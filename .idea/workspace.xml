@@ -10,7 +10,30 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="78afd4d1-1ed3-4b4d-a584-1aa195b3fadc" name="Default Changelist" comment="" />
+    <list default="true" id="78afd4d1-1ed3-4b4d-a584-1aa195b3fadc" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/public/style.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Components/AllObject/allObject.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Components/AllObject/style.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Components/CurrentObject/currentObject.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Components/CurrentObject/style.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Components/Main/main.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Components/Main/style.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Components/Menu/menu.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Components/Menu/style.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Components/Scene/scene.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Components/Scene/style.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Components/Toolbar/style.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Components/Toolbar/toolbar.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Images/Icons/cube_front_view.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Images/Icons/cube_left_view.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Images/Icons/cube_top_view.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -25,7 +48,7 @@
   <component name="GitToolBoxStore">
     <option name="projectConfigVersion" value="2" />
   </component>
-  <component name="JupyterTrust" id="a3c65dd0-ec4e-4226-a2ac-76b6eb968a1f" />
+  <component name="JupyterTrust" id="5a638de9-f33f-4d61-aadc-d54bcc0e7ad4" />
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
@@ -42,13 +65,32 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/Components/AllObject" />
     <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.standard" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.standard" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.standard" value="" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_interpreter_path" value="node" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\flav6\Desktop\sardinette\src\Images\Icons" />
+      <recent name="C:\Users\flav6\Desktop\sardinette\src\Components" />
+      <recent name="C:\Users\flav6\Desktop\sardinette\src\Components\Menu" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\flav6\Desktop\sardinette\src\Components\AllObject" />
+      <recent name="C:\Users\flav6\Desktop\sardinette\src\Components\CurrentObject" />
+      <recent name="C:\Users\flav6\Desktop\sardinette\src\Components\Scene" />
+      <recent name="C:\Users\flav6\Desktop\sardinette\src\Components\Main" />
+    </key>
   </component>
   <component name="RunManager">
     <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
@@ -91,6 +133,8 @@
       <updated>1615978097650</updated>
       <workItem from="1615978100128" duration="371000" />
       <workItem from="1615978530457" duration="215000" />
+      <workItem from="1616011269352" duration="3304000" />
+      <workItem from="1616014593045" duration="6050000" />
     </task>
     <servers />
   </component>
@@ -107,11 +151,44 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="1148" y="592" key="#ESLint" timestamp="1616012880684">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="1148" y="592" key="#ESLint/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1616012880684" />
     <state x="414" y="175" width="1092" height="714" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1615978707500">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="414" y="175" width="1092" height="714" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1615978707500" />
+    <state x="1046" y="502" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1616015692413">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="1046" y="502" key="#com.intellij.fileTypes.FileTypeChooser/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1616015692413" />
+    <state x="1060" y="455" key="FileChooserDialogImpl" timestamp="1616011878145">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="1060" y="455" key="FileChooserDialogImpl/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1616011878145" />
+    <state width="2517" height="401" key="GridCell.Tab.0.bottom" timestamp="1616017346407">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state width="2517" height="401" key="GridCell.Tab.0.bottom/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1616017346407" />
+    <state width="2517" height="401" key="GridCell.Tab.0.center" timestamp="1616017346407">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state width="2517" height="401" key="GridCell.Tab.0.center/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1616017346407" />
+    <state width="2517" height="401" key="GridCell.Tab.0.left" timestamp="1616017346407">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state width="2517" height="401" key="GridCell.Tab.0.left/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1616017346407" />
+    <state width="2517" height="401" key="GridCell.Tab.0.right" timestamp="1616017346407">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state width="2517" height="401" key="GridCell.Tab.0.right/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1616017346407" />
+    <state x="1002" y="612" key="vcs.readOnlyHandler.ReadOnlyStatusDialog" timestamp="1616013727573">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="1002" y="612" key="vcs.readOnlyHandler.ReadOnlyStatusDialog/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1616013727573" />
   </component>
 </project>
