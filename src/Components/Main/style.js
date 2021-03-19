@@ -20,6 +20,18 @@ const useStyles = makeStyles({
         minWidth: 0,
         minHeight: 0,
     },
+    containerToolsObject:{
+        display: 'flex',
+        padding:"5px 16px 5px 16px",
+        minWidth: "500px",
+        flexDirection:"column",
+        '& > :nth-child(1)':{
+            flex:"1",
+        },
+        '& > :nth-child(2)':{
+            flex:"2",
+        },
+    },
 });
 
 export default useStyles;

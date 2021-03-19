@@ -1,19 +1,23 @@
-import { makeStyles } from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 
 const useStyles = makeStyles({
 
-    container:{
-        display:"flex",
-        '& > :not(:last-child) ':{
-            borderRight:'solid black 2px'
+    container: {
+        padding: "5px",
+        display: "flex",
+        '& > :not(:last-child) ': {
+            borderRight: 'solid black 2px'
         },
 
     },
 
-    section:{
-      '& *':{
-          padding:"5px",
-      }
+    section: {
+        display:"flex",
+        alignItems: "center",
+        justifyContent: "center",
+        '& *': {
+            padding: "5px",
+        }
     },
 
 });

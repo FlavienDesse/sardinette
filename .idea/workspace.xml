@@ -11,28 +11,31 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="78afd4d1-1ed3-4b4d-a584-1aa195b3fadc" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/public/style.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Components/AllObject/allObject.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Components/AllObject/style.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Components/CurrentObject/currentObject.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Components/CurrentObject/style.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Components/Main/main.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Components/Main/style.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Components/Menu/menu.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Components/Menu/style.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Components/Scene/scene.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Components/Scene/style.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Components/Toolbar/style.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Components/Toolbar/toolbar.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Images/Icons/cube_front_view.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Images/Icons/cube_left_view.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Images/Icons/cube_top_view.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Class/Background.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Components/AllObjectAndGlobalSettings/AllObjectAndGlobalSettings.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Components/AllObjectAndGlobalSettings/style.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Components/Menu/OpenExamples/openExamples.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Components/Menu/OpenExamples/style.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Components/Menu/OpenFile/openFile.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Components/Menu/OpenFile/style.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Components/Menu/OpenInsert/openInsert.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Components/Menu/OpenInsert/style.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Components/Menu/OpenView/openView.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Components/Menu/OpenView/style.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/AllObject/allObject.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/AllObject/style.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/CurrentObject/currentObject.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/CurrentObject/currentObject.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/CurrentObject/style.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/CurrentObject/style.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Main/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Main/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Main/style.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Main/style.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Menu/menu.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Menu/menu.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Menu/style.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Menu/style.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Scene/scene.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Scene/scene.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Toolbar/style.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Toolbar/style.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Toolbar/toolbar.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Toolbar/toolbar.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,7 +68,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/Components/AllObject" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/Components/Menu/OpenExamples" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.standard" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -86,20 +89,23 @@
       <recent name="C:\Users\flav6\Desktop\sardinette\src\Components\Menu" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\flav6\Desktop\sardinette\src\Components\AllObject" />
-      <recent name="C:\Users\flav6\Desktop\sardinette\src\Components\CurrentObject" />
-      <recent name="C:\Users\flav6\Desktop\sardinette\src\Components\Scene" />
-      <recent name="C:\Users\flav6\Desktop\sardinette\src\Components\Main" />
+      <recent name="C:\Users\flav6\Desktop\sardinette\src\Components\Menu\OpenExamples" />
+      <recent name="C:\Users\flav6\Desktop\sardinette\src\Components\Menu\OpenView" />
+      <recent name="C:\Users\flav6\Desktop\sardinette\src\Components\Menu\OpenInsert" />
+      <recent name="C:\Users\flav6\Desktop\sardinette\src\Components\Menu\OpenFile" />
+      <recent name="C:\Users\flav6\Desktop\sardinette\src\Components\Menu\ClickOnView" />
     </key>
   </component>
   <component name="RunManager">
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="class" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -134,7 +140,12 @@
       <workItem from="1615978100128" duration="371000" />
       <workItem from="1615978530457" duration="215000" />
       <workItem from="1616011269352" duration="3304000" />
-      <workItem from="1616014593045" duration="6050000" />
+      <workItem from="1616014593045" duration="6102000" />
+      <workItem from="1616026585613" duration="2807000" />
+      <workItem from="1616073659701" duration="4676000" />
+      <workItem from="1616107955027" duration="3005000" />
+      <workItem from="1616111096782" duration="7695000" />
+      <workItem from="1616159776568" duration="15822000" />
     </task>
     <servers />
   </component>
@@ -162,30 +173,42 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="414" y="175" width="1092" height="714" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1615978707500" />
-    <state x="1046" y="502" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1616015692413">
+    <state x="1046" y="502" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1616180213201">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state x="1046" y="502" key="#com.intellij.fileTypes.FileTypeChooser/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1616015692413" />
+    <state x="1046" y="502" key="#com.intellij.fileTypes.FileTypeChooser/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1616180213201" />
     <state x="1060" y="455" key="FileChooserDialogImpl" timestamp="1616011878145">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="1060" y="455" key="FileChooserDialogImpl/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1616011878145" />
-    <state width="2517" height="401" key="GridCell.Tab.0.bottom" timestamp="1616017346407">
+    <state width="2517" height="401" key="GridCell.Tab.0.bottom" timestamp="1616168737314">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="2517" height="401" key="GridCell.Tab.0.bottom/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1616017346407" />
-    <state width="2517" height="401" key="GridCell.Tab.0.center" timestamp="1616017346407">
+    <state width="2517" height="401" key="GridCell.Tab.0.bottom/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1616168737314" />
+    <state width="2517" height="401" key="GridCell.Tab.0.bottom/0.0.2560.1400/2560.0.2560.1400@2560.0.2560.1400" timestamp="1616107871524" />
+    <state width="2517" height="401" key="GridCell.Tab.0.center" timestamp="1616168737314">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="2517" height="401" key="GridCell.Tab.0.center/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1616017346407" />
-    <state width="2517" height="401" key="GridCell.Tab.0.left" timestamp="1616017346407">
+    <state width="2517" height="401" key="GridCell.Tab.0.center/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1616168737314" />
+    <state width="2517" height="401" key="GridCell.Tab.0.center/0.0.2560.1400/2560.0.2560.1400@2560.0.2560.1400" timestamp="1616107871524" />
+    <state width="2517" height="401" key="GridCell.Tab.0.left" timestamp="1616168737313">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="2517" height="401" key="GridCell.Tab.0.left/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1616017346407" />
-    <state width="2517" height="401" key="GridCell.Tab.0.right" timestamp="1616017346407">
+    <state width="2517" height="401" key="GridCell.Tab.0.left/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1616168737313" />
+    <state width="2517" height="401" key="GridCell.Tab.0.left/0.0.2560.1400/2560.0.2560.1400@2560.0.2560.1400" timestamp="1616107871524" />
+    <state width="2517" height="401" key="GridCell.Tab.0.right" timestamp="1616168737314">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="2517" height="401" key="GridCell.Tab.0.right/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1616017346407" />
+    <state width="2517" height="401" key="GridCell.Tab.0.right/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1616168737314" />
+    <state width="2517" height="401" key="GridCell.Tab.0.right/0.0.2560.1400/2560.0.2560.1400@2560.0.2560.1400" timestamp="1616107871524" />
+    <state x="987" y="433" width="585" height="534" key="find.popup" timestamp="1616028308055">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="987" y="433" width="585" height="534" key="find.popup/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1616028308055" />
+    <state x="943" y="315" key="search.everywhere.popup" timestamp="1616112762639">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="943" y="315" key="search.everywhere.popup/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1616112762639" />
     <state x="1002" y="612" key="vcs.readOnlyHandler.ReadOnlyStatusDialog" timestamp="1616013727573">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
