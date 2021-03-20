@@ -22,7 +22,7 @@ export default function Main() {
             <Toolbar/>
             <div className={classes.containerSceneAndBoxObject}>
                 <div className={classes.containerScene}>
-                    <Scene background={background}/>
+                    <Scene background={background} setCurrentObject={setCurrentObject} currentObject={currentObject} />
                 </div>
                 <div className={classes.containerToolsObject}>
                     <AllObjectAndGlobalSettings setBackground={setBackground}/>

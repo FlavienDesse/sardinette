@@ -11,31 +11,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="78afd4d1-1ed3-4b4d-a584-1aa195b3fadc" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Class/Background.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Components/AllObjectAndGlobalSettings/AllObjectAndGlobalSettings.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Components/AllObjectAndGlobalSettings/style.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Components/Menu/OpenExamples/openExamples.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Components/Menu/OpenExamples/style.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Components/Menu/OpenFile/openFile.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Components/Menu/OpenFile/style.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Components/Menu/OpenInsert/openInsert.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Components/Menu/OpenInsert/style.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Components/Menu/OpenView/openView.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Components/Menu/OpenView/style.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/AllObject/allObject.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/AllObject/style.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/CurrentObject/currentObject.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/CurrentObject/currentObject.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/CurrentObject/style.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/CurrentObject/style.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Components/Main/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Main/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Main/style.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Main/style.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Menu/menu.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Menu/menu.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Menu/style.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Menu/style.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Components/Scene/scene.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Scene/scene.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Toolbar/style.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Toolbar/style.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Toolbar/toolbar.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Toolbar/toolbar.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -97,19 +75,6 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration default="true" type="js.build_tools.npm">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
@@ -146,6 +111,7 @@
       <workItem from="1616107955027" duration="3005000" />
       <workItem from="1616111096782" duration="7695000" />
       <workItem from="1616159776568" duration="15822000" />
+      <workItem from="1616198901202" duration="5483000" />
     </task>
     <servers />
   </component>
