@@ -10,24 +10,25 @@ import Background from "../../Class/Background";
 export default function Main() {
     const classes = useStyles();
 
-    const [currentObject,setCurrentObject] = React.useState(true)
+    const [currentObject,setCurrentObject] = React.useState(null)
+    const [allObject,setAllObject] = React.useState([])
     const [background,setBackground] = React.useState(new Background(null,true));
 
 
 
     return (
         <div className={classes.container}>
-            <Menu/>
+            <Menu setAllObject={setAllObject}/>
 
             <Toolbar/>
             <div className={classes.containerSceneAndBoxObject}>
                 <div className={classes.containerScene}>
-                    <Scene background={background} setCurrentObject={setCurrentObject} currentObject={currentObject} />
+                    <Scene background={background} setCurrentObject={setCurrentObject} currentObject={currentObject} allObject={allObject}/>
                 </div>
                 <div className={classes.containerToolsObject}>
-                    <AllObjectAndGlobalSettings setBackground={setBackground}/>
+                    <AllObjectAndGlobalSettings  setBackground={setBackground}/>
                     {
-                        currentObject && <CurrentObject/>
+                        currentObject && <CurrentObject currentObject={currentObject} setCurrentObject={setCurrentObject}/>
                     }
 
                 </div>

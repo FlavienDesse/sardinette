@@ -9,6 +9,9 @@ const useStyles = makeStyles({
     container:{
         borderTop:'solid 1px grey',
     },
+    tabs:{
+      marginBottom:"40px",
+    },
 });
 
 export default useStyles;

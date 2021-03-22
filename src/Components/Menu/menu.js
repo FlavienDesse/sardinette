@@ -5,9 +5,15 @@ import OpenFile from "./OpenFile/openFile";
 import OpenInsert from "./OpenInsert/openInsert";
 import OpenView from "./OpenView/openView";
 import OpenExamples from "./OpenExamples/openExamples";
+import PropTypes from "prop-types";
 
 
-export default function Menu() {
+Menu.propType = {
+
+    setAllObject:PropTypes.func.isRequired,
+}
+
+export default function Menu(props) {
     const classes = useStyles();
 
     const [openMenu, setOpenMenu] = React.useState([false, false, false,false]);
@@ -17,9 +23,6 @@ export default function Menu() {
             return [...prevState];
         }))
     };
-
-
-
 
 
     const handleOpenMenu = (event,pos) => {
@@ -36,13 +39,13 @@ export default function Menu() {
                 <Button className={classes.button} aria-haspopup={true}>
                     File
                 </Button>
-                {openMenu[0] && <OpenFile/>}
+                {openMenu[0] && <OpenFile />}
             </div>
             <div className={classes.containerButton} onMouseEnter={(event => handleOpenMenu(event,1))} onMouseLeave={(event => handleCloseMenu(event,1))}>
                 <Button className={classes.button} aria-haspopup={true}>
                     Insert
                 </Button>
-                {openMenu[1] && <OpenInsert/>}
+                {openMenu[1] && <OpenInsert setAllObject={props.setAllObject}/>}
             </div>
             <div className={classes.containerButton} onMouseEnter={(event => handleOpenMenu(event,2))}  onMouseLeave={(event => handleCloseMenu(event,2))}>
                 <Button className={classes.button} aria-haspopup={true}>

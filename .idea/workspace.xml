@@ -11,8 +11,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="78afd4d1-1ed3-4b4d-a584-1aa195b3fadc" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/Class/Constant.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Class/Utils.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Components/CurrentObject/TabsObject/style.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Components/CurrentObject/TabsObject/tabsObject.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/CurrentObject/currentObject.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/CurrentObject/currentObject.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/CurrentObject/style.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/CurrentObject/style.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Components/Main/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Main/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Menu/OpenInsert/openInsert.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Menu/OpenInsert/openInsert.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Menu/menu.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Menu/menu.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Components/Scene/scene.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Scene/scene.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -46,7 +54,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/Components/Menu/OpenExamples" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/Components/CurrentObject/TabsObject" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.standard" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -67,14 +75,27 @@
       <recent name="C:\Users\flav6\Desktop\sardinette\src\Components\Menu" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\flav6\Desktop\sardinette\src\Components\CurrentObject\TabsObject" />
       <recent name="C:\Users\flav6\Desktop\sardinette\src\Components\Menu\OpenExamples" />
       <recent name="C:\Users\flav6\Desktop\sardinette\src\Components\Menu\OpenView" />
       <recent name="C:\Users\flav6\Desktop\sardinette\src\Components\Menu\OpenInsert" />
       <recent name="C:\Users\flav6\Desktop\sardinette\src\Components\Menu\OpenFile" />
-      <recent name="C:\Users\flav6\Desktop\sardinette\src\Components\Menu\ClickOnView" />
     </key>
   </component>
   <component name="RunManager">
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration default="true" type="js.build_tools.npm">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
@@ -111,7 +132,8 @@
       <workItem from="1616107955027" duration="3005000" />
       <workItem from="1616111096782" duration="7695000" />
       <workItem from="1616159776568" duration="15822000" />
-      <workItem from="1616198901202" duration="5483000" />
+      <workItem from="1616198901202" duration="5745000" />
+      <workItem from="1616246427140" duration="4168000" />
     </task>
     <servers />
   </component>
@@ -139,42 +161,43 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="414" y="175" width="1092" height="714" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1615978707500" />
-    <state x="1046" y="502" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1616180213201">
+    <state x="1046" y="502" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1616248630046">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state x="1046" y="502" key="#com.intellij.fileTypes.FileTypeChooser/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1616180213201" />
-    <state x="1060" y="455" key="FileChooserDialogImpl" timestamp="1616011878145">
-      <screen x="0" y="0" width="2560" height="1400" />
+    <state x="1046" y="502" key="#com.intellij.fileTypes.FileTypeChooser/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1616248630046" />
+    <state x="3620" y="455" key="FileChooserDialogImpl" timestamp="1616263726684">
+      <screen x="2560" y="0" width="2560" height="1400" />
     </state>
     <state x="1060" y="455" key="FileChooserDialogImpl/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1616011878145" />
-    <state width="2517" height="401" key="GridCell.Tab.0.bottom" timestamp="1616168737314">
-      <screen x="0" y="0" width="2560" height="1400" />
+    <state x="3620" y="455" key="FileChooserDialogImpl/0.0.2560.1400/2560.0.2560.1400@2560.0.2560.1400" timestamp="1616263726684" />
+    <state width="2517" height="401" key="GridCell.Tab.0.bottom" timestamp="1616263727586">
+      <screen x="2560" y="0" width="2560" height="1400" />
     </state>
-    <state width="2517" height="401" key="GridCell.Tab.0.bottom/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1616168737314" />
-    <state width="2517" height="401" key="GridCell.Tab.0.bottom/0.0.2560.1400/2560.0.2560.1400@2560.0.2560.1400" timestamp="1616107871524" />
-    <state width="2517" height="401" key="GridCell.Tab.0.center" timestamp="1616168737314">
-      <screen x="0" y="0" width="2560" height="1400" />
+    <state width="2517" height="401" key="GridCell.Tab.0.bottom/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1616247094958" />
+    <state width="2517" height="401" key="GridCell.Tab.0.bottom/0.0.2560.1400/2560.0.2560.1400@2560.0.2560.1400" timestamp="1616263727585" />
+    <state width="2517" height="401" key="GridCell.Tab.0.center" timestamp="1616263727585">
+      <screen x="2560" y="0" width="2560" height="1400" />
     </state>
-    <state width="2517" height="401" key="GridCell.Tab.0.center/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1616168737314" />
-    <state width="2517" height="401" key="GridCell.Tab.0.center/0.0.2560.1400/2560.0.2560.1400@2560.0.2560.1400" timestamp="1616107871524" />
-    <state width="2517" height="401" key="GridCell.Tab.0.left" timestamp="1616168737313">
-      <screen x="0" y="0" width="2560" height="1400" />
+    <state width="2517" height="401" key="GridCell.Tab.0.center/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1616247094957" />
+    <state width="2517" height="401" key="GridCell.Tab.0.center/0.0.2560.1400/2560.0.2560.1400@2560.0.2560.1400" timestamp="1616263727585" />
+    <state width="2517" height="401" key="GridCell.Tab.0.left" timestamp="1616263727585">
+      <screen x="2560" y="0" width="2560" height="1400" />
     </state>
-    <state width="2517" height="401" key="GridCell.Tab.0.left/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1616168737313" />
-    <state width="2517" height="401" key="GridCell.Tab.0.left/0.0.2560.1400/2560.0.2560.1400@2560.0.2560.1400" timestamp="1616107871524" />
-    <state width="2517" height="401" key="GridCell.Tab.0.right" timestamp="1616168737314">
-      <screen x="0" y="0" width="2560" height="1400" />
+    <state width="2517" height="401" key="GridCell.Tab.0.left/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1616247094957" />
+    <state width="2517" height="401" key="GridCell.Tab.0.left/0.0.2560.1400/2560.0.2560.1400@2560.0.2560.1400" timestamp="1616263727585" />
+    <state width="2517" height="401" key="GridCell.Tab.0.right" timestamp="1616263727585">
+      <screen x="2560" y="0" width="2560" height="1400" />
     </state>
-    <state width="2517" height="401" key="GridCell.Tab.0.right/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1616168737314" />
-    <state width="2517" height="401" key="GridCell.Tab.0.right/0.0.2560.1400/2560.0.2560.1400@2560.0.2560.1400" timestamp="1616107871524" />
+    <state width="2517" height="401" key="GridCell.Tab.0.right/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1616247094958" />
+    <state width="2517" height="401" key="GridCell.Tab.0.right/0.0.2560.1400/2560.0.2560.1400@2560.0.2560.1400" timestamp="1616263727585" />
     <state x="987" y="433" width="585" height="534" key="find.popup" timestamp="1616028308055">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="987" y="433" width="585" height="534" key="find.popup/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1616028308055" />
-    <state x="943" y="315" key="search.everywhere.popup" timestamp="1616112762639">
+    <state x="943" y="315" width="672" height="678" key="search.everywhere.popup" timestamp="1616248058532">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state x="943" y="315" key="search.everywhere.popup/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1616112762639" />
+    <state x="943" y="315" width="672" height="678" key="search.everywhere.popup/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1616248058532" />
     <state x="1002" y="612" key="vcs.readOnlyHandler.ReadOnlyStatusDialog" timestamp="1616013727573">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>

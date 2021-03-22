@@ -9,8 +9,9 @@ import {TransformControls} from "three/examples/jsm/controls/TransformControls"
 
 Scene.propType = {
     background: PropTypes.instanceOf(Background).isRequired,
-    currentObject:PropTypes.object.isRequired,
-    setCurrentObject:PropTypes.func.isRequired,
+    currentObject: PropTypes.object.isRequired,
+    allObject: PropTypes.array.isRequired,
+    setCurrentObject: PropTypes.func.isRequired,
 }
 
 export default function Scene(props) {
@@ -21,7 +22,7 @@ export default function Scene(props) {
     const camera = useRef();
     const renderer = useRef();
     const scene = useRef();
-    const raycaster  = useRef();
+    const raycaster = useRef();
 
     //This useEffect is for initialisation
     React.useEffect(() => {
@@ -36,7 +37,7 @@ export default function Scene(props) {
         camera.current = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
         camera.current.position.z = 5;
 
-        raycaster.current= new THREE.Raycaster();
+        raycaster.current = new THREE.Raycaster();
 
         renderer.current = new THREE.WebGLRenderer({alpha: true})
         renderer.current.setSize(width, height);
@@ -51,21 +52,9 @@ export default function Scene(props) {
         refContainer.current.appendChild(renderer.current.domElement)
 
 
-        const geometry = new THREE.BoxGeometry();
-        const material = new THREE.MeshPhongMaterial({color: 0xDCDCDC});
-        const cube = new THREE.Mesh(geometry, material);
-        const light = new THREE.PointLight(0xff0040, 5);
-        const sphere = new THREE.SphereGeometry(0.1, 64, 64);
-
         const controlsElem = new TransformControls(camera.current, renderer.current.domElement)
 
 
-
-        light.add(new THREE.Mesh(sphere, new THREE.MeshBasicMaterial({color: 0xff0040})));
-
-        light.position.set(2, 2, 0);
-        scene.current.add(cube);
-        scene.current.add(light);
         scene.current.add(plane);
 
 
@@ -88,8 +77,6 @@ export default function Scene(props) {
         let animate = function () {
             requestAnimationFrame(animate);
             controls.update()
-            cube.rotation.x += 0.01;
-            cube.rotation.y += 0.01;
 
 
             renderer.current.render(scene.current, camera.current);
@@ -135,9 +122,6 @@ export default function Scene(props) {
         renderer.current.domElement.addEventListener("click", onclick, true);
 
 
-
-
-
         function onclick(event) {
 
             const target = event.target;
@@ -150,18 +134,31 @@ export default function Scene(props) {
             let width = boundingContainer.width;
 
             let mouse = {
-                x:  ( (event.clientX - rectMouse.left)/width ) * 2 - 1,
-                y: - ( (event.clientY- rectMouse.top )/ height) * 2 + 1,
+                x: ((event.clientX - rectMouse.left) / width) * 2 - 1,
+                y: -((event.clientY - rectMouse.top) / height) * 2 + 1,
             }
 
-            raycaster.current.setFromCamera( mouse, camera.current );
-            const intersects = raycaster.current.intersectObjects( scene.current.children );
-            console.log(intersects)
+            raycaster.current.setFromCamera(mouse, camera.current);
+            const intersects = raycaster.current.intersectObjects(props.allObject);
+
+            if (intersects.length > 0) {
+                props.setCurrentObject(intersects[0].object)
+                console.log(intersects[0].object)
+            }
         }
 
     }, [])
 
+    //This one is when we add object in the list of all object
+    React.useEffect(() => {
+        if(props.allObject.length > 0){
+            scene.current.add(props.allObject[props.allObject.length  - 1])
+        }
 
+
+
+
+    }, [props.allObject])
 
 
     return (
