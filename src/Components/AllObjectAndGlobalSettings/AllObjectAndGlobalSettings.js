@@ -9,9 +9,11 @@ import {ChromePicker} from 'react-color'
 import PropTypes from 'prop-types';
 import Background from "../../Class/Background";
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
+import ArrayRenderObject from "./ArrayRenderObject/ArrayRenderObject";
 
 AllObjectAndGlobalSettings.propTypes = {
-    setBackground: PropTypes.func.isRequired
+    setBackground: PropTypes.func.isRequired,
+    allObject:PropTypes.array.isRequired,
 }
 
 
@@ -57,6 +59,11 @@ export default function AllObjectAndGlobalSettings(props) {
             </Button>
 
             <div className={classes.containerAllObject}>
+                {
+                    props.allObject.map((object,index)=>{
+                        return (<ArrayRenderObject object={object}/>)
+                    })
+                }
             </div>
             <Grid container alignItems={"center"} justify={"center"}>
                 <Grid item xs={4}>

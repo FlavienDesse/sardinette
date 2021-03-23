@@ -19,6 +19,7 @@ export default function Scene(props) {
     const refContainer = useRef();
 
 
+
     const camera = useRef();
     const renderer = useRef();
     const scene = useRef();
@@ -117,45 +118,56 @@ export default function Scene(props) {
         //   renderer.render(scene, camera);
     }, [props.background])
 
+
+
+
+    const handleClickOnCanvas= React.useCallback(event => {
+        const target = event.target;
+
+        // Get the bounding rectangle of target
+        const rectMouse = target.getBoundingClientRect();
+
+        let boundingContainer = refContainer.current.getBoundingClientRect()
+        let height = boundingContainer.height;
+        let width = boundingContainer.width;
+
+        let mouse = {
+            x: ((event.clientX - rectMouse.left) / width) * 2 - 1,
+            y: -((event.clientY - rectMouse.top) / height) * 2 + 1,
+        }
+
+        raycaster.current.setFromCamera(mouse, camera.current);
+        const intersects = raycaster.current.intersectObjects([...props.allObject]);
+        if (intersects.length > 0) {
+            props.setCurrentObject(intersects[0].object)
+
+        }
+    }, [props.allObject]);
+
+
+
+
     //This one is when we click on object
     React.useEffect(() => {
-        renderer.current.domElement.addEventListener("click", onclick, true);
+        renderer.current.domElement.addEventListener("click", handleClickOnCanvas);
 
 
-        function onclick(event) {
 
-            const target = event.target;
+        return () => {
+            renderer.current.domElement.removeEventListener('click', handleClickOnCanvas);
+        };
 
-            // Get the bounding rectangle of target
-            const rectMouse = target.getBoundingClientRect();
+    }, [handleClickOnCanvas])
 
-            let boundingContainer = refContainer.current.getBoundingClientRect()
-            let height = boundingContainer.height;
-            let width = boundingContainer.width;
-
-            let mouse = {
-                x: ((event.clientX - rectMouse.left) / width) * 2 - 1,
-                y: -((event.clientY - rectMouse.top) / height) * 2 + 1,
-            }
-
-            raycaster.current.setFromCamera(mouse, camera.current);
-            const intersects = raycaster.current.intersectObjects(props.allObject);
-
-            if (intersects.length > 0) {
-                props.setCurrentObject(intersects[0].object)
-                console.log(intersects[0].object)
-            }
-        }
-
-    }, [])
-
-    //This one is when we add object in the list of all object
+    //This one is when the list changed
     React.useEffect(() => {
-        if(props.allObject.length > 0){
-            scene.current.add(props.allObject[props.allObject.length  - 1])
-        }
 
 
+        props.allObject.forEach(elem => {
+
+            scene.current.remove(elem)
+            scene.current.add(elem)
+        });
 
 
     }, [props.allObject])

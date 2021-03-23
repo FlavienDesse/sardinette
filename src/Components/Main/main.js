@@ -15,6 +15,18 @@ export default function Main() {
     const [background,setBackground] = React.useState(new Background(null,true));
 
 
+    const updateAllObjectWhenCurrentObjectChange =(lastValue,newValue)=>{
+
+
+
+        const index = allObject.findIndex(value => value.uuid === lastValue.uuid)
+        setAllObject(prevState => {
+            prevState[index] = newValue
+            return [...prevState]
+        })
+
+
+    }
 
     return (
         <div className={classes.container}>
@@ -26,9 +38,9 @@ export default function Main() {
                     <Scene background={background} setCurrentObject={setCurrentObject} currentObject={currentObject} allObject={allObject}/>
                 </div>
                 <div className={classes.containerToolsObject}>
-                    <AllObjectAndGlobalSettings  setBackground={setBackground}/>
+                    <AllObjectAndGlobalSettings  setAllObject={setAllObject} allObject={allObject}  setBackground={setBackground}/>
                     {
-                        currentObject && <CurrentObject currentObject={currentObject} setCurrentObject={setCurrentObject}/>
+                        currentObject && <CurrentObject allObject={allObject} updateAllObjectWhenCurrentObjectChange={updateAllObjectWhenCurrentObjectChange} currentObject={currentObject} setCurrentObject={setCurrentObject}/>
                     }
 
                 </div>

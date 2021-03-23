@@ -22,6 +22,11 @@ const useStyles = makeStyles({
     checkBox:{
       padding:'0px',
     },
+    popoverColorPicker:{
+        position:'absolute',
+        zIndex: '2000',
+        transform: "translateX(-50%) translateX(15px)", //15px correspoding to the padding of containerColorPicker
+    },
 });
 
 export default useStyles;

@@ -26,6 +26,7 @@ export default function OpenInsert(props) {
             let point = createPoint()
 
             prevState.push(point)
+
             return [...prevState]
         })
     }

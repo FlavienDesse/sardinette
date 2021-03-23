@@ -5,11 +5,13 @@ import Tab from "@material-ui/core/Tab";
 import Menu from "@material-ui/core/Menu";
 import PropTypes from "prop-types";
 import TabsObject from "./TabsObject/tabsObject";
+import TabsTexture from "./TabsTexture/tabsTexture";
 
 
 Menu.propType = {
     setCurrentObject:PropTypes.func.isRequired,
     currentObject:PropTypes.object.isRequired,
+    updateAllObjectWhenCurrentObjectChange : PropTypes.func.isRequired
 }
 
 
@@ -33,11 +35,13 @@ export default function CurrentObject(props) {
                 className={classes.tabs}
             >
                 <Tab label="OBJECT" />
-                <Tab label="GEOMETRY" />
                 <Tab label="TEXTURE" />
             </Tabs>
             {
-                currentTabs === 0  && <TabsObject/>
+                currentTabs === 0  && <TabsObject allObject={props.allObject} updateAllObjectWhenCurrentObjectChange={props.updateAllObjectWhenCurrentObjectChange} setAllObject={props.setAllObject} currentObject={props.currentObject} setCurrentObject={props.setCurrentObject}/>
+            }
+            {
+                currentTabs === 1  && <TabsTexture setAllObject={props.setAllObject} currentObject={props.currentObject} setCurrentObject={props.setCurrentObject}/>
             }
         </div>
     );
