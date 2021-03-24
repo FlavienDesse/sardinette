@@ -11,17 +11,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="78afd4d1-1ed3-4b4d-a584-1aa195b3fadc" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Components/AllObjectAndGlobalSettings/ArrayRenderObject/ArrayRenderObject.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Components/AllObjectAndGlobalSettings/ArrayRenderObject/style.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Components/CurrentObject/TabsTexture/style.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Components/CurrentObject/TabsTexture/tabsTexture.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/AllObjectAndGlobalSettings/AllObjectAndGlobalSettings.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/AllObjectAndGlobalSettings/AllObjectAndGlobalSettings.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/CurrentObject/TabsObject/style.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/CurrentObject/TabsObject/style.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Class/Constant.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Class/Constant.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Class/Utils.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Class/Utils.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Components/CurrentObject/TabsObject/tabsObject.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/CurrentObject/TabsObject/tabsObject.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/CurrentObject/currentObject.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/CurrentObject/currentObject.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/CurrentObject/TabsTexture/tabsTexture.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/CurrentObject/TabsTexture/tabsTexture.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Components/Main/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Main/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Menu/OpenInsert/openInsert.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Menu/OpenInsert/openInsert.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Components/Scene/scene.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Scene/scene.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -84,19 +79,6 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration default="true" type="js.build_tools.npm">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
@@ -135,6 +117,9 @@
       <workItem from="1616159776568" duration="15822000" />
       <workItem from="1616198901202" duration="5745000" />
       <workItem from="1616246427140" duration="4168000" />
+      <workItem from="1616507556428" duration="5934000" />
+      <workItem from="1616520024958" duration="373000" />
+      <workItem from="1616534478647" duration="2529000" />
     </task>
     <servers />
   </component>
@@ -171,30 +156,30 @@
     </state>
     <state x="1060" y="455" key="FileChooserDialogImpl/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1616011878145" />
     <state x="3620" y="455" key="FileChooserDialogImpl/0.0.2560.1400/2560.0.2560.1400@2560.0.2560.1400" timestamp="1616263726684" />
-    <state width="2517" height="247" key="GridCell.Tab.0.bottom" timestamp="1616457687587">
-      <screen x="2560" y="0" width="2560" height="1400" />
+    <state width="2517" height="247" key="GridCell.Tab.0.bottom" timestamp="1616538683756">
+      <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="2517" height="247" key="GridCell.Tab.0.bottom/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1616442036769" />
+    <state width="2517" height="247" key="GridCell.Tab.0.bottom/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1616538683756" />
     <state width="2517" height="247" key="GridCell.Tab.0.bottom/0.0.2560.1400/2560.0.2560.1400@2560.0.2560.1400" timestamp="1616457687587" />
-    <state width="2517" height="247" key="GridCell.Tab.0.center" timestamp="1616457687587">
-      <screen x="2560" y="0" width="2560" height="1400" />
+    <state width="2517" height="247" key="GridCell.Tab.0.center" timestamp="1616538683756">
+      <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="2517" height="247" key="GridCell.Tab.0.center/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1616442036769" />
+    <state width="2517" height="247" key="GridCell.Tab.0.center/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1616538683756" />
     <state width="2517" height="247" key="GridCell.Tab.0.center/0.0.2560.1400/2560.0.2560.1400@2560.0.2560.1400" timestamp="1616457687587" />
-    <state width="2517" height="247" key="GridCell.Tab.0.left" timestamp="1616457687587">
-      <screen x="2560" y="0" width="2560" height="1400" />
+    <state width="2517" height="247" key="GridCell.Tab.0.left" timestamp="1616538683756">
+      <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="2517" height="247" key="GridCell.Tab.0.left/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1616442036769" />
+    <state width="2517" height="247" key="GridCell.Tab.0.left/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1616538683756" />
     <state width="2517" height="247" key="GridCell.Tab.0.left/0.0.2560.1400/2560.0.2560.1400@2560.0.2560.1400" timestamp="1616457687587" />
-    <state width="2517" height="247" key="GridCell.Tab.0.right" timestamp="1616457687587">
-      <screen x="2560" y="0" width="2560" height="1400" />
+    <state width="2517" height="247" key="GridCell.Tab.0.right" timestamp="1616538683756">
+      <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="2517" height="247" key="GridCell.Tab.0.right/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1616442036769" />
+    <state width="2517" height="247" key="GridCell.Tab.0.right/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1616538683756" />
     <state width="2517" height="247" key="GridCell.Tab.0.right/0.0.2560.1400/2560.0.2560.1400@2560.0.2560.1400" timestamp="1616457687587" />
-    <state x="4115" y="402" width="585" height="534" key="find.popup" timestamp="1616455411338">
-      <screen x="2560" y="0" width="2560" height="1400" />
+    <state x="987" y="433" width="585" height="534" key="find.popup" timestamp="1616514647508">
+      <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state x="987" y="433" width="585" height="534" key="find.popup/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1616028308055" />
+    <state x="987" y="433" width="585" height="534" key="find.popup/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1616514647508" />
     <state x="4115" y="402" width="585" height="534" key="find.popup/0.0.2560.1400/2560.0.2560.1400@2560.0.2560.1400" timestamp="1616455411338" />
     <state x="943" y="315" width="672" height="678" key="search.everywhere.popup" timestamp="1616443109416">
       <screen x="0" y="0" width="2560" height="1400" />

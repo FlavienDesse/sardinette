@@ -5,7 +5,8 @@ import PropTypes from 'prop-types';
 import Background from "../../Class/Background";
 import {TrackballControls} from "three/examples/jsm/controls/TrackballControls"
 import {TransformControls} from "three/examples/jsm/controls/TransformControls"
-
+import {changeColorLightness} from "../../Class/Utils";
+import Constant from "../../Class/Constant";
 
 Scene.propType = {
     background: PropTypes.instanceOf(Background).isRequired,
@@ -17,7 +18,6 @@ Scene.propType = {
 export default function Scene(props) {
     const classes = useStyles();
     const refContainer = useRef();
-
 
 
     const camera = useRef();
@@ -119,9 +119,7 @@ export default function Scene(props) {
     }, [props.background])
 
 
-
-
-    const handleClickOnCanvas= React.useCallback(event => {
+    const handleClickOnCanvas = React.useCallback(event => {
         const target = event.target;
 
         // Get the bounding rectangle of target
@@ -138,19 +136,30 @@ export default function Scene(props) {
 
         raycaster.current.setFromCamera(mouse, camera.current);
         const intersects = raycaster.current.intersectObjects([...props.allObject]);
-        if (intersects.length > 0) {
-            props.setCurrentObject(intersects[0].object)
+
+
+        if ((intersects.length > 0 && props.currentObject == null) || (intersects.length > 0 && props.currentObject.id !== intersects[0].object.id)) {
+            if (props.currentObject != null && props.currentObject.id !== intersects[0].object.id) {
+                props.currentObject.scale.x =  props.currentObject.currentScale.x
+                props.currentObject.scale.y =  props.currentObject.currentScale.y
+                props.currentObject.scale.z =  props.currentObject.currentScale.z
+            }
+
+            let intersect = intersects[0].object
+
+            intersect.currentScale = {...intersect.scale}
+            intersect.scale.x += 0.5
+            intersect.scale.y += 0.5
+            intersect.scale.z += 0.5
+            props.setCurrentObject(intersect)
 
         }
-    }, [props.allObject]);
-
-
+    }, [props.allObject, props.currentObject]);
 
 
     //This one is when we click on object
     React.useEffect(() => {
         renderer.current.domElement.addEventListener("click", handleClickOnCanvas);
-
 
 
         return () => {
@@ -164,7 +173,7 @@ export default function Scene(props) {
 
 
         props.allObject.forEach(elem => {
-
+            //TODO opti
             scene.current.remove(elem)
             scene.current.add(elem)
         });

@@ -1,5 +1,5 @@
 import Menu from "../Menu/menu";
-import React from "react";
+import React, {useCallback, useEffect} from "react";
 import useStyles from "./style";
 import Toolbar from "../Toolbar/toolbar";
 import Scene from "../Scene/scene";
@@ -10,16 +10,43 @@ import Background from "../../Class/Background";
 export default function Main() {
     const classes = useStyles();
 
-    const [currentObject,setCurrentObject] = React.useState(null)
-    const [allObject,setAllObject] = React.useState([])
-    const [background,setBackground] = React.useState(new Background(null,true));
+    const [currentObject, setCurrentObject] = React.useState(null)
+    const [allObject, setAllObject] = React.useState([])
+    const [background, setBackground] = React.useState(new Background(null, true));
 
 
-    const updateAllObjectWhenCurrentObjectChange =(lastValue,newValue)=>{
+    const callBackKeys = useCallback((e => {
+        let keyCode = e.key;
+        if (currentObject != null) {
+
+            if (keyCode === "Escape") {
+
+                setCurrentObject((prevState) => {
+
+                    prevState.scale.x = prevState.currentScale.x
+                    prevState.scale.y = prevState.currentScale.y
+                    prevState.scale.z = prevState.currentScale.z
+
+                    return null
+                })
+            }
+        }
+
+    }), [currentObject])
+
+    useEffect(() => {
+
+        document.addEventListener('keydown', callBackKeys)
+
+        return (() => document.removeEventListener('keydown', callBackKeys));
+
+    }, [callBackKeys])
 
 
-
-        const index = allObject.findIndex(value => value.uuid === lastValue.uuid)
+    //Normally the array allObject is updated when we change the value of currentObject , because currentObject is a reference of one item in the array
+    //But we have to do this to refresh all component
+    const updateAllObjectWhenCurrentObjectChange = (lastValue, newValue) => {
+        const index = allObject.findIndex(value => value.id === lastValue.id)
         setAllObject(prevState => {
             prevState[index] = newValue
             return [...prevState]
@@ -35,12 +62,17 @@ export default function Main() {
             <Toolbar/>
             <div className={classes.containerSceneAndBoxObject}>
                 <div className={classes.containerScene}>
-                    <Scene background={background} setCurrentObject={setCurrentObject} currentObject={currentObject} allObject={allObject}/>
+                    <Scene background={background} setCurrentObject={setCurrentObject} currentObject={currentObject}
+                           allObject={allObject}/>
                 </div>
                 <div className={classes.containerToolsObject}>
-                    <AllObjectAndGlobalSettings  setAllObject={setAllObject} allObject={allObject}  setBackground={setBackground}/>
+                    <AllObjectAndGlobalSettings setAllObject={setAllObject} allObject={allObject}
+                                                setBackground={setBackground}/>
                     {
-                        currentObject && <CurrentObject allObject={allObject} updateAllObjectWhenCurrentObjectChange={updateAllObjectWhenCurrentObjectChange} currentObject={currentObject} setCurrentObject={setCurrentObject}/>
+                        currentObject && <CurrentObject allObject={allObject}
+                                                        updateAllObjectWhenCurrentObjectChange={updateAllObjectWhenCurrentObjectChange}
+                                                        currentObject={currentObject}
+                                                        setCurrentObject={setCurrentObject}/>
                     }
 
                 </div>

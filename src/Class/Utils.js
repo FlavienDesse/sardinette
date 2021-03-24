@@ -4,6 +4,17 @@ import {Mesh} from "three";
 import {MeshBasicMaterial} from "three";
 import Constant from "./Constant";
 
+function changeColorLightness(color, lightness) {
+    const r = (color & 0xFF0000) / 0x10**4;
+    const g = (color & 0x00FF00) / 0x10**2;
+    const b = (color & 0x0000FF);
+
+    const changedR = Math.max(0, Math.min(r + lightness, 0xFF));
+    const changedG = Math.max(0, Math.min(g + lightness, 0xFF));
+    const changedB = Math.max(0, Math.min(b + lightness, 0xFF));
+
+    return (changedR * 0x10**4) + (changedG * 0x10**2) + changedB;
+}
 
 
 
@@ -17,6 +28,6 @@ function createPoint(){
 
 
 export {
-    createPoint
+    createPoint,changeColorLightness
 }
 

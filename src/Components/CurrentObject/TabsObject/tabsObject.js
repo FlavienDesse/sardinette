@@ -50,26 +50,22 @@ export default function TabsObject(props) {
 
     const handleChangeTextFieldPositionX= (event)=>{
 
-       setPosition((prevState => {
-           prevState.x = parseFloat(event.target.value)
-           return {...prevState}
-       }))
-
+        setPosition(prevState => {
+            return {...prevState, x: event.target.value}
+        })
 
     }
 
     const handleChangeTextFieldPositionY = (event)=>{
-        setPosition((prevState => {
-            prevState.y = parseFloat(event.target.value)
-            return {...prevState}
-        }))
+        setPosition(prevState => {
+            return {...prevState, y: event.target.value}
+        })
     }
 
     const handleChangeTextFieldPositionZ = (event)=>{
-        setPosition((prevState => {
-            prevState.z = parseFloat(event.target.value)
-            return {...prevState}
-        }))
+        setPosition(prevState => {
+            return {...prevState, z:event.target.value}
+        })
     }
 
 

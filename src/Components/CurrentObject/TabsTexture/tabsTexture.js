@@ -3,13 +3,12 @@ import TextField from '@material-ui/core/TextField';
 import {Typography} from "@material-ui/core";
 import useStyles from "./style";
 import Grid from "@material-ui/core/Grid";
-import Checkbox from "@material-ui/core/Checkbox";
+import {rgbToHex} from "../../../Class/Utils";
 import {ChromePicker} from "react-color";
 import ClickAwayListener from "@material-ui/core/ClickAwayListener";
-import Background from "../../../Class/Background";
-import Menu from "@material-ui/core/Menu";
+
 import PropTypes from "prop-types";
-import * as THREE from "three";
+
 
 
 TabsTexture.propType = {
@@ -23,7 +22,8 @@ export default function TabsTexture(props) {
     const classes = useStyles();
 
 
-    const [color, setColor] = React.useState("#FFFFFF");
+
+    const [color, setColor] = React.useState("#"+props.currentObject.material.color.getHexString());
 
     const [displayColorPicker, setDisplayColorPicker] = React.useState(false);
 
