@@ -33,7 +33,7 @@
   <component name="GitToolBoxStore">
     <option name="projectConfigVersion" value="2" />
   </component>
-  <component name="JupyterTrust" id="5a638de9-f33f-4d61-aadc-d54bcc0e7ad4" />
+  <component name="JupyterTrust" id="a3c65dd0-ec4e-4226-a2ac-76b6eb968a1f" />
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
@@ -50,7 +50,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/Components/CurrentObject" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../racines carrees/racines-carrees-front" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.standard" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -79,6 +79,17 @@
     </key>
   </component>
   <component name="RunManager">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration default="true" type="js.build_tools.npm">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
@@ -120,6 +131,9 @@
       <workItem from="1616507556428" duration="5934000" />
       <workItem from="1616520024958" duration="373000" />
       <workItem from="1616534478647" duration="2529000" />
+      <workItem from="1616603486472" duration="479000" />
+      <workItem from="1616604261648" duration="25000" />
+      <workItem from="1616604314529" duration="100000" />
     </task>
     <servers />
   </component>
@@ -151,29 +165,34 @@
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="1046" y="502" key="#com.intellij.fileTypes.FileTypeChooser/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1616248630046" />
-    <state x="3620" y="455" key="FileChooserDialogImpl" timestamp="1616263726684">
-      <screen x="2560" y="0" width="2560" height="1400" />
+    <state x="795" y="338" key="FileChooserDialogImpl" timestamp="1616604400573">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
+    <state x="795" y="338" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1616604400573" />
     <state x="1060" y="455" key="FileChooserDialogImpl/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1616011878145" />
     <state x="3620" y="455" key="FileChooserDialogImpl/0.0.2560.1400/2560.0.2560.1400@2560.0.2560.1400" timestamp="1616263726684" />
-    <state width="2517" height="247" key="GridCell.Tab.0.bottom" timestamp="1616538683756">
-      <screen x="0" y="0" width="2560" height="1400" />
+    <state width="1877" height="282" key="GridCell.Tab.0.bottom" timestamp="1616603965295">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
+    <state width="1877" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1616603965295" />
     <state width="2517" height="247" key="GridCell.Tab.0.bottom/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1616538683756" />
     <state width="2517" height="247" key="GridCell.Tab.0.bottom/0.0.2560.1400/2560.0.2560.1400@2560.0.2560.1400" timestamp="1616457687587" />
-    <state width="2517" height="247" key="GridCell.Tab.0.center" timestamp="1616538683756">
-      <screen x="0" y="0" width="2560" height="1400" />
+    <state width="1877" height="282" key="GridCell.Tab.0.center" timestamp="1616603965295">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
+    <state width="1877" height="282" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1616603965295" />
     <state width="2517" height="247" key="GridCell.Tab.0.center/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1616538683756" />
     <state width="2517" height="247" key="GridCell.Tab.0.center/0.0.2560.1400/2560.0.2560.1400@2560.0.2560.1400" timestamp="1616457687587" />
-    <state width="2517" height="247" key="GridCell.Tab.0.left" timestamp="1616538683756">
-      <screen x="0" y="0" width="2560" height="1400" />
+    <state width="1877" height="282" key="GridCell.Tab.0.left" timestamp="1616603965295">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
+    <state width="1877" height="282" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1616603965295" />
     <state width="2517" height="247" key="GridCell.Tab.0.left/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1616538683756" />
     <state width="2517" height="247" key="GridCell.Tab.0.left/0.0.2560.1400/2560.0.2560.1400@2560.0.2560.1400" timestamp="1616457687587" />
-    <state width="2517" height="247" key="GridCell.Tab.0.right" timestamp="1616538683756">
-      <screen x="0" y="0" width="2560" height="1400" />
+    <state width="1877" height="282" key="GridCell.Tab.0.right" timestamp="1616603965295">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
+    <state width="1877" height="282" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1616603965295" />
     <state width="2517" height="247" key="GridCell.Tab.0.right/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1616538683756" />
     <state width="2517" height="247" key="GridCell.Tab.0.right/0.0.2560.1400/2560.0.2560.1400@2560.0.2560.1400" timestamp="1616457687587" />
     <state x="987" y="433" width="585" height="534" key="find.popup" timestamp="1616514647508">
