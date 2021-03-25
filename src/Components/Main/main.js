@@ -15,7 +15,7 @@ export default function Main() {
     const [background, setBackground] = React.useState(new Background(null, true));
 
 
-    const callBackKeys = useCallback((e => {
+    const  callBackKeys = useCallback((e => {
         let keyCode = e.key;
         if (currentObject != null) {
 
@@ -66,7 +66,7 @@ export default function Main() {
                            allObject={allObject}/>
                 </div>
                 <div className={classes.containerToolsObject}>
-                    <AllObjectAndGlobalSettings setAllObject={setAllObject} allObject={allObject}
+                    <AllObjectAndGlobalSettings currentObject={currentObject} setCurrentObject={setCurrentObject} setAllObject={setAllObject} allObject={allObject}
                                                 setBackground={setBackground}/>
                     {
                         currentObject && <CurrentObject allObject={allObject}

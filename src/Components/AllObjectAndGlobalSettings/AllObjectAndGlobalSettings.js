@@ -9,11 +9,21 @@ import {ChromePicker} from 'react-color'
 import PropTypes from 'prop-types';
 import Background from "../../Class/Background";
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
-import ArrayRenderObject from "./ArrayRenderObject/ArrayRenderObject";
+import ArrayRenderObject from "./ArrayRenderObject/arrayRenderObject";
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Paper from "@material-ui/core/Paper";
 
 AllObjectAndGlobalSettings.propTypes = {
     setBackground: PropTypes.func.isRequired,
-    allObject:PropTypes.array.isRequired,
+    allObject: PropTypes.array.isRequired,
+    setCurrentObject:PropTypes.func.isRequired,
+    currentObject:PropTypes.any,
+
 }
 
 
@@ -28,8 +38,7 @@ export default function AllObjectAndGlobalSettings(props) {
         setBackgroundType(event.target.value);
         if (event.target.value === "Color") {
             props.setBackground(Background.FromColor(backgroundColor))
-        }
-        else if(event.target.value === "Empty"){
+        } else if (event.target.value === "Empty") {
             props.setBackground(Background.FromEmpty())
         }
     };
@@ -49,6 +58,8 @@ export default function AllObjectAndGlobalSettings(props) {
     }
 
 
+
+
     return (
         <div className={classes.container}>
 
@@ -58,13 +69,26 @@ export default function AllObjectAndGlobalSettings(props) {
                 </Typography>
             </Button>
 
-            <div className={classes.containerAllObject}>
-                {
-                    props.allObject.map((object,index)=>{
-                        return (<ArrayRenderObject object={object}/>)
-                    })
-                }
-            </div>
+            <TableContainer component={Paper} className={classes.containerAllObject}>
+                <Table className={classes.table} >
+                    <TableHead>
+                        <TableRow>
+                            <TableCell>Error</TableCell>
+                            <TableCell >Visibility</TableCell>
+                            <TableCell>Type</TableCell>
+                            <TableCell >Name</TableCell>
+
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {
+                            props.allObject.map((object, index) =>
+                               <ArrayRenderObject key={object.id} currentObject={props.currentObject} setCurrentObject={props.setCurrentObject} object={object}/>
+                            )
+                        }
+                    </TableBody>
+                </Table>
+            </TableContainer>
             <Grid container alignItems={"center"} justify={"center"}>
                 <Grid item xs={4}>
                     <Typography>
@@ -98,13 +122,14 @@ export default function AllObjectAndGlobalSettings(props) {
                                     height: '14px',
                                     borderRadius: '2px',
                                     background: backgroundColor,
-                                    border:"solid black 2px"
+                                    border: "solid black 2px"
                                 }}/>
                             </div>
                             {displayColorPicker &&
                             <ClickAwayListener onClickAway={handleCloseColorPicker}>
                                 <div className={classes.popoverColorPicker}>
-                                    <ChromePicker disableAlpha={true} color={backgroundColor} onChange={handleChangeColor}/>
+                                    <ChromePicker disableAlpha={true} color={backgroundColor}
+                                                  onChange={handleChangeColor}/>
                                 </div>
 
                             </ClickAwayListener>

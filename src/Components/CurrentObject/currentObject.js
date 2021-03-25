@@ -8,10 +8,11 @@ import TabsObject from "./TabsObject/tabsObject";
 import TabsTexture from "./TabsTexture/tabsTexture";
 
 
-Menu.propType = {
+CurrentObject.propType = {
     setCurrentObject:PropTypes.func.isRequired,
     currentObject:PropTypes.object.isRequired,
-    updateAllObjectWhenCurrentObjectChange : PropTypes.func.isRequired
+    updateAllObjectWhenCurrentObjectChange : PropTypes.func.isRequired,
+    allObject:PropTypes.array.isRequired,
 }
 
 

@@ -7,6 +7,8 @@ import {TrackballControls} from "three/examples/jsm/controls/TrackballControls"
 import {TransformControls} from "three/examples/jsm/controls/TransformControls"
 import {changeColorLightness} from "../../Class/Utils";
 import Constant from "../../Class/Constant";
+import currentObject from "../CurrentObject/currentObject";
+import {modifyObjectWhenClickOn} from "../../Class/Utils"
 
 Scene.propType = {
     background: PropTypes.instanceOf(Background).isRequired,
@@ -137,22 +139,16 @@ export default function Scene(props) {
         raycaster.current.setFromCamera(mouse, camera.current);
         const intersects = raycaster.current.intersectObjects([...props.allObject]);
 
+        if(intersects.length > 0 ){
 
-        if ((intersects.length > 0 && props.currentObject == null) || (intersects.length > 0 && props.currentObject.id !== intersects[0].object.id)) {
-            if (props.currentObject != null && props.currentObject.id !== intersects[0].object.id) {
-                props.currentObject.scale.x =  props.currentObject.currentScale.x
-                props.currentObject.scale.y =  props.currentObject.currentScale.y
-                props.currentObject.scale.z =  props.currentObject.currentScale.z
-            }
+            props.setCurrentObject(modifyObjectWhenClickOn(intersects[0].object , props.currentObject))
 
-            let intersect = intersects[0].object
+        }
 
-            intersect.currentScale = {...intersect.scale}
-            intersect.scale.x += 0.5
-            intersect.scale.y += 0.5
-            intersect.scale.z += 0.5
-            props.setCurrentObject(intersect)
+        else {
 
+
+            props.setCurrentObject( modifyObjectWhenClickOn(null, props.currentObject))
         }
     }, [props.allObject, props.currentObject]);
 

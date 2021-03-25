@@ -1,10 +1,10 @@
 import {makeStyles} from '@material-ui/core/styles';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme)=>({
     title: {
 
         fontSize: "0.875rem !important",
-        color: "#3f51b5",
+        color:theme.palette.primary.main,
         lineHeight: '1.75',
         letterSpacing: "0.02857em",
     },
@@ -12,7 +12,7 @@ const useStyles = makeStyles({
         width:"160px",
         justifyContent: "center",
         borderRadius:"0px",
-        borderBottom:"solid 2px #3f51b5",
+        borderBottom:"solid 2px #3f51b5 !importantx",
     },
     container: {
         paddingBottom:"25px",
@@ -20,9 +20,9 @@ const useStyles = makeStyles({
         flexDirection:"column",
     },
     containerAllObject:{
-        margin:"12px 16px",
-        backgroundColor:"grey",
-        flex:1,
+        margin:"12px 6px",
+
+        flex:"1 0 0",
     },
     select:{
         minWidth:'150px',
@@ -38,6 +38,6 @@ const useStyles = makeStyles({
       display:"inline-block",
     },
 
-});
+}));
 
 export default useStyles;

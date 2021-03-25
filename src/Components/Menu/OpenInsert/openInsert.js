@@ -1,14 +1,11 @@
 import React from "react";
-import MenuItem from "@material-ui/core/MenuItem";
-import Menu from '@material-ui/core/Menu';
 import PropTypes from 'prop-types';
 import useStyles from "./style";
 import {createPoint} from "../../../Class/Utils"
+import {MenuItem, SubMenu} from "rc-menu";
 
 
-
-
-Menu.propType = {
+OpenInsert.propType = {
 
     setAllObject:PropTypes.func.isRequired,
 }
@@ -32,11 +29,22 @@ export default function OpenInsert(props) {
     }
 
     return (
-        <div className={classes.container}>
-            <MenuItem onClick={handleAddPoint}>Point</MenuItem>
+        <SubMenu  popupOffset={[0,2]} {...props} title="Insert">
+            <SubMenu  popupOffset={[0,0]} title={"Point"}>
+                <MenuItem onClick={handleAddPoint}>
+                    Point
+                </MenuItem>
+                <MenuItem>
+                    Mirrored Point
+                </MenuItem>
+            </SubMenu>
+            <SubMenu  popupOffset={[0,2]} title={"Curve"}>
 
+            </SubMenu>
+            <SubMenu  popupOffset={[0,2]} title={"Surfaces"}>
 
-        </div>
+            </SubMenu>
+        </SubMenu>
     )
 
 
