@@ -86,8 +86,8 @@ function deBoor(t, degree, points, knots, weights) {
 
 /**
  * Computes the euclidian distance between two points
- * @param {Array<number>|Array<THREE.Vector3>} pointA 
- * @param {Array<number>|Array<THREE.Vector3>} pointB 
+ * @param {Array<number>|THREE.Vector3} pointA 
+ * @param {Array<number>|THREE.Vector3} pointB 
  * @returns {number}
  */
 function distance(pointA, pointB) {
@@ -215,14 +215,12 @@ function spline(degree, controlPoints, resolution, knots, weights) {
         points = []
 
         // Compute a homogeneous array of points representing the spline
-        for(var t = 0; t < pNum; t++) {
+        for(var t = 0; t <= pNum; t++) {
             points.push(deBoor(t / pNum, degree, formattedControlPoints, knots, weights))
         }
 
         // Compute the length of the curve
         length = curveLength(points)
-
-        console.log("Length " + pNum + " " + length)
         
         // If the length hasn't changed, we stop here
         if(lastLength === length) break
@@ -239,4 +237,119 @@ function spline(degree, controlPoints, resolution, knots, weights) {
     else return points
 }
 
-export {spline, toVector3, fromVector3, curveLength, distance}
+// C-SPLINE
+
+/**
+ * Computes the c-spline according to the inputs
+ * @param {Array<Array<number>>|Array<THREE.Vector3>} controlPoints control points that will be interpolated. Can be vectors of any dimensionality ([x, y], [x, y, z], ...)
+ * @param {number} resolution number of points per unit in the returned curve
+ * @param {boolean} closed if the curve should be closed or not
+ * @returns {Array<Array<number>>|Array<THREE.Vector3>} an array of points that represents the spline.
+ */
+function cSpline(controlPoints, resolution, closed) {
+    
+    let formattedControlPoints = controlPoints
+    // Format the control points if not in the good format
+    if(controlPoints[0].x === undefined) {
+        formattedControlPoints = toVector3(controlPoints)
+    }
+
+    let points = []
+
+    // Set the default resolution per unit
+    if(!resolution) resolution = 100
+    if(!closed) closed = false
+
+    let curve = new THREE.CatmullRomCurve3(formattedControlPoints, closed)
+
+    // Let's say the length is equal to 1, there are resolution * 1 points that are represented by pNum
+    let pNum = resolution
+    let length = 1
+
+    let lastLength = length
+    do {
+        // With each loop, pNum will change according to the computed length
+        // as the number of points will always be resolution * length
+        pNum = Math.floor(resolution * length)
+        points = []
+
+        // Compute a homogeneous array of points representing the spline
+        for(var t = 0; t <= pNum; t++) {
+            points.push(curve.getPoint(t / pNum))
+        }
+
+        // Compute the length of the curve
+        length = curveLength(points)
+        
+        // If the length hasn't changed, we stop here
+        if(lastLength === length) break
+        lastLength = length
+
+        // While the number of points doesn't match the length of the curve with the given resolution
+        // This is an approximation with an error of 0.5%
+    } while(length * 0.995 > pNum / resolution || length * 1.005 < pNum / resolution)
+    
+    // If the control points were not THREE.Vector3, convert the resulting curve into a coordinates array
+    if(controlPoints[0].x === undefined) {
+        return fromVector3(points)
+    }
+    else return points
+}
+
+/**
+ * 
+ * @param {Array<Array<number>>} curveA 
+ * @param {Array<Array<number>>} curveB 
+ * @returns {Array<Array<Array<number>>}
+ */
+function getSurface(curveA, curveB) {
+    let triangles = []
+
+    let maxLength = Math.max(curveA.length, curveB.length)
+    let smallCurve
+    let longCurve
+
+    if(maxLength === curveA.length) {
+        longCurve = fromVector3(toVector3(curveA))
+        smallCurve = fromVector3(toVector3(curveB))
+    }
+    else {
+        longCurve = fromVector3(toVector3(curveB))
+        smallCurve = fromVector3(toVector3(curveA))        
+    }
+
+    let ratio = (longCurve.length - smallCurve.length) / (smallCurve.length - 1)
+    let trace = 0
+    
+    for(let i = 1; i < smallCurve.length; i++) {
+        trace += ratio
+        let n = Math.floor(trace)
+        let j = 1
+        if(trace >= 1 || (i === smallCurve.length - 1 && trace > 0.5)) {
+            let a = { x: smallCurve[i - 1][0], y: smallCurve[i - 1][1], z: smallCurve[i - 1][2]}
+            let b = { x: smallCurve[i][0], y: smallCurve[i][1], z: smallCurve[i][2]}
+            let c = {x: 0, y: 0, z: 0}
+            while(trace >= 1 || (i === smallCurve.length - 1 && trace > 0.5)) {
+                c.x = a.x + (b.x - a.x) / (n + 1) * j
+                c.y = a.y + (b.y - a.y) / (n + 1) * j
+                c.z = a.z + (b.z - a.z) / (n + 1) * j
+                smallCurve.splice(i, 0, [c.x, c.y, c.z])
+                i++
+                j++
+                trace--
+            }
+        }        
+    }
+
+    smallCurve.forEach((elt, idx) => {
+        if(idx + 1 >= smallCurve.length) return
+        let t = [elt, longCurve[idx], smallCurve[idx + 1]]
+        let t2 = [longCurve[idx], smallCurve[idx + 1], longCurve[idx + 1]]
+        triangles.push(t)
+        triangles.push(t2)
+    })
+
+    return triangles
+}
+
+export {spline, cSpline, toVector3, fromVector3, curveLength, distance, getSurface}
