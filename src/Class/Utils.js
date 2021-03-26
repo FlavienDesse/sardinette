@@ -19,12 +19,23 @@ function changeColorLightness(color, lightness) {
 function createPoint() {
     const geometry = new SphereGeometry(Constant.DEFAULT_SIZE_POINT, 32, 32);
     let material = new MeshBasicMaterial({color: Constant.DEFAULT_COLOR_POINT});
-    const sphere = new Mesh(geometry, material);
-    sphere.type = "Point"
-    sphere.isError = false
-    return sphere
+    const point = new Mesh(geometry, material);
+    point.type = "Point"
+    point.isError = false
+    point.weight = 1
+    return point
 }
 
+
+function createBSpline() {
+    const geometry = new SphereGeometry(Constant.DEFAULT_SIZE_POINT, 32, 32);
+    let material = new MeshBasicMaterial({color: Constant.DEFAULT_COLOR_POINT});
+    const bSpline = new Mesh(geometry, material);
+
+    bSpline.type = "B-Spline"
+    bSpline.isError = true
+    return bSpline
+}
 
 function modifyObjectWhenClickOn(object, currentObject) {
 

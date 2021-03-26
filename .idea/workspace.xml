@@ -53,7 +53,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../racines carrees/racines-carrees-front" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/Components/CurrentObject/TabsObject/Curve/B-Spline" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.standard" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -68,30 +68,28 @@
     <property name="settings.editor.selected.configurable" value="editor.preferences.import" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\flav6\Desktop\sardinette\sardinette-front\src\Components\CurrentObject\TabsObject\Curve\B-Spline" />
+      <recent name="C:\Users\flav6\Desktop\sardinette\src\Components\CurrentObject" />
+      <recent name="C:\Users\flav6\Desktop\sardinette\src\Components\CurrentObject\TabsObject" />
+      <recent name="C:\Users\flav6\Desktop\sardinette\src\Components\Menu\OpenExamples" />
+      <recent name="C:\Users\flav6\Desktop\sardinette\src\Components\Menu\OpenView" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\flav6\Desktop\sardinette\sardinette-front\src\Components\CurrentObject\TabsObject\Point\Point" />
       <recent name="C:\Users\flav6\Desktop\sardinette\src\Images\Icons" />
       <recent name="C:\Users\flav6\Desktop\sardinette\src\Components" />
       <recent name="C:\Users\flav6\Desktop\sardinette\src\Components\Menu" />
     </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\flav6\Desktop\sardinette\src\Components\CurrentObject" />
-      <recent name="C:\Users\flav6\Desktop\sardinette\src\Components\CurrentObject\TabsObject" />
-      <recent name="C:\Users\flav6\Desktop\sardinette\src\Components\Menu\OpenExamples" />
-      <recent name="C:\Users\flav6\Desktop\sardinette\src\Components\Menu\OpenView" />
-      <recent name="C:\Users\flav6\Desktop\sardinette\src\Components\Menu\OpenInsert" />
-    </key>
   </component>
   <component name="RunManager">
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -216,10 +214,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="616" y="240" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1616706035089" />
-    <state x="707" y="234" width="672" height="504" key="search.everywhere.popup" timestamp="1616711321811">
+    <state x="707" y="234" width="672" height="504" key="search.everywhere.popup" timestamp="1616763716961">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="707" y="234" width="672" height="504" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1616711321811" />
+    <state x="707" y="234" width="672" height="504" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1616763716961" />
     <state x="943" y="315" width="672" height="678" key="search.everywhere.popup/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1616443109416" />
     <state x="1002" y="612" key="vcs.readOnlyHandler.ReadOnlyStatusDialog" timestamp="1616013727573">
       <screen x="0" y="0" width="2560" height="1400" />

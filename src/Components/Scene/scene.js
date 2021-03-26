@@ -5,10 +5,7 @@ import PropTypes from 'prop-types';
 import Background from "../../Class/Background";
 import {TrackballControls} from "three/examples/jsm/controls/TrackballControls"
 import {TransformControls} from "three/examples/jsm/controls/TransformControls"
-import {changeColorLightness} from "../../Class/Utils";
-import Constant from "../../Class/Constant";
-import currentObject from "../CurrentObject/currentObject";
-import {modifyObjectWhenClickOn} from "../../Class/Utils"
+import {modifyObjectWhenClickOn} from "../../Class/Utils";
 
 Scene.propType = {
     background: PropTypes.instanceOf(Background).isRequired,

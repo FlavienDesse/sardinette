@@ -3,7 +3,7 @@ import React, {useCallback, useEffect} from "react";
 import useStyles from "./style";
 import Toolbar from "../Toolbar/toolbar";
 import Scene from "../Scene/scene";
-import AllObjectAndGlobalSettings from "../AllObjectAndGlobalSettings/AllObjectAndGlobalSettings";
+import AllObjectAndGlobalSettings from "../AllObjectAndGlobalSettings/allObjectAndGlobalSettings";
 import CurrentObject from "../CurrentObject/currentObject";
 import Background from "../../Class/Background";
 

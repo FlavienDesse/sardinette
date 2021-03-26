@@ -1,8 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import AllObjectAndGlobalSettings from "../AllObjectAndGlobalSettings";
 import useStyles from "./style";
-import {Grid} from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
@@ -17,7 +15,9 @@ ArrayRenderObject.propTypes = {
     currentObject:PropTypes.any,
 
 }
-
+/*
+     Component for render array of all object
+ */
 export default function ArrayRenderObject(props){
     const classes = useStyles();
 

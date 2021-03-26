@@ -2,7 +2,6 @@ import React from "react";
 import useStyles from "./style";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
-import Menu from "@material-ui/core/Menu";
 import PropTypes from "prop-types";
 import TabsObject from "./TabsObject/tabsObject";
 import TabsTexture from "./TabsTexture/tabsTexture";

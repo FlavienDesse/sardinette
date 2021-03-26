@@ -1,8 +1,5 @@
 import React from "react";
-
-import useStyles from "./style";
-import MenuItemMaterialUI from "@material-ui/core/MenuItem";
-import MenuRC, {MenuItem, SubMenu} from "rc-menu"
+import {SubMenu} from "rc-menu"
 
 
 export default function OpenFile(props) {

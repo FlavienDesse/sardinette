@@ -18,10 +18,11 @@ export default function Point(props) {
     const classes = useStyles();
 
 
-    const [isVisible,setIsVisible]=React.useState(props.currentObject.visible);
 
+    const [weight,setWeight]=React.useState(props.currentObject.weight);
 
     const [name,setName] = React.useState(props.currentObject.name);
+    const [isVisible,setIsVisible]=React.useState(props.currentObject.visible);
 
     const [position,setPosition] = React.useState({...props.currentObject.position});
 
@@ -70,6 +71,10 @@ export default function Point(props) {
         })
     }
 
+    const handleChangeTextFieldWeight = (e) => {
+        setWeight(e.target.value)
+    }
+
 
     const keyPressTextFieldPosition = (e) => {
         if(e.keyCode === 13){
@@ -80,10 +85,19 @@ export default function Point(props) {
             newValue.position.z = position.z
             props.updateAllObjectWhenCurrentObjectChange(lastValue,newValue)
             props.setCurrentObject(newValue)
-
-
         }
     }
+
+    const keyPressTextFieldWeight = (e) => {
+        if(e.keyCode === 13){
+            let lastValue = props.currentObject;
+            let newValue =  props.currentObject
+            newValue.weight = weight
+            props.updateAllObjectWhenCurrentObjectChange(lastValue,newValue)
+            props.setCurrentObject(newValue)
+        }
+    }
+
 
 
     const keyPressTextFieldName = (e) => {
@@ -100,7 +114,7 @@ export default function Point(props) {
 
 
     return (
-        <Grid>
+        <div>
             <div className={classes.containerRow}>
                 <Typography className={classes.text}>
                     Name
@@ -111,9 +125,9 @@ export default function Point(props) {
                 <Typography className={classes.text}>
                     Position
                 </Typography>
-                <TextField value={position.x} onKeyDown={keyPressTextFieldPosition} onChange={handleChangeTextFieldPositionX} InputProps={{className: classes.inputTextFieldPosition}} />
-                <TextField value={position.y} onKeyDown={keyPressTextFieldPosition} onChange={handleChangeTextFieldPositionY} InputProps={{className: classes.inputTextFieldPosition}} />
-                <TextField value={position.z} onKeyDown={keyPressTextFieldPosition} onChange={handleChangeTextFieldPositionZ} InputProps={{className: classes.inputTextFieldPosition}} />
+                <TextField value={position.x} onKeyDown={keyPressTextFieldPosition} onChange={handleChangeTextFieldPositionX} InputProps={{className: classes.inputSmallTextField}} />
+                <TextField value={position.y} onKeyDown={keyPressTextFieldPosition} onChange={handleChangeTextFieldPositionY} InputProps={{className: classes.inputSmallTextField}} />
+                <TextField value={position.z} onKeyDown={keyPressTextFieldPosition} onChange={handleChangeTextFieldPositionZ} InputProps={{className: classes.inputSmallTextField}} />
             </div>
             <div className={classes.containerRow}>
                 <Typography className={classes.text}>
@@ -126,7 +140,14 @@ export default function Point(props) {
                     onChange={handleChangeIsVisible}
                 />
             </div>
-        </Grid>
+            <div className={classes.containerRow}>
+                <Typography className={classes.text}>
+                    Weight
+                </Typography>
+                <TextField value={weight} onKeyDown={keyPressTextFieldWeight} onChange={handleChangeTextFieldWeight} InputProps={{className: classes.inputSmallTextField}} />
+
+            </div>
+        </div>
     )
 
 }

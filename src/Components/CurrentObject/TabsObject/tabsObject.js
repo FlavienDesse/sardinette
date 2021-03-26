@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Point from "./Point/Point/Point";
+import Point from "./Point/Point/point"
 
 TabsObject.propType = {
     setCurrentObject: PropTypes.func.isRequired,
@@ -20,7 +20,12 @@ export default function TabsObject(props) {
 
             {
 
-                typeObject === "Point" ? <Point   setCurrentObject={props.setCurrentObject} currentObject={props.currentObject} allObject={props.allObject} updateAllObjectWhenCurrentObjectChange={props.updateAllObjectWhenCurrentObjectChange}/> : ""
+                typeObject === "Point" ? <Point   setCurrentObject={props.setCurrentObject} currentObject={props.currentObject} allObject={props.allObject} updateAllObjectWhenCurrentObjectChange={props.updateAllObjectWhenCurrentObjectChange}/> :
+                    typeObject === "B-Spline" ? <Point   setCurrentObject={props.setCurrentObject} currentObject={props.currentObject} allObject={props.allObject} updateAllObjectWhenCurrentObjectChange={props.updateAllObjectWhenCurrentObjectChange}/> :
+
+
+
+                    ""
             }
         </div>
 

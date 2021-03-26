@@ -7,9 +7,8 @@ import {MenuItem, SubMenu} from "rc-menu";
 
 OpenInsert.propType = {
 
-    setAllObject:PropTypes.func.isRequired,
+    setAllObject: PropTypes.func.isRequired,
 }
-
 
 
 export default function OpenInsert(props) {
@@ -17,8 +16,8 @@ export default function OpenInsert(props) {
     const classes = useStyles();
 
 
-    const handleAddPoint = ()=>{
-        props.setAllObject((prevState)=>{
+    const handleAddPoint = () => {
+        props.setAllObject((prevState) => {
 
             let point = createPoint()
 
@@ -28,9 +27,15 @@ export default function OpenInsert(props) {
         })
     }
 
+    const handleAddBSpline = () => {
+        props.setAllObject((prevState) => {
+
+        })
+    }
+
     return (
-        <SubMenu  popupOffset={[0,2]} {...props} title="Insert">
-            <SubMenu  popupOffset={[0,0]} title={"Point"}>
+        <SubMenu popupOffset={[0, 2]} {...props} title="Insert">
+            <SubMenu popupOffset={[0, 0]} title={"Point"}>
                 <MenuItem onClick={handleAddPoint}>
                     Point
                 </MenuItem>
@@ -38,10 +43,15 @@ export default function OpenInsert(props) {
                     Mirrored Point
                 </MenuItem>
             </SubMenu>
-            <SubMenu  popupOffset={[0,2]} title={"Curve"}>
-
+            <SubMenu popupOffset={[0, 2]} title={"Curve"}>
+                <MenuItem onClick={handleAddBSpline}>
+                    B-Spline
+                </MenuItem>
+                <MenuItem>
+                    C-Spline
+                </MenuItem>
             </SubMenu>
-            <SubMenu  popupOffset={[0,2]} title={"Surfaces"}>
+            <SubMenu popupOffset={[0, 2]} title={"Surfaces"}>
 
             </SubMenu>
         </SubMenu>

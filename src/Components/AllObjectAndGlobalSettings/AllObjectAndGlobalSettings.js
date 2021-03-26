@@ -26,6 +26,10 @@ AllObjectAndGlobalSettings.propTypes = {
 
 }
 
+/*
+    Component of all objects and global settings
+    This is the thing in the right of the page
+ */
 
 export default function AllObjectAndGlobalSettings(props) {
     const classes = useStyles();
