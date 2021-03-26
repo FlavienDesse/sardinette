@@ -65,8 +65,8 @@ function createBSpline() {
     increaseDefaultName("B-Spline")
     bSpline.type = "B-Spline"
     bSpline.controlsPoints = []
-    bSpline.degree = 1
-    bSpline.resolution = 10
+    bSpline.degree = 2
+    bSpline.resolution = 100
     bSpline.isError = true
     return bSpline
 }
@@ -77,18 +77,11 @@ function modificationBSpline(bSpline) {
     let allControlsPoints = bSpline.controlsPoints.map(a => a.position);
 
 
-
-
-
-
     try {
-        let res = spline(bSpline.degree,allControlsPoints,bSpline.resolution,undefined,bSpline.controlsPoints.map(a => a.weight))
+
+        let res = spline(bSpline.degree,allControlsPoints,bSpline.resolution,null,bSpline.controlsPoints.map(a => a.weight))
 
         const geometry = new BufferGeometry().setFromPoints(res);
-
-
-
-        console.log(res)
 
         return geometry
     }catch (e){

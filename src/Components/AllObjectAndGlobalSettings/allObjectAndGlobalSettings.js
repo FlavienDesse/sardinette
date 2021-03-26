@@ -23,6 +23,7 @@ AllObjectAndGlobalSettings.propTypes = {
     allObject: PropTypes.array.isRequired,
     setCurrentObject:PropTypes.func.isRequired,
     currentObject:PropTypes.any,
+    currentTextFieldSelected:PropTypes.object.isRequired,
 
 }
 
@@ -64,6 +65,7 @@ export default function AllObjectAndGlobalSettings(props) {
 
 
 
+
     return (
         <div className={classes.container}>
 
@@ -87,7 +89,7 @@ export default function AllObjectAndGlobalSettings(props) {
                     <TableBody>
                         {
                             props.allObject.map((object, index) =>
-                               <ArrayRenderObject key={object.id} currentObject={props.currentObject} setCurrentObject={props.setCurrentObject} object={object}/>
+                               <ArrayRenderObject key={object.id} currentTextFieldSelected={props.currentTextFieldSelected} currentObject={props.currentObject} setCurrentObject={props.setCurrentObject} object={object}/>
                             )
                         }
                     </TableBody>

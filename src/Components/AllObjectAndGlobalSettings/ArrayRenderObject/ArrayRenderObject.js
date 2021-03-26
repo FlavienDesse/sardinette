@@ -13,7 +13,7 @@ ArrayRenderObject.propTypes = {
     object:PropTypes.object.isRequired,
     setCurrentObject:PropTypes.func.isRequired,
     currentObject:PropTypes.any,
-
+    currentTextFieldSelected:PropTypes.object,
 }
 /*
      Component for render array of all object
@@ -21,9 +21,26 @@ ArrayRenderObject.propTypes = {
 export default function ArrayRenderObject(props){
     const classes = useStyles();
 
-    const handleOnClickTableRow =  ()=>{
-        props.setCurrentObject(modifyObjectWhenClickOn(props.object , props.currentObject))
-    }
+
+    let handleOnClickTableRow = React.useCallback((event)=>{
+
+        if (props.currentTextFieldSelected !== null && props.currentTextFieldSelected.acceptType.includes(props.object.type)) {
+            if (event.ctrlKey) {
+                event.preventDefault();
+                props.currentTextFieldSelected.addItems(props.object)
+            } else {
+                event.preventDefault();
+                props.currentTextFieldSelected.clearWithOneItem(props.object)
+            }
+        } else {
+            props.setCurrentObject(modifyObjectWhenClickOn(props.object, props.currentObject))
+        }
+
+    },[props.currentTextFieldSelected])
+
+    React.useEffect(()=>{
+       
+    },[props.currentTextFieldSelected])
 
     return(
         <TableRow className={classes.container}  onClick={handleOnClickTableRow}>

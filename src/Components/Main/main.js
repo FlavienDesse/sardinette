@@ -6,12 +6,13 @@ import Scene from "../Scene/scene";
 import AllObjectAndGlobalSettings from "../AllObjectAndGlobalSettings/allObjectAndGlobalSettings";
 import CurrentObject from "../CurrentObject/currentObject";
 import Background from "../../Class/Background";
+import {createPoint} from "../../Class/Utils";
 
 export default function Main() {
     const classes = useStyles();
 
     const [currentObject, setCurrentObject] = React.useState(null)
-    const [allObject, setAllObject] = React.useState([])
+    const [allObject, setAllObject] = React.useState([createPoint(),createPoint(),createPoint()])
     const [background, setBackground] = React.useState(new Background(null, true));
 
     /*
@@ -71,7 +72,7 @@ export default function Main() {
                            allObject={allObject}/>
                 </div>
                 <div className={classes.containerToolsObject}>
-                    <AllObjectAndGlobalSettings  currentObject={currentObject} setCurrentObject={setCurrentObject} setAllObject={setAllObject} allObject={allObject}
+                    <AllObjectAndGlobalSettings currentTextFieldSelected={currentTextFieldSelected} currentObject={currentObject} setCurrentObject={setCurrentObject} setAllObject={setAllObject} allObject={allObject}
                                                 setBackground={setBackground}/>
                     {
                         currentObject && <CurrentObject setCurrentTextFieldSelected={setCurrentTextFieldSelected} allObject={allObject}

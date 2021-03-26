@@ -10,7 +10,7 @@ Point.propType = {
     setCurrentObject: PropTypes.func.isRequired,
     currentObject: PropTypes.object.isRequired,
     allObject: PropTypes.array.isRequired,
-    updateAllObjectWhenCurrentObjectChange : PropTypes.func.isRequired
+    updateAllObjectWhenCurrentObjectChange: PropTypes.func.isRequired
 }
 
 
@@ -18,40 +18,34 @@ export default function Point(props) {
     const classes = useStyles();
 
 
+    const [weight, setWeight] = React.useState(props.currentObject.weight);
 
-    const [weight,setWeight]=React.useState(props.currentObject.weight);
+    const [name, setName] = React.useState(props.currentObject.name);
+    const [isVisible, setIsVisible] = React.useState(props.currentObject.visible);
 
-    const [name,setName] = React.useState(props.currentObject.name);
-    const [isVisible,setIsVisible]=React.useState(props.currentObject.visible);
-
-    const [position,setPosition] = React.useState({...props.currentObject.position});
-
-
-
+    const [position, setPosition] = React.useState({...props.currentObject.position});
 
 
     React.useEffect((() => {
         setName(props.currentObject.name)
         setPosition({...props.currentObject.position})
-    }),[props.currentObject])
+    }), [props.currentObject])
 
 
-
-
-    const handleChangeIsVisible = (event)=>{
+    const handleChangeIsVisible = (event) => {
         setIsVisible(event.target.checked);
         let lastValue = props.currentObject;
-        let newValue =  props.currentObject
+        let newValue = props.currentObject
         newValue.visible = event.target.checked;
-        props.updateAllObjectWhenCurrentObjectChange(lastValue,newValue)
+        props.updateAllObjectWhenCurrentObjectChange(lastValue, newValue)
         props.setCurrentObject(newValue)
     }
 
-    const handleChangeTextFieldName = (event)=>{
+    const handleChangeTextFieldName = (event) => {
         setName(event.target.value);
     }
 
-    const handleChangeTextFieldPositionX= (event)=>{
+    const handleChangeTextFieldPositionX = (event) => {
 
         setPosition(prevState => {
             return {...prevState, x: event.target.value}
@@ -59,15 +53,15 @@ export default function Point(props) {
 
     }
 
-    const handleChangeTextFieldPositionY = (event)=>{
+    const handleChangeTextFieldPositionY = (event) => {
         setPosition(prevState => {
             return {...prevState, y: event.target.value}
         })
     }
 
-    const handleChangeTextFieldPositionZ = (event)=>{
+    const handleChangeTextFieldPositionZ = (event) => {
         setPosition(prevState => {
-            return {...prevState, z:event.target.value}
+            return {...prevState, z: event.target.value}
         })
     }
 
@@ -77,35 +71,34 @@ export default function Point(props) {
 
 
     const keyPressTextFieldPosition = (e) => {
-        if(e.keyCode === 13){
+        if (e.keyCode === 13) {
             let lastValue = props.currentObject;
-            let newValue =  props.currentObject
-            newValue.position.x = position.x
-            newValue.position.y = position.y
-            newValue.position.z = position.z
-            props.updateAllObjectWhenCurrentObjectChange(lastValue,newValue)
+            let newValue = props.currentObject
+            newValue.position.x = parseFloat(position.x)
+            newValue.position.y = parseFloat(position.y)
+            newValue.position.z = parseFloat(position.z)
+            props.updateAllObjectWhenCurrentObjectChange(lastValue, newValue)
             props.setCurrentObject(newValue)
         }
     }
 
     const keyPressTextFieldWeight = (e) => {
-        if(e.keyCode === 13){
+        if (e.keyCode === 13) {
             let lastValue = props.currentObject;
-            let newValue =  props.currentObject
+            let newValue = props.currentObject
             newValue.weight = weight
-            props.updateAllObjectWhenCurrentObjectChange(lastValue,newValue)
+            props.updateAllObjectWhenCurrentObjectChange(lastValue, newValue)
             props.setCurrentObject(newValue)
         }
     }
 
 
-
     const keyPressTextFieldName = (e) => {
-        if(e.keyCode === 13){
+        if (e.keyCode === 13) {
             let lastValue = props.currentObject;
-            let newValue =  props.currentObject
+            let newValue = props.currentObject
             newValue.name = name
-            props.updateAllObjectWhenCurrentObjectChange(lastValue,newValue)
+            props.updateAllObjectWhenCurrentObjectChange(lastValue, newValue)
             props.setCurrentObject(newValue)
 
 
@@ -119,15 +112,22 @@ export default function Point(props) {
                 <Typography className={classes.text}>
                     Name
                 </Typography>
-                <TextField   value={name} onKeyDown={keyPressTextFieldName} onChange={handleChangeTextFieldName}  InputProps={{className: classes.inputTextField}} />
+                <TextField value={name} onKeyDown={keyPressTextFieldName} onChange={handleChangeTextFieldName}
+                           InputProps={{className: classes.inputTextField}}/>
             </div>
             <div className={classes.containerRow}>
                 <Typography className={classes.text}>
                     Position
                 </Typography>
-                <TextField value={position.x} onKeyDown={keyPressTextFieldPosition} onChange={handleChangeTextFieldPositionX} InputProps={{className: classes.inputSmallTextField}} />
-                <TextField value={position.y} onKeyDown={keyPressTextFieldPosition} onChange={handleChangeTextFieldPositionY} InputProps={{className: classes.inputSmallTextField}} />
-                <TextField value={position.z} onKeyDown={keyPressTextFieldPosition} onChange={handleChangeTextFieldPositionZ} InputProps={{className: classes.inputSmallTextField}} />
+                <TextField value={position.x} onKeyDown={keyPressTextFieldPosition}
+                           onChange={handleChangeTextFieldPositionX}
+                           InputProps={{className: classes.inputSmallTextField}}/>
+                <TextField value={position.y} onKeyDown={keyPressTextFieldPosition}
+                           onChange={handleChangeTextFieldPositionY}
+                           InputProps={{className: classes.inputSmallTextField}}/>
+                <TextField value={position.z} onKeyDown={keyPressTextFieldPosition}
+                           onChange={handleChangeTextFieldPositionZ}
+                           InputProps={{className: classes.inputSmallTextField}}/>
             </div>
             <div className={classes.containerRow}>
                 <Typography className={classes.text}>
@@ -144,7 +144,8 @@ export default function Point(props) {
                 <Typography className={classes.text}>
                     Weight
                 </Typography>
-                <TextField value={weight} onKeyDown={keyPressTextFieldWeight} onChange={handleChangeTextFieldWeight} InputProps={{className: classes.inputSmallTextField}} />
+                <TextField value={weight} onKeyDown={keyPressTextFieldWeight} onChange={handleChangeTextFieldWeight}
+                           InputProps={{className: classes.inputSmallTextField}}/>
 
             </div>
         </div>

@@ -139,12 +139,14 @@ export default function Scene(props) {
         const intersects = raycaster.current.intersectObjects([...props.allObject]);
 
         if (intersects.length > 0) {
-            if (props.currentTextFieldSelected !== null && event.ctrlKey) {
-                event.preventDefault();
-                props.currentTextFieldSelected.addItems(intersects[0].object)
-            } else if (props.currentTextFieldSelected !== null) {
-                event.preventDefault();
-                props.currentTextFieldSelected.clearWithOneItem(intersects[0].object)
+            if (props.currentTextFieldSelected !== null && props.currentTextFieldSelected.acceptType.includes(intersects[0].object.type)) {
+                if (event.ctrlKey) {
+                    event.preventDefault();
+                    props.currentTextFieldSelected.addItems(intersects[0].object)
+                } else {
+                    event.preventDefault();
+                    props.currentTextFieldSelected.clearWithOneItem(intersects[0].object)
+                }
             } else {
                 props.setCurrentObject(modifyObjectWhenClickOn(intersects[0].object, props.currentObject))
             }
@@ -153,8 +155,7 @@ export default function Scene(props) {
 
             if (props.currentTextFieldSelected !== null) {
                 event.preventDefault();
-            }
-            else{
+            } else {
                 props.setCurrentObject(modifyObjectWhenClickOn(null, props.currentObject))
 
             }
