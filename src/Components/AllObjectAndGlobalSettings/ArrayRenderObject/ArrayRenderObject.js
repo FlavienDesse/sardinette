@@ -22,7 +22,9 @@ export default function ArrayRenderObject(props){
     const classes = useStyles();
 
 
-    let handleOnClickTableRow = React.useCallback((event)=>{
+    let handleOnClickTableRow = (event)=>{
+        event.preventDefault();
+        event.stopPropagation();
 
         if (props.currentTextFieldSelected !== null && props.currentTextFieldSelected.acceptType.includes(props.object.type)) {
             if (event.ctrlKey) {
@@ -33,17 +35,15 @@ export default function ArrayRenderObject(props){
                 props.currentTextFieldSelected.clearWithOneItem(props.object)
             }
         } else {
-            props.setCurrentObject(modifyObjectWhenClickOn(props.object, props.currentObject))
+           props.setCurrentObject(modifyObjectWhenClickOn(props.object, props.currentObject))
         }
 
-    },[props.currentTextFieldSelected])
+    }
 
-    React.useEffect(()=>{
-       
-    },[props.currentTextFieldSelected])
 
     return(
-        <TableRow className={classes.container}  onClick={handleOnClickTableRow}>
+        <TableRow className={classes.container}  onMouseDown={handleOnClickTableRow}>
+
             <TableCell>
                 {
                     props.object.isError ? <ErrorIcon className={classes.redIcon}/> : " "

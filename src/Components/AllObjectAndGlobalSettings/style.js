@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme)=>({
         width:"160px",
         justifyContent: "center",
         borderRadius:"0px",
-        borderBottom:"solid 2px #3f51b5 !importantx",
+        borderBottom:"solid 2px #3f51b5 !important",
     },
     container: {
         paddingBottom:"25px",
