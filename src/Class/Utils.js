@@ -1,7 +1,8 @@
 import {SphereGeometry} from "three";
 import {Mesh} from "three";
-import {MeshBasicMaterial} from "three";
+import {MeshBasicMaterial, SplineCurve, Vector3, BufferGeometry, Line, LineBasicMaterial} from "three";
 import Constant from "./Constant";
+import {spline} from "./Math";
 
 function changeColorLightness(color, lightness) {
     const r = (color & 0xFF0000) / 0x10 ** 4;
@@ -15,12 +16,32 @@ function changeColorLightness(color, lightness) {
     return (changedR * 0x10 ** 4) + (changedG * 0x10 ** 2) + changedB;
 }
 
+/**
+ * @param {string} type of the object , example : "Point"
+
+ */
+function increaseDefaultName(type) {
+    const reg = new RegExp("\\d+$[D]*")
+    let matches;
+    switch (type) {
+        case "Point":
+            matches =  Constant.DEFAULT_NAME_POINT.match(reg);
+            Constant.DEFAULT_NAME_POINT = Constant.DEFAULT_NAME_POINT.replace(reg, parseInt(matches[0], 10)+1)
+            break;
+        case "B-Spline":
+            matches =  Constant.DEFAULT_NAME_B_SPLINE.match(reg);
+            Constant.DEFAULT_NAME_B_SPLINE = Constant.DEFAULT_NAME_B_SPLINE.replace(reg, parseInt(matches[0], 10)+1)
+            break;
+    }
+}
 
 function createPoint() {
     const geometry = new SphereGeometry(Constant.DEFAULT_SIZE_POINT, 32, 32);
     let material = new MeshBasicMaterial({color: Constant.DEFAULT_COLOR_POINT});
     const point = new Mesh(geometry, material);
     point.type = "Point"
+    point.name = Constant.DEFAULT_NAME_POINT
+    increaseDefaultName("Point")
     point.isError = false
     point.weight = 1
     return point
@@ -28,43 +49,97 @@ function createPoint() {
 
 
 function createBSpline() {
-    const geometry = new SphereGeometry(Constant.DEFAULT_SIZE_POINT, 32, 32);
-    let material = new MeshBasicMaterial({color: Constant.DEFAULT_COLOR_POINT});
-    const bSpline = new Mesh(geometry, material);
+    // Create a sine-like wave
+    const points =[
 
+        new Vector3(5, -5,0),
+        new Vector3(10, 0,0)
+    ];
+
+
+    const geometry = new BufferGeometry().setFromPoints(points);
+
+    const material = new LineBasicMaterial({color: 0xff0000});
+    const bSpline = new Line(geometry, material);
+    bSpline.name = Constant.DEFAULT_NAME_B_SPLINE
+    increaseDefaultName("B-Spline")
     bSpline.type = "B-Spline"
+    bSpline.controlsPoints = []
+    bSpline.degree = 1
+    bSpline.resolution = 10
     bSpline.isError = true
     return bSpline
 }
 
+
+function modificationBSpline(bSpline) {
+
+    let allControlsPoints = bSpline.controlsPoints.map(a => a.position);
+
+
+
+
+
+
+    try {
+        let res = spline(bSpline.degree,allControlsPoints,bSpline.resolution,undefined,bSpline.controlsPoints.map(a => a.weight))
+
+        const geometry = new BufferGeometry().setFromPoints(res);
+
+
+
+        console.log(res)
+
+        return geometry
+    }catch (e){
+        throw new Error(e.message)
+    }
+
+
+
+
+}
+
+
 function modifyObjectWhenClickOn(object, currentObject) {
 
-    if (object === null && currentObject != null) {
+
+
+    if(  currentObject != null && (object == null || (currentObject.id !== object.id))){
         if (currentObject.type === "Point") {
             currentObject.scale.x = currentObject.currentScale.x
             currentObject.scale.y = currentObject.currentScale.y
             currentObject.scale.z = currentObject.currentScale.z
         }
-    } else if (object != null ) {
-        if (object.type === "Point") {
-            if (currentObject == null || (currentObject.id !== object.id)) {
-                if (currentObject != null && currentObject.id !== object.id) {
-                    currentObject.scale.x = currentObject.currentScale.x
-                    currentObject.scale.y = currentObject.currentScale.y
-                    currentObject.scale.z = currentObject.currentScale.z
-                }
+    }
 
+
+    if (object != null) {
+        if (object.type === "Point") {
+            if (currentObject == null || (currentObject.id !== object.id)  ) {
                 let intersect = object
 
                 intersect.currentScale = {...intersect.scale}
-                intersect.scale.x += 0.5
-                intersect.scale.y += 0.5
-                intersect.scale.z += 0.5
+                intersect.scale.x += Constant.DEFAULT_SIZE_POINT_SELECTED
+                intersect.scale.y += Constant.DEFAULT_SIZE_POINT_SELECTED
+                intersect.scale.z += Constant.DEFAULT_SIZE_POINT_SELECTED
 
                 return intersect;
 
+            } else {
+                return currentObject
             }
-            else{
+        } else if (object.type === "B-Spline") {
+            if (currentObject == null || (currentObject.id !== object.id)) {
+
+                let intersect = object
+
+
+
+
+                return intersect;
+
+            } else {
                 return currentObject
             }
         }
@@ -77,6 +152,6 @@ function modifyObjectWhenClickOn(object, currentObject) {
 }
 
 export {
-    createPoint, changeColorLightness, modifyObjectWhenClickOn
+    createPoint, changeColorLightness, modifyObjectWhenClickOn, createBSpline , modificationBSpline
 }
 

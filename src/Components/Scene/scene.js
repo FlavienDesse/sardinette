@@ -7,11 +7,14 @@ import {TrackballControls} from "three/examples/jsm/controls/TrackballControls"
 import {TransformControls} from "three/examples/jsm/controls/TransformControls"
 import {modifyObjectWhenClickOn} from "../../Class/Utils";
 
+
 Scene.propType = {
     background: PropTypes.instanceOf(Background).isRequired,
     currentObject: PropTypes.object.isRequired,
     allObject: PropTypes.array.isRequired,
     setCurrentObject: PropTypes.func.isRequired,
+    setCurrentTextFieldSelected: PropTypes.func.isRequired,
+    currentTextFieldSelected: PropTypes.object.isRequired,
 }
 
 export default function Scene(props) {
@@ -32,13 +35,12 @@ export default function Scene(props) {
         let boundingContainer = refContainer.current.getBoundingClientRect()
         let height = boundingContainer.height;
         let width = boundingContainer.width;
-
         //create camera
         camera.current = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
         camera.current.position.z = 5;
 
         raycaster.current = new THREE.Raycaster();
-
+        raycaster.current.params.Line.threshold = 0.1;
         renderer.current = new THREE.WebGLRenderer({alpha: true})
         renderer.current.setSize(width, height);
 
@@ -121,6 +123,7 @@ export default function Scene(props) {
     const handleClickOnCanvas = React.useCallback(event => {
         const target = event.target;
 
+
         // Get the bounding rectangle of target
         const rectMouse = target.getBoundingClientRect();
 
@@ -132,22 +135,31 @@ export default function Scene(props) {
             x: ((event.clientX - rectMouse.left) / width) * 2 - 1,
             y: -((event.clientY - rectMouse.top) / height) * 2 + 1,
         }
-
         raycaster.current.setFromCamera(mouse, camera.current);
         const intersects = raycaster.current.intersectObjects([...props.allObject]);
 
-        if(intersects.length > 0 ){
+        if (intersects.length > 0) {
+            if (props.currentTextFieldSelected !== null && event.ctrlKey) {
+                event.preventDefault();
+                props.currentTextFieldSelected.addItems(intersects[0].object)
+            } else if (props.currentTextFieldSelected !== null) {
+                event.preventDefault();
+                props.currentTextFieldSelected.clearWithOneItem(intersects[0].object)
+            } else {
+                props.setCurrentObject(modifyObjectWhenClickOn(intersects[0].object, props.currentObject))
+            }
 
-            props.setCurrentObject(modifyObjectWhenClickOn(intersects[0].object , props.currentObject))
+        } else {
 
+            if (props.currentTextFieldSelected !== null) {
+                event.preventDefault();
+            }
+            else{
+                props.setCurrentObject(modifyObjectWhenClickOn(null, props.currentObject))
+
+            }
         }
-
-        else {
-
-
-            props.setCurrentObject( modifyObjectWhenClickOn(null, props.currentObject))
-        }
-    }, [props.allObject, props.currentObject]);
+    }, [props.allObject, props.currentObject, props.currentTextFieldSelected]);
 
 
     //This one is when we click on object

@@ -14,6 +14,11 @@ export default function Main() {
     const [allObject, setAllObject] = React.useState([])
     const [background, setBackground] = React.useState(new Background(null, true));
 
+    /*
+       This hook is useful when the user clicks on a textField where we must enter values (like points)
+     */
+    const [currentTextFieldSelected, setCurrentTextFieldSelected] = React.useState(null);
+
 
     const  callBackKeys = useCallback((e => {
         let keyCode = e.key;
@@ -62,14 +67,14 @@ export default function Main() {
             <Toolbar/>
             <div className={classes.containerSceneAndBoxObject}>
                 <div className={classes.containerScene}>
-                    <Scene background={background} setCurrentObject={setCurrentObject} currentObject={currentObject}
+                    <Scene currentTextFieldSelected={currentTextFieldSelected} setCurrentTextFieldSelected={setCurrentTextFieldSelected} background={background} setCurrentObject={setCurrentObject} currentObject={currentObject}
                            allObject={allObject}/>
                 </div>
                 <div className={classes.containerToolsObject}>
-                    <AllObjectAndGlobalSettings currentObject={currentObject} setCurrentObject={setCurrentObject} setAllObject={setAllObject} allObject={allObject}
+                    <AllObjectAndGlobalSettings  currentObject={currentObject} setCurrentObject={setCurrentObject} setAllObject={setAllObject} allObject={allObject}
                                                 setBackground={setBackground}/>
                     {
-                        currentObject && <CurrentObject allObject={allObject}
+                        currentObject && <CurrentObject setCurrentTextFieldSelected={setCurrentTextFieldSelected} allObject={allObject}
                                                         updateAllObjectWhenCurrentObjectChange={updateAllObjectWhenCurrentObjectChange}
                                                         currentObject={currentObject}
                                                         setCurrentObject={setCurrentObject}/>

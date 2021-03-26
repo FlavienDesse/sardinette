@@ -29,7 +29,7 @@ export default function ArrayRenderObject(props){
         <TableRow className={classes.container}  onClick={handleOnClickTableRow}>
             <TableCell>
                 {
-                    props.object.isError ? <ErrorIcon/> : " "
+                    props.object.isError ? <ErrorIcon className={classes.redIcon}/> : " "
                 }
             </TableCell>
             <TableCell>

@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from 'prop-types';
 import useStyles from "./style";
-import {createPoint} from "../../../Class/Utils"
+import {createPoint,createBSpline} from "../../../Class/Utils"
 import {MenuItem, SubMenu} from "rc-menu";
 
 
@@ -29,6 +29,11 @@ export default function OpenInsert(props) {
 
     const handleAddBSpline = () => {
         props.setAllObject((prevState) => {
+            let curve = createBSpline()
+
+            prevState.push(curve)
+
+            return [...prevState]
 
         })
     }

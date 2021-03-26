@@ -1,6 +1,13 @@
 
 
 export default class Object {
+   static DEFAULT_NAME_B_SPLINE = "B-Spline0"
+
+
+
+
+   static DEFAULT_NAME_POINT = "Point0"
    static DEFAULT_COLOR_POINT = 0xFFD700
-   static DEFAULT_SIZE_POINT = 0.5
+   static DEFAULT_SIZE_POINT = 0.1
+   static DEFAULT_SIZE_POINT_SELECTED = 0.1
 }
