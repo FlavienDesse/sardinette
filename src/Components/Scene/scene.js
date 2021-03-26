@@ -181,7 +181,12 @@ export default function Scene(props) {
         props.allObject.forEach(elem => {
             //TODO opti
             scene.current.remove(elem)
-            scene.current.add(elem)
+
+            if(!elem.isError){
+                scene.current.add(elem)
+
+            }
+
         });
 
 

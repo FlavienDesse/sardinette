@@ -49,15 +49,10 @@ function createPoint() {
 
 
 function createBSpline() {
-    // Create a sine-like wave
-    const points =[
-
-        new Vector3(5, -5,0),
-        new Vector3(10, 0,0)
-    ];
 
 
-    const geometry = new BufferGeometry().setFromPoints(points);
+
+    const geometry = new BufferGeometry().setFromPoints([]);
 
     const material = new LineBasicMaterial({color: 0xff0000});
     const bSpline = new Line(geometry, material);
