@@ -70,18 +70,18 @@
     <property name="settings.editor.selected.configurable" value="editor.preferences.import" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\flav6\Desktop\sardinette\sardinette-front\src\Components\CurrentObject\TabsObject\Point\Point" />
-      <recent name="C:\Users\flav6\Desktop\sardinette\src\Images\Icons" />
-      <recent name="C:\Users\flav6\Desktop\sardinette\src\Components" />
-      <recent name="C:\Users\flav6\Desktop\sardinette\src\Components\Menu" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\flav6\Desktop\sardinette\sardinette-front\src\Components\CurrentObject\TabsObject\Curve\B-Spline" />
       <recent name="C:\Users\flav6\Desktop\sardinette\src\Components\CurrentObject" />
       <recent name="C:\Users\flav6\Desktop\sardinette\src\Components\CurrentObject\TabsObject" />
       <recent name="C:\Users\flav6\Desktop\sardinette\src\Components\Menu\OpenExamples" />
       <recent name="C:\Users\flav6\Desktop\sardinette\src\Components\Menu\OpenView" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\flav6\Desktop\sardinette\sardinette-front\src\Components\CurrentObject\TabsObject\Point\Point" />
+      <recent name="C:\Users\flav6\Desktop\sardinette\src\Images\Icons" />
+      <recent name="C:\Users\flav6\Desktop\sardinette\src\Components" />
+      <recent name="C:\Users\flav6\Desktop\sardinette\src\Components\Menu" />
     </key>
   </component>
   <component name="RunManager">
