@@ -9,5 +9,5 @@ export default class Object {
    static DEFAULT_NAME_POINT = "Point0"
    static DEFAULT_COLOR_POINT = 0xFFD700
    static DEFAULT_SIZE_POINT = 0.1
-   static DEFAULT_SIZE_POINT_SELECTED = 0.1
+   static DEFAULT_SIZE_POINT_SELECTED = 1
 }

@@ -9,6 +9,7 @@ TabsObject.propType = {
     allObject: PropTypes.array.isRequired,
     updateAllObjectWhenCurrentObjectChange: PropTypes.func.isRequired,
     setCurrentTextFieldSelected:PropTypes.func.isRequired,
+    updateObjectByAddingChildrenID:PropTypes.func.isRequired,
 }
 
 export default function TabsObject(props) {
@@ -27,7 +28,7 @@ export default function TabsObject(props) {
             {
 
                 typeObject === "Point" ? <Point   setCurrentObject={props.setCurrentObject} currentObject={props.currentObject} allObject={props.allObject} updateAllObjectWhenCurrentObjectChange={props.updateAllObjectWhenCurrentObjectChange}/> :
-                    typeObject === "B-Spline" ? <BSpline setCurrentTextFieldSelected={props.setCurrentTextFieldSelected}  setCurrentObject={props.setCurrentObject} currentObject={props.currentObject} allObject={props.allObject} updateAllObjectWhenCurrentObjectChange={props.updateAllObjectWhenCurrentObjectChange}/> :
+                    typeObject === "B-Spline" ? <BSpline updateObjectByAddingChildrenID={props.updateObjectByAddingChildrenID} setCurrentTextFieldSelected={props.setCurrentTextFieldSelected}  setCurrentObject={props.setCurrentObject} currentObject={props.currentObject} allObject={props.allObject} updateAllObjectWhenCurrentObjectChange={props.updateAllObjectWhenCurrentObjectChange}/> :
 
 
 

@@ -12,7 +12,8 @@ BSpline.propType = {
     currentObject: PropTypes.object.isRequired,
     allObject: PropTypes.array.isRequired,
     updateAllObjectWhenCurrentObjectChange: PropTypes.func.isRequired,
-    setCurrentTextFieldSelected: PropTypes.func.isRequired
+    setCurrentTextFieldSelected: PropTypes.func.isRequired,
+    updateObjectByAddingChildrenID:PropTypes.func.isRequired,
 }
 
 
@@ -30,6 +31,14 @@ export default function BSpline(props) {
 
     const [controlsPoints, setControlsPoints] = React.useState(props.currentObject.controlsPoints);
 
+
+    React.useEffect((() => {
+        setResolution(props.currentObject.resolution)
+        setIsVisible(props.currentObject.visible)
+        setName(props.currentObject.name)
+        setDegree(props.currentObject.degree)
+        setControlsPoints(props.currentObject.controlsPoints)
+    }), [props.currentObject])
 
     const handleChangeIsVisible = (event) => {
         setIsVisible(event.target.checked);
@@ -102,7 +111,6 @@ export default function BSpline(props) {
             try {
                 let res = modificationBSpline(newValue)
                 newValue.geometry = res
-
                 newValue.isError = false;
                 props.updateAllObjectWhenCurrentObjectChange(lastValue, newValue)
                 props.setCurrentObject(newValue)
@@ -126,6 +134,7 @@ export default function BSpline(props) {
                 let res = modificationBSpline(newValue)
                 newValue.geometry = res
                 newValue.isError = false;
+                props.updateObjectByAddingChildrenID(controlsPoints,props.currentObject.id)
                 props.updateAllObjectWhenCurrentObjectChange(lastValue, newValue)
                 props.setCurrentObject(newValue)
             } catch (e) {

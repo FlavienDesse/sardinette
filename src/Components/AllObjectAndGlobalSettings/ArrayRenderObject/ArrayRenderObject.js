@@ -8,6 +8,7 @@ import ErrorIcon from '@material-ui/icons/Error';
 import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
 import {modifyObjectWhenClickOn} from "../../../Class/Utils";
+import clsx from "clsx";
 
 ArrayRenderObject.propTypes = {
     object:PropTypes.object.isRequired,
@@ -42,7 +43,7 @@ export default function ArrayRenderObject(props){
 
 
     return(
-        <TableRow className={classes.container}  onMouseDown={handleOnClickTableRow}>
+        <TableRow className={clsx(classes.container , props.currentObject!= null && props.currentObject.id === props.object.id && classes.selected)}  onMouseDown={handleOnClickTableRow}>
 
             <TableCell>
                 {
@@ -55,13 +56,13 @@ export default function ArrayRenderObject(props){
                 }
             </TableCell>
             <TableCell >
-                <Typography>
+                <Typography className={ props.currentObject!= null && props.currentObject.id === props.object.id && classes.selectedText}>
                     {
                         props.object.type
                     }
                 </Typography>
             </TableCell>
-            <TableCell >
+            <TableCell className={ props.currentObject!= null && props.currentObject.id === props.object.id && classes.selectedText}>
 
                     {
                         props.object.name

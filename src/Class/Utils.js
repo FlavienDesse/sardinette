@@ -4,6 +4,33 @@ import {MeshBasicMaterial, SplineCurve, Vector3, BufferGeometry, Line, LineBasic
 import Constant from "./Constant";
 import {spline} from "./Math";
 
+/*
+    CURRENT TYPE :
+    - B-Spline
+    - Point
+ */
+
+/*
+    WHEN CREATE NEW OBJECT YOU HAVE TO UPDATE :
+     - TabsObject
+     - ModifyObjectWhenClickOn
+     - updateWhenDeleted
+     -
+ */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 function changeColorLightness(color, lightness) {
     const r = (color & 0xFF0000) / 0x10 ** 4;
     const g = (color & 0x00FF00) / 0x10 ** 2;
@@ -44,9 +71,31 @@ function createPoint() {
     increaseDefaultName("Point")
     point.isError = false
     point.weight = 1
+    point.childrenID = []
     return point
 }
 
+function updateWhenDeleted(allObject,currentObject){
+
+    let res = allObject.map((prev)=> {
+       if( currentObject.childrenID.includes(prev.id) ){
+           if(prev.type === "B-Spline"){
+               prev.controlsPoints = prev.controlsPoints.filter(controlsPoints => controlsPoints.id !== currentObject.id  )
+               try {
+                   prev.geometry = modificationBSpline(prev)
+               }catch (e){
+                   prev.isError = true
+               }
+
+           }
+       }
+        return prev
+    })
+
+
+
+    return res
+}
 
 function createBSpline() {
 
@@ -60,6 +109,7 @@ function createBSpline() {
     increaseDefaultName("B-Spline")
     bSpline.type = "B-Spline"
     bSpline.controlsPoints = []
+    bSpline.childrenID = []
     bSpline.degree = 2
     bSpline.resolution = 100
     bSpline.isError = true
@@ -140,6 +190,6 @@ function modifyObjectWhenClickOn(object, currentObject) {
 }
 
 export {
-    createPoint, changeColorLightness, modifyObjectWhenClickOn, createBSpline , modificationBSpline
+    createPoint, changeColorLightness, modifyObjectWhenClickOn, createBSpline , modificationBSpline,updateWhenDeleted
 }
 

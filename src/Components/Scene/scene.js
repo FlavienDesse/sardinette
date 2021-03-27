@@ -30,7 +30,7 @@ export default function Scene(props) {
     //This useEffect is for initialisation
     React.useEffect(() => {
 
-
+        const group = new THREE.Group();
         //We get the size of the available space
         let boundingContainer = refContainer.current.getBoundingClientRect()
         let height = boundingContainer.height;
@@ -56,8 +56,10 @@ export default function Scene(props) {
 
         const controlsElem = new TransformControls(camera.current, renderer.current.domElement)
 
+        group.add(plane)
+        scene.current.add(group);
+        scene.current.add(  new THREE.Group());
 
-        scene.current.add(plane);
 
 
         const controls = new TrackballControls(camera.current, renderer.current.domElement)
@@ -178,17 +180,23 @@ export default function Scene(props) {
     React.useEffect(() => {
 
 
+        //TODO opti
+        scene.current.remove(scene.current.children[1]);
+
+        const group = new THREE.Group();
+
         props.allObject.forEach(elem => {
             //TODO opti
-            scene.current.remove(elem)
 
             if(!elem.isError){
-                scene.current.add(elem)
+                group.add(elem)
+
+
 
             }
 
         });
-
+        scene.current.add(group)
 
     }, [props.allObject])
 
