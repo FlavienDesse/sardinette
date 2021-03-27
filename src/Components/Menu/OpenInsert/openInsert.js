@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from 'prop-types';
-import useStyles from "./style";
-import {createPoint,createBSpline} from "../../../Class/Utils"
+import {createBSpline, createPoint} from "../../../Class/Utils"
 import {MenuItem, SubMenu} from "rc-menu";
 
 
@@ -12,10 +11,7 @@ OpenInsert.propType = {
 
 
 export default function OpenInsert(props) {
-
-    const classes = useStyles();
-
-
+    
     const handleAddPoint = () => {
         props.setAllObject((prevState) => {
 
@@ -38,8 +34,11 @@ export default function OpenInsert(props) {
         })
     }
 
+    let propsSubMenu = Object.assign({}, props)
+    delete  propsSubMenu.setAllObject
+
     return (
-        <SubMenu popupOffset={[0, 2]} {...props} title="Insert">
+        <SubMenu popupOffset={[0, 2]} {...propsSubMenu} title="Insert">
             <SubMenu popupOffset={[0, 0]} title={"Point"}>
                 <MenuItem onClick={handleAddPoint}>
                     Point
@@ -57,7 +56,9 @@ export default function OpenInsert(props) {
                 </MenuItem>
             </SubMenu>
             <SubMenu popupOffset={[0, 2]} title={"Surfaces"}>
-
+                <MenuItem>
+                    C-Surfaces
+                </MenuItem>
             </SubMenu>
         </SubMenu>
     )

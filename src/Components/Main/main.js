@@ -6,9 +6,9 @@ import Scene from "../Scene/scene";
 import AllObjectAndGlobalSettings from "../AllObjectAndGlobalSettings/allObjectAndGlobalSettings";
 import CurrentObject from "../CurrentObject/currentObject";
 import Background from "../../Class/Background";
-import {createPoint, modificationBSpline, modifyObjectWhenClickOn, updateWhenDeleted} from "../../Class/Utils";
-import ModalDeleteObject from "./ModalDeleteObject/modalDeleteObject";
+import {createPoint, modifyObjectWhenClickOn, updateWhenDeleted} from "../../Class/Utils";
 import Modal from "@material-ui/core/Modal";
+import {Button, Typography} from "@material-ui/core";
 
 export default function Main() {
     const classes = useStyles();
@@ -26,30 +26,9 @@ export default function Main() {
     const [currentTextFieldSelected, setCurrentTextFieldSelected] = React.useState(null);
 
 
-    const callBackKeys = useCallback((e => {
-        let keyCode = e.key;
-        if (currentObject != null) {
-
-            if (keyCode === "Escape") {
-                modifyObjectWhenClickOn(null, currentObject)
-                setCurrentObject(null)
-            } else if (keyCode === "Delete") {
-                updateWhenDeleted(allObject, currentObject)
-                deleteTheCurrentObject()
 
 
-            }
-        }
 
-    }), [currentObject])
-
-    useEffect(() => {
-
-        document.addEventListener('keydown', callBackKeys)
-
-        return (() => document.removeEventListener('keydown', callBackKeys));
-
-    }, [callBackKeys])
 
 
     //Normally the array allObject is updated when we change the value of currentObject , because currentObject is a reference of one item in the array
@@ -78,16 +57,44 @@ export default function Main() {
         setAllObject(newState)
     }
 
-    const deleteTheCurrentObject = () => {
-        let number = 0;
-        allObject.map((prev)=> {
-            if( currentObject.childrenID.includes(prev.id) ){
-                number++
+
+
+    const callBackKeys = useCallback((e) => {
+
+        const deleteTheCurrentObject = () => {
+            let number = 0;
+            allObject.forEach((prev)=> {
+                if( currentObject.childrenID.includes(prev.id) ){
+                    number++
+                }
+            })
+            setNumberElemDelete(number)
+            handleOpen()
+        }
+
+        let keyCode = e.key;
+        if (currentObject != null) {
+
+            if (keyCode === "Escape") {
+                modifyObjectWhenClickOn(null, currentObject)
+                setCurrentObject(null)
+            } else if (keyCode === "Delete") {
+                updateWhenDeleted(allObject, currentObject)
+                deleteTheCurrentObject()
+
+
             }
-        })
-        setNumberElemDelete(number)
-        handleOpen()
-    }
+        }
+
+    }, [allObject,currentObject])
+
+    useEffect(() => {
+
+        document.addEventListener('keydown', callBackKeys)
+
+        return (() => document.removeEventListener('keydown', callBackKeys));
+
+    }, [callBackKeys])
 
     const callbackDeleteTheCurrentObject = () => {
 
@@ -106,17 +113,42 @@ export default function Main() {
         setModalDeleteObject(false);
     };
 
+
+
+    const body = (
+        <div  className={classes.paper}>
+            <Typography variant={"body1"}>
+                Are you sure you want to delete {currentObject != null ? currentObject.name : ""} ?
+            </Typography>
+            <Typography variant={"body1"}>
+                {numberElemDelete } object(s) will be impacted
+            </Typography>
+            <div className={classes.containerButton}>
+                <Button className={classes.buttonModal} variant={"contained"} color={"secondary"} onClick={handleClose}>
+                    Close
+                </Button>
+                <Button className={classes.buttonModal} variant={"contained"} color={"primary"} onClick={callbackDeleteTheCurrentObject}>
+                    Accept
+                </Button>
+            </div>
+
+        </div>
+    )
+
+
     return (
         <div className={classes.container}>
-            <Menu setAllObject={setAllObject}/>
+            <Menu setAllObject={setAllObject}>
+
+            </Menu>
 
             <Modal
                 open={openModalDeleteObject}
                 onClose={handleClose}
 
             >
-                <ModalDeleteObject currentObject={currentObject} close={handleClose} number={numberElemDelete}
-                                   delete={callbackDeleteTheCurrentObject}/>
+                {body}
+
             </Modal>
 
             <Toolbar/>

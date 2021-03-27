@@ -4,7 +4,6 @@ import useStyles from "./style";
 import PropTypes from 'prop-types';
 import Background from "../../Class/Background";
 import {TrackballControls} from "three/examples/jsm/controls/TrackballControls"
-import {TransformControls} from "three/examples/jsm/controls/TransformControls"
 import {modifyObjectWhenClickOn} from "../../Class/Utils";
 
 
@@ -54,7 +53,7 @@ export default function Scene(props) {
         refContainer.current.appendChild(renderer.current.domElement)
 
 
-        const controlsElem = new TransformControls(camera.current, renderer.current.domElement)
+
 
         group.add(plane)
         scene.current.add(group);
@@ -122,7 +121,7 @@ export default function Scene(props) {
     }, [props.background])
 
 
-    const handleClickOnCanvas = React.useCallback(event => {
+    const handleClickOnCanvas = React.useCallback((event) => {
         const target = event.target;
 
 
@@ -162,7 +161,7 @@ export default function Scene(props) {
 
             }
         }
-    }, [props.allObject, props.currentObject, props.currentTextFieldSelected]);
+    }, [props]);
 
 
     //This one is when we click on object

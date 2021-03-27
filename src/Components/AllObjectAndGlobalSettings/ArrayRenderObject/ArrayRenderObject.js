@@ -56,13 +56,13 @@ export default function ArrayRenderObject(props){
                 }
             </TableCell>
             <TableCell >
-                <Typography className={ props.currentObject!= null && props.currentObject.id === props.object.id && classes.selectedText}>
+                <Typography className={ clsx(props.currentObject!= null && props.currentObject.id === props.object.id && classes.selectedText)}>
                     {
                         props.object.type
                     }
                 </Typography>
             </TableCell>
-            <TableCell className={ props.currentObject!= null && props.currentObject.id === props.object.id && classes.selectedText}>
+            <TableCell className={ clsx(props.currentObject!= null && props.currentObject.id === props.object.id && classes.selectedText)}>
 
                     {
                         props.object.name

@@ -1,6 +1,4 @@
-import {SphereGeometry} from "three";
-import {Mesh} from "three";
-import {MeshBasicMaterial, SplineCurve, Vector3, BufferGeometry, Line, LineBasicMaterial} from "three";
+import {BufferGeometry, Line, LineBasicMaterial, Mesh, MeshBasicMaterial, SphereGeometry} from "three";
 import Constant from "./Constant";
 import {spline} from "./Math";
 
@@ -17,18 +15,6 @@ import {spline} from "./Math";
      - updateWhenDeleted
      -
  */
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 function changeColorLightness(color, lightness) {
@@ -52,13 +38,15 @@ function increaseDefaultName(type) {
     let matches;
     switch (type) {
         case "Point":
-            matches =  Constant.DEFAULT_NAME_POINT.match(reg);
-            Constant.DEFAULT_NAME_POINT = Constant.DEFAULT_NAME_POINT.replace(reg, parseInt(matches[0], 10)+1)
+            matches = Constant.DEFAULT_NAME_POINT.match(reg);
+            Constant.DEFAULT_NAME_POINT = Constant.DEFAULT_NAME_POINT.replace(reg, parseInt(matches[0], 10) + 1)
             break;
         case "B-Spline":
-            matches =  Constant.DEFAULT_NAME_B_SPLINE.match(reg);
-            Constant.DEFAULT_NAME_B_SPLINE = Constant.DEFAULT_NAME_B_SPLINE.replace(reg, parseInt(matches[0], 10)+1)
+            matches = Constant.DEFAULT_NAME_B_SPLINE.match(reg);
+            Constant.DEFAULT_NAME_B_SPLINE = Constant.DEFAULT_NAME_B_SPLINE.replace(reg, parseInt(matches[0], 10) + 1)
             break;
+        default:
+            throw new Error("unknow type provided")
     }
 }
 
@@ -75,30 +63,28 @@ function createPoint() {
     return point
 }
 
-function updateWhenDeleted(allObject,currentObject){
+function updateWhenDeleted(allObject, currentObject) {
 
-    let res = allObject.map((prev)=> {
-       if( currentObject.childrenID.includes(prev.id) ){
-           if(prev.type === "B-Spline"){
-               prev.controlsPoints = prev.controlsPoints.filter(controlsPoints => controlsPoints.id !== currentObject.id  )
-               try {
-                   prev.geometry = modificationBSpline(prev)
-               }catch (e){
-                   prev.isError = true
-               }
+    let res = allObject.map((prev) => {
+        if (currentObject.childrenID.includes(prev.id)) {
+            if (prev.type === "B-Spline") {
+                prev.controlsPoints = prev.controlsPoints.filter(controlsPoints => controlsPoints.id !== currentObject.id)
+                try {
+                    prev.geometry = modificationBSpline(prev)
+                } catch (e) {
+                    prev.isError = true
+                }
 
-           }
-       }
+            }
+        }
         return prev
     })
-
 
 
     return res
 }
 
 function createBSpline() {
-
 
 
     const geometry = new BufferGeometry().setFromPoints([]);
@@ -124,16 +110,14 @@ function modificationBSpline(bSpline) {
 
     try {
 
-        let res = spline(bSpline.degree,allControlsPoints,bSpline.resolution,null,bSpline.controlsPoints.map(a => a.weight))
+        let res = spline(bSpline.degree, allControlsPoints, bSpline.resolution, null, bSpline.controlsPoints.map(a => a.weight))
 
         const geometry = new BufferGeometry().setFromPoints(res);
 
         return geometry
-    }catch (e){
+    } catch (e) {
         throw new Error(e.message)
     }
-
-
 
 
 }
@@ -142,8 +126,7 @@ function modificationBSpline(bSpline) {
 function modifyObjectWhenClickOn(object, currentObject) {
 
 
-
-    if(  currentObject != null && (object == null || (currentObject.id !== object.id))){
+    if (currentObject != null && (object == null || (currentObject.id !== object.id))) {
         if (currentObject.type === "Point") {
             currentObject.scale.x = currentObject.currentScale.x
             currentObject.scale.y = currentObject.currentScale.y
@@ -154,7 +137,7 @@ function modifyObjectWhenClickOn(object, currentObject) {
 
     if (object != null) {
         if (object.type === "Point") {
-            if (currentObject == null || (currentObject.id !== object.id)  ) {
+            if (currentObject == null || (currentObject.id !== object.id)) {
                 let intersect = object
 
                 intersect.currentScale = {...intersect.scale}
@@ -173,8 +156,6 @@ function modifyObjectWhenClickOn(object, currentObject) {
                 let intersect = object
 
 
-
-
                 return intersect;
 
             } else {
@@ -190,6 +171,6 @@ function modifyObjectWhenClickOn(object, currentObject) {
 }
 
 export {
-    createPoint, changeColorLightness, modifyObjectWhenClickOn, createBSpline , modificationBSpline,updateWhenDeleted
+    createPoint, changeColorLightness, modifyObjectWhenClickOn, createBSpline, modificationBSpline, updateWhenDeleted
 }
 

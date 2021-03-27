@@ -2,7 +2,6 @@ import React from 'react'
 import TextField from '@material-ui/core/TextField';
 import {Typography} from "@material-ui/core";
 import useStyles from "./style";
-import Grid from "@material-ui/core/Grid";
 import Checkbox from "@material-ui/core/Checkbox";
 import PropTypes from "prop-types";
 

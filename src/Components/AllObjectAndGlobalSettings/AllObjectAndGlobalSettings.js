@@ -23,7 +23,7 @@ AllObjectAndGlobalSettings.propTypes = {
     allObject: PropTypes.array.isRequired,
     setCurrentObject:PropTypes.func.isRequired,
     currentObject:PropTypes.any,
-    currentTextFieldSelected:PropTypes.object.isRequired,
+    currentTextFieldSelected:PropTypes.object,
 
 }
 

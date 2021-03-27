@@ -5,7 +5,7 @@ import Checkbox from "@material-ui/core/Checkbox";
 import useStyles from "./style";
 import PropTypes from "prop-types";
 import {modificationBSpline} from "../../../../../Class/Utils";
-import { useSnackbar } from 'notistack';
+import {useSnackbar} from 'notistack';
 
 BSpline.propType = {
     setCurrentObject: PropTypes.func.isRequired,
@@ -21,7 +21,7 @@ export default function BSpline(props) {
 
     const classes = useStyles()
 
-    const {enqueueSnackbar, closeSnackbar} = useSnackbar();
+    const {enqueueSnackbar} = useSnackbar();
 
     const [name, setName] = React.useState(props.currentObject.name);
     const [isVisible, setIsVisible] = React.useState(props.currentObject.visible);
