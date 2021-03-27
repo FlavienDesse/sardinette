@@ -1,14 +1,11 @@
 import React from 'react'
-import TextField from '@material-ui/core/TextField';
 import {Typography} from "@material-ui/core";
 import useStyles from "./style";
 import Grid from "@material-ui/core/Grid";
-import {rgbToHex} from "../../../Class/Utils";
 import {ChromePicker} from "react-color";
 import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 
 import PropTypes from "prop-types";
-
 
 
 TabsTexture.propType = {

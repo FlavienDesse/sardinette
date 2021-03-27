@@ -1,27 +1,19 @@
 import React from "react";
-import MenuItem from "@material-ui/core/MenuItem";
-import Menu from '@material-ui/core/Menu';
 import PropTypes from 'prop-types';
-import useStyles from "./style";
-import {createPoint} from "../../../Class/Utils"
+import {createBSpline, createPoint} from "../../../Class/Utils"
+import {MenuItem, SubMenu} from "rc-menu";
 
 
+OpenInsert.propType = {
 
-
-Menu.propType = {
-
-    setAllObject:PropTypes.func.isRequired,
+    setAllObject: PropTypes.func.isRequired,
 }
 
 
-
 export default function OpenInsert(props) {
-
-    const classes = useStyles();
-
-
-    const handleAddPoint = ()=>{
-        props.setAllObject((prevState)=>{
+    
+    const handleAddPoint = () => {
+        props.setAllObject((prevState) => {
 
             let point = createPoint()
 
@@ -31,12 +23,44 @@ export default function OpenInsert(props) {
         })
     }
 
+    const handleAddBSpline = () => {
+        props.setAllObject((prevState) => {
+            let curve = createBSpline()
+
+            prevState.push(curve)
+
+            return [...prevState]
+
+        })
+    }
+
+    let propsSubMenu = Object.assign({}, props)
+    delete  propsSubMenu.setAllObject
+
     return (
-        <div className={classes.container}>
-            <MenuItem onClick={handleAddPoint}>Point</MenuItem>
-
-
-        </div>
+        <SubMenu popupOffset={[0, 2]} {...propsSubMenu} title="Insert">
+            <SubMenu popupOffset={[0, 0]} title={"Point"}>
+                <MenuItem onClick={handleAddPoint}>
+                    Point
+                </MenuItem>
+                <MenuItem>
+                    Mirrored Point
+                </MenuItem>
+            </SubMenu>
+            <SubMenu popupOffset={[0, 2]} title={"Curve"}>
+                <MenuItem onClick={handleAddBSpline}>
+                    B-Spline
+                </MenuItem>
+                <MenuItem>
+                    C-Spline
+                </MenuItem>
+            </SubMenu>
+            <SubMenu popupOffset={[0, 2]} title={"Surfaces"}>
+                <MenuItem>
+                    C-Surfaces
+                </MenuItem>
+            </SubMenu>
+        </SubMenu>
     )
 
 

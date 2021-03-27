@@ -1,39 +1,42 @@
 import React from "react";
-import {Button} from "@material-ui/core";
 import useStyles from "./style";
 import OpenFile from "./OpenFile/openFile";
 import OpenInsert from "./OpenInsert/openInsert";
-import OpenView from "./OpenView/openView";
 import OpenExamples from "./OpenExamples/openExamples";
 import PropTypes from "prop-types";
-
+import MenuRC from "rc-menu";
+import 'rc-menu/assets/index.css';
 
 Menu.propType = {
 
-    setAllObject:PropTypes.func.isRequired,
+    setAllObject: PropTypes.func.isRequired,
 }
 
 export default function Menu(props) {
     const classes = useStyles();
 
-    const [openMenu, setOpenMenu] = React.useState([false, false, false,false]);
-    const handleCloseMenu = (event,pos) => {
-        setOpenMenu((prevState => {
-            prevState[pos] = false;
-            return [...prevState];
-        }))
-    };
-
-
-    const handleOpenMenu = (event,pos) => {
-        setOpenMenu((prevState => {
-            prevState[pos] = true;
-            return [...prevState];
-        }))
-    };
-
 
     return (
+        <MenuRC
+            className={classes.menu}
+            defaultActiveFirst
+            mode={"horizontal"}
+            selectable={false}
+            inlineIndent={100}
+        >
+           <OpenFile/>
+           <OpenInsert setAllObject={props.setAllObject}/>
+           <OpenExamples/>
+
+
+        </MenuRC>
+    )
+
+
+}
+
+/*
+ return (
         <div>
             <div className={classes.containerButton} onMouseEnter={(event => handleOpenMenu(event,0))} onMouseLeave={(event => handleCloseMenu(event,0))}>
                 <Button className={classes.button} aria-haspopup={true}>
@@ -62,5 +65,4 @@ export default function Menu(props) {
 
         </div>
     )
-
-}
+ */

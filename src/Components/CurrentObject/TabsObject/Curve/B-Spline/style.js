@@ -15,7 +15,7 @@ const useStyles = makeStyles({
         alignItems: 'center',
     },
 
-    inputTextFieldPosition:{
+    inputSmallTextField:{
         width: '50px',
         marginRight: '25px',
     },

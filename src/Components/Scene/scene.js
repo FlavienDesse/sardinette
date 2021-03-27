@@ -4,15 +4,16 @@ import useStyles from "./style";
 import PropTypes from 'prop-types';
 import Background from "../../Class/Background";
 import {TrackballControls} from "three/examples/jsm/controls/TrackballControls"
-import {TransformControls} from "three/examples/jsm/controls/TransformControls"
-import {changeColorLightness} from "../../Class/Utils";
-import Constant from "../../Class/Constant";
+import {modifyObjectWhenClickOn} from "../../Class/Utils";
+
 
 Scene.propType = {
     background: PropTypes.instanceOf(Background).isRequired,
     currentObject: PropTypes.object.isRequired,
     allObject: PropTypes.array.isRequired,
     setCurrentObject: PropTypes.func.isRequired,
+    setCurrentTextFieldSelected: PropTypes.func.isRequired,
+    currentTextFieldSelected: PropTypes.object.isRequired,
 }
 
 export default function Scene(props) {
@@ -28,18 +29,17 @@ export default function Scene(props) {
     //This useEffect is for initialisation
     React.useEffect(() => {
 
-
+        const group = new THREE.Group();
         //We get the size of the available space
         let boundingContainer = refContainer.current.getBoundingClientRect()
         let height = boundingContainer.height;
         let width = boundingContainer.width;
-
         //create camera
         camera.current = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
         camera.current.position.z = 5;
 
         raycaster.current = new THREE.Raycaster();
-
+        raycaster.current.params.Line.threshold = 0.1;
         renderer.current = new THREE.WebGLRenderer({alpha: true})
         renderer.current.setSize(width, height);
 
@@ -53,10 +53,12 @@ export default function Scene(props) {
         refContainer.current.appendChild(renderer.current.domElement)
 
 
-        const controlsElem = new TransformControls(camera.current, renderer.current.domElement)
 
 
-        scene.current.add(plane);
+        group.add(plane)
+        scene.current.add(group);
+        scene.current.add(  new THREE.Group());
+
 
 
         const controls = new TrackballControls(camera.current, renderer.current.domElement)
@@ -119,8 +121,9 @@ export default function Scene(props) {
     }, [props.background])
 
 
-    const handleClickOnCanvas = React.useCallback(event => {
+    const handleClickOnCanvas = React.useCallback((event) => {
         const target = event.target;
+
 
         // Get the bounding rectangle of target
         const rectMouse = target.getBoundingClientRect();
@@ -133,28 +136,32 @@ export default function Scene(props) {
             x: ((event.clientX - rectMouse.left) / width) * 2 - 1,
             y: -((event.clientY - rectMouse.top) / height) * 2 + 1,
         }
-
         raycaster.current.setFromCamera(mouse, camera.current);
         const intersects = raycaster.current.intersectObjects([...props.allObject]);
 
-
-        if ((intersects.length > 0 && props.currentObject == null) || (intersects.length > 0 && props.currentObject.id !== intersects[0].object.id)) {
-            if (props.currentObject != null && props.currentObject.id !== intersects[0].object.id) {
-                props.currentObject.scale.x =  props.currentObject.currentScale.x
-                props.currentObject.scale.y =  props.currentObject.currentScale.y
-                props.currentObject.scale.z =  props.currentObject.currentScale.z
+        if (intersects.length > 0) {
+            if (props.currentTextFieldSelected !== null && props.currentTextFieldSelected.acceptType.includes(intersects[0].object.type)) {
+                if (event.ctrlKey) {
+                    event.preventDefault();
+                    props.currentTextFieldSelected.addItems(intersects[0].object)
+                } else {
+                    event.preventDefault();
+                    props.currentTextFieldSelected.clearWithOneItem(intersects[0].object)
+                }
+            } else {
+                props.setCurrentObject(modifyObjectWhenClickOn(intersects[0].object, props.currentObject))
             }
 
-            let intersect = intersects[0].object
+        } else {
 
-            intersect.currentScale = {...intersect.scale}
-            intersect.scale.x += 0.5
-            intersect.scale.y += 0.5
-            intersect.scale.z += 0.5
-            props.setCurrentObject(intersect)
+            if (props.currentTextFieldSelected !== null) {
+                event.preventDefault();
+            } else {
+                props.setCurrentObject(modifyObjectWhenClickOn(null, props.currentObject))
 
+            }
         }
-    }, [props.allObject, props.currentObject]);
+    }, [props]);
 
 
     //This one is when we click on object
@@ -172,12 +179,23 @@ export default function Scene(props) {
     React.useEffect(() => {
 
 
+        //TODO opti
+        scene.current.remove(scene.current.children[1]);
+
+        const group = new THREE.Group();
+
         props.allObject.forEach(elem => {
             //TODO opti
-            scene.current.remove(elem)
-            scene.current.add(elem)
-        });
 
+            if(!elem.isError){
+                group.add(elem)
+
+
+
+            }
+
+        });
+        scene.current.add(group)
 
     }, [props.allObject])
 
