@@ -6,6 +6,14 @@
 .pnp.js
 /.idea
 
+
+
+src/Components/AllObjectAndGlobalSettings/AllObjectAndGlobalSettings.js
+src/Components/AllObjectAndGlobalSettings/ArrayRenderObject/ArrayRenderObject.js
+src/Components/CurrentObject/TabsObject/Point/Point/Point.js
+
+
+
 # testing
 /coverage
 
