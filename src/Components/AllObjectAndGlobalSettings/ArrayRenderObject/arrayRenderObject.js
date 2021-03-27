@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import AllObjectAndGlobalSettings from "../AllObjectAndGlobalSettings";
+import AllObjectAndGlobalSettings from "../allObjectAndGlobalSettings";
 import useStyles from "../style";
 import {Grid} from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";

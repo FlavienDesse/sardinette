@@ -9,7 +9,7 @@ import {ChromePicker} from 'react-color'
 import PropTypes from 'prop-types';
 import Background from "../../Class/Background";
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
-import ArrayRenderObject from "./ArrayRenderObject/ArrayRenderObject";
+import ArrayRenderObject from "./ArrayRenderObject/arrayRenderObject";
 
 AllObjectAndGlobalSettings.propTypes = {
     setBackground: PropTypes.func.isRequired,
