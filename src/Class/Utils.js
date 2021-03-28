@@ -13,7 +13,7 @@ import {spline} from "./Math";
      - TabsObject
      - ModifyObjectWhenClickOn
      - updateWhenDeleted
-     -
+     - increaseDefaultName
  */
 
 
@@ -45,10 +45,19 @@ function increaseDefaultName(type) {
             matches = Constant.DEFAULT_NAME_B_SPLINE.match(reg);
             Constant.DEFAULT_NAME_B_SPLINE = Constant.DEFAULT_NAME_B_SPLINE.replace(reg, parseInt(matches[0], 10) + 1)
             break;
+        case "B-Spline":
+            matches = Constant.DEFAULT_NAME_SURFACE.match(reg);
+            Constant.DEFAULT_NAME_SURFACE = Constant.DEFAULT_NAME_SURFACE.replace(reg, parseInt(matches[0], 10) + 1)
+            break;
         default:
             throw new Error("unknow type provided")
     }
 }
+
+
+
+
+
 
 function createPoint() {
     const geometry = new SphereGeometry(Constant.DEFAULT_SIZE_POINT, 32, 32);
@@ -62,6 +71,54 @@ function createPoint() {
     point.childrenID = []
     return point
 }
+
+
+
+function createBSpline() {
+
+
+    const geometry = new BufferGeometry().setFromPoints([]);
+
+    const material = new LineBasicMaterial({color: 0xff0000});
+    const bSpline = new Line(geometry, material);
+    bSpline.name = Constant.DEFAULT_NAME_B_SPLINE
+    increaseDefaultName("B-Spline")
+    bSpline.type = "B-Spline"
+    bSpline.childrenID = []
+    bSpline.firstCurve = []
+    bSpline.secondCurve = []
+
+    bSpline. = 100
+    bSpline.isError = true
+    return bSpline
+}
+
+
+function createSurface() {
+
+
+    bSpline.name = Constant.DEFAULT_NAME_B_SPLINE
+    increaseDefaultName("B-Spline")
+    bSpline.type = "B-Spline"
+    bSpline.controlsPoints = []
+    bSpline.childrenID = []
+    bSpline.degree = 2
+    bSpline.resolution = 100
+    bSpline.isError = true
+    return bSpline
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 function updateWhenDeleted(allObject, currentObject) {
 
@@ -83,25 +140,6 @@ function updateWhenDeleted(allObject, currentObject) {
 
     return res
 }
-
-function createBSpline() {
-
-
-    const geometry = new BufferGeometry().setFromPoints([]);
-
-    const material = new LineBasicMaterial({color: 0xff0000});
-    const bSpline = new Line(geometry, material);
-    bSpline.name = Constant.DEFAULT_NAME_B_SPLINE
-    increaseDefaultName("B-Spline")
-    bSpline.type = "B-Spline"
-    bSpline.controlsPoints = []
-    bSpline.childrenID = []
-    bSpline.degree = 2
-    bSpline.resolution = 100
-    bSpline.isError = true
-    return bSpline
-}
-
 
 function modificationBSpline(bSpline) {
 

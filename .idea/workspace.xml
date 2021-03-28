@@ -11,8 +11,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="78afd4d1-1ed3-4b4d-a584-1aa195b3fadc" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Components/CurrentObject/TabsObject/Surfaces/Surface/style.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Components/CurrentObject/TabsObject/Surfaces/Surface/surface.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Class/Constant.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Class/Constant.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Class/Utils.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Class/Utils.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,6 +40,10 @@
             <RecentBranchesForRepo>
               <option name="branches">
                 <list>
+                  <RecentBranch>
+                    <option name="branchName" value="Interface" />
+                    <option name="lastUsedInstant" value="1616942909" />
+                  </RecentBranch>
                   <RecentBranch>
                     <option name="branchName" value="main" />
                     <option name="lastUsedInstant" value="1616883244" />
@@ -71,7 +78,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/Components/CurrentObject/TabsObject/Curve/B-Spline" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/Components/CurrentObject/TabsObject/Surfaces/Surface" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.standard" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -87,13 +94,6 @@
     <property name="settings.editor.selected.configurable" value="editor.preferences.import" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\flav6\Desktop\sardinette\sardinette-front\src\Components\CurrentObject\TabsObject\Curve\B-Spline" />
-      <recent name="C:\Users\flav6\Desktop\sardinette\src\Components\CurrentObject" />
-      <recent name="C:\Users\flav6\Desktop\sardinette\src\Components\CurrentObject\TabsObject" />
-      <recent name="C:\Users\flav6\Desktop\sardinette\src\Components\Menu\OpenExamples" />
-      <recent name="C:\Users\flav6\Desktop\sardinette\src\Components\Menu\OpenView" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\flav6\Desktop\sardinette\sardinette-front\src\Class" />
       <recent name="C:\Users\flav6\Desktop\sardinette\sardinette-front\src\Components\CurrentObject\TabsObject\Point\Point" />
@@ -101,17 +101,22 @@
       <recent name="C:\Users\flav6\Desktop\sardinette\src\Components" />
       <recent name="C:\Users\flav6\Desktop\sardinette\src\Components\Menu" />
     </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\flav6\Desktop\sardinette\sardinette-front\src\Components\CurrentObject\TabsObject\Surfaces\Surface" />
+      <recent name="C:\Users\flav6\Desktop\sardinette\sardinette-front\src\Components\CurrentObject\TabsObject\Curve\B-Spline" />
+      <recent name="C:\Users\flav6\Desktop\sardinette\src\Components\CurrentObject" />
+      <recent name="C:\Users\flav6\Desktop\sardinette\src\Components\CurrentObject\TabsObject" />
+      <recent name="C:\Users\flav6\Desktop\sardinette\src\Components\Menu\OpenExamples" />
+    </key>
   </component>
   <component name="RunManager">
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -189,10 +194,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="414" y="175" width="1092" height="738" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1616622457359" />
-    <state x="785" y="373" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1616705709072">
+    <state x="785" y="373" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1616942976215">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="785" y="373" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1616705709072" />
+    <state x="785" y="373" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1616942976215" />
     <state x="1046" y="502" key="#com.intellij.fileTypes.FileTypeChooser/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1616248630046" />
     <state x="672" y="375" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1616765960159">
       <screen x="0" y="0" width="1920" height="1040" />
