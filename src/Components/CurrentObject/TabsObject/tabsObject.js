@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import Point from "./Point/Point/point"
 import BSpline from "./Curve/B-Spline/bSpline";
+import Surface from "./Surfaces/Surface/surface";
 
 TabsObject.propType = {
     setCurrentObject: PropTypes.func.isRequired,
@@ -29,6 +30,7 @@ export default function TabsObject(props) {
 
                 typeObject === "Point" ? <Point   setCurrentObject={props.setCurrentObject} currentObject={props.currentObject} allObject={props.allObject} updateAllObjectWhenCurrentObjectChange={props.updateAllObjectWhenCurrentObjectChange}/> :
                     typeObject === "B-Spline" ? <BSpline updateObjectByAddingChildrenID={props.updateObjectByAddingChildrenID} setCurrentTextFieldSelected={props.setCurrentTextFieldSelected}  setCurrentObject={props.setCurrentObject} currentObject={props.currentObject} allObject={props.allObject} updateAllObjectWhenCurrentObjectChange={props.updateAllObjectWhenCurrentObjectChange}/> :
+                        typeObject === "Surface" ? <Surface updateObjectByAddingChildrenID={props.updateObjectByAddingChildrenID} setCurrentTextFieldSelected={props.setCurrentTextFieldSelected}  setCurrentObject={props.setCurrentObject} currentObject={props.currentObject} allObject={props.allObject} updateAllObjectWhenCurrentObjectChange={props.updateAllObjectWhenCurrentObjectChange}/> :
 
 
 

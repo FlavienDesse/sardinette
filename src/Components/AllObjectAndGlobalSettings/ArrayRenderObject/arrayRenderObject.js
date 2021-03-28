@@ -36,6 +36,7 @@ export default function ArrayRenderObject(props){
                 props.currentTextFieldSelected.clearWithOneItem(props.object)
             }
         } else {
+
            props.setCurrentObject(modifyObjectWhenClickOn(props.object, props.currentObject))
         }
 

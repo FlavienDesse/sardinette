@@ -116,6 +116,20 @@ function createBSpline() {
 function createSurface() {
 
 
+    const geometry = new BufferGeometry().setFromPoints([]);
+
+    const material = new LineBasicMaterial({color: 0xff0000});
+    const surface = new Line(geometry, material);
+    surface.name = Constant.DEFAULT_NAME_SURFACE
+    increaseDefaultName("Surface")
+    surface.type = "Surface"
+
+    surface.childrenID = []
+    surface.firstCurve= {}
+    surface.secondCurve= {}
+
+    surface.isError = true
+    return surface
 
 }
 
@@ -189,6 +203,18 @@ function modifyObjectWhenClickOn(object, currentObject) {
                 return currentObject
             }
         }
+        else if (object.type === "Surface") {
+            if (currentObject == null || (currentObject.id !== object.id)) {
+
+                let intersect = object
+
+
+                return intersect;
+
+            } else {
+                return currentObject
+            }
+        }
     }
 
 
@@ -198,6 +224,6 @@ function modifyObjectWhenClickOn(object, currentObject) {
 }
 
 export {
-    createPoint, changeColorLightness, modifyObjectWhenClickOn, createBSpline, modificationBSpline, updateChildren
+    createPoint, changeColorLightness, modifyObjectWhenClickOn, createBSpline, modificationBSpline, updateChildren,createSurface
 }
 

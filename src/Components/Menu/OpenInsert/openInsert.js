@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from 'prop-types';
-import {createBSpline, createPoint} from "../../../Class/Utils"
+import {createBSpline, createPoint, createSurface} from "../../../Class/Utils"
 import {MenuItem, SubMenu} from "rc-menu";
 
 
@@ -18,6 +18,17 @@ export default function OpenInsert(props) {
             let point = createPoint()
 
             prevState.push(point)
+
+            return [...prevState]
+        })
+    }
+
+    const handleAddSurface = () => {
+        props.setAllObject((prevState) => {
+
+            let surface = createSurface()
+
+            prevState.push(surface)
 
             return [...prevState]
         })
@@ -56,8 +67,8 @@ export default function OpenInsert(props) {
                 </MenuItem>
             </SubMenu>
             <SubMenu popupOffset={[0, 2]} title={"Surfaces"}>
-                <MenuItem>
-                    C-Surfaces
+                <MenuItem onClick={handleAddSurface}>
+                    Surface
                 </MenuItem>
             </SubMenu>
         </SubMenu>

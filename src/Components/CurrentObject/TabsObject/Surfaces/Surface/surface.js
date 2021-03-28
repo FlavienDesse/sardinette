@@ -5,7 +5,7 @@ import useStyles from "./style";
 import Checkbox from "@material-ui/core/Checkbox";
 import PropTypes from "prop-types";
 
-Point.propType = {
+Surface.propType = {
     setCurrentObject: PropTypes.func.isRequired,
     currentObject: PropTypes.object.isRequired,
     allObject: PropTypes.array.isRequired,
@@ -16,19 +16,17 @@ Point.propType = {
 export default function Surface(props) {
     const classes = useStyles();
 
-
     const [name, setName] = React.useState(props.currentObject.name);
     const [isVisible, setIsVisible] = React.useState(props.currentObject.visible);
 
-    const [firstCurve, setFirstCurve] = React.useState();
-    const [secondCurve, setSecondCurve] = React.useState();
+    const [firstCurve, setFirstCurve] = React.useState(props.currentObject.firstCurve);
+    const [secondCurve, setSecondCurve] = React.useState(props.currentObject.secondCurve);
 
-    const []
 
     React.useEffect((() => {
         setIsVisible(props.currentObject.visible)
         setName(props.currentObject.name)
-       setFirstCurve(props.currentObject.firstCurve)
+        setFirstCurve(props.currentObject.firstCurve)
         setSecondCurve(props.currentObject.secondCurve)
     }), [props.currentObject])
 
@@ -46,52 +44,7 @@ export default function Surface(props) {
         setName(event.target.value);
     }
 
-    const handleChangeTextFieldPositionX = (event) => {
 
-        setPosition(prevState => {
-            return {...prevState, x: event.target.value}
-        })
-
-    }
-
-    const handleChangeTextFieldPositionY = (event) => {
-        setPosition(prevState => {
-            return {...prevState, y: event.target.value}
-        })
-    }
-
-    const handleChangeTextFieldPositionZ = (event) => {
-        setPosition(prevState => {
-            return {...prevState, z: event.target.value}
-        })
-    }
-
-    const handleChangeTextFieldWeight = (e) => {
-        setWeight(e.target.value)
-    }
-
-
-    const keyPressTextFieldPosition = (e) => {
-        if (e.keyCode === 13) {
-            let lastValue = props.currentObject;
-            let newValue = props.currentObject
-            newValue.position.x = parseFloat(position.x)
-            newValue.position.y = parseFloat(position.y)
-            newValue.position.z = parseFloat(position.z)
-            props.updateAllObjectWhenCurrentObjectChange(lastValue, newValue)
-            props.setCurrentObject(newValue)
-        }
-    }
-
-    const keyPressTextFieldWeight = (e) => {
-        if (e.keyCode === 13) {
-            let lastValue = props.currentObject;
-            let newValue = props.currentObject
-            newValue.weight = weight
-            props.updateAllObjectWhenCurrentObjectChange(lastValue, newValue)
-            props.setCurrentObject(newValue)
-        }
-    }
 
 
     const keyPressTextFieldName = (e) => {
@@ -116,20 +69,7 @@ export default function Surface(props) {
                 <TextField value={name} onKeyDown={keyPressTextFieldName} onChange={handleChangeTextFieldName}
                            InputProps={{className: classes.inputTextField}}/>
             </div>
-            <div className={classes.containerRow}>
-                <Typography className={classes.text}>
-                    Position
-                </Typography>
-                <TextField value={position.x} onKeyDown={keyPressTextFieldPosition}
-                           onChange={handleChangeTextFieldPositionX}
-                           InputProps={{className: classes.inputSmallTextField}}/>
-                <TextField value={position.y} onKeyDown={keyPressTextFieldPosition}
-                           onChange={handleChangeTextFieldPositionY}
-                           InputProps={{className: classes.inputSmallTextField}}/>
-                <TextField value={position.z} onKeyDown={keyPressTextFieldPosition}
-                           onChange={handleChangeTextFieldPositionZ}
-                           InputProps={{className: classes.inputSmallTextField}}/>
-            </div>
+
             <div className={classes.containerRow}>
                 <Typography className={classes.text}>
                     Visible
@@ -143,10 +83,14 @@ export default function Surface(props) {
             </div>
             <div className={classes.containerRow}>
                 <Typography className={classes.text}>
-                    Weight
+                    First Curve
                 </Typography>
-                <TextField value={weight} onKeyDown={keyPressTextFieldWeight} onChange={handleChangeTextFieldWeight}
-                           InputProps={{className: classes.inputSmallTextField}}/>
+
+            </div>
+            <div className={classes.containerRow}>
+                <Typography className={classes.text}>
+                    Second Curve
+                </Typography>
 
             </div>
         </div>
