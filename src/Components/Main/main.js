@@ -6,7 +6,7 @@ import Scene from "../Scene/scene";
 import AllObjectAndGlobalSettings from "../AllObjectAndGlobalSettings/allObjectAndGlobalSettings";
 import CurrentObject from "../CurrentObject/currentObject";
 import Background from "../../Class/Background";
-import {createPoint, modifyObjectWhenClickOn, updateWhenDeleted} from "../../Class/Utils";
+import {createPoint, modifyObjectWhenClickOn, updateChildren} from "../../Class/Utils";
 import Modal from "@material-ui/core/Modal";
 import {Button, Typography} from "@material-ui/core";
 
@@ -37,7 +37,9 @@ export default function Main() {
         const index = allObject.findIndex(value => value.id === lastValue.id)
         setAllObject(prevState => {
             prevState[index] = newValue
-            return [...prevState]
+
+            let res = updateChildren(allObject,prevState[index],false)
+            return [...res]
         })
     }
 
@@ -46,8 +48,8 @@ export default function Main() {
         let allIDUpdated = allUpdatedObject.map(prev => prev.id)
 
         let newState = allObject.map(prev => {
-            if (allIDUpdated.includes(prev.id)) {
-                prev.childrenID.push(id)
+            if (allIDUpdated.includes(prev.id) && !prev.childrenID.includes(prev.id)) {
+                prev.childrenID.push(id )
 
             }
             return prev
@@ -79,7 +81,7 @@ export default function Main() {
                 modifyObjectWhenClickOn(null, currentObject)
                 setCurrentObject(null)
             } else if (keyCode === "Delete") {
-                updateWhenDeleted(allObject, currentObject)
+                updateChildren(allObject, currentObject,true)
                 deleteTheCurrentObject()
 
 
@@ -98,7 +100,7 @@ export default function Main() {
 
     const callbackDeleteTheCurrentObject = () => {
 
-        let res = updateWhenDeleted(allObject, currentObject).filter(item => item.id !== currentObject.id)
+        let res = updateChildren(allObject, currentObject,true).filter(item => item.id !== currentObject.id)
         setAllObject(res)
         setCurrentObject(null)
         handleClose()

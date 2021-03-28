@@ -11,10 +11,10 @@ import {modifyObjectWhenClickOn} from "../../../Class/Utils";
 import clsx from "clsx";
 
 ArrayRenderObject.propTypes = {
-    object:PropTypes.object.isRequired,
-    setCurrentObject:PropTypes.func.isRequired,
-    currentObject:PropTypes.any,
-    currentTextFieldSelected:PropTypes.object,
+  currentObject: PropTypes.any,
+  currentTextFieldSelected: PropTypes.object,
+  object: PropTypes.object.isRequired,
+  setCurrentObject: PropTypes.func.isRequired
 }
 /*
      Component for render array of all object

@@ -45,7 +45,7 @@ function increaseDefaultName(type) {
             matches = Constant.DEFAULT_NAME_B_SPLINE.match(reg);
             Constant.DEFAULT_NAME_B_SPLINE = Constant.DEFAULT_NAME_B_SPLINE.replace(reg, parseInt(matches[0], 10) + 1)
             break;
-        case "B-Spline":
+        case "Surface":
             matches = Constant.DEFAULT_NAME_SURFACE.match(reg);
             Constant.DEFAULT_NAME_SURFACE = Constant.DEFAULT_NAME_SURFACE.replace(reg, parseInt(matches[0], 10) + 1)
             break;
@@ -73,6 +73,26 @@ function createPoint() {
 }
 
 
+function updateChildren(allObject, currentObject,isDeletion) {
+    let res = allObject.map((prev) => {
+        if (currentObject.childrenID.includes(prev.id)) {
+            if (prev.type === "B-Spline") {
+                if(isDeletion){
+                    prev.controlsPoints = prev.controlsPoints.filter(controlsPoints => controlsPoints.id !== currentObject.id)
+                }
+                try {
+                    prev.geometry = modificationBSpline(prev)
+                    updateChildren(allObject, prev,false)
+                } catch (e) {
+                    prev.isError = true
+                }
+            }
+        }
+        return prev
+    })
+    return res
+}
+
 
 function createBSpline() {
 
@@ -81,22 +101,6 @@ function createBSpline() {
 
     const material = new LineBasicMaterial({color: 0xff0000});
     const bSpline = new Line(geometry, material);
-    bSpline.name = Constant.DEFAULT_NAME_B_SPLINE
-    increaseDefaultName("B-Spline")
-    bSpline.type = "B-Spline"
-    bSpline.childrenID = []
-    bSpline.firstCurve = []
-    bSpline.secondCurve = []
-
-    bSpline. = 100
-    bSpline.isError = true
-    return bSpline
-}
-
-
-function createSurface() {
-
-
     bSpline.name = Constant.DEFAULT_NAME_B_SPLINE
     increaseDefaultName("B-Spline")
     bSpline.type = "B-Spline"
@@ -109,37 +113,22 @@ function createSurface() {
 }
 
 
+function createSurface() {
 
 
 
-
-
-
-
-
-
-
-
-function updateWhenDeleted(allObject, currentObject) {
-
-    let res = allObject.map((prev) => {
-        if (currentObject.childrenID.includes(prev.id)) {
-            if (prev.type === "B-Spline") {
-                prev.controlsPoints = prev.controlsPoints.filter(controlsPoints => controlsPoints.id !== currentObject.id)
-                try {
-                    prev.geometry = modificationBSpline(prev)
-                } catch (e) {
-                    prev.isError = true
-                }
-
-            }
-        }
-        return prev
-    })
-
-
-    return res
 }
+
+
+
+
+
+
+
+
+
+
+
 
 function modificationBSpline(bSpline) {
 
@@ -209,6 +198,6 @@ function modifyObjectWhenClickOn(object, currentObject) {
 }
 
 export {
-    createPoint, changeColorLightness, modifyObjectWhenClickOn, createBSpline, modificationBSpline, updateWhenDeleted
+    createPoint, changeColorLightness, modifyObjectWhenClickOn, createBSpline, modificationBSpline, updateChildren
 }
 
