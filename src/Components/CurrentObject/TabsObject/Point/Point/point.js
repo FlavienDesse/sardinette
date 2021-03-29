@@ -4,6 +4,7 @@ import {Typography} from "@material-ui/core";
 import useStyles from "./style";
 import Checkbox from "@material-ui/core/Checkbox";
 import PropTypes from "prop-types";
+import {useSnackbar} from "notistack";
 
 Point.propType = {
     setCurrentObject: PropTypes.func.isRequired,
@@ -15,6 +16,8 @@ Point.propType = {
 
 export default function Point(props) {
     const classes = useStyles();
+
+    const {enqueueSnackbar} = useSnackbar();
 
 
     const [weight, setWeight] = React.useState(props.currentObject.weight);
@@ -96,12 +99,18 @@ export default function Point(props) {
 
     const keyPressTextFieldName = (e) => {
         if (e.keyCode === 13) {
-            let lastValue = props.currentObject;
-            let newValue = props.currentObject
-            newValue.name = name
-            props.updateAllObjectWhenCurrentObjectChange(lastValue, newValue,false)
-            props.setCurrentObject(newValue)
-
+            if(name === ""){
+                enqueueSnackbar("name can't be empty", {
+                    variant: 'error',
+                });
+            }
+            else{
+                let lastValue = props.currentObject;
+                let newValue = props.currentObject
+                newValue.name = name
+                props.updateAllObjectWhenCurrentObjectChange(lastValue, newValue,false)
+                props.setCurrentObject(newValue)
+            }
 
         }
     }

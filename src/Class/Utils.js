@@ -138,12 +138,6 @@ function createSurface() {
 
 
 
-
-
-
-
-
-
 function modificationBSpline(bSpline) {
 
     let allControlsPoints = bSpline.controlsPoints.map(a => a.position);
@@ -195,7 +189,6 @@ function modifyObjectWhenClickOn(object, currentObject) {
             if (currentObject == null || (currentObject.id !== object.id)) {
 
                 let intersect = object
-
 
                 return intersect;
 
