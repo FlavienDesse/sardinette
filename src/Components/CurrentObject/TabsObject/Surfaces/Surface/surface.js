@@ -36,7 +36,7 @@ export default function Surface(props) {
         let lastValue = props.currentObject;
         let newValue = props.currentObject
         newValue.visible = event.target.checked;
-        props.updateAllObjectWhenCurrentObjectChange(lastValue, newValue)
+        props.updateAllObjectWhenCurrentObjectChange(lastValue, newValue,false)
         props.setCurrentObject(newValue)
     }
 
@@ -52,7 +52,7 @@ export default function Surface(props) {
             let lastValue = props.currentObject;
             let newValue = props.currentObject
             newValue.name = name
-            props.updateAllObjectWhenCurrentObjectChange(lastValue, newValue)
+            props.updateAllObjectWhenCurrentObjectChange(lastValue, newValue,false)
             props.setCurrentObject(newValue)
 
 

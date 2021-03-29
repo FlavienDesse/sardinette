@@ -45,7 +45,7 @@ export default function BSpline(props) {
         let lastValue = props.currentObject;
         let newValue = props.currentObject
         newValue.visible = event.target.checked;
-        props.updateAllObjectWhenCurrentObjectChange(lastValue, newValue)
+        props.updateAllObjectWhenCurrentObjectChange(lastValue, newValue,false)
         props.setCurrentObject(newValue)
     }
 
@@ -96,7 +96,7 @@ export default function BSpline(props) {
                 let lastValue = props.currentObject;
                 let newValue = props.currentObject
                 newValue.name = name
-                props.updateAllObjectWhenCurrentObjectChange(lastValue, newValue)
+                props.updateAllObjectWhenCurrentObjectChange(lastValue, newValue,false)
                 props.setCurrentObject(newValue)
             }
 
@@ -112,14 +112,14 @@ export default function BSpline(props) {
                 let res = modificationBSpline(newValue)
                 newValue.geometry = res
                 newValue.isError = false;
-                props.updateAllObjectWhenCurrentObjectChange(lastValue, newValue)
+                props.updateAllObjectWhenCurrentObjectChange(lastValue, newValue,true)
                 props.setCurrentObject(newValue)
             } catch (e) {
                 enqueueSnackbar(e.message, {
                     variant: 'error',
                 });
                 newValue.isError = true;
-                props.updateAllObjectWhenCurrentObjectChange(lastValue, newValue)
+                props.updateAllObjectWhenCurrentObjectChange(lastValue, newValue,false)
                 props.setCurrentObject(newValue)
             }
         }
@@ -135,14 +135,14 @@ export default function BSpline(props) {
                 newValue.geometry = res
                 newValue.isError = false;
                 props.updateObjectByAddingChildrenID(controlsPoints,props.currentObject.id)
-                props.updateAllObjectWhenCurrentObjectChange(lastValue, newValue)
+                props.updateAllObjectWhenCurrentObjectChange(lastValue, newValue,true)
                 props.setCurrentObject(newValue)
             } catch (e) {
                 enqueueSnackbar(e.message, {
                     variant: 'error',
                 });
                 newValue.isError = true;
-                props.updateAllObjectWhenCurrentObjectChange(lastValue, newValue)
+                props.updateAllObjectWhenCurrentObjectChange(lastValue, newValue,false)
                 props.setCurrentObject(newValue)
             }
 
@@ -159,14 +159,14 @@ export default function BSpline(props) {
                 let res = modificationBSpline(newValue)
                 newValue.geometry = res
                 newValue.isError = false;
-                props.updateAllObjectWhenCurrentObjectChange(lastValue, newValue)
+                props.updateAllObjectWhenCurrentObjectChange(lastValue, newValue,true)
                 props.setCurrentObject(newValue)
             } catch (e) {
                 enqueueSnackbar(e.message, {
                     variant: 'error',
                 });
                 newValue.isError = true;
-                props.updateAllObjectWhenCurrentObjectChange(lastValue, newValue)
+                props.updateAllObjectWhenCurrentObjectChange(lastValue, newValue,false)
                 props.setCurrentObject(newValue)
             }
         }

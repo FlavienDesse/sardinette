@@ -33,13 +33,20 @@ export default function Main() {
 
     //Normally the array allObject is updated when we change the value of currentObject , because currentObject is a reference of one item in the array
     //But we have to do this to refresh all component
-    const updateAllObjectWhenCurrentObjectChange = (lastValue, newValue) => {
+    const updateAllObjectWhenCurrentObjectChange = (lastValue, newValue , haveToRecalculateChildren) => {
         const index = allObject.findIndex(value => value.id === lastValue.id)
         setAllObject(prevState => {
-            prevState[index] = newValue
 
-            let res = updateChildren(allObject,prevState[index],false)
-            return [...res]
+            if(haveToRecalculateChildren){
+                prevState[index] = newValue
+                let res = updateChildren(allObject,prevState[index],false)
+                return [...res]
+            }
+            else{
+                prevState[index] = newValue
+                return [...prevState]
+
+            }
         })
     }
 
