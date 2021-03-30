@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import Background from "../../Class/Background";
 import {TrackballControls} from "three/examples/jsm/controls/TrackballControls"
 import {modifyObjectWhenClickOn} from "../../Class/Utils";
+import {TransformControls} from "three/examples/jsm/controls/TransformControls"
 
 
 Scene.propType = {
@@ -20,11 +21,21 @@ export default function Scene(props) {
     const classes = useStyles();
     const refContainer = useRef();
 
-
+    const control = useRef();
     const camera = useRef();
     const renderer = useRef();
     const scene = useRef();
     const raycaster = useRef();
+
+    React.useEffect(()=>{
+
+        if (props.currentObject && props.currentObject.type === "Point"){
+            control.current.attach({props.currentObject} );
+        }
+
+
+
+    },[props.currentObject])
 
     //This useEffect is for initialisation
     React.useEffect(() => {
@@ -52,16 +63,28 @@ export default function Scene(props) {
 
         refContainer.current.appendChild(renderer.current.domElement)
 
-
-
+        const controls = new TrackballControls(camera.current, renderer.current.domElement)
+        control.current = new TransformControls( camera.current, renderer.current.domElement );
 
         group.add(plane)
+        group.add(control.current)
         scene.current.add(group);
         scene.current.add(  new THREE.Group());
 
 
+        control.current.addEventListener( 'objectChange', function ( event ) {
+            props.setCurrentObject({...control.current.object})
+            console.log(control.current.object)
 
-        const controls = new TrackballControls(camera.current, renderer.current.domElement)
+        } );
+
+
+
+        control.current.addEventListener( 'dragging-changed', function ( event ) {
+
+            controls.enabled = ! event.value;
+
+        } );
         // controls.addEventListener('change', () => console.log("Controls Change"))
         // controls.addEventListener('start', () => console.log("Controls Start Event"))
         // controls.addEventListener('end', () => console.log("Controls End Event"))
