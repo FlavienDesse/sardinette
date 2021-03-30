@@ -1,11 +1,12 @@
 import {BufferGeometry, Line, LineBasicMaterial, Mesh, MeshBasicMaterial, SphereGeometry} from "three";
 import Constant from "./Constant";
-import {spline} from "./Math";
+import {bSpline,cSpline} from "./Math";
 
 /*
     CURRENT TYPE :
     - B-Spline
     - Point
+    - C
  */
 
 /*
@@ -14,6 +15,7 @@ import {spline} from "./Math";
      - ModifyObjectWhenClickOn
      - updateWhenDeleted
      - increaseDefaultName
+     - updateChildren
  */
 
 
@@ -49,6 +51,10 @@ function increaseDefaultName(type) {
             matches = Constant.DEFAULT_NAME_SURFACE.match(reg);
             Constant.DEFAULT_NAME_SURFACE = Constant.DEFAULT_NAME_SURFACE.replace(reg, parseInt(matches[0], 10) + 1)
             break;
+        case "C-Spline":
+            matches = Constant.DEFAULT_NAME_C_SPLINE.match(reg);
+            Constant.DEFAULT_NAME_C_SPLINE = Constant.DEFAULT_NAME_C_SPLINE.replace(reg, parseInt(matches[0], 10) + 1)
+            break;
         default:
             throw new Error("unknow type provided")
     }
@@ -75,13 +81,27 @@ function createPoint() {
 
 function updateChildren(allObject, currentObject,isDeletion) {
     let res = allObject.map((prev) => {
+
         if (currentObject.childrenID.includes(prev.id)) {
+            console.log(prev)
             if (prev.type === "B-Spline") {
                 if(isDeletion){
                     prev.controlsPoints = prev.controlsPoints.filter(controlsPoints => controlsPoints.id !== currentObject.id)
                 }
                 try {
                     prev.geometry = modificationBSpline(prev)
+                    updateChildren(allObject, prev,false)
+                } catch (e) {
+                    prev.isError = true
+                }
+            }
+            else   if (prev.type === "C-Spline") {
+
+                if(isDeletion){
+                    prev.controlsPoints = prev.controlsPoints.filter(controlsPoints => controlsPoints.id !== currentObject.id)
+                }
+                try {
+                    prev.geometry = modificationCSpline(prev)
                     updateChildren(allObject, prev,false)
                 } catch (e) {
                     prev.isError = true
@@ -113,6 +133,25 @@ function createBSpline() {
 }
 
 
+function createCSpline() {
+
+
+    const geometry = new BufferGeometry().setFromPoints([]);
+
+    const material = new LineBasicMaterial({color: 0xff0000});
+    const cSpline = new Line(geometry, material);
+    cSpline.name = Constant.DEFAULT_NAME_C_SPLINE
+    increaseDefaultName("C-Spline")
+    cSpline.type = "C-Spline"
+    cSpline.controlsPoints = []
+    cSpline.childrenID = []
+    cSpline.closed = false;
+    cSpline.resolution = 100
+    cSpline.isError = true
+    return cSpline
+
+}
+
 function createSurface() {
 
 
@@ -136,25 +175,26 @@ function createSurface() {
 
 
 
-
-
-function modificationBSpline(bSpline) {
-
-    let allControlsPoints = bSpline.controlsPoints.map(a => a.position);
-
-
+function modificationCSpline(cSplineParam) {
+    let allControlsPoints = cSplineParam.controlsPoints.map(a => a.position);
     try {
-
-        let res = spline(bSpline.degree, allControlsPoints, bSpline.resolution, null, bSpline.controlsPoints.map(a => a.weight))
-
+        let res = cSpline(allControlsPoints, cSplineParam.resolution, cSplineParam.closed)
         const geometry = new BufferGeometry().setFromPoints(res);
-
         return geometry
     } catch (e) {
         throw new Error(e.message)
     }
+}
 
-
+function modificationBSpline(bSplineParam) {
+    let allControlsPoints = bSplineParam.controlsPoints.map(a => a.position);
+    try {
+        let res = bSpline(bSplineParam.degree, allControlsPoints, bSplineParam.resolution, null, bSplineParam.controlsPoints.map(a => a.weight))
+        const geometry = new BufferGeometry().setFromPoints(res);
+        return geometry
+    } catch (e) {
+        throw new Error(e.message)
+    }
 }
 
 
@@ -195,6 +235,16 @@ function modifyObjectWhenClickOn(object, currentObject) {
             } else {
                 return currentObject
             }
+        }else if (object.type === "C-Spline") {
+            if (currentObject == null || (currentObject.id !== object.id)) {
+
+                let intersect = object
+
+                return intersect;
+
+            } else {
+                return currentObject
+            }
         }
         else if (object.type === "Surface") {
             if (currentObject == null || (currentObject.id !== object.id)) {
@@ -217,6 +267,6 @@ function modifyObjectWhenClickOn(object, currentObject) {
 }
 
 export {
-    createPoint, changeColorLightness, modifyObjectWhenClickOn, createBSpline, modificationBSpline, updateChildren,createSurface
+    createPoint, changeColorLightness, modifyObjectWhenClickOn, createBSpline, modificationBSpline, updateChildren,createSurface,createCSpline,modificationCSpline
 }
 

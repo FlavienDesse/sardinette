@@ -185,7 +185,7 @@ function toVector3(points) {
  * @param {Array<number>} weights optional control points weights. Must be the same length as the control point array.
  * @returns {Array<Array<number>>|Array<THREE.Vector3>} an array of points that represents the spline.
  */
-function spline(degree, controlPoints, resolution, knots, weights) {
+function bSpline(degree, controlPoints, resolution, knots, weights) {
 
     let formattedControlPoints = controlPoints
     // Format the control points if not in the good format
@@ -352,4 +352,4 @@ function getSurface(curveA, curveB) {
     return triangles
 }
 
-export {spline, cSpline, toVector3, fromVector3, curveLength, distance, getSurface}
+export {bSpline, cSpline, toVector3, fromVector3, curveLength, distance, getSurface}

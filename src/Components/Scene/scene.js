@@ -46,16 +46,34 @@ export default function Scene(props) {
         scene.current = new THREE.Scene()
 
 
-        //show the plane
-        const plane = new THREE.GridHelper(100, 100);
-
 
         refContainer.current.appendChild(renderer.current.domElement)
 
+        const dirX = new THREE.Vector3( 1, 0, 0 );
+        const dirY = new THREE.Vector3( 0, 1, 0 );
+        const dirZ = new THREE.Vector3( 0, 0, 1 );
 
 
 
-        group.add(plane)
+        const origin = new THREE.Vector3( 0, 0, 0 );
+
+
+
+        const length = 3;
+
+        const red = 0xff0000;
+        const blue = 0x00ff00;
+        const green = 0x0000fff;
+
+
+        const arrowHelperX = new THREE.ArrowHelper( dirX, origin, length, red );
+        const arrowHelperY = new THREE.ArrowHelper( dirY, origin, length, blue );
+        const arrowHelperZ = new THREE.ArrowHelper( dirZ, origin, length, green );
+
+
+        group.add(arrowHelperX)
+        group.add(arrowHelperY)
+        group.add(arrowHelperZ)
         scene.current.add(group);
         scene.current.add(  new THREE.Group());
 

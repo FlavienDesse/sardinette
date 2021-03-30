@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from 'prop-types';
-import {createBSpline, createPoint, createSurface} from "../../../Class/Utils"
+import {createBSpline, createPoint, createSurface,createCSpline} from "../../../Class/Utils"
 import {MenuItem, SubMenu} from "rc-menu";
 
 
@@ -45,6 +45,17 @@ export default function OpenInsert(props) {
         })
     }
 
+    const handleAddCSpline = () => {
+        props.setAllObject((prevState) => {
+            let curve = createCSpline()
+
+            prevState.push(curve)
+
+            return [...prevState]
+
+        })
+    }
+
     let propsSubMenu = Object.assign({}, props)
     delete  propsSubMenu.setAllObject
 
@@ -62,7 +73,7 @@ export default function OpenInsert(props) {
                 <MenuItem onClick={handleAddBSpline}>
                     B-Spline
                 </MenuItem>
-                <MenuItem>
+                <MenuItem onClick={handleAddCSpline}>
                     C-Spline
                 </MenuItem>
             </SubMenu>
