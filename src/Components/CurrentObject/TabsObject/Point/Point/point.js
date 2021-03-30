@@ -36,6 +36,10 @@ export default function Point(props) {
     }), [props.currentObject])
 
 
+    const blurTextFieldName = (event) => {
+        setName(props.currentObject.name);
+    }
+
     const handleChangeIsVisible = (event) => {
         setIsVisible(event.target.checked);
         let lastValue = props.currentObject;
@@ -122,7 +126,7 @@ export default function Point(props) {
                 <Typography className={classes.text}>
                     Name
                 </Typography>
-                <TextField value={name} onKeyDown={keyPressTextFieldName} onChange={handleChangeTextFieldName}
+                <TextField value={name} onBlur={blurTextFieldName}onKeyDown={keyPressTextFieldName} onChange={handleChangeTextFieldName}
                            InputProps={{className: classes.inputTextField}}/>
             </div>
             <div className={classes.containerRow}>
