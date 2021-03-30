@@ -11,18 +11,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="78afd4d1-1ed3-4b4d-a584-1aa195b3fadc" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Components/CurrentObject/TabsObject/Curve/C-Spline/cSpline.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Components/CurrentObject/TabsObject/Curve/C-Spline/style.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Components/CurrentObject/TabsObject/Surfaces/Surface/.idea/Surface.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Components/CurrentObject/TabsObject/Point/MirroredPoint/mirroredPoint.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Components/CurrentObject/TabsObject/Point/MirroredPoint/style.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Class/Constant.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Class/Constant.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Class/Math.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Class/Math.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Class/Utils.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Class/Utils.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Components/CurrentObject/TabsObject/tabsObject.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/CurrentObject/TabsObject/tabsObject.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Menu/OpenInsert/openInsert.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Menu/OpenInsert/openInsert.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Scene/scene.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Scene/scene.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -86,7 +79,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/Components/CurrentObject/TabsObject/Curve/C-Spline" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/Components/CurrentObject/TabsObject/Point/MirroredPoint" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.standard" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -103,11 +96,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\flav6\Desktop\sardinette\src\Components\CurrentObject\TabsObject\Point\MirroredPoint" />
       <recent name="C:\Users\flav6\Desktop\sardinette\src\Components\CurrentObject\TabsObject\Curve\C-Spline" />
       <recent name="C:\Users\flav6\Desktop\sardinette\sardinette-front\src\Components\CurrentObject\TabsObject\Surfaces\Surface" />
       <recent name="C:\Users\flav6\Desktop\sardinette\sardinette-front\src\Components\CurrentObject\TabsObject\Curve\B-Spline" />
       <recent name="C:\Users\flav6\Desktop\sardinette\src\Components\CurrentObject" />
-      <recent name="C:\Users\flav6\Desktop\sardinette\src\Components\CurrentObject\TabsObject" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\flav6\Desktop\sardinette\sardinette-front\src\Class" />
@@ -180,7 +173,7 @@
       <workItem from="1617017923756" duration="2515000" />
       <workItem from="1617040291514" duration="690000" />
       <workItem from="1617107647342" duration="1639000" />
-      <workItem from="1617117737478" duration="2083000" />
+      <workItem from="1617117737478" duration="2998000" />
     </task>
     <servers />
   </component>
@@ -223,29 +216,29 @@
     <state x="795" y="338" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1616708358684" />
     <state x="1060" y="455" key="FileChooserDialogImpl/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1616011878145" />
     <state x="3620" y="455" key="FileChooserDialogImpl/0.0.2560.1400/2560.0.2560.1400@2560.0.2560.1400" timestamp="1617112748228" />
-    <state width="2517" height="247" key="GridCell.Tab.0.bottom" timestamp="1617118827441">
+    <state width="2517" height="247" key="GridCell.Tab.0.bottom" timestamp="1617120287655">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state width="1877" height="217" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1617020512948" />
-    <state width="2517" height="247" key="GridCell.Tab.0.bottom/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1617118827441" />
+    <state width="2517" height="247" key="GridCell.Tab.0.bottom/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1617120287655" />
     <state width="2517" height="247" key="GridCell.Tab.0.bottom/0.0.2560.1400/2560.0.2560.1400@2560.0.2560.1400" timestamp="1617113660916" />
-    <state width="2517" height="247" key="GridCell.Tab.0.center" timestamp="1617118827441">
+    <state width="2517" height="247" key="GridCell.Tab.0.center" timestamp="1617120287655">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state width="1877" height="217" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1617020512948" />
-    <state width="2517" height="247" key="GridCell.Tab.0.center/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1617118827441" />
+    <state width="2517" height="247" key="GridCell.Tab.0.center/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1617120287655" />
     <state width="2517" height="247" key="GridCell.Tab.0.center/0.0.2560.1400/2560.0.2560.1400@2560.0.2560.1400" timestamp="1617113660916" />
-    <state width="2517" height="247" key="GridCell.Tab.0.left" timestamp="1617118827441">
+    <state width="2517" height="247" key="GridCell.Tab.0.left" timestamp="1617120287655">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state width="1877" height="217" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1617020512948" />
-    <state width="2517" height="247" key="GridCell.Tab.0.left/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1617118827441" />
+    <state width="2517" height="247" key="GridCell.Tab.0.left/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1617120287655" />
     <state width="2517" height="247" key="GridCell.Tab.0.left/0.0.2560.1400/2560.0.2560.1400@2560.0.2560.1400" timestamp="1617113660916" />
-    <state width="2517" height="247" key="GridCell.Tab.0.right" timestamp="1617118827441">
+    <state width="2517" height="247" key="GridCell.Tab.0.right" timestamp="1617120287655">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state width="1877" height="217" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1617020512948" />
-    <state width="2517" height="247" key="GridCell.Tab.0.right/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1617118827441" />
+    <state width="2517" height="247" key="GridCell.Tab.0.right/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1617120287655" />
     <state width="2517" height="247" key="GridCell.Tab.0.right/0.0.2560.1400/2560.0.2560.1400@2560.0.2560.1400" timestamp="1617113660916" />
     <state x="461" y="165" key="SettingsEditor" timestamp="1616711315364">
       <screen x="0" y="0" width="1920" height="1040" />

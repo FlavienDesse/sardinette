@@ -6,7 +6,7 @@ import {bSpline,cSpline} from "./Math";
     CURRENT TYPE :
     - B-Spline
     - Point
-    - C
+    - C-Spline
  */
 
 /*
@@ -62,6 +62,19 @@ function increaseDefaultName(type) {
 
 
 
+function createMirroredPoint() {
+    const geometry = new SphereGeometry(Constant.DEFAULT_SIZE_POINT, 32, 32);
+    let material = new MeshBasicMaterial({color: Constant.DEFAULT_COLOR_POINT});
+    const point = new Mesh(geometry, material);
+    point.type = "Point"
+    point.name = Constant.DEFAULT_NAME_POINT
+    increaseDefaultName("Point")
+    point.isError = true
+        point.initialPoint = {}
+    point.weight = 1
+    point.childrenID = []
+    return point
+}
 
 
 
