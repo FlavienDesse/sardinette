@@ -1,3 +1,4 @@
+import { ThreeDRotation } from '@material-ui/icons'
 import * as THREE from 'three'
 
 /**
@@ -352,4 +353,65 @@ function getSurface(curveA, curveB) {
     return triangles
 }
 
-export {spline, cSpline, toVector3, fromVector3, curveLength, distance, getSurface}
+/**
+ * 
+ * @param {THREE.Vector3} point 
+ * @param {Array<THREE.Vector3>} curve 
+ * @returns {THREE.Vector3} The mirrored point
+ */
+function mirrorPointFromCurve(point, curve) {
+    let res = new THREE.Vector3(0, 0, 0)
+
+    curve.forEach(elt => {
+        res.x += 2 * elt.x - point.x
+        res.y += 2 * elt.y - point.y
+        res.z += 2 * elt.z - point.z
+    })
+    
+    res.x /= curve.length
+    res.y /= curve.length
+    res.z /= curve.length
+    res.x = Math.round(res.x * 10000) / 10000
+    res.y = Math.round(res.y * 10000) / 10000
+    res.z = Math.round(res.z * 10000) / 10000
+    return res
+}
+
+/**
+ * 
+ * @param {THREE.Vector3} point 
+ * @param {string} axis 
+ */
+function mirrorPoint(point, axis) {
+    let res = new THREE.Vector3(point.x, point.y, point.z)
+
+    switch(axis.toLowerCase()) {
+        case 'x': res.x *= -1
+            break
+        case 'y': res.y *= -1
+            break
+        case 'z': res.z *= -1
+            break
+        default:
+            throw new Error("Axis invalid")
+    }
+    return res
+}
+
+/**
+ * 
+ * @param {Array<THREE.Vector3>} curve 
+ * @param {string} axis 
+ * @returns {Array<THREE.Vector3>} The mirrored curve
+ */
+function mirrorCurve(curve, axis) {
+    let res = []
+
+    curve.foreach(elt => {
+        res.push(mirrorPoint(elt, axis))
+    })
+
+    return res
+}
+
+export {spline, cSpline, toVector3, fromVector3, curveLength, distance, getSurface, mirrorPoint, mirrorPointFromCurve, mirrorCurve}
