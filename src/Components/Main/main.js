@@ -6,7 +6,7 @@ import Scene from "../Scene/scene";
 import AllObjectAndGlobalSettings from "../AllObjectAndGlobalSettings/allObjectAndGlobalSettings";
 import CurrentObject from "../CurrentObject/currentObject";
 import Background from "../../Class/Background";
-import {createPoint, modifyObjectWhenClickOn, updateChildren} from "../../Class/Utils";
+import {createAxis, createMirroredPoint, createPoint, modifyObjectWhenClickOn, updateChildren} from "../../Class/Utils";
 import Modal from "@material-ui/core/Modal";
 import {Button, Typography} from "@material-ui/core";
 
@@ -14,7 +14,7 @@ export default function Main() {
     const classes = useStyles();
 
     const [currentObject, setCurrentObject] = React.useState(null)
-    const [allObject, setAllObject] = React.useState([createPoint(), createPoint(), createPoint()])
+    const [allObject, setAllObject] = React.useState([createAxis("x"), createAxis("y"),createAxis("z"),createMirroredPoint(),createPoint()])
     const [background, setBackground] = React.useState(new Background(null, true));
     const [openModalDeleteObject, setModalDeleteObject] = React.useState(false);
 
@@ -33,6 +33,9 @@ export default function Main() {
 
     //Normally the array allObject is updated when we change the value of currentObject , because currentObject is a reference of one item in the array
     //But we have to do this to refresh all component
+
+
+    //TODO lastValue to id
     const updateAllObjectWhenCurrentObjectChange = (lastValue, newValue , haveToRecalculateChildren) => {
         const index = allObject.findIndex(value => value.id === lastValue.id)
         setAllObject(prevState => {
@@ -86,8 +89,9 @@ export default function Main() {
 
             if (keyCode === "Escape") {
                 modifyObjectWhenClickOn(null, currentObject)
+                setCurrentTextFieldSelected(null)
                 setCurrentObject(null)
-            } else if (keyCode === "Delete") {
+            } else if (keyCode === "Delete" && currentObject.type !== "Axis") {
                 updateChildren(allObject, currentObject,true)
                 deleteTheCurrentObject()
 

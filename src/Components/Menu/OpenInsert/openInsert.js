@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from 'prop-types';
-import {createBSpline, createPoint, createSurface,createCSpline} from "../../../Class/Utils"
+import {createBSpline, createPoint, createSurface, createCSpline, createMirroredPoint} from "../../../Class/Utils"
 import {MenuItem, SubMenu} from "rc-menu";
 
 
@@ -56,6 +56,17 @@ export default function OpenInsert(props) {
         })
     }
 
+    const handleAddMirroredPoint = () => {
+        props.setAllObject((prevState) => {
+            let mirroredPoint = createMirroredPoint()
+
+            prevState.push(mirroredPoint)
+
+            return [...prevState]
+
+        })
+    }
+
     let propsSubMenu = Object.assign({}, props)
     delete  propsSubMenu.setAllObject
 
@@ -65,7 +76,7 @@ export default function OpenInsert(props) {
                 <MenuItem onClick={handleAddPoint}>
                     Point
                 </MenuItem>
-                <MenuItem>
+                <MenuItem onClick={handleAddMirroredPoint}>
                     Mirrored Point
                 </MenuItem>
             </SubMenu>

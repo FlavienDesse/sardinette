@@ -46,37 +46,11 @@ export default function Scene(props) {
         scene.current = new THREE.Scene()
 
 
-
         refContainer.current.appendChild(renderer.current.domElement)
 
-        const dirX = new THREE.Vector3( 1, 0, 0 );
-        const dirY = new THREE.Vector3( 0, 1, 0 );
-        const dirZ = new THREE.Vector3( 0, 0, 1 );
 
-
-
-        const origin = new THREE.Vector3( 0, 0, 0 );
-
-
-
-        const length = 3;
-
-        const red = 0xff0000;
-        const blue = 0x00ff00;
-        const green = 0x0000fff;
-
-
-        const arrowHelperX = new THREE.ArrowHelper( dirX, origin, length, red );
-        const arrowHelperY = new THREE.ArrowHelper( dirY, origin, length, blue );
-        const arrowHelperZ = new THREE.ArrowHelper( dirZ, origin, length, green );
-
-
-        group.add(arrowHelperX)
-        group.add(arrowHelperY)
-        group.add(arrowHelperZ)
         scene.current.add(group);
-        scene.current.add(  new THREE.Group());
-
+        scene.current.add(new THREE.Group());
 
 
         const controls = new TrackballControls(camera.current, renderer.current.domElement)
@@ -158,13 +132,13 @@ export default function Scene(props) {
         const intersects = raycaster.current.intersectObjects([...props.allObject]);
 
         if (intersects.length > 0) {
-            if (props.currentTextFieldSelected !== null && props.currentTextFieldSelected.acceptType.includes(intersects[0].object.type)) {
+            if (props.currentTextFieldSelected !== null && props.currentTextFieldSelected.id !== intersects[0].object.id && props.currentTextFieldSelected.acceptType.includes(intersects[0].object.type)) {
                 if (event.ctrlKey) {
                     event.preventDefault();
-                    props.currentTextFieldSelected.addItems(intersects[0].object)
+                    props.currentTextFieldSelected.clickCtrl(intersects[0].object)
                 } else {
                     event.preventDefault();
-                    props.currentTextFieldSelected.clearWithOneItem(intersects[0].object)
+                    props.currentTextFieldSelected.simpleClick(intersects[0].object)
                 }
             } else {
                 props.setCurrentObject(modifyObjectWhenClickOn(intersects[0].object, props.currentObject))
@@ -204,10 +178,8 @@ export default function Scene(props) {
 
         props.allObject.forEach(elem => {
             //TODO opti
-
-            if(!elem.isError){
+            if (!elem.isError) {
                 group.add(elem)
-
 
 
             }

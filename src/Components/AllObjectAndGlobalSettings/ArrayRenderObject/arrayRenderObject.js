@@ -27,13 +27,13 @@ export default function ArrayRenderObject(props){
         event.preventDefault();
         event.stopPropagation();
 
-        if (props.currentTextFieldSelected !== null && props.currentTextFieldSelected.acceptType.includes(props.object.type)) {
+        if (props.currentTextFieldSelected !== null && props.currentTextFieldSelected.id !==props.object.id && props.currentTextFieldSelected.acceptType.includes(props.object.type)) {
             if (event.ctrlKey) {
                 event.preventDefault();
-                props.currentTextFieldSelected.addItems(props.object)
+                props.currentTextFieldSelected.clickCtrl(props.object)
             } else {
                 event.preventDefault();
-                props.currentTextFieldSelected.clearWithOneItem(props.object)
+                props.currentTextFieldSelected.simpleClick(props.object)
             }
         } else {
 

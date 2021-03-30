@@ -176,9 +176,10 @@ export default function BSpline(props) {
     const handleFocusOnTextFieldControlsPoints = (e) => {
         setControlsPoints([])
         props.setCurrentTextFieldSelected({
-            acceptType:["Point"],
-            addItems: addControlsPoints,
-            clearWithOneItem: setOneControlsPoints
+            id:props.currentObject.id,
+            acceptType:["Point","Mirrored Point"],
+            clickCtrl: addControlsPoints,
+            simpleClick: setOneControlsPoints
         })
     }
 

@@ -11,11 +11,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="78afd4d1-1ed3-4b4d-a584-1aa195b3fadc" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Components/CurrentObject/TabsObject/Point/MirroredPoint/mirroredPoint.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Components/CurrentObject/TabsObject/Point/MirroredPoint/style.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Class/Constant.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Class/Constant.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Class/Math.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Class/Math.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Class/Utils.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Class/Utils.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/AllObjectAndGlobalSettings/ArrayRenderObject/arrayRenderObject.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/AllObjectAndGlobalSettings/ArrayRenderObject/arrayRenderObject.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/CurrentObject/TabsObject/Curve/B-Spline/bSpline.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/CurrentObject/TabsObject/Curve/B-Spline/bSpline.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/CurrentObject/TabsObject/Curve/C-Spline/cSpline.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/CurrentObject/TabsObject/Curve/C-Spline/cSpline.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/CurrentObject/TabsObject/Point/MirroredPoint/mirroredPoint.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/CurrentObject/TabsObject/Point/MirroredPoint/mirroredPoint.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Components/CurrentObject/TabsObject/tabsObject.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/CurrentObject/TabsObject/tabsObject.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Main/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Main/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Menu/OpenInsert/openInsert.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Menu/OpenInsert/openInsert.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Scene/scene.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Scene/scene.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -95,19 +102,19 @@
     <property name="settings.editor.selected.configurable" value="editor.preferences.import" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\flav6\Desktop\sardinette\src\Components\CurrentObject\TabsObject\Point\MirroredPoint" />
-      <recent name="C:\Users\flav6\Desktop\sardinette\src\Components\CurrentObject\TabsObject\Curve\C-Spline" />
-      <recent name="C:\Users\flav6\Desktop\sardinette\sardinette-front\src\Components\CurrentObject\TabsObject\Surfaces\Surface" />
-      <recent name="C:\Users\flav6\Desktop\sardinette\sardinette-front\src\Components\CurrentObject\TabsObject\Curve\B-Spline" />
-      <recent name="C:\Users\flav6\Desktop\sardinette\src\Components\CurrentObject" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\flav6\Desktop\sardinette\sardinette-front\src\Class" />
       <recent name="C:\Users\flav6\Desktop\sardinette\sardinette-front\src\Components\CurrentObject\TabsObject\Point\Point" />
       <recent name="C:\Users\flav6\Desktop\sardinette\src\Images\Icons" />
       <recent name="C:\Users\flav6\Desktop\sardinette\src\Components" />
       <recent name="C:\Users\flav6\Desktop\sardinette\src\Components\Menu" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\flav6\Desktop\sardinette\src\Components\CurrentObject\TabsObject\Point\MirroredPoint" />
+      <recent name="C:\Users\flav6\Desktop\sardinette\src\Components\CurrentObject\TabsObject\Curve\C-Spline" />
+      <recent name="C:\Users\flav6\Desktop\sardinette\sardinette-front\src\Components\CurrentObject\TabsObject\Surfaces\Surface" />
+      <recent name="C:\Users\flav6\Desktop\sardinette\sardinette-front\src\Components\CurrentObject\TabsObject\Curve\B-Spline" />
+      <recent name="C:\Users\flav6\Desktop\sardinette\src\Components\CurrentObject" />
     </key>
   </component>
   <component name="RunManager">
@@ -201,44 +208,45 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="414" y="175" width="1092" height="738" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1616622457359" />
-    <state x="785" y="373" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1616942976215">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="1046" y="502" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1617121284203">
+      <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="785" y="373" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1616942976215" />
-    <state x="1046" y="502" key="#com.intellij.fileTypes.FileTypeChooser/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1616248630046" />
-    <state x="672" y="375" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1616765960159">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="1046" y="502" key="#com.intellij.fileTypes.FileTypeChooser/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1617121284203" />
+    <state x="896" y="505" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1617123735238">
+      <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="672" y="375" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1920.1040@0.0.1920.1040" timestamp="1616765960159" />
+    <state x="896" y="505" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1617123735238" />
     <state x="3620" y="455" key="FileChooserDialogImpl" timestamp="1617112748228">
       <screen x="2560" y="0" width="2560" height="1400" />
     </state>
     <state x="795" y="338" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1616708358684" />
     <state x="1060" y="455" key="FileChooserDialogImpl/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1616011878145" />
     <state x="3620" y="455" key="FileChooserDialogImpl/0.0.2560.1400/2560.0.2560.1400@2560.0.2560.1400" timestamp="1617112748228" />
-    <state width="2517" height="247" key="GridCell.Tab.0.bottom" timestamp="1617120287655">
+    <state width="2517" height="247" key="GridCell.Tab.0.bottom" timestamp="1617121463111">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state width="1877" height="217" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1617020512948" />
-    <state width="2517" height="247" key="GridCell.Tab.0.bottom/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1617120287655" />
+    <state width="2517" height="247" key="GridCell.Tab.0.bottom/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1617121463111" />
     <state width="2517" height="247" key="GridCell.Tab.0.bottom/0.0.2560.1400/2560.0.2560.1400@2560.0.2560.1400" timestamp="1617113660916" />
-    <state width="2517" height="247" key="GridCell.Tab.0.center" timestamp="1617120287655">
+    <state width="2517" height="247" key="GridCell.Tab.0.center" timestamp="1617121463111">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state width="1877" height="217" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1617020512948" />
-    <state width="2517" height="247" key="GridCell.Tab.0.center/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1617120287655" />
+    <state width="2517" height="247" key="GridCell.Tab.0.center/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1617121463111" />
     <state width="2517" height="247" key="GridCell.Tab.0.center/0.0.2560.1400/2560.0.2560.1400@2560.0.2560.1400" timestamp="1617113660916" />
-    <state width="2517" height="247" key="GridCell.Tab.0.left" timestamp="1617120287655">
+    <state width="2517" height="247" key="GridCell.Tab.0.left" timestamp="1617121463111">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state width="1877" height="217" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1617020512948" />
-    <state width="2517" height="247" key="GridCell.Tab.0.left/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1617120287655" />
+    <state width="2517" height="247" key="GridCell.Tab.0.left/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1617121463111" />
     <state width="2517" height="247" key="GridCell.Tab.0.left/0.0.2560.1400/2560.0.2560.1400@2560.0.2560.1400" timestamp="1617113660916" />
-    <state width="2517" height="247" key="GridCell.Tab.0.right" timestamp="1617120287655">
+    <state width="2517" height="247" key="GridCell.Tab.0.right" timestamp="1617121463111">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state width="1877" height="217" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1617020512948" />
-    <state width="2517" height="247" key="GridCell.Tab.0.right/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1617120287655" />
+    <state width="2517" height="247" key="GridCell.Tab.0.right/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1617121463111" />
     <state width="2517" height="247" key="GridCell.Tab.0.right/0.0.2560.1400/2560.0.2560.1400@2560.0.2560.1400" timestamp="1617113660916" />
     <state x="461" y="165" key="SettingsEditor" timestamp="1616711315364">
       <screen x="0" y="0" width="1920" height="1040" />
@@ -248,11 +256,11 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="498" height="451" key="SwitcherDM/0.0.1920.1040@0.0.1920.1040" timestamp="1616777287671" />
-    <state x="987" y="433" width="922" height="680" key="find.popup" timestamp="1617118936012">
+    <state x="1453" y="389" width="922" height="680" key="find.popup" timestamp="1617132816112">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="889" y="212" width="771" height="699" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1617018219136" />
-    <state x="987" y="433" width="922" height="680" key="find.popup/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1617118936012" />
+    <state x="1453" y="389" width="922" height="680" key="find.popup/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1617132816112" />
     <state x="4115" y="402" width="585" height="534" key="find.popup/0.0.2560.1400/2560.0.2560.1400@2560.0.2560.1400" timestamp="1616455411338" />
     <state x="616" y="240" key="run.anything.popup" timestamp="1616944675788">
       <screen x="0" y="0" width="1920" height="1040" />

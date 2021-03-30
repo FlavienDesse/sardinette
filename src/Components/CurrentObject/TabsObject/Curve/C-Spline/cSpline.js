@@ -152,9 +152,9 @@ export default function CSpline(props) {
     const handleFocusOnTextFieldControlsPoints = (e) => {
         setControlsPoints([])
         props.setCurrentTextFieldSelected({
-            acceptType:["Point"],
-            addItems: addControlsPoints,
-            clearWithOneItem: setOneControlsPoints
+            acceptType:["Point","Mirrored Point"],
+            clickCtrl : addControlsPoints,
+            simpleClick: setOneControlsPoints
         })
     }
 

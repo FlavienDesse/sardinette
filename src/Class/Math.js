@@ -384,7 +384,7 @@ function mirrorPointFromCurve(point, curve) {
  * @param {string} axis 
  */
 function mirrorPoint(point, axis) {
-    let res = new THREE.Vector3(point.x, point.y, point.z)
+    let res = point
 
     switch(axis.toLowerCase()) {
         case 'x': res.x *= -1
