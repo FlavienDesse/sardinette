@@ -25,7 +25,7 @@ export default function Point(props) {
     const [name, setName] = React.useState(props.currentObject.name);
     const [isVisible, setIsVisible] = React.useState(props.currentObject.visible);
 
-    const [position, setPosition] = React.useState({...props.currentObject.position});
+    const [position, setPosition] = React.useState(props.currentObject.position);
 
 
     React.useEffect((() => {
@@ -33,7 +33,7 @@ export default function Point(props) {
         setWeight(props.currentObject.weight)
         setIsVisible(props.currentObject.visible)
         setName(props.currentObject.name)
-        setPosition({...props.currentObject.position})
+        setPosition(props.currentObject.position)
     }), [props.currentObject])
 
 

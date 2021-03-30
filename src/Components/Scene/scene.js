@@ -31,14 +31,14 @@ export default function Scene(props) {
 
 
     const handleMove = React.useCallback((event) => {
-
+        console.log(event)
         let lastValue = props.currentObject;
         let newValue = event.target.object
 
 
 
         props.updateAllObjectWhenCurrentObjectChange(lastValue, newValue,true)
-        props.setCurrentObject({...newValue})
+        props.setCurrentObject(newValue)
         control.current.attach(props.currentObject );
 
     },[props.currentObject])

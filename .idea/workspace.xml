@@ -13,7 +13,6 @@
     <list default="true" id="78afd4d1-1ed3-4b4d-a584-1aa195b3fadc" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Components/CurrentObject/TabsObject/Point/Point/point.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/CurrentObject/TabsObject/Point/Point/point.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Main/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Main/main.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Components/Scene/scene.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Scene/scene.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -60,7 +59,7 @@
       </RecentBranches>
     </option>
   </component>
-  <component name="JupyterTrust" id="a3c65dd0-ec4e-4226-a2ac-76b6eb968a1f" />
+  <component name="JupyterTrust" id="5a638de9-f33f-4d61-aadc-d54bcc0e7ad4" />
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
@@ -93,19 +92,19 @@
     <property name="settings.editor.selected.configurable" value="editor.preferences.import" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\flav6\Desktop\sardinette\sardinette-front\src\Class" />
-      <recent name="C:\Users\flav6\Desktop\sardinette\sardinette-front\src\Components\CurrentObject\TabsObject\Point\Point" />
-      <recent name="C:\Users\flav6\Desktop\sardinette\src\Images\Icons" />
-      <recent name="C:\Users\flav6\Desktop\sardinette\src\Components" />
-      <recent name="C:\Users\flav6\Desktop\sardinette\src\Components\Menu" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\flav6\Desktop\sardinette\sardinette-front\src\Components\CurrentObject\TabsObject\Surfaces\Surface" />
       <recent name="C:\Users\flav6\Desktop\sardinette\sardinette-front\src\Components\CurrentObject\TabsObject\Curve\B-Spline" />
       <recent name="C:\Users\flav6\Desktop\sardinette\src\Components\CurrentObject" />
       <recent name="C:\Users\flav6\Desktop\sardinette\src\Components\CurrentObject\TabsObject" />
       <recent name="C:\Users\flav6\Desktop\sardinette\src\Components\Menu\OpenExamples" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\flav6\Desktop\sardinette\sardinette-front\src\Class" />
+      <recent name="C:\Users\flav6\Desktop\sardinette\sardinette-front\src\Components\CurrentObject\TabsObject\Point\Point" />
+      <recent name="C:\Users\flav6\Desktop\sardinette\src\Images\Icons" />
+      <recent name="C:\Users\flav6\Desktop\sardinette\src\Components" />
+      <recent name="C:\Users\flav6\Desktop\sardinette\src\Components\Menu" />
     </key>
   </component>
   <component name="RunManager">
