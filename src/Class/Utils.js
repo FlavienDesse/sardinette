@@ -1,6 +1,6 @@
 import {BufferGeometry, Line, LineBasicMaterial, Mesh, MeshBasicMaterial, SphereGeometry} from "three";
 import Constant from "./Constant";
-import {bSpline, cSpline,mirrorPoint} from "./Math";
+import {bSpline, cSpline, mirrorPoint} from "./Math";
 import * as THREE from "three";
 
 /*
@@ -67,51 +67,105 @@ function increaseDefaultName(type) {
 }
 
 
-
-
-
 function updateChildren(allObject, currentObject, isDeletion) {
-    let res = allObject.map((prev) => {
 
-        if (  currentObject.childrenID.includes(prev.id)) {
+    let allChildrenInfo = []
+
+
+    currentObject.childrenID.forEach((id) => {
+        allChildrenInfo.push({
+                id: id,
+                isError: currentObject.isError,
+            }
+        )
+    })
+
+
+
+    while(allChildrenInfo.length !== 0){
+
+
+
+        let tempInfo = []
+
+        allChildrenInfo.forEach((value => {
+            let prev = allObject.find(object => object.id === value.id)
+
+
             if (prev.type === "B-Spline") {
                 if (isDeletion) {
                     prev.controlsPoints = prev.controlsPoints.filter(controlsPoints => controlsPoints.id !== currentObject.id)
                 }
-                try {
-                    prev.geometry = modificationBSpline(prev)
-                    updateChildren(allObject, prev, false)
-                } catch (e) {
+
+                if (value.isError) {
                     prev.isError = true
+                } else {
+                    try {
+                        prev.geometry = modificationBSpline(prev)
+                        prev.isError = false
+                    } catch (e) {
+                        prev.isError = true
+                    }
                 }
             } else if (prev.type === "C-Spline") {
 
                 if (isDeletion) {
                     prev.controlsPoints = prev.controlsPoints.filter(controlsPoints => controlsPoints.id !== currentObject.id)
                 }
-                try {
-                    prev.geometry = modificationCSpline(prev)
-                    updateChildren(allObject, prev, false)
-                } catch (e) {
-                    prev.isError = true
-                }
-            }else if (prev.type === "Mirrored Point") {
-                if (isDeletion) {
-                    prev.initialPoint =null;
-                }
-                try {
-                    let res = modificationMirroredPoint(prev.initialPoint,prev.axis)
-                    prev.position.set(res.x,res.y,res.z)
-                    updateChildren(allObject, prev, false)
-                } catch (e) {
-                    prev.isError = true
 
+                if (value.isError) {
+                    prev.isError = true
+                } else {
+                    try {
+                        prev.geometry = modificationCSpline(prev)
+                        prev.isError = false
+
+                    } catch (e) {
+                        prev.isError = true
+                    }
                 }
+
+            } else if (prev.type === "Mirrored Point") {
+                if (isDeletion) {
+                    prev.initialPoint = null;
+                }
+                if (value.isError) {
+                    prev.isError = true
+                } else {
+                    try {
+                        let res = modificationMirroredPoint(prev.initialPoint, prev.axis)
+                        prev.position.set(res.x, res.y, res.z)
+                        prev.isError = false
+
+                    } catch (e) {
+                        prev.isError = true
+
+                    }
+                }
+
             }
-        }
-        return prev
-    })
-    return res
+
+            prev.childrenID.forEach((id) => {
+                tempInfo.push({
+                        id: id,
+                        isError: prev.isError,
+                    }
+                )
+            })
+
+
+        }))
+        isDeletion = false;
+        allChildrenInfo = tempInfo
+    }
+
+
+    return allObject
+
+
+
+
+
 }
 
 function createMirroredPoint() {
@@ -133,9 +187,7 @@ function createMirroredPoint() {
 function createAxis(axis) {
 
 
-
-    const origin = new THREE.Vector3( 0, 0, 0 );
-
+    const origin = new THREE.Vector3(0, 0, 0);
 
 
     const length = 3;
@@ -145,34 +197,34 @@ function createAxis(axis) {
     const green = 0x0000fff;
 
 
-    let tempAxis={};
+    let tempAxis = {};
 
 
     switch (axis) {
         case 'x':
-            const dirX = new THREE.Vector3( 1, 0, 0 );
-            tempAxis = new THREE.ArrowHelper( dirX, origin, length, red );
-            tempAxis.name="X Axis"
+            const dirX = new THREE.Vector3(1, 0, 0);
+            tempAxis = new THREE.ArrowHelper(dirX, origin, length, red);
+            tempAxis.name = "X Axis"
             tempAxis.value = "x";
             break
         case 'y':
 
-            const dirY = new THREE.Vector3( 0, 1, 0 );
-            tempAxis = new THREE.ArrowHelper( dirY, origin, length, blue );
-            tempAxis.name="Y Axis"
+            const dirY = new THREE.Vector3(0, 1, 0);
+            tempAxis = new THREE.ArrowHelper(dirY, origin, length, blue);
+            tempAxis.name = "Y Axis"
             tempAxis.value = "y";
             break
         case 'z':
 
-            const dirZ = new THREE.Vector3( 0, 0, 1 );
-            tempAxis = new THREE.ArrowHelper( dirZ, origin, length, green );
-            tempAxis.name="Z Axis"
+            const dirZ = new THREE.Vector3(0, 0, 1);
+            tempAxis = new THREE.ArrowHelper(dirZ, origin, length, green);
+            tempAxis.name = "Z Axis"
             tempAxis.value = "z";
             break
     }
-    tempAxis.type="Axis"
-    tempAxis.isError=false
-    tempAxis.lock=true
+    tempAxis.type = "Axis"
+    tempAxis.isError = false
+    tempAxis.lock = true
 
     return tempAxis
 
@@ -262,7 +314,7 @@ function modificationCSpline(cSplineParam) {
     }
 }
 
-function modificationMirroredPoint(point,axis) {
+function modificationMirroredPoint(point, axis) {
     let posPoint = {...point.position}
 
     try {
@@ -289,7 +341,7 @@ function modifyObjectWhenClickOn(object, currentObject) {
 
 
     if (currentObject != null && (object == null || (currentObject.id !== object.id))) {
-        if (currentObject.type === "Point"|| currentObject.type ==="Mirrored Point") {
+        if (currentObject.type === "Point" || currentObject.type === "Mirrored Point") {
 
             currentObject.scale.x = currentObject.currentScale.x
             currentObject.scale.y = currentObject.currentScale.y
@@ -300,7 +352,7 @@ function modifyObjectWhenClickOn(object, currentObject) {
 
 
     if (object != null) {
-        if (object.type === "Point" || object.type ==="Mirrored Point") {
+        if (object.type === "Point" || object.type === "Mirrored Point") {
             if (currentObject == null || (currentObject.id !== object.id)) {
                 let intersect = object
 
@@ -313,7 +365,7 @@ function modifyObjectWhenClickOn(object, currentObject) {
             } else {
                 return currentObject
             }
-        }else if (object.type === "B-Spline") {
+        } else if (object.type === "B-Spline") {
             if (currentObject == null || (currentObject.id !== object.id)) {
 
                 let intersect = object

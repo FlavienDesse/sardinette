@@ -39,7 +39,7 @@ export default function Main() {
     const updateAllObjectWhenCurrentObjectChange = (lastValue, newValue , haveToRecalculateChildren) => {
         const index = allObject.findIndex(value => value.id === lastValue.id)
         setAllObject(prevState => {
-
+            console.log(newValue)
             if(haveToRecalculateChildren){
                 prevState[index] = newValue
                 let res = updateChildren(allObject,prevState[index],false)
