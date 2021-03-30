@@ -15,6 +15,7 @@ Scene.propType = {
     setCurrentObject: PropTypes.func.isRequired,
     setCurrentTextFieldSelected: PropTypes.func.isRequired,
     currentTextFieldSelected: PropTypes.object.isRequired,
+    updateAllObjectWhenCurrentObjectChange:PropTypes.func.isRequired,
 }
 
 export default function Scene(props) {
@@ -27,15 +28,35 @@ export default function Scene(props) {
     const scene = useRef();
     const raycaster = useRef();
 
+
+
+    const handleMove = React.useCallback((event) => {
+
+        let lastValue = props.currentObject;
+        let newValue = event.target.object
+
+
+
+        props.updateAllObjectWhenCurrentObjectChange(lastValue, newValue,true)
+        props.setCurrentObject({...newValue})
+        control.current.attach(props.currentObject );
+
+    },[props.currentObject])
+
+
     React.useEffect(()=>{
 
         if (props.currentObject && props.currentObject.type === "Point"){
-            control.current.attach({props.currentObject} );
+            control.current.attach(props.currentObject );
+            control.current.addEventListener( 'objectChange',handleMove);
+            return () => {
+                control.current.removeEventListener('objectChange', handleMove);
+            };
         }
 
 
 
-    },[props.currentObject])
+    },[handleMove])
 
     //This useEffect is for initialisation
     React.useEffect(() => {
@@ -72,11 +93,7 @@ export default function Scene(props) {
         scene.current.add(  new THREE.Group());
 
 
-        control.current.addEventListener( 'objectChange', function ( event ) {
-            props.setCurrentObject({...control.current.object})
-            console.log(control.current.object)
 
-        } );
 
 
 

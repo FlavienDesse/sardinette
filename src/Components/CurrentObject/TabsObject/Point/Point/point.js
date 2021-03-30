@@ -29,6 +29,7 @@ export default function Point(props) {
 
 
     React.useEffect((() => {
+
         setWeight(props.currentObject.weight)
         setIsVisible(props.currentObject.visible)
         setName(props.currentObject.name)
