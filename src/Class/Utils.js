@@ -96,7 +96,11 @@ function updateChildren(allObject, currentObject, isDeletion) {
             let prev = allObject.find(object => object.id === value.id)
 
 
-            if (prev.type === "B-Spline") {
+
+            if(prev === null){
+
+            }
+            else if (prev.type === "B-Spline") {
                 if (isDeletion) {
                     prev.controlsPoints = prev.controlsPoints.filter(controlsPoints => controlsPoints.id !== currentObject.id)
                 }
@@ -151,7 +155,7 @@ function updateChildren(allObject, currentObject, isDeletion) {
 
             else if (prev.type === "Mirrored Curve") {
                 if (isDeletion) {
-                    prev.initialPoint = null;
+                    prev.initialCurve= null;
                 }
                 if (value.isError) {
                     prev.isError = true
