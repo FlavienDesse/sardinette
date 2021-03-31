@@ -2,6 +2,8 @@
 
 export default class Object {
 
+   static DEFAULT_NAME_MIRRORED_CURVE= "MirroredCurve0"
+
    static DEFAULT_NAME_MIRRORED_POINT = "MirroredPoint0"
 
    static DEFAULT_NAME_C_SPLINE = "C-Spline0"

@@ -235,6 +235,9 @@ function bSpline(degree, controlPoints, resolution, knots, weights) {
     if(controlPoints[0].x !== undefined) {
         return toVector3(points)
     }
+
+
+
     else return points
 }
 
@@ -407,11 +410,11 @@ function mirrorPoint(point, axis) {
  */
 function mirrorCurve(curve, axis) {
     let res = []
-
-    curve.foreach(elt => {
+    console.log(curve)
+    curve.forEach(elt => {
         res.push(mirrorPoint(elt, axis))
     })
-
+    console.log(res)
     return res
 }
 

@@ -1,6 +1,13 @@
 import React from "react";
 import PropTypes from 'prop-types';
-import {createBSpline, createPoint, createSurface, createCSpline, createMirroredPoint} from "../../../Class/Utils"
+import {
+    createBSpline,
+    createPoint,
+    createSurface,
+    createCSpline,
+    createMirroredPoint,
+    createMirroredCurve
+} from "../../../Class/Utils"
 import {MenuItem, SubMenu} from "rc-menu";
 
 
@@ -67,6 +74,17 @@ export default function OpenInsert(props) {
         })
     }
 
+    const handleAddMirroredCurve = () => {
+        props.setAllObject((prevState) => {
+            let mirroredCurve = createMirroredCurve()
+
+            prevState.push(mirroredCurve)
+
+            return [...prevState]
+
+        })
+    }
+
     let propsSubMenu = Object.assign({}, props)
     delete  propsSubMenu.setAllObject
 
@@ -86,6 +104,9 @@ export default function OpenInsert(props) {
                 </MenuItem>
                 <MenuItem onClick={handleAddCSpline}>
                     C-Spline
+                </MenuItem>
+                <MenuItem onClick={handleAddMirroredCurve}>
+                    Mirrored Curve
                 </MenuItem>
             </SubMenu>
             <SubMenu popupOffset={[0, 2]} title={"Surfaces"}>

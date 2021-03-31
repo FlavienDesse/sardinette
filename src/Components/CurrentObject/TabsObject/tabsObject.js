@@ -5,6 +5,7 @@ import BSpline from "./Curve/B-Spline/bSpline";
 import Surface from "./Surfaces/Surface/surface";
 import CSpline from "./Curve/C-Spline/cSpline";
 import MirroredPoint from "./Point/MirroredPoint/mirroredPoint";
+import MirroredCurve from "./Curve/Mirrored Curve/mirroredCurve";
 
 TabsObject.propType = {
     setCurrentObject: PropTypes.func.isRequired,
@@ -35,6 +36,7 @@ export default function TabsObject(props) {
                         typeObject === "Surface" ? <Surface updateObjectByAddingChildrenID={props.updateObjectByAddingChildrenID} setCurrentTextFieldSelected={props.setCurrentTextFieldSelected}  setCurrentObject={props.setCurrentObject} currentObject={props.currentObject} allObject={props.allObject} updateAllObjectWhenCurrentObjectChange={props.updateAllObjectWhenCurrentObjectChange}/> :
                             typeObject === "C-Spline" ? <CSpline updateObjectByAddingChildrenID={props.updateObjectByAddingChildrenID} setCurrentTextFieldSelected={props.setCurrentTextFieldSelected}  setCurrentObject={props.setCurrentObject} currentObject={props.currentObject} allObject={props.allObject} updateAllObjectWhenCurrentObjectChange={props.updateAllObjectWhenCurrentObjectChange}/> :
                                 typeObject === "Mirrored Point" ? <MirroredPoint updateObjectByAddingChildrenID={props.updateObjectByAddingChildrenID} setCurrentTextFieldSelected={props.setCurrentTextFieldSelected}  setCurrentObject={props.setCurrentObject} currentObject={props.currentObject} allObject={props.allObject} updateAllObjectWhenCurrentObjectChange={props.updateAllObjectWhenCurrentObjectChange}/> :
+                                    typeObject === "Mirrored Curve" ? <MirroredCurve updateObjectByAddingChildrenID={props.updateObjectByAddingChildrenID} setCurrentTextFieldSelected={props.setCurrentTextFieldSelected}  setCurrentObject={props.setCurrentObject} currentObject={props.currentObject} allObject={props.allObject} updateAllObjectWhenCurrentObjectChange={props.updateAllObjectWhenCurrentObjectChange}/> :
 
 
 

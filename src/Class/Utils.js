@@ -1,6 +1,6 @@
-import {BufferGeometry, Line, LineBasicMaterial, Mesh, MeshBasicMaterial, SphereGeometry} from "three";
+import {BufferGeometry, Line, LineBasicMaterial, Mesh, MeshBasicMaterial, SphereGeometry, Vector3} from "three";
 import Constant from "./Constant";
-import {bSpline, cSpline, mirrorPoint} from "./Math";
+import {bSpline, cSpline, mirrorCurve, mirrorPoint} from "./Math";
 import * as THREE from "three";
 
 /*
@@ -60,6 +60,10 @@ function increaseDefaultName(type) {
         case "Mirrored Point":
             matches = Constant.DEFAULT_NAME_MIRRORED_POINT.match(reg);
             Constant.DEFAULT_NAME_MIRRORED_POINT = Constant.DEFAULT_NAME_MIRRORED_POINT.replace(reg, parseInt(matches[0], 10) + 1)
+            break;
+        case "Mirrored Curve":
+            matches = Constant.DEFAULT_NAME_MIRRORED_CURVE.match(reg);
+            Constant.DEFAULT_NAME_MIRRORED_CURVE = Constant.DEFAULT_NAME_MIRRORED_CURVE.replace(reg, parseInt(matches[0], 10) + 1)
             break;
         default:
             throw new Error("unknow type provided")
@@ -135,6 +139,39 @@ function updateChildren(allObject, currentObject, isDeletion) {
                     try {
                         let res = modificationMirroredPoint(prev.initialPoint, prev.axis)
                         prev.position.set(res.x, res.y, res.z)
+                        prev.isError = false
+
+                    } catch (e) {
+                        prev.isError = true
+
+                    }
+                }
+
+            }
+
+            else if (prev.type === "Mirrored Curve") {
+                if (isDeletion) {
+                    prev.initialPoint = null;
+                }
+                if (value.isError) {
+                    prev.isError = true
+                } else {
+                    try {
+                        let allVector3 = []
+
+
+                        for (let i = 0; prev.initialCurve.geometry.attributes.position.array.length > i; i = i+3) {
+
+                            let x = prev.initialCurve.geometry.attributes.position.array[i]
+                            let y = prev.initialCurve.geometry.attributes.position.array[i + 1]
+                            let z = prev.initialCurve.geometry.attributes.position.array[i + 2]
+                            allVector3.push({
+                                x:x,
+                                y:y,
+                                z:z,
+                            })
+                        }
+                        prev.geometry = modificationMirroredCurve(allVector3,prev.axis)
                         prev.isError = false
 
                     } catch (e) {
@@ -231,10 +268,23 @@ function createAxis(axis) {
 
 }
 
-function createPoint() {
+function createPoint(position) {
+
+
+
+
     const geometry = new SphereGeometry(Constant.DEFAULT_SIZE_POINT, 32, 32);
     let material = new MeshBasicMaterial({color: Constant.DEFAULT_COLOR_POINT});
     const point = new Mesh(geometry, material);
+
+
+    if(position){
+        point.position.set(position.x,position.y,position.z)
+    }
+
+
+
+
     point.type = "Point"
     point.name = Constant.DEFAULT_NAME_POINT
     increaseDefaultName("Point")
@@ -260,6 +310,23 @@ function createBSpline() {
     bSpline.resolution = 100
     bSpline.isError = true
     return bSpline
+}
+
+function createMirroredCurve() {
+
+
+    const geometry = new BufferGeometry().setFromPoints([]);
+
+    const material = new LineBasicMaterial({color: 0xff0000});
+    const mirroredCurve = new Line(geometry, material);
+    mirroredCurve.name = Constant.DEFAULT_NAME_MIRRORED_CURVE
+    increaseDefaultName("Mirrored Curve")
+    mirroredCurve.type = "Mirrored Curve"
+    mirroredCurve.initialCurve = null
+    mirroredCurve.axis = null
+    mirroredCurve.childrenID = []
+    mirroredCurve.isError = true
+    return mirroredCurve
 }
 
 
@@ -308,7 +375,19 @@ function modificationCSpline(cSplineParam) {
     try {
         let res = cSpline(allControlsPoints, cSplineParam.resolution, cSplineParam.closed)
         const geometry = new BufferGeometry().setFromPoints(res);
+
         return geometry
+    } catch (e) {
+        throw new Error(e.message)
+    }
+}
+
+function modificationMirroredCurve(allPoint, axis) {
+
+    try {
+        let points = mirrorCurve(allPoint, axis.value)
+        return new BufferGeometry().setFromPoints(points);
+
     } catch (e) {
         throw new Error(e.message)
     }
@@ -408,6 +487,18 @@ function modifyObjectWhenClickOn(object, currentObject) {
                 return currentObject
             }
         }
+        else if (object.type === "Mirrored Curve") {
+            if (currentObject == null || (currentObject.id !== object.id)) {
+
+                let intersect = object
+
+
+                return intersect;
+
+            } else {
+                return currentObject
+            }
+        }
     }
 
 
@@ -428,6 +519,8 @@ export {
     modificationCSpline,
     createAxis,
     createMirroredPoint,
-    modificationMirroredPoint
+    modificationMirroredPoint,
+    createMirroredCurve,
+    modificationMirroredCurve
 }
 

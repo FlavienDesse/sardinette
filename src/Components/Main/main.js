@@ -14,7 +14,7 @@ export default function Main() {
     const classes = useStyles();
 
     const [currentObject, setCurrentObject] = React.useState(null)
-    const [allObject, setAllObject] = React.useState([createAxis("x"), createAxis("y"),createAxis("z"),createMirroredPoint(),createPoint()])
+    const [allObject, setAllObject] = React.useState([createAxis("x"), createAxis("y"),createAxis("z"),createPoint({x:0,y:2,z:0}),createPoint({x:0,y:0,z:0}),createPoint({x:2,y:2,z:0})])
     const [background, setBackground] = React.useState(new Background(null, true));
     const [openModalDeleteObject, setModalDeleteObject] = React.useState(false);
 
@@ -39,7 +39,6 @@ export default function Main() {
     const updateAllObjectWhenCurrentObjectChange = (lastValue, newValue , haveToRecalculateChildren) => {
         const index = allObject.findIndex(value => value.id === lastValue.id)
         setAllObject(prevState => {
-            console.log(newValue)
             if(haveToRecalculateChildren){
                 prevState[index] = newValue
                 let res = updateChildren(allObject,prevState[index],false)
