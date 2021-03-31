@@ -1,5 +1,6 @@
 import { ThreeDRotation } from '@material-ui/icons'
 import * as THREE from 'three'
+import { Vector3 } from 'three'
 
 /**
  * B-spline interpolation of control points of any dimensionality using de Boor's algorithm.
@@ -157,6 +158,7 @@ function curveLength(points, closed)
  */
 function fromVector3(points) {
     let res = []
+    if(points[0].x === undefined) return points
     points.forEach(elt => {
         res.push([elt.x, elt.y, elt.z])
     })
@@ -171,6 +173,7 @@ function fromVector3(points) {
  */
 function toVector3(points) {
     let res = []
+    if(points[0].x !== undefined) return points
     points.forEach(elt => {
         res.push(new THREE.Vector3(elt[0], elt[1], elt[2]))
     })
@@ -250,13 +253,15 @@ function bSpline(degree, controlPoints, resolution, knots, weights) {
  * @param {boolean} closed if the curve should be closed or not
  * @returns {Array<Array<number>>|Array<THREE.Vector3>} an array of points that represents the spline.
  */
-function cSpline(controlPoints, resolution, closed) {
+function cSpline(controlPoints, resolution, closed, isResolutionRelativeToLength) {
     
     let formattedControlPoints = controlPoints
     // Format the control points if not in the good format
     if(controlPoints[0].x === undefined) {
         formattedControlPoints = toVector3(controlPoints)
     }
+
+    if(isResolutionRelativeToLength === undefined) isResolutionRelativeToLength = true
 
     let points = []
 
@@ -291,7 +296,7 @@ function cSpline(controlPoints, resolution, closed) {
 
         // While the number of points doesn't match the length of the curve with the given resolution
         // This is an approximation with an error of 0.5%
-    } while(length * 0.995 > pNum / resolution || length * 1.005 < pNum / resolution)
+    } while(isResolutionRelativeToLength && (length * 0.995 > pNum / resolution || length * 1.005 < pNum / resolution))
     
     // If the control points were not THREE.Vector3, convert the resulting curve into a coordinates array
     if(controlPoints[0].x === undefined) {
@@ -302,9 +307,9 @@ function cSpline(controlPoints, resolution, closed) {
 
 /**
  * 
- * @param {Array<Array<number>>} curveA 
- * @param {Array<Array<number>>} curveB 
- * @returns {Array<Array<Array<number>>}
+ * @param {Array<THREE.Vector3>} curveA 
+ * @param {Array<THREE.Vector3>} curveB 
+ * @returns {Array<Array<THREE.Vector3>} An array of triangles
  */
 function getSurface(curveA, curveB) {
     let triangles = []
@@ -312,47 +317,47 @@ function getSurface(curveA, curveB) {
     let maxLength = Math.max(curveA.length, curveB.length)
     let smallCurve
     let longCurve
-
     if(maxLength === curveA.length) {
-        longCurve = fromVector3(toVector3(curveA))
-        smallCurve = fromVector3(toVector3(curveB))
+        longCurve = fromVector3(curveA)
+        smallCurve = fromVector3(curveB)
     }
     else {
-        longCurve = fromVector3(toVector3(curveB))
-        smallCurve = fromVector3(toVector3(curveA))        
+        longCurve = fromVector3(curveB)
+        smallCurve = fromVector3(curveA)        
     }
 
-    let ratio = (longCurve.length - smallCurve.length) / (smallCurve.length - 1)
-    let trace = 0
-    
-    for(let i = 1; i < smallCurve.length; i++) {
-        trace += ratio
-        let n = Math.floor(trace)
-        let j = 1
-        if(trace >= 1 || (i === smallCurve.length - 1 && trace > 0.5)) {
-            let a = { x: smallCurve[i - 1][0], y: smallCurve[i - 1][1], z: smallCurve[i - 1][2]}
-            let b = { x: smallCurve[i][0], y: smallCurve[i][1], z: smallCurve[i][2]}
-            let c = {x: 0, y: 0, z: 0}
-            while(trace >= 1 || (i === smallCurve.length - 1 && trace > 0.5)) {
-                c.x = a.x + (b.x - a.x) / (n + 1) * j
-                c.y = a.y + (b.y - a.y) / (n + 1) * j
-                c.z = a.z + (b.z - a.z) / (n + 1) * j
-                smallCurve.splice(i, 0, [c.x, c.y, c.z])
-                i++
-                j++
-                trace--
-            }
-        }        
+    if(smallCurve.length !== longCurve.length) {
+        let ratio = (longCurve.length - smallCurve.length) / (smallCurve.length - 1)
+        let trace = 0
+        
+        for(let i = 1; i < smallCurve.length; i++) {
+            trace += ratio
+            let n = Math.floor(trace)
+            let j = 1
+            if(trace >= 1 || (i === smallCurve.length - 1 && trace > 0.5)) {
+                let a = { x: smallCurve[i - 1][0], y: smallCurve[i - 1][1], z: smallCurve[i - 1][2]}
+                let b = { x: smallCurve[i][0], y: smallCurve[i][1], z: smallCurve[i][2]}
+                let c = {x: 0, y: 0, z: 0}
+                while(trace >= 1 || (i === smallCurve.length - 1 && trace > 0.5)) {
+                    c.x = a.x + (b.x - a.x) / (n + 1) * j
+                    c.y = a.y + (b.y - a.y) / (n + 1) * j
+                    c.z = a.z + (b.z - a.z) / (n + 1) * j
+                    smallCurve.splice(i, 0, [c.x, c.y, c.z])
+                    i++
+                    j++
+                    trace--
+                }
+            }        
+        }
     }
 
     smallCurve.forEach((elt, idx) => {
         if(idx + 1 >= smallCurve.length) return
         let t = [elt, longCurve[idx], smallCurve[idx + 1]]
         let t2 = [longCurve[idx], smallCurve[idx + 1], longCurve[idx + 1]]
-        triangles.push(t)
-        triangles.push(t2)
+        triangles.push(toVector3(t))
+        triangles.push(toVector3(t2))
     })
-
     return triangles
 }
 
@@ -418,5 +423,62 @@ function mirrorCurve(curve, axis) {
     return res
 }
 
-export {bSpline, cSpline, toVector3, fromVector3, curveLength, distance, getSurface, mirrorPoint, mirrorPointFromCurve, mirrorCurve}
+/**
+ * 
+ * @param {Array<Array<THREE.Vector3>>} curves  The control points of each curve 
+ * @param {number} minResolution The minimum resolution
+ * @param {Array<boolean>} areClosed Tells if each curve is closed or not
+ * @returns {Array<Array<THREE.Vector3>>} An array of triangles
+ */
+function cLoftSurface(curves, minResolution, areClosed) {
+    let surface = []
+    minResolution = minResolution || 20
+
+    let fullCurves = []
+    let loftCurves = []
+
+    let globalResolution = 0
+
+    curves.forEach((elt, idx) => {
+        let res = cSpline(elt, minResolution, areClosed[idx])
+        if(globalResolution < res.length) globalResolution = res.length
+    })
+
+    curves.forEach((elt, idx) => {
+        fullCurves.push(cSpline(elt, globalResolution, areClosed[idx], false))
+    })
+
+    for(let i = 0; i < fullCurves.length; i++) {
+        let curve = fullCurves[i]
+
+        if(i === 0) {
+            curve.forEach(elt => {
+                loftCurves.push([elt])
+            })
+        }
+        else {
+            curve.forEach((elt, idx) => {
+                loftCurves[idx].push(elt)
+            })
+        }
+    }
+
+    let fullLoftCurves = []
+
+    loftCurves.forEach(elt => {
+        fullLoftCurves.push(cSpline(elt, minResolution))
+    })
+
+    fullLoftCurves.forEach((elt, idx) => {
+        if(idx === fullLoftCurves.length - 1) return
+        let tmp = getSurface(elt, fullLoftCurves[idx + 1])
+        tmp.forEach(triangle => {
+            surface.push(triangle)
+        })
+    })
+    console.log(`surface`, surface)
+    return surface
+}
+
+export {bSpline, cSpline, toVector3, fromVector3, curveLength, distance, getSurface, mirrorPoint, mirrorPointFromCurve, mirrorCurve, cLoftSurface}
 
