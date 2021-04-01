@@ -54,7 +54,7 @@ export default function Scene(props) {
         }
 
 
-    },[handleMove, props.currentObject])
+    },[handleMove])
 
     //This useEffect is for initialisation
     React.useEffect(() => {
@@ -197,27 +197,25 @@ export default function Scene(props) {
 
         } else {
 
+            console.log(control.current.dragging)
 
-            if(!control.current.dragging){
-                if (props.currentTextFieldSelected !== null) {
-                    event.preventDefault();
-                } else {
-                    props.setCurrentObject(modifyObjectWhenClickOn(null, props.currentObject))
+            if (props.currentTextFieldSelected !== null) {
+                event.preventDefault();
+            } else {
+                props.setCurrentObject(modifyObjectWhenClickOn(null, props.currentObject))
 
-                }
             }
-
         }
     }, [props]);
 
 
     //This one is when we click on object
     React.useEffect(() => {
-        renderer.current.domElement.addEventListener('pointerdown', handleClickOnCanvas,false);
+        renderer.current.domElement.addEventListener('click', handleClickOnCanvas,false);
 
 
         return () => {
-            renderer.current.domElement.removeEventListener('pointerdown', handleClickOnCanvas,false);
+            renderer.current.domElement.removeEventListener('click', handleClickOnCanvas,false);
         };
 
     }, [handleClickOnCanvas])
