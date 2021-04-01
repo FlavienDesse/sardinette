@@ -6,6 +6,7 @@ import useStyles from "./style";
 import PropTypes from "prop-types";
 import {modificationBSpline} from "../../../../../Class/Utils";
 import {useSnackbar} from 'notistack';
+import {BufferGeometry} from "three";
 
 BSpline.propType = {
     setCurrentObject: PropTypes.func.isRequired,
@@ -110,7 +111,8 @@ export default function BSpline(props) {
             newValue.degree = degree
             try {
                 let res = modificationBSpline(newValue)
-                newValue.geometry = res
+                newValue.geometry =  new BufferGeometry().setFromPoints(res);
+                newValue.allCalculatedPoints = res
                 newValue.isError = false;
                 props.updateAllObjectWhenCurrentObjectChange(lastValue, newValue,true)
                 props.setCurrentObject(newValue)
@@ -132,7 +134,8 @@ export default function BSpline(props) {
             newValue.controlsPoints = controlsPoints
             try {
                 let res = modificationBSpline(newValue)
-                newValue.geometry = res
+                newValue.allCalculatedPoints = res
+                newValue.geometry =  new BufferGeometry().setFromPoints(res);
                 newValue.isError = false;
                 props.updateObjectByAddingChildrenID(controlsPoints,props.currentObject.id)
                 props.updateAllObjectWhenCurrentObjectChange(lastValue, newValue,true)
@@ -157,7 +160,8 @@ export default function BSpline(props) {
             newValue.resolution = resolution
             try {
                 let res = modificationBSpline(newValue)
-                newValue.geometry = res
+                newValue.geometry =  new BufferGeometry().setFromPoints(res);
+                newValue.allCalculatedPoints = res
                 newValue.isError = false;
                 props.updateAllObjectWhenCurrentObjectChange(lastValue, newValue,true)
                 props.setCurrentObject(newValue)

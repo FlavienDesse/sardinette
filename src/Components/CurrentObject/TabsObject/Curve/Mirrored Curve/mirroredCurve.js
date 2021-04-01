@@ -6,7 +6,7 @@ import {Typography} from "@material-ui/core";
 import TextField from "@material-ui/core/TextField";
 import Checkbox from "@material-ui/core/Checkbox";
 import PropTypes from "prop-types";
-import {Vector3} from "three";
+import {BufferGeometry, Vector3} from "three";
 
 MirroredCurve.propType = {
     setCurrentObject: PropTypes.func.isRequired,
@@ -98,7 +98,8 @@ export default function MirroredCurve(props) {
 
 
                 let res = modificationMirroredCurve(allVector3, axis)
-                newValue.geometry = res
+                newValue.allCalculatedPoints = res
+                newValue.geometry =new BufferGeometry().setFromPoints(res);
                 newValue.isError = false;
                 props.updateObjectByAddingChildrenID(new Array(initialCurve), props.currentObject.id)
                 props.updateAllObjectWhenCurrentObjectChange(lastValue, newValue, true)
@@ -166,7 +167,8 @@ export default function MirroredCurve(props) {
 
 
                 let res = modificationMirroredCurve(allVector3, axis)
-                newValue.geometry = res
+                newValue.allCalculatedPoints = res
+                newValue.geometry =new BufferGeometry().setFromPoints(res);
                 newValue.isError = false;
                 props.updateObjectByAddingChildrenID(new Array(initialCurve), props.currentObject.id)
                 props.updateAllObjectWhenCurrentObjectChange(lastValue, newValue, true)

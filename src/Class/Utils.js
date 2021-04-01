@@ -155,21 +155,12 @@ function updateChildren(allObject, currentObject, isDeletion) {
                     prev.isError = true
                 } else {
                     try {
-                        let allVector3 = []
+
+                        let res = modificationMirroredCurve(prev.allCalculatedPoints, prev.axis)
+                        prev.allCalculatedPoints = res
+                        prev.geometry =new BufferGeometry().setFromPoints(res);
 
 
-                        for (let i = 0; prev.initialCurve.geometry.attributes.position.array.length > i; i = i + 3) {
-
-                            let x = prev.initialCurve.geometry.attributes.position.array[i]
-                            let y = prev.initialCurve.geometry.attributes.position.array[i + 1]
-                            let z = prev.initialCurve.geometry.attributes.position.array[i + 2]
-                            allVector3.push({
-                                x: x,
-                                y: y,
-                                z: z,
-                            })
-                        }
-                        prev.geometry = modificationMirroredCurve(allVector3, prev.axis)
                         prev.isError = false
 
                     } catch (e) {
@@ -300,6 +291,7 @@ function createBSpline() {
     bSpline.degree = 2
     bSpline.resolution = 100
     bSpline.isError = true
+    bSpline.allCalculatedPoints = []
     return bSpline
 }
 
@@ -389,7 +381,7 @@ function modificationSurface(firstCurve, secondCurve) {
         let geometry = new THREE.BufferGeometry();
         let numTriangles = res.length
 
-        let positions = new Float32Array(numTriangles * 3 * 3);
+        let positions = new Float32Array(numTriangles * 3 );
 
         for (let i = 0; i < numTriangles ; i++) {
             let triangle = res[i]
@@ -432,7 +424,7 @@ function modificationMirroredCurve(allPoint, axis) {
 
     try {
         let points = mirrorCurve(allPoint, axis.value)
-        return new BufferGeometry().setFromPoints(points);
+        return points
 
     } catch (e) {
         throw new Error(e.message)
@@ -454,8 +446,9 @@ function modificationBSpline(bSplineParam) {
     let allControlsPoints = bSplineParam.controlsPoints.map(a => a.position);
     try {
         let res = bSpline(bSplineParam.degree, allControlsPoints, bSplineParam.resolution, null, bSplineParam.controlsPoints.map(a => a.weight))
-        const geometry = new BufferGeometry().setFromPoints(res);
-        return geometry
+
+
+        return res
     } catch (e) {
         throw new Error(e.message)
     }

@@ -151,6 +151,7 @@ export default function MirroredPoint(props) {
 
             try {
                 let res = modificationMirroredPoint(initialPoint, axis)
+                newValue.allCalculatedPoints = res
                 newValue.position.set(res.x,res.y,res.z)
                 newValue.isError = false;
                 props.updateObjectByAddingChildrenID(new Array(initialPoint), props.currentObject.id)
