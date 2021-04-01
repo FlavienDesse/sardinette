@@ -31,7 +31,6 @@ export default function Scene(props) {
 
 
     const handleMove = React.useCallback((event) => {
-        console.log(event)
         let lastValue = props.currentObject;
         let newValue = event.target.object
 
@@ -53,7 +52,6 @@ export default function Scene(props) {
                 control.current.removeEventListener('objectChange', handleMove);
             };
         }
-
 
 
     },[handleMove])
@@ -92,14 +90,12 @@ export default function Scene(props) {
         scene.current.add(group);
         scene.current.add(  new THREE.Group());
 
-
-
-
+        
 
 
         control.current.addEventListener( 'dragging-changed', function ( event ) {
-
             controls.enabled = ! event.value;
+
 
         } );
         // controls.addEventListener('change', () => console.log("Controls Change"))
@@ -128,6 +124,15 @@ export default function Scene(props) {
 
 
     }, [])
+
+    React.useEffect(() => {
+
+        if(props.currentObject === null) {
+            control.current.detach(props.currentObject );
+        }
+
+    }, [props.currentObject])
+
 
     //This one is when size change
     React.useEffect(() => {
@@ -164,7 +169,7 @@ export default function Scene(props) {
     const handleClickOnCanvas = React.useCallback((event) => {
         const target = event.target;
 
-
+        console.log("lol")
         // Get the bounding rectangle of target
         const rectMouse = target.getBoundingClientRect();
 
@@ -194,6 +199,8 @@ export default function Scene(props) {
 
         } else {
 
+            console.log(control.current.dragging)
+
             if (props.currentTextFieldSelected !== null) {
                 event.preventDefault();
             } else {
@@ -206,11 +213,11 @@ export default function Scene(props) {
 
     //This one is when we click on object
     React.useEffect(() => {
-        renderer.current.domElement.addEventListener("click", handleClickOnCanvas);
+        renderer.current.domElement.addEventListener('click', handleClickOnCanvas,false);
 
 
         return () => {
-            renderer.current.domElement.removeEventListener('click', handleClickOnCanvas);
+            renderer.current.domElement.removeEventListener('click', handleClickOnCanvas,false);
         };
 
     }, [handleClickOnCanvas])
