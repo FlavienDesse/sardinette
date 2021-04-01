@@ -6,7 +6,15 @@ import Scene from "../Scene/scene";
 import AllObjectAndGlobalSettings from "../AllObjectAndGlobalSettings/allObjectAndGlobalSettings";
 import CurrentObject from "../CurrentObject/currentObject";
 import Background from "../../Class/Background";
-import {createAxis, createMirroredPoint, createPoint, modifyObjectWhenClickOn, updateChildren} from "../../Class/Utils";
+import {
+    createAxis,
+    createBSpline,
+    createMirroredCurve,
+    createPoint,
+    createSurface,
+    modifyObjectWhenClickOn,
+    updateChildren
+} from "../../Class/Utils";
 import Modal from "@material-ui/core/Modal";
 import {Button, Typography} from "@material-ui/core";
 
@@ -14,7 +22,7 @@ export default function Main() {
     const classes = useStyles();
 
     const [currentObject, setCurrentObject] = React.useState(null)
-    const [allObject, setAllObject] = React.useState([createAxis("x"), createAxis("y"),createAxis("z"),createPoint({x:0,y:2,z:0}),createPoint({x:0,y:0,z:0}),createPoint({x:2,y:2,z:0})])
+    const [allObject, setAllObject] = React.useState([,,])
     const [background, setBackground] = React.useState(new Background(null, true));
     const [openModalDeleteObject, setModalDeleteObject] = React.useState(false);
 
@@ -27,7 +35,28 @@ export default function Main() {
 
 
 
+    useEffect(()=>{
 
+
+        const axisX = createAxis("x")
+        const axisY= createAxis("y")
+        const axisZ = createAxis("z")
+
+
+        const firstPoint = createPoint({x:0,y:2,z:2});
+        const secondPoint=createPoint({x:2,y:2,z:0})
+
+        const thirdPoint=createPoint({x:0,y:0,z:0});
+
+        const firstCurve = createBSpline([firstPoint,secondPoint,thirdPoint])
+
+        const mirrorFirstCurve = createMirroredCurve(firstCurve,axisY)
+
+       const surface = createSurface(firstCurve,mirrorFirstCurve)
+
+        setAllObject([axisX,axisY,axisZ,firstPoint,secondPoint,thirdPoint,firstCurve,mirrorFirstCurve,surface])
+
+    },[])
 
 
 

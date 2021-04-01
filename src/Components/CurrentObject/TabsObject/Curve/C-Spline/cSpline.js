@@ -6,6 +6,7 @@ import useStyles from "./style";
 import PropTypes from "prop-types";
 import {modificationCSpline} from "../../../../../Class/Utils";
 import {useSnackbar} from 'notistack';
+import {BufferGeometry} from "three";
 
 CSpline.propType = {
     setCurrentObject: PropTypes.func.isRequired,
@@ -108,7 +109,8 @@ export default function CSpline(props) {
             newValue.controlsPoints = controlsPoints
             try {
                 let res = modificationCSpline(newValue)
-                newValue.geometry = res
+                newValue.allCalculatedPoints = res
+                newValue.geometry =  new BufferGeometry().setFromPoints(res);
                 newValue.isError = false;
                 props.updateObjectByAddingChildrenID(controlsPoints,props.currentObject.id)
                 props.updateAllObjectWhenCurrentObjectChange(lastValue, newValue,true)
@@ -133,7 +135,8 @@ export default function CSpline(props) {
             newValue.resolution = resolution
             try {
                 let res = modificationCSpline(newValue)
-                newValue.geometry = res
+                newValue.allCalculatedPoints = res
+                newValue.geometry =  new BufferGeometry().setFromPoints(res);
                 newValue.isError = false;
                 props.updateAllObjectWhenCurrentObjectChange(lastValue, newValue,true)
                 props.setCurrentObject(newValue)

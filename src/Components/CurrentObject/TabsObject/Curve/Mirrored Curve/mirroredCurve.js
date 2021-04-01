@@ -81,23 +81,9 @@ export default function MirroredCurve(props) {
 
 
             try {
-                let allVector3 = []
 
 
-                for (let i = 0; initialCurve.geometry.attributes.position.array.length > i; i = i+3) {
-
-                    let x = initialCurve.geometry.attributes.position.array[i]
-                    let y = initialCurve.geometry.attributes.position.array[i + 1]
-                    let z = initialCurve.geometry.attributes.position.array[i + 2]
-                    allVector3.push({
-                        x:x,
-                        y:y,
-                        z:z,
-                    })
-                }
-
-
-                let res = modificationMirroredCurve(allVector3, axis)
+                let res = modificationMirroredCurve(initialCurve.allCalculatedPoints, axis)
                 newValue.allCalculatedPoints = res
                 newValue.geometry =new BufferGeometry().setFromPoints(res);
                 newValue.isError = false;
@@ -150,23 +136,7 @@ export default function MirroredCurve(props) {
 
             try {
 
-                let allVector3 = []
-
-
-                for (let i = 0; initialCurve.geometry.attributes.position.array.length > i; i = i+3) {
-
-                    let x = initialCurve.geometry.attributes.position.array[i]
-                    let y = initialCurve.geometry.attributes.position.array[i + 1]
-                    let z = initialCurve.geometry.attributes.position.array[i + 2]
-                    allVector3.push({
-                        x:x,
-                        y:y,
-                        z:z,
-                    })
-                }
-
-
-                let res = modificationMirroredCurve(allVector3, axis)
+                let res = modificationMirroredCurve(initialCurve.allCalculatedPoints, axis)
                 newValue.allCalculatedPoints = res
                 newValue.geometry =new BufferGeometry().setFromPoints(res);
                 newValue.isError = false;
