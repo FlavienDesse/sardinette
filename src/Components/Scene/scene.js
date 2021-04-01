@@ -15,7 +15,7 @@ Scene.propType = {
     setCurrentObject: PropTypes.func.isRequired,
     setCurrentTextFieldSelected: PropTypes.func.isRequired,
     currentTextFieldSelected: PropTypes.object.isRequired,
-    updateAllObjectWhenCurrentObjectChange:PropTypes.func.isRequired,
+    updateAllObjectWhenCurrentObjectChange: PropTypes.func.isRequired,
 }
 
 export default function Scene(props) {
@@ -29,32 +29,30 @@ export default function Scene(props) {
     const raycaster = useRef();
 
 
-
     const handleMove = React.useCallback((event) => {
         let lastValue = props.currentObject;
         let newValue = event.target.object
 
 
-
-        props.updateAllObjectWhenCurrentObjectChange(lastValue, newValue,true)
+        props.updateAllObjectWhenCurrentObjectChange(lastValue, newValue, true)
         props.setCurrentObject(newValue)
-        control.current.attach(props.currentObject );
+        control.current.attach(props.currentObject);
 
-    },[props.currentObject])
+    }, [props.currentObject])
 
 
-    React.useEffect(()=>{
+    React.useEffect(() => {
 
-        if (props.currentObject && props.currentObject.type === "Point"){
-            control.current.attach(props.currentObject );
-            control.current.addEventListener( 'objectChange',handleMove);
+        if (props.currentObject && props.currentObject.type === "Point") {
+            control.current.attach(props.currentObject);
+            control.current.addEventListener('objectChange', handleMove);
             return () => {
                 control.current.removeEventListener('objectChange', handleMove);
             };
         }
 
 
-    },[handleMove])
+    }, [handleMove])
 
     //This useEffect is for initialisation
     React.useEffect(() => {
@@ -79,24 +77,19 @@ export default function Scene(props) {
         refContainer.current.appendChild(renderer.current.domElement)
 
 
-
-
         const controls = new TrackballControls(camera.current, renderer.current.domElement)
-        control.current = new TransformControls( camera.current, renderer.current.domElement );
+        control.current = new TransformControls(camera.current, renderer.current.domElement);
 
         group.add(control.current)
         scene.current.add(group);
-        scene.current.add(  new THREE.Group());
-
-        
+        scene.current.add(new THREE.Group());
 
 
+        control.current.addEventListener('dragging-changed', function (event) {
+            controls.enabled = !event.value;
 
-        control.current.addEventListener( 'dragging-changed', function ( event ) {
-            controls.enabled = ! event.value;
 
-
-        } );
+        });
         // controls.addEventListener('change', () => console.log("Controls Change"))
         // controls.addEventListener('start', () => console.log("Controls Start Event"))
         // controls.addEventListener('end', () => console.log("Controls End Event"))
@@ -126,8 +119,8 @@ export default function Scene(props) {
 
     React.useEffect(() => {
 
-        if(props.currentObject === null) {
-            control.current.detach(props.currentObject );
+        if (props.currentObject === null) {
+            control.current.detach(props.currentObject);
         }
 
     }, [props.currentObject])
@@ -181,22 +174,22 @@ export default function Scene(props) {
         }
         raycaster.current.setFromCamera(mouse, camera.current);
         const intersects = raycaster.current.intersectObjects([...props.allObject]);
-
-        if (intersects.length > 0) {
-            if (props.currentTextFieldSelected !== null && props.currentTextFieldSelected.id !== intersects[0].object.id && props.currentTextFieldSelected.acceptType.includes(intersects[0].object.type)) {
-                if (event.ctrlKey) {
-                    event.preventDefault();
-                    props.currentTextFieldSelected.clickCtrl(intersects[0].object)
+        if (!control.current.dragging) {
+            if (intersects.length > 0) {
+                if (props.currentTextFieldSelected !== null && props.currentTextFieldSelected.id !== intersects[0].object.id && props.currentTextFieldSelected.acceptType.includes(intersects[0].object.type)) {
+                    if (event.ctrlKey) {
+                        event.preventDefault();
+                        props.currentTextFieldSelected.clickCtrl(intersects[0].object)
+                    } else {
+                        event.preventDefault();
+                        props.currentTextFieldSelected.simpleClick(intersects[0].object)
+                    }
                 } else {
-                    event.preventDefault();
-                    props.currentTextFieldSelected.simpleClick(intersects[0].object)
+                    props.setCurrentObject(modifyObjectWhenClickOn(intersects[0].object, props.currentObject))
                 }
-            } else {
-                props.setCurrentObject(modifyObjectWhenClickOn(intersects[0].object, props.currentObject))
-            }
 
-        } else {
-            if(!control.current.dragging){
+            } else {
+
                 if (props.currentTextFieldSelected !== null) {
                     event.preventDefault();
                 } else {
@@ -211,11 +204,11 @@ export default function Scene(props) {
 
     //This one is when we click on object
     React.useEffect(() => {
-        renderer.current.domElement.addEventListener('pointerdown', handleClickOnCanvas,false);
+        renderer.current.domElement.addEventListener('pointerdown', handleClickOnCanvas, false);
 
 
         return () => {
-            renderer.current.domElement.removeEventListener('pointerdown', handleClickOnCanvas,false);
+            renderer.current.domElement.removeEventListener('pointerdown', handleClickOnCanvas, false);
         };
 
     }, [handleClickOnCanvas])

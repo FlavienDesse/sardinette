@@ -57,7 +57,8 @@ export default function CSpline(props) {
         let newValue = props.currentObject
         newValue.closed = event.target.checked;
         let res = modificationCSpline(newValue)
-        newValue.geometry = res
+        newValue.allCalculatedPoints = res
+        newValue.geometry =  new BufferGeometry().setFromPoints(res);
         props.updateAllObjectWhenCurrentObjectChange(lastValue, newValue,true)
         props.setCurrentObject(newValue)
     }

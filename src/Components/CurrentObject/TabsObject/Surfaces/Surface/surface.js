@@ -68,7 +68,7 @@ export default function Surface(props) {
         if (e.keyCode === 13) {
             let lastValue = props.currentObject;
             let newValue = props.currentObject
-            newValue.firstCurve = secondCurve
+            newValue.secondCurve = secondCurve
 
 
             try {

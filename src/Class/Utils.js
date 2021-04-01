@@ -395,6 +395,7 @@ function createCSpline() {
     increaseDefaultName("C-Spline")
     cSpline.type = "C-Spline"
     cSpline.controlsPoints = []
+    cSpline.allCalculatedPoints = []
     cSpline.childrenID = []
     cSpline.closed = false;
     cSpline.resolution = 100
@@ -511,8 +512,6 @@ function modificationSurface(firstCurve, secondCurve) {
 function modificationCSpline(cSplineParam) {
     let allControlsPoints = cSplineParam.controlsPoints.map(a => a.position);
     try {
-
-
         return cSpline(allControlsPoints, cSplineParam.resolution, cSplineParam.closed)
     } catch (e) {
         throw new Error(e.message)

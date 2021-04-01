@@ -54,7 +54,10 @@ export default function Main() {
 
        const surface = createSurface(firstCurve,mirrorFirstCurve)
 
-        setAllObject([axisX,axisY,axisZ,firstPoint,secondPoint,thirdPoint,firstCurve,mirrorFirstCurve,surface])
+
+        setAllObject([axisX,axisY,axisZ,firstPoint,secondPoint,thirdPoint])
+
+      //  setAllObject([axisX,axisY,axisZ,firstPoint,secondPoint,thirdPoint,firstCurve,mirrorFirstCurve,surface])
 
     },[])
 
