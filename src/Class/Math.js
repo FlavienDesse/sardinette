@@ -415,11 +415,9 @@ function mirrorPoint(point, axis) {
  */
 function mirrorCurve(curve, axis) {
     let res = []
-    console.log(curve)
     curve.forEach(elt => {
         res.push(mirrorPoint(elt, axis))
     })
-    console.log(res)
     return res
 }
 

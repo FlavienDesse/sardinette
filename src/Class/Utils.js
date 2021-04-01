@@ -1,6 +1,6 @@
-import {BufferGeometry, Line, LineBasicMaterial, Mesh, MeshBasicMaterial, SphereGeometry, Vector3} from "three";
+import {BufferGeometry, Line, LineBasicMaterial, Mesh, MeshBasicMaterial, SphereGeometry, Vector3, Face} from "three";
 import Constant from "./Constant";
-import {bSpline, cSpline, mirrorCurve, mirrorPoint} from "./Math";
+import {bSpline, cSpline, mirrorCurve, mirrorPoint, getSurface} from "./Math";
 import * as THREE from "three";
 
 /*
@@ -85,9 +85,7 @@ function updateChildren(allObject, currentObject, isDeletion) {
     })
 
 
-
-    while(allChildrenInfo.length !== 0){
-
+    while (allChildrenInfo.length !== 0) {
 
 
         let tempInfo = []
@@ -96,11 +94,9 @@ function updateChildren(allObject, currentObject, isDeletion) {
             let prev = allObject.find(object => object.id === value.id)
 
 
-
-            if(prev === null){
-
-            }
-            else if (prev.type === "B-Spline") {
+            if (prev === null) {
+                //TODO delete the children id
+            } else if (prev.type === "B-Spline") {
                 if (isDeletion) {
                     prev.controlsPoints = prev.controlsPoints.filter(controlsPoints => controlsPoints.id !== currentObject.id)
                 }
@@ -151,11 +147,9 @@ function updateChildren(allObject, currentObject, isDeletion) {
                     }
                 }
 
-            }
-
-            else if (prev.type === "Mirrored Curve") {
+            } else if (prev.type === "Mirrored Curve") {
                 if (isDeletion) {
-                    prev.initialCurve= null;
+                    prev.initialCurve = null;
                 }
                 if (value.isError) {
                     prev.isError = true
@@ -164,18 +158,18 @@ function updateChildren(allObject, currentObject, isDeletion) {
                         let allVector3 = []
 
 
-                        for (let i = 0; prev.initialCurve.geometry.attributes.position.array.length > i; i = i+3) {
+                        for (let i = 0; prev.initialCurve.geometry.attributes.position.array.length > i; i = i + 3) {
 
                             let x = prev.initialCurve.geometry.attributes.position.array[i]
                             let y = prev.initialCurve.geometry.attributes.position.array[i + 1]
                             let z = prev.initialCurve.geometry.attributes.position.array[i + 2]
                             allVector3.push({
-                                x:x,
-                                y:y,
-                                z:z,
+                                x: x,
+                                y: y,
+                                z: z,
                             })
                         }
-                        prev.geometry = modificationMirroredCurve(allVector3,prev.axis)
+                        prev.geometry = modificationMirroredCurve(allVector3, prev.axis)
                         prev.isError = false
 
                     } catch (e) {
@@ -202,9 +196,6 @@ function updateChildren(allObject, currentObject, isDeletion) {
 
 
     return allObject
-
-
-
 
 
 }
@@ -275,18 +266,14 @@ function createAxis(axis) {
 function createPoint(position) {
 
 
-
-
     const geometry = new SphereGeometry(Constant.DEFAULT_SIZE_POINT, 32, 32);
     let material = new MeshBasicMaterial({color: Constant.DEFAULT_COLOR_POINT});
     const point = new Mesh(geometry, material);
 
 
-    if(position){
-        point.position.set(position.x,position.y,position.z)
+    if (position) {
+        point.position.set(position.x, position.y, position.z)
     }
-
-
 
 
     point.type = "Point"
@@ -356,10 +343,10 @@ function createCSpline() {
 function createSurface() {
 
 
-    const geometry = new BufferGeometry().setFromPoints([]);
+    const geometry = new THREE.BufferGeometry();
 
-    const material = new LineBasicMaterial({color: 0xff0000});
-    const surface = new Line(geometry, material);
+    const material = new THREE.MeshBasicMaterial( { color: 0xff0000 ,side: THREE.DoubleSide} );
+    const surface = new THREE.Mesh(geometry, material);
     surface.name = Constant.DEFAULT_NAME_SURFACE
     increaseDefaultName("Surface")
     surface.type = "Surface"
@@ -373,6 +360,61 @@ function createSurface() {
 
 }
 
+function modificationSurface(firstCurve, secondCurve) {
+    let pointFirstCurve = []
+    let pointSecondCurve = []
+
+    for (let i = 0; firstCurve.geometry.attributes.position.array.length > i; i = i + 3) {
+
+        let x = firstCurve.geometry.attributes.position.array[i]
+        let y = firstCurve.geometry.attributes.position.array[i + 1]
+        let z = firstCurve.geometry.attributes.position.array[i + 2]
+        pointFirstCurve.push({
+            x: x,
+            y: y,
+            z: z,
+        })
+
+        x = secondCurve.geometry.attributes.position.array[i]
+        y = secondCurve.geometry.attributes.position.array[i + 1]
+        z = secondCurve.geometry.attributes.position.array[i + 2]
+        pointSecondCurve.push({
+            x: x,
+            y: y,
+            z: z,
+        })
+    }
+    try {
+       let res = getSurface(pointFirstCurve, pointSecondCurve)
+        let geometry = new THREE.BufferGeometry();
+        let numTriangles = res.length
+
+        let positions = new Float32Array(numTriangles * 3 * 3);
+
+        for (let i = 0; i < numTriangles ; i++) {
+            let triangle = res[i]
+            for (let l = 0 ; l < 3 ; l++){
+                positions[i*3 + l*3] = triangle[l].x
+                positions[i*3 + l*3 +1] = triangle[l].y
+                positions[i*3 + l*3 +2] = triangle[l].z
+
+
+
+            }
+
+
+
+        }
+
+        geometry.addAttribute( 'position', new THREE.BufferAttribute( positions, 3 ) );
+
+
+
+        return geometry
+    } catch (e) {
+        throw new Error(e.message)
+    }
+}
 
 function modificationCSpline(cSplineParam) {
     let allControlsPoints = cSplineParam.controlsPoints.map(a => a.position);
@@ -490,8 +532,7 @@ function modifyObjectWhenClickOn(object, currentObject) {
             } else {
                 return currentObject
             }
-        }
-        else if (object.type === "Mirrored Curve") {
+        } else if (object.type === "Mirrored Curve") {
             if (currentObject == null || (currentObject.id !== object.id)) {
 
                 let intersect = object
@@ -525,6 +566,7 @@ export {
     createMirroredPoint,
     modificationMirroredPoint,
     createMirroredCurve,
-    modificationMirroredCurve
+    modificationMirroredCurve,
+    modificationSurface,
 }
 
