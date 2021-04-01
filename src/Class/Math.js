@@ -474,7 +474,6 @@ function cLoftSurface(curves, minResolution, areClosed) {
             surface.push(triangle)
         })
     })
-    console.log(`surface`, surface)
     return surface
 }
 

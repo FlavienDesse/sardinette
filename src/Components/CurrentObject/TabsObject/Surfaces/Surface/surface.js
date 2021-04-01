@@ -75,7 +75,7 @@ export default function Surface(props) {
                 let res = modificationSurface(firstCurve, secondCurve)
                 newValue.geometry = res;
                 newValue.isError = false;
-                props.updateObjectByAddingChildrenID(new Array(firstCurve), props.currentObject.id)
+                props.updateObjectByAddingChildrenID(new Array(secondCurve), props.currentObject.id)
                 props.updateAllObjectWhenCurrentObjectChange(lastValue, newValue, true)
                 props.setCurrentObject(newValue)
 

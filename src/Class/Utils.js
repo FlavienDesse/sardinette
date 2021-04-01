@@ -93,114 +93,123 @@ function updateChildren(allObject, currentObject, isDeletion) {
         allChildrenInfo.forEach((value => {
             let prev = allObject.find(object => object.id === value.id)
 
+            if (prev === undefined) {
 
-            if (prev === null) {
-                //TODO delete the children id
-            } else if (prev.type === "B-Spline") {
-                if (isDeletion) {
-                    prev.controlsPoints = prev.controlsPoints.filter(controlsPoints => controlsPoints.id !== currentObject.id)
-                }
 
-                if (value.isError) {
-                    prev.isError = true
-                } else {
-                    try {
-                        let res = modificationBSpline(prev)
-                        prev.allCalculatedPoints = res
-                        prev.geometry =  new BufferGeometry().setFromPoints(res);
-                        prev.isError = false
-                    } catch (e) {
-                        prev.isError = true
+                allObject.forEach((obj) => {
+                    const index = obj.childrenID.indexOf(value.id);
+                    if (index > -1) {
+                        obj.childrenID.splice(index, 1);
                     }
-                }
-            } else if (prev.type === "C-Spline") {
-
-                if (isDeletion) {
-                    prev.controlsPoints = prev.controlsPoints.filter(controlsPoints => controlsPoints.id !== currentObject.id)
-                }
-
-                if (value.isError) {
-                    prev.isError = true
-                } else {
-                    try {
-                        let res = modificationCSpline(prev)
-                        prev.allCalculatedPoints = res
-                        prev.geometry =  new BufferGeometry().setFromPoints(res);
-                        prev.isError = false
-
-                    } catch (e) {
-                        prev.isError = true
+                })
+            } else {
+                if (prev.type === "B-Spline") {
+                    if (isDeletion) {
+                        prev.controlsPoints = prev.controlsPoints.filter(controlsPoints => controlsPoints.id !== currentObject.id)
                     }
-                }
 
-            } else if (prev.type === "Mirrored Point") {
-                if (isDeletion) {
-                    prev.initialPoint = null;
-                }
-                if (value.isError) {
-                    prev.isError = true
-                } else {
-                    try {
-                        let res = modificationMirroredPoint(prev.initialPoint, prev.axis)
-                        prev.position.set(res.x, res.y, res.z)
-                        prev.isError = false
-
-                    } catch (e) {
+                    if (value.isError) {
                         prev.isError = true
-
+                    } else {
+                        try {
+                            let res = modificationBSpline(prev)
+                            prev.allCalculatedPoints = res
+                            prev.geometry = new BufferGeometry().setFromPoints(res);
+                            prev.isError = false
+                        } catch (e) {
+                            prev.isError = true
+                        }
                     }
-                }
+                } else if (prev.type === "C-Spline") {
 
-            } else if (prev.type === "Mirrored Curve") {
-                if (isDeletion) {
-                    prev.initialCurve = null;
-                }
-                if (value.isError) {
-                    prev.isError = true
-                } else {
-                    try {
-                        let res = modificationMirroredCurve(prev.initialCurve.allCalculatedPoints, prev.axis)
-                        prev.allCalculatedPoints = res
-                        prev.geometry =new BufferGeometry().setFromPoints(res);
+                    if (isDeletion) {
+                        prev.controlsPoints = prev.controlsPoints.filter(controlsPoints => controlsPoints.id !== currentObject.id)
+                    }
 
-
-                        prev.isError = false
-
-                    } catch (e) {
+                    if (value.isError) {
                         prev.isError = true
+                    } else {
+                        try {
+                            let res = modificationCSpline(prev)
+                            prev.allCalculatedPoints = res
+                            prev.geometry = new BufferGeometry().setFromPoints(res);
+                            prev.isError = false
 
+                        } catch (e) {
+                            prev.isError = true
+                        }
                     }
-                }
 
-            }else if (prev.type === "Surface") {
-                if (isDeletion) {
-                    prev.initialCurve = null;
-                }
-                if (value.isError) {
-                    prev.isError = true
-                } else {
-                    try {
-                        let res = modificationSurface(prev.firstCurve,prev.secondCurve)
-                        prev.geometry =res
-
-
-                        prev.isError = false
-
-                    } catch (e) {
+                } else if (prev.type === "Mirrored Point") {
+                    if (isDeletion) {
+                        prev.initialPoint = null;
+                    }
+                    if (value.isError) {
                         prev.isError = true
+                    } else {
+                        try {
+                            let res = modificationMirroredPoint(prev.initialPoint, prev.axis)
+                            prev.position.set(res.x, res.y, res.z)
+                            prev.isError = false
 
+                        } catch (e) {
+                            prev.isError = true
+
+                        }
                     }
+
+                } else if (prev.type === "Mirrored Curve") {
+                    if (isDeletion) {
+                        prev.initialCurve = null;
+                    }
+                    if (value.isError) {
+                        prev.isError = true
+                    } else {
+                        try {
+                            let res = modificationMirroredCurve(prev.initialCurve.allCalculatedPoints, prev.axis)
+                            prev.allCalculatedPoints = res
+                            prev.geometry = new BufferGeometry().setFromPoints(res);
+
+
+                            prev.isError = false
+
+                        } catch (e) {
+                            prev.isError = true
+
+                        }
+                    }
+
+                } else if (prev.type === "Surface") {
+                    if (isDeletion) {
+                        prev.firstCurve = null;
+                        prev.secondCurve = null;
+                    }
+                    if (value.isError) {
+                        prev.isError = true
+                    } else {
+                        try {
+                            let res = modificationSurface(prev.firstCurve, prev.secondCurve)
+                            prev.geometry = res
+
+
+                            prev.isError = false
+
+                        } catch (e) {
+                            prev.isError = true
+
+                        }
+                    }
+
                 }
 
+                prev.childrenID.forEach((id) => {
+                    tempInfo.push({
+                            id: id,
+                            isError: prev.isError,
+                        }
+                    )
+                })
             }
-
-            prev.childrenID.forEach((id) => {
-                tempInfo.push({
-                        id: id,
-                        isError: prev.isError,
-                    }
-                )
-            })
 
 
         }))
@@ -271,7 +280,7 @@ function createAxis(axis) {
     tempAxis.type = "Axis"
     tempAxis.isError = false
     tempAxis.lock = true
-
+    tempAxis.childrenID = []
     return tempAxis
 
 
@@ -316,21 +325,21 @@ function createBSpline(controlsPoints) {
     bSplineParam.isError = true
     bSplineParam.allCalculatedPoints = []
 
-    if(controlsPoints){
+    if (controlsPoints) {
         try {
             let allPositionControlsPoints = controlsPoints.map(a => a.position);
             let res = bSpline(bSplineParam.degree, allPositionControlsPoints, bSplineParam.resolution, null, controlsPoints.map(a => a.weight))
             bSplineParam.allCalculatedPoints = res
-            bSplineParam.geometry =  new BufferGeometry().setFromPoints(res);
+            bSplineParam.geometry = new BufferGeometry().setFromPoints(res);
             bSplineParam.isError = false
             bSplineParam.controlsPoints = controlsPoints
 
 
-            controlsPoints.forEach((controls)=>{
+            controlsPoints.forEach((controls) => {
                 controls.childrenID.push(bSplineParam.id)
             })
 
-        }catch (e){
+        } catch (e) {
             console.log(e)
         }
     }
@@ -339,7 +348,7 @@ function createBSpline(controlsPoints) {
     return bSplineParam
 }
 
-function createMirroredCurve(initialCurve,axis) {
+function createMirroredCurve(initialCurve, axis) {
 
     const geometry = new BufferGeometry().setFromPoints([]);
 
@@ -355,18 +364,17 @@ function createMirroredCurve(initialCurve,axis) {
     mirroredCurve.allCalculatedPoints = []
 
 
-
-    if(initialCurve && axis){
+    if (initialCurve && axis) {
         try {
             let res = mirrorCurve(initialCurve.allCalculatedPoints, axis.value)
             mirroredCurve.allCalculatedPoints = res
-            mirroredCurve.geometry =  new BufferGeometry().setFromPoints(res);
+            mirroredCurve.geometry = new BufferGeometry().setFromPoints(res);
             mirroredCurve.isError = false
             mirroredCurve.initialCurve = initialCurve
             mirroredCurve.axis = axis
             initialCurve.childrenID.push(mirroredCurve.id)
 
-        }catch (e){
+        } catch (e) {
             console.log(e)
         }
     }
@@ -395,12 +403,12 @@ function createCSpline() {
 
 }
 
-function createSurface(firstCurve,secondCurve) {
+function createSurface(firstCurve, secondCurve) {
 
 
     const geometry = new THREE.BufferGeometry();
 
-    const material = new THREE.MeshBasicMaterial( { color: 0xff0000 ,side: THREE.DoubleSide} );
+    const material = new THREE.MeshBasicMaterial({color: 0xff0000, side: THREE.DoubleSide});
     const surface = new THREE.Mesh(geometry, material);
     surface.name = Constant.DEFAULT_NAME_SURFACE
     increaseDefaultName("Surface")
@@ -413,13 +421,10 @@ function createSurface(firstCurve,secondCurve) {
     surface.isError = true
 
 
-
-    if(firstCurve && secondCurve){
+    if (firstCurve && secondCurve) {
         try {
             let pointFirstCurve = firstCurve.allCalculatedPoints
             let pointSecondCurve = secondCurve.allCalculatedPoints
-
-
 
 
             let res = getSurface(pointFirstCurve, pointSecondCurve)
@@ -427,25 +432,24 @@ function createSurface(firstCurve,secondCurve) {
             let geometry = new THREE.BufferGeometry();
             let numTriangles = res.length
 
-            let positions = new Float32Array(numTriangles * 3 *9);
+            let positions = new Float32Array(numTriangles * 3 * 9);
 
 
-            for (let i = 0 ; i < numTriangles ; i++){
+            for (let i = 0; i < numTriangles; i++) {
                 let triangle = res[i]
 
-                for (let j = 0 ; j < 9 ;j++){
+                for (let j = 0; j < 9; j++) {
 
                     let index = Math.floor(j % 3)
-                    positions[i*27+j*3] = triangle[index].x
-                    positions[i*27+j*3+1] = triangle[index].y
-                    positions[i*27+j*3+2] = triangle[index].z
+                    positions[i * 27 + j * 3] = triangle[index].x
+                    positions[i * 27 + j * 3 + 1] = triangle[index].y
+                    positions[i * 27 + j * 3 + 2] = triangle[index].z
                 }
 
             }
 
 
-
-            geometry.setAttribute( 'position', new THREE.BufferAttribute( positions, 3 ) );
+            geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
 
 
             surface.firstCurve = firstCurve
@@ -457,7 +461,7 @@ function createSurface(firstCurve,secondCurve) {
 
             surface.geometry = geometry
 
-        }catch (e){
+        } catch (e) {
             console.log(e)
         }
     }
@@ -478,27 +482,24 @@ function modificationSurface(firstCurve, secondCurve) {
         let geometry = new THREE.BufferGeometry();
         let numTriangles = res.length
 
-        let positions = new Float32Array(numTriangles * 3 *9);
+        let positions = new Float32Array(numTriangles * 3 * 9);
 
 
-        for (let i = 0 ; i < numTriangles ; i++){
+        for (let i = 0; i < numTriangles; i++) {
             let triangle = res[i]
 
-            for (let j = 0 ; j < 9 ;j++){
+            for (let j = 0; j < 9; j++) {
 
                 let index = Math.floor(j % 3)
-                positions[i*27+j*3] = triangle[index].x
-                positions[i*27+j*3+1] = triangle[index].y
-                positions[i*27+j*3+2] = triangle[index].z
+                positions[i * 27 + j * 3] = triangle[index].x
+                positions[i * 27 + j * 3 + 1] = triangle[index].y
+                positions[i * 27 + j * 3 + 2] = triangle[index].z
             }
 
         }
 
 
-
-        geometry.setAttribute( 'position', new THREE.BufferAttribute( positions, 3 ) );
-
-
+        geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
 
 
         return geometry

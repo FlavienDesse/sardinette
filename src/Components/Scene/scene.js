@@ -196,26 +196,26 @@ export default function Scene(props) {
             }
 
         } else {
+            if(!control.current.dragging){
+                if (props.currentTextFieldSelected !== null) {
+                    event.preventDefault();
+                } else {
+                    props.setCurrentObject(modifyObjectWhenClickOn(null, props.currentObject))
 
-            console.log(control.current.dragging)
-
-            if (props.currentTextFieldSelected !== null) {
-                event.preventDefault();
-            } else {
-                props.setCurrentObject(modifyObjectWhenClickOn(null, props.currentObject))
-
+                }
             }
+
         }
     }, [props]);
 
 
     //This one is when we click on object
     React.useEffect(() => {
-        renderer.current.domElement.addEventListener('click', handleClickOnCanvas,false);
+        renderer.current.domElement.addEventListener('pointerdown', handleClickOnCanvas,false);
 
 
         return () => {
-            renderer.current.domElement.removeEventListener('click', handleClickOnCanvas,false);
+            renderer.current.domElement.removeEventListener('pointerdown', handleClickOnCanvas,false);
         };
 
     }, [handleClickOnCanvas])
