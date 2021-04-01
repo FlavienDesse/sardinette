@@ -166,7 +166,7 @@ export default function Main() {
             <Toolbar/>
             <div className={classes.containerSceneAndBoxObject}>
                 <div className={classes.containerScene}>
-                    <Scene currentTextFieldSelected={currentTextFieldSelected}
+                    <Scene updateAllObjectWhenCurrentObjectChange={updateAllObjectWhenCurrentObjectChange} currentTextFieldSelected={currentTextFieldSelected}
                            setCurrentTextFieldSelected={setCurrentTextFieldSelected} background={background}
                            setCurrentObject={setCurrentObject} currentObject={currentObject}
                            allObject={allObject}/>

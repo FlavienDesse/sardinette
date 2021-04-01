@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import Background from "../../Class/Background";
 import {TrackballControls} from "three/examples/jsm/controls/TrackballControls"
 import {modifyObjectWhenClickOn} from "../../Class/Utils";
+import {TransformControls} from "three/examples/jsm/controls/TransformControls"
 
 
 Scene.propType = {
@@ -14,17 +15,46 @@ Scene.propType = {
     setCurrentObject: PropTypes.func.isRequired,
     setCurrentTextFieldSelected: PropTypes.func.isRequired,
     currentTextFieldSelected: PropTypes.object.isRequired,
+    updateAllObjectWhenCurrentObjectChange:PropTypes.func.isRequired,
 }
 
 export default function Scene(props) {
     const classes = useStyles();
     const refContainer = useRef();
 
-
+    const control = useRef();
     const camera = useRef();
     const renderer = useRef();
     const scene = useRef();
     const raycaster = useRef();
+
+
+
+    const handleMove = React.useCallback((event) => {
+        let lastValue = props.currentObject;
+        let newValue = event.target.object
+
+
+
+        props.updateAllObjectWhenCurrentObjectChange(lastValue, newValue,true)
+        props.setCurrentObject(newValue)
+        control.current.attach(props.currentObject );
+
+    },[props.currentObject])
+
+
+    React.useEffect(()=>{
+
+        if (props.currentObject && props.currentObject.type === "Point"){
+            control.current.attach(props.currentObject );
+            control.current.addEventListener( 'objectChange',handleMove);
+            return () => {
+                control.current.removeEventListener('objectChange', handleMove);
+            };
+        }
+
+
+    },[handleMove, props.currentObject])
 
     //This useEffect is for initialisation
     React.useEffect(() => {
@@ -49,11 +79,24 @@ export default function Scene(props) {
         refContainer.current.appendChild(renderer.current.domElement)
 
 
-        scene.current.add(group);
-        scene.current.add(new THREE.Group());
 
 
         const controls = new TrackballControls(camera.current, renderer.current.domElement)
+        control.current = new TransformControls( camera.current, renderer.current.domElement );
+
+        group.add(control.current)
+        scene.current.add(group);
+        scene.current.add(  new THREE.Group());
+
+        
+
+
+
+        control.current.addEventListener( 'dragging-changed', function ( event ) {
+            controls.enabled = ! event.value;
+
+
+        } );
         // controls.addEventListener('change', () => console.log("Controls Change"))
         // controls.addEventListener('start', () => console.log("Controls Start Event"))
         // controls.addEventListener('end', () => console.log("Controls End Event"))
@@ -80,6 +123,15 @@ export default function Scene(props) {
 
 
     }, [])
+
+    React.useEffect(() => {
+
+        if(props.currentObject === null) {
+            control.current.detach(props.currentObject );
+        }
+
+    }, [props.currentObject])
+
 
     //This one is when size change
     React.useEffect(() => {
@@ -116,7 +168,6 @@ export default function Scene(props) {
     const handleClickOnCanvas = React.useCallback((event) => {
         const target = event.target;
 
-
         // Get the bounding rectangle of target
         const rectMouse = target.getBoundingClientRect();
 
@@ -146,23 +197,27 @@ export default function Scene(props) {
 
         } else {
 
-            if (props.currentTextFieldSelected !== null) {
-                event.preventDefault();
-            } else {
-                props.setCurrentObject(modifyObjectWhenClickOn(null, props.currentObject))
 
+            if(!control.current.dragging){
+                if (props.currentTextFieldSelected !== null) {
+                    event.preventDefault();
+                } else {
+                    props.setCurrentObject(modifyObjectWhenClickOn(null, props.currentObject))
+
+                }
             }
+
         }
     }, [props]);
 
 
     //This one is when we click on object
     React.useEffect(() => {
-        renderer.current.domElement.addEventListener("click", handleClickOnCanvas);
+        renderer.current.domElement.addEventListener('pointerdown', handleClickOnCanvas,false);
 
 
         return () => {
-            renderer.current.domElement.removeEventListener('click', handleClickOnCanvas);
+            renderer.current.domElement.removeEventListener('pointerdown', handleClickOnCanvas,false);
         };
 
     }, [handleClickOnCanvas])
