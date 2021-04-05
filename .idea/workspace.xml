@@ -12,9 +12,8 @@
   <component name="ChangeListManager">
     <list default="true" id="78afd4d1-1ed3-4b4d-a584-1aa195b3fadc" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Class/Constant.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Class/Constant.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Class/Utils.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Class/Utils.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/CurrentObject/TabsObject/Curve/C-Spline/cSpline.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/CurrentObject/TabsObject/Curve/C-Spline/cSpline.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/CurrentObject/TabsObject/Surfaces/Surface/surface.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/CurrentObject/TabsObject/Surfaces/Surface/surface.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Components/Main/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Main/main.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Components/Scene/scene.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Scene/scene.js" afterDir="false" />
     </list>
@@ -166,6 +165,7 @@
       <workItem from="1617228676185" duration="3756000" />
       <workItem from="1617265670308" duration="5811000" />
       <workItem from="1617318355853" duration="1329000" />
+      <workItem from="1617653590317" duration="2490000" />
     </task>
     <servers />
   </component>

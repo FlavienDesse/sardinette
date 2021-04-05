@@ -407,10 +407,16 @@ function createCSpline() {
 function createSurface(firstCurve, secondCurve) {
 
 
-    const geometry = new THREE.BufferGeometry();
 
-    const material = new THREE.MeshBasicMaterial({color: 0xff0000, side: THREE.DoubleSide});
-    const surface = new THREE.Mesh(geometry, material);
+    const geometrySurface = new THREE.BufferGeometry();
+    const geometryLine = new THREE.BufferGeometry();
+
+    const material = new THREE.MeshBasicMaterial({color: Constant.DEFAULT_COLOR_SURFACE,    opacity: 0.5, transparent: true, side: THREE.DoubleSide});
+    const lineMaterial =new THREE.MeshBasicMaterial({color: Constant.DEFAULT_COLOR_SURFACE, side: THREE.DoubleSide});
+
+    const surface = new THREE.Mesh(geometrySurface, material);
+    const line = new THREE.Line(geometryLine, lineMaterial);
+
     surface.name = Constant.DEFAULT_NAME_SURFACE
     increaseDefaultName("Surface")
     surface.type = "Surface"
@@ -424,6 +430,9 @@ function createSurface(firstCurve, secondCurve) {
 
     if (firstCurve && secondCurve) {
         try {
+
+            surface.children.push(line)
+
             let pointFirstCurve = firstCurve.allCalculatedPoints
             let pointSecondCurve = secondCurve.allCalculatedPoints
 
@@ -459,6 +468,8 @@ function createSurface(firstCurve, secondCurve) {
 
             firstCurve.childrenID.push(surface.id);
             secondCurve.childrenID.push(surface.id);
+
+           // line.geometry=geometry
 
             surface.geometry = geometry
 

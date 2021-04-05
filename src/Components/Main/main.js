@@ -1,5 +1,5 @@
 import Menu from "../Menu/menu";
-import React, {useCallback, useEffect} from "react";
+import React, {useCallback, useEffect, useRef} from "react";
 import useStyles from "./style";
 import Toolbar from "../Toolbar/toolbar";
 import Scene from "../Scene/scene";
@@ -33,7 +33,11 @@ export default function Main() {
      */
     const [currentTextFieldSelected, setCurrentTextFieldSelected] = React.useState(null);
 
-
+    const control = useRef();
+    const camera = useRef();
+    const renderer = useRef();
+    const scene = useRef();
+    const raycaster = useRef();
 
     useEffect(()=>{
 
@@ -55,9 +59,8 @@ export default function Main() {
        const surface = createSurface(firstCurve,mirrorFirstCurve)
 
 
-        setAllObject([axisX,axisY,axisZ,firstPoint,secondPoint,thirdPoint])
-
-      //  setAllObject([axisX,axisY,axisZ,firstPoint,secondPoint,thirdPoint,firstCurve,mirrorFirstCurve,surface])
+        //setAllObject([axisX,axisY,axisZ,firstPoint,secondPoint,thirdPoint])
+        setAllObject([axisX,axisY,axisZ,firstPoint,secondPoint,thirdPoint,firstCurve,mirrorFirstCurve,surface])
 
     },[])
 
@@ -198,7 +201,7 @@ export default function Main() {
             <Toolbar/>
             <div className={classes.containerSceneAndBoxObject}>
                 <div className={classes.containerScene}>
-                    <Scene updateAllObjectWhenCurrentObjectChange={updateAllObjectWhenCurrentObjectChange} currentTextFieldSelected={currentTextFieldSelected}
+                    <Scene control={control} camera={camera}  renderer={renderer} scene={scene} raycaster={raycaster} updateAllObjectWhenCurrentObjectChange={updateAllObjectWhenCurrentObjectChange} currentTextFieldSelected={currentTextFieldSelected}
                            setCurrentTextFieldSelected={setCurrentTextFieldSelected} background={background}
                            setCurrentObject={setCurrentObject} currentObject={currentObject}
                            allObject={allObject}/>

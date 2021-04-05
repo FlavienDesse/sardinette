@@ -22,11 +22,7 @@ export default function Scene(props) {
     const classes = useStyles();
     const refContainer = useRef();
 
-    const control = useRef();
-    const camera = useRef();
-    const renderer = useRef();
-    const scene = useRef();
-    const raycaster = useRef();
+
 
 
     const handleMove = React.useCallback((event) => {
@@ -36,7 +32,7 @@ export default function Scene(props) {
 
         props.updateAllObjectWhenCurrentObjectChange(lastValue, newValue, true)
         props.setCurrentObject(newValue)
-        control.current.attach(props.currentObject);
+        props.control.current.attach(props.currentObject);
 
     }, [props.currentObject])
 
@@ -44,10 +40,10 @@ export default function Scene(props) {
     React.useEffect(() => {
 
         if (props.currentObject && props.currentObject.type === "Point") {
-            control.current.attach(props.currentObject);
-            control.current.addEventListener('objectChange', handleMove);
+            props.control.current.attach(props.currentObject);
+            props.control.current.addEventListener('objectChange', handleMove);
             return () => {
-                control.current.removeEventListener('objectChange', handleMove);
+                props.control.current.removeEventListener('objectChange', handleMove);
             };
         }
 
@@ -63,29 +59,31 @@ export default function Scene(props) {
         let height = boundingContainer.height;
         let width = boundingContainer.width;
         //create camera
-        camera.current = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
-        camera.current.position.z = 5;
+        props.camera.current = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
+        props.camera.current.position.z = 5;
 
-        raycaster.current = new THREE.Raycaster();
-        raycaster.current.params.Line.threshold = 0.1;
-        renderer.current = new THREE.WebGLRenderer({alpha: true})
-        renderer.current.setSize(width, height);
+        props.raycaster.current = new THREE.Raycaster();
+        props.raycaster.current.params.Line.threshold = 0.1;
+        props.renderer.current = new THREE.WebGLRenderer({alpha: true})
+        props.renderer.current.setSize(width, height);
 
-        scene.current = new THREE.Scene()
-
-
-        refContainer.current.appendChild(renderer.current.domElement)
+        props.scene.current = new THREE.Scene()
 
 
-        const controls = new TrackballControls(camera.current, renderer.current.domElement)
-        control.current = new TransformControls(camera.current, renderer.current.domElement);
+        refContainer.current.appendChild(props.renderer.current.domElement)
 
-        group.add(control.current)
-        scene.current.add(group);
-        scene.current.add(new THREE.Group());
+        const controls = new TrackballControls(props.camera.current, props.renderer.current.domElement)
+        props.control.current = new TransformControls(props.camera.current, props.renderer.current.domElement);
+
+        group.add(props.control.current)
+
+        props.scene.current.add(group);
+        props.scene.current.add(new THREE.Group());
 
 
-        control.current.addEventListener('dragging-changed', function (event) {
+
+
+        props.control.current.addEventListener('dragging-changed', function (event) {
             controls.enabled = !event.value;
 
 
@@ -110,7 +108,7 @@ export default function Scene(props) {
             controls.update()
 
 
-            renderer.current.render(scene.current, camera.current);
+            props.renderer.current.render(props.scene.current, props.camera.current);
         };
         animate();
 
@@ -120,7 +118,7 @@ export default function Scene(props) {
     React.useEffect(() => {
 
         if (props.currentObject === null) {
-            control.current.detach(props.currentObject);
+            props.control.current.detach(props.currentObject);
         }
 
     }, [props.currentObject])
@@ -134,9 +132,9 @@ export default function Scene(props) {
             let boundingContainer = refContainer.current.getBoundingClientRect()
             let height = boundingContainer.height;
             let width = boundingContainer.width;
-            camera.current.aspect = width / height;
-            camera.current.updateProjectionMatrix()
-            renderer.current.setSize(width, height)
+            props.camera.current.aspect = width / height;
+            props.camera.current.updateProjectionMatrix()
+            props.renderer.current.setSize(width, height)
         }
     }, [])
 
@@ -149,7 +147,7 @@ export default function Scene(props) {
             default:
                 backgroundColor = parseInt(props.background.color.replace("#", '0x'), 16)
 
-                scene.current.background = new THREE.Color(backgroundColor)
+                props.scene.current.background = new THREE.Color(backgroundColor)
 
                 break;
 
@@ -172,9 +170,9 @@ export default function Scene(props) {
             x: ((event.clientX - rectMouse.left) / width) * 2 - 1,
             y: -((event.clientY - rectMouse.top) / height) * 2 + 1,
         }
-        raycaster.current.setFromCamera(mouse, camera.current);
-        const intersects = raycaster.current.intersectObjects([...props.allObject]);
-        if (!control.current.dragging) {
+        props.raycaster.current.setFromCamera(mouse, props.camera.current);
+        const intersects = props.raycaster.current.intersectObjects([...props.allObject]);
+        if (!props.control.current.dragging) {
             if (intersects.length > 0) {
                 if (props.currentTextFieldSelected !== null && props.currentTextFieldSelected.id !== intersects[0].object.id && props.currentTextFieldSelected.acceptType.includes(intersects[0].object.type)) {
                     if (event.ctrlKey) {
@@ -204,11 +202,11 @@ export default function Scene(props) {
 
     //This one is when we click on object
     React.useEffect(() => {
-        renderer.current.domElement.addEventListener('pointerdown', handleClickOnCanvas, false);
+        props.renderer.current.domElement.addEventListener('pointerdown', handleClickOnCanvas, false);
 
 
         return () => {
-            renderer.current.domElement.removeEventListener('pointerdown', handleClickOnCanvas, false);
+            props.renderer.current.domElement.removeEventListener('pointerdown', handleClickOnCanvas, false);
         };
 
     }, [handleClickOnCanvas])
@@ -218,7 +216,7 @@ export default function Scene(props) {
 
 
         //TODO opti
-        scene.current.remove(scene.current.children[1]);
+        props.scene.current.remove(props.scene.current.children[1]);
 
         const group = new THREE.Group();
 
@@ -231,7 +229,7 @@ export default function Scene(props) {
             }
 
         });
-        scene.current.add(group)
+        props.scene.current.add(group)
 
     }, [props.allObject])
 
