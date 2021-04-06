@@ -313,7 +313,7 @@ function createBSpline(controlsPoints) {
 
     const geometry = new BufferGeometry().setFromPoints([]);
 
-    const material = new LineBasicMaterial({color: 0xff0000});
+    const material = new LineBasicMaterial({color: Constant.DEFAULT_COLOR_CURVE});
     const bSplineParam = new Line(geometry, material);
     bSplineParam.name = Constant.DEFAULT_NAME_B_SPLINE
     increaseDefaultName("B-Spline")
@@ -352,7 +352,7 @@ function createMirroredCurve(initialCurve, axis) {
 
     const geometry = new BufferGeometry().setFromPoints([]);
 
-    const material = new LineBasicMaterial({color: 0xff0000});
+    const material = new LineBasicMaterial({color: Constant.DEFAULT_COLOR_CURVE});
     const mirroredCurve = new Line(geometry, material);
     mirroredCurve.name = Constant.DEFAULT_NAME_MIRRORED_CURVE
     increaseDefaultName("Mirrored Curve")
@@ -389,7 +389,7 @@ function createCSpline() {
 
     const geometry = new BufferGeometry().setFromPoints([]);
 
-    const material = new LineBasicMaterial({color: 0xff0000});
+    const material = new LineBasicMaterial({color: Constant.DEFAULT_COLOR_CURVE});
     const cSpline = new Line(geometry, material);
     cSpline.name = Constant.DEFAULT_NAME_C_SPLINE
     increaseDefaultName("C-Spline")
