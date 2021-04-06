@@ -36,8 +36,10 @@ export default function ArrayRenderObject(props){
                 props.currentTextFieldSelected.simpleClick(props.object)
             }
         } else {
+            if(props.object.type !== "Axis"){
+                props.setCurrentObject(modifyObjectWhenClickOn(props.object, props.currentObject))
+            }
 
-           props.setCurrentObject(modifyObjectWhenClickOn(props.object, props.currentObject))
         }
 
     }

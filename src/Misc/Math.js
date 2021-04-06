@@ -392,7 +392,7 @@ function mirrorPointFromCurve(point, curve) {
  * @param {string} axis 
  */
 function mirrorPoint(point, axis) {
-    let res = point
+    let res = {...point}
 
     switch(axis.toLowerCase()) {
         case 'x': res.x *= -1

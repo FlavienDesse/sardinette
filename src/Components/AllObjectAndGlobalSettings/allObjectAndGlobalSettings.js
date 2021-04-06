@@ -17,6 +17,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from "@material-ui/core/Paper";
+import {createAxis} from "../../Misc/Utils";
 
 AllObjectAndGlobalSettings.propTypes = {
     setBackground: PropTypes.func.isRequired,
@@ -88,7 +89,7 @@ export default function AllObjectAndGlobalSettings(props) {
                     </TableHead>
                     <TableBody>
                         {
-                            props.allObject.map((object, index) =>
+                            props.allObject.concat([createAxis("x"),createAxis("y"),createAxis("z")]).map((object, index) =>
                                <ArrayRenderObject key={object.id} currentTextFieldSelected={props.currentTextFieldSelected} currentObject={props.currentObject} setCurrentObject={props.setCurrentObject} object={object}/>
                             )
                         }

@@ -5,7 +5,7 @@ import useStyles from "./style";
 import Checkbox from "@material-ui/core/Checkbox";
 import PropTypes from "prop-types";
 import {useSnackbar} from "notistack";
-import {modificationMirroredPoint} from "../../../../../Misc/Utils";
+import {updateObjectByAddingChildrenID} from "../../../../../Misc/Utils";
 
 MirroredPoint.propType = {
     setCurrentObject: PropTypes.func.isRequired,
@@ -99,21 +99,16 @@ export default function MirroredPoint(props) {
 
 
             try {
-                let res = modificationMirroredPoint(initialPoint, axis)
-                newValue.position.set(res.x,res.y,res.z)
-                newValue.isError = false;
-                props.updateObjectByAddingChildrenID(new Array(initialPoint), props.currentObject.id)
-                props.updateAllObjectWhenCurrentObjectChange(lastValue, newValue, true)
-                props.setCurrentObject(newValue)
+                newValue.update()
+
 
             } catch (e) {
                 enqueueSnackbar(e.message, {
                     variant: 'error',
                 });
-                newValue.isError = true;
-                props.updateAllObjectWhenCurrentObjectChange(lastValue, newValue, false)
-                props.setCurrentObject(newValue)
             }
+            props.updateAllObjectWhenCurrentObjectChange(lastValue, newValue, true)
+            props.setCurrentObject(newValue)
         }
 
 
@@ -150,24 +145,19 @@ export default function MirroredPoint(props) {
 
 
             try {
-                let res = modificationMirroredPoint(initialPoint, axis)
-                newValue.allCalculatedPoints = res
-                newValue.position.set(res.x,res.y,res.z)
-                newValue.isError = false;
-                props.updateObjectByAddingChildrenID(new Array(initialPoint), props.currentObject.id)
-                props.updateAllObjectWhenCurrentObjectChange(lastValue, newValue, true)
-                props.setCurrentObject(newValue)
+                newValue.update()
+                updateObjectByAddingChildrenID(new Array(initialPoint),props.currentObject.id,props.allObject,props.setAllObject)
+
 
             } catch (e) {
                 enqueueSnackbar(e.message, {
                     variant: 'error',
                 });
-                newValue.isError = true;
-                props.updateAllObjectWhenCurrentObjectChange(lastValue, newValue, false)
-                props.setCurrentObject(newValue)
+
             }
 
-
+            props.updateAllObjectWhenCurrentObjectChange(lastValue, newValue, true)
+            props.setCurrentObject(newValue)
         }
     }
 

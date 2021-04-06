@@ -13,7 +13,6 @@ CurrentObject.propType = {
     updateAllObjectWhenCurrentObjectChange : PropTypes.func.isRequired,
     allObject:PropTypes.array.isRequired,
     setCurrentTextFieldSelected:PropTypes.func.isRequired,
-    updateObjectByAddingChildrenID:PropTypes.func.isRequired,
 }
 
 
@@ -40,7 +39,7 @@ export default function CurrentObject(props) {
                 <Tab label="TEXTURE" />
             </Tabs>
             {
-                currentTabs === 0  && <TabsObject updateObjectByAddingChildrenID={props.updateObjectByAddingChildrenID} setCurrentTextFieldSelected={props.setCurrentTextFieldSelected} allObject={props.allObject} updateAllObjectWhenCurrentObjectChange={props.updateAllObjectWhenCurrentObjectChange} setAllObject={props.setAllObject} currentObject={props.currentObject} setCurrentObject={props.setCurrentObject}/>
+                currentTabs === 0  && <TabsObject setCurrentTextFieldSelected={props.setCurrentTextFieldSelected} allObject={props.allObject} updateAllObjectWhenCurrentObjectChange={props.updateAllObjectWhenCurrentObjectChange} setAllObject={props.setAllObject} currentObject={props.currentObject} setCurrentObject={props.setCurrentObject}/>
             }
             {
                 currentTabs === 1  && <TabsTexture  setAllObject={props.setAllObject} currentObject={props.currentObject} setCurrentObject={props.setCurrentObject}/>

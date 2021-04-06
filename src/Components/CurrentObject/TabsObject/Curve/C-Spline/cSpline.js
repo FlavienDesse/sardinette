@@ -4,9 +4,8 @@ import TextField from "@material-ui/core/TextField";
 import Checkbox from "@material-ui/core/Checkbox";
 import useStyles from "./style";
 import PropTypes from "prop-types";
-import {modificationCSpline} from "../../../../../Misc/Utils";
 import {useSnackbar} from 'notistack';
-import {BufferGeometry} from "three";
+import {updateObjectByAddingChildrenID} from "../../../../../Misc/Utils";
 
 CSpline.propType = {
     setCurrentObject: PropTypes.func.isRequired,
@@ -14,7 +13,6 @@ CSpline.propType = {
     allObject: PropTypes.array.isRequired,
     updateAllObjectWhenCurrentObjectChange: PropTypes.func.isRequired,
     setCurrentTextFieldSelected: PropTypes.func.isRequired,
-    updateObjectByAddingChildrenID:PropTypes.func.isRequired,
 }
 
 
@@ -56,9 +54,7 @@ export default function CSpline(props) {
         let lastValue = props.currentObject;
         let newValue = props.currentObject
         newValue.closed = event.target.checked;
-        let res = modificationCSpline(newValue)
-        newValue.allCalculatedPoints = res
-        newValue.geometry =  new BufferGeometry().setFromPoints(res);
+        newValue.update()
         props.updateAllObjectWhenCurrentObjectChange(lastValue, newValue,true)
         props.setCurrentObject(newValue)
     }
@@ -108,23 +104,18 @@ export default function CSpline(props) {
             let lastValue = props.currentObject;
             let newValue = props.currentObject
             newValue.controlsPoints = controlsPoints
+
             try {
-                let res = modificationCSpline(newValue)
-                newValue.allCalculatedPoints = res
-                newValue.geometry =  new BufferGeometry().setFromPoints(res);
-                newValue.isError = false;
-                props.updateObjectByAddingChildrenID(controlsPoints,props.currentObject.id)
-                props.updateAllObjectWhenCurrentObjectChange(lastValue, newValue,true)
-                props.setCurrentObject(newValue)
+                newValue.update()
+                updateObjectByAddingChildrenID(controlsPoints,props.currentObject.id,props.allObject,props.setAllObject)
+
             } catch (e) {
                 enqueueSnackbar(e.message, {
                     variant: 'error',
                 });
-                newValue.isError = true;
-                props.updateAllObjectWhenCurrentObjectChange(lastValue, newValue,false)
-                props.setCurrentObject(newValue)
             }
-
+            props.updateAllObjectWhenCurrentObjectChange(lastValue, newValue,true)
+            props.setCurrentObject(newValue)
 
         }
     }
@@ -134,21 +125,17 @@ export default function CSpline(props) {
             let lastValue = props.currentObject;
             let newValue = props.currentObject
             newValue.resolution = resolution
+
             try {
-                let res = modificationCSpline(newValue)
-                newValue.allCalculatedPoints = res
-                newValue.geometry =  new BufferGeometry().setFromPoints(res);
-                newValue.isError = false;
-                props.updateAllObjectWhenCurrentObjectChange(lastValue, newValue,true)
-                props.setCurrentObject(newValue)
+                newValue.update()
+
             } catch (e) {
                 enqueueSnackbar(e.message, {
                     variant: 'error',
                 });
-                newValue.isError = true;
-                props.updateAllObjectWhenCurrentObjectChange(lastValue, newValue,false)
-                props.setCurrentObject(newValue)
             }
+            props.updateAllObjectWhenCurrentObjectChange(lastValue, newValue,true)
+            props.setCurrentObject(newValue)
         }
     }
 

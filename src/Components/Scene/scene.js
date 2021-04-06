@@ -6,7 +6,7 @@ import Background from "../../Misc/Background";
 import {TrackballControls} from "three/examples/jsm/controls/TrackballControls"
 import {modifyObjectWhenClickOn} from "../../Misc/Utils";
 import {TransformControls} from "three/examples/jsm/controls/TransformControls"
-
+import InfiniteGridHelper from "../../Misc/InfiniteGridHelper";
 
 Scene.propType = {
     background: PropTypes.instanceOf(Background).isRequired,
@@ -58,16 +58,27 @@ export default function Scene(props) {
         let width = boundingContainer.width;
         //create camera
         props.camera.current = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
+
+        props.camera.current.position.x = 5;
+        props.camera.current.position.y = 5;
         props.camera.current.position.z = 5;
+        
+        props.camera.current.lookAt(new THREE.Vector3(0,0,0))
+
 
         props.raycaster.current = new THREE.Raycaster();
         props.raycaster.current.params.Line.threshold = 0.1;
-        props.renderer.current = new THREE.WebGLRenderer({alpha: true})
+        props.renderer.current = new THREE.WebGLRenderer()
         props.renderer.current.setSize(width, height);
+
+        props.renderer.current.outputEncoding = THREE.sRGBEncoding;
+        props.renderer.current.gammaFactor = 2.2;
+
 
         props.scene.current = new THREE.Scene()
 
-        const grid = new THREE.InfiniteGridHelper(10, 100);
+        const grid = new InfiniteGridHelper(10,1)
+
 
 
         refContainer.current.appendChild(props.renderer.current.domElement)
@@ -76,6 +87,8 @@ export default function Scene(props) {
         props.control.current = new TransformControls(props.camera.current, props.renderer.current.domElement);
 
         group.add(props.control.current)
+        group.add(grid)
+
 
         props.scene.current.add(group);
         props.scene.current.add(new THREE.Group());
@@ -246,6 +259,7 @@ export default function Scene(props) {
         <div ref={refContainer} className={classes.container}>
 
         </div>
+
     )
 
 }

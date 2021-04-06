@@ -1,12 +1,12 @@
 import React from "react";
 import useStyles from "../../Point/MirroredPoint/style";
 import {useSnackbar} from "notistack";
-import {modificationMirroredCurve} from "../../../../../Misc/Utils";
 import {Typography} from "@material-ui/core";
 import TextField from "@material-ui/core/TextField";
 import Checkbox from "@material-ui/core/Checkbox";
 import PropTypes from "prop-types";
-import {BufferGeometry, Vector3} from "three";
+import {updateObjectByAddingChildrenID} from "../../../../../Misc/Utils";
+
 
 MirroredCurve.propType = {
     setCurrentObject: PropTypes.func.isRequired,
@@ -83,22 +83,19 @@ export default function MirroredCurve(props) {
             try {
 
 
-                let res = modificationMirroredCurve(initialCurve.allCalculatedPoints, axis)
-                newValue.allCalculatedPoints = res
-                newValue.geometry =new BufferGeometry().setFromPoints(res);
-                newValue.isError = false;
+                newValue.update()
                 props.updateObjectByAddingChildrenID(new Array(initialCurve), props.currentObject.id)
-                props.updateAllObjectWhenCurrentObjectChange(lastValue, newValue, true)
-                props.setCurrentObject(newValue)
+
 
             } catch (e) {
                 enqueueSnackbar(e.message, {
                     variant: 'error',
                 });
-                newValue.isError = true;
-                props.updateAllObjectWhenCurrentObjectChange(lastValue, newValue, false)
-                props.setCurrentObject(newValue)
+
             }
+
+            props.updateAllObjectWhenCurrentObjectChange(lastValue, newValue, true)
+            props.setCurrentObject(newValue)
         }
 
 
@@ -136,23 +133,17 @@ export default function MirroredCurve(props) {
 
             try {
 
-                let res = modificationMirroredCurve(initialCurve.allCalculatedPoints, axis)
-                newValue.allCalculatedPoints = res
-                newValue.geometry =new BufferGeometry().setFromPoints(res);
-                newValue.isError = false;
-                props.updateObjectByAddingChildrenID(new Array(initialCurve), props.currentObject.id)
-                props.updateAllObjectWhenCurrentObjectChange(lastValue, newValue, true)
-                props.setCurrentObject(newValue)
+                newValue.update()
+                updateObjectByAddingChildrenID(new Array(initialCurve),props.currentObject.id,props.allObject,props.setAllObject)
+
 
             } catch (e) {
                 enqueueSnackbar(e.message, {
                     variant: 'error',
                 });
-                newValue.isError = true;
-                props.updateAllObjectWhenCurrentObjectChange(lastValue, newValue, false)
-                props.setCurrentObject(newValue)
             }
-
+            props.updateAllObjectWhenCurrentObjectChange(lastValue, newValue, true)
+            props.setCurrentObject(newValue)
 
         }
     }
