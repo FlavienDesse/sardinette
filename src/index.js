@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-import {spline, cSpline, toVector3, fromVector3, getSurface, mirrorPoint, mirrorPointFromCurve, cLoftSurface} from './utils/spline.js'
+import {spline, cSpline, toVector3, fromVector3, getSurface, mirrorPoint, mirrorPointFromCurve, cLoftSurface, bezierCurve} from './utils/maths.js'
 import * as THREE from 'three'
 
 let controlPoints = [
@@ -54,6 +54,7 @@ function graph() {
   theContext.strokeRect(0, 0, width, height)
 
   theContext.fillStyle = '#DDA500'
+  theContext.strokeStyle = '#DDA500'
 
   //1
 
@@ -61,7 +62,7 @@ function graph() {
     theContext.fillRect(elt.x * 50 + 250 - 3, -elt.y * 50 + 250 - 3, 6, 6)
   })
 
-  let points = cSpline(controlPoints, 100, isClosed)
+  let points = bezierCurve(controlPoints, 20)
 
   theContext.beginPath();
   theContext.moveTo(points[0][0] * 50 + 250, -points[0][1] * 50 + 250);
@@ -75,7 +76,7 @@ function graph() {
 
   //2
 
-  controlPoints2.forEach(elt => {
+  /*controlPoints2.forEach(elt => {
     theContext.fillRect(elt.x * 50 + 250 - 3, -elt.y * 50 + 250 - 3, 6, 6)
   })
 
@@ -88,11 +89,11 @@ function graph() {
     theContext.lineTo(points[x].x * 50 + 250, -points[x].y* 50 + 250);
   }
   theContext.stroke();
-  theContext.closePath()
+  theContext.closePath()*/
 
   //3
 
-  controlPoints3.forEach(elt => {
+  /*controlPoints3.forEach(elt => {
     theContext.fillRect(elt.x * 50 + 250 - 3, -elt.y * 50 + 250 - 3, 6, 6)
   })
 
@@ -105,11 +106,11 @@ function graph() {
     theContext.lineTo(points[x].x * 50 + 250, -points[x].y* 50 + 250);
   }
   theContext.stroke();
-  theContext.closePath()
+  theContext.closePath()*/
 
   // LoftSurface
 
-  let triangles = cLoftSurface([controlPoints, controlPoints2, controlPoints3], 0, [isClosed, isClosed2, isClosed3])
+  /*let triangles = cLoftSurface([controlPoints, controlPoints2, controlPoints3], 0, [isClosed, isClosed2, isClosed3])
 
   //triangles.forEach(elt => drawTriangle(theContext, elt[0], elt[1], elt[2]))
   
@@ -121,7 +122,7 @@ function graph() {
       if(iterVar >= triangles.length) break
     }
     if(iterVar >= triangles.length) clearInterval(interval)
-  })
+  })*/
 
 }
 
