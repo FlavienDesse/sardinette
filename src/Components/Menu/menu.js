@@ -8,7 +8,7 @@ import MenuRC from "rc-menu";
 import 'rc-menu/assets/index.css';
 
 Menu.propType = {
-
+    scene:PropTypes.any.isRequired,
     setAllObject: PropTypes.func.isRequired,
 }
 
@@ -22,17 +22,12 @@ export default function Menu(props) {
             defaultActiveFirst
             mode={"horizontal"}
             selectable={false}
-            inlineIndent={100}
-        >
-           <OpenFile/>
+            inlineIndent={100}>
+           <OpenFile scene={props.scene}/>
            <OpenInsert setAllObject={props.setAllObject}/>
            <OpenExamples/>
-
-
         </MenuRC>
     )
-
-
 }
 
 /*

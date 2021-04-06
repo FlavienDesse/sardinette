@@ -185,7 +185,7 @@ export default function Main() {
 
     return (
         <div className={classes.container}>
-            <Menu setAllObject={setAllObject}>
+            <Menu scene={scene.current} setAllObject={setAllObject}>
 
             </Menu>
 

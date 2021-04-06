@@ -9,6 +9,7 @@
     "@testing-library/react": "^11.2.5",
     "@testing-library/user-event": "^12.8.3",
     "clsx": "^1.1.1",
+    "file-saver": "^2.0.5",
     "notistack": "^1.0.5",
     "prop-types": "^15.7.2",
     "rc-menu": "^8.10.6",
