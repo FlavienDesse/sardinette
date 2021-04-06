@@ -7,7 +7,7 @@ import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
 import ErrorIcon from '@material-ui/icons/Error';
 import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
-import {modifyObjectWhenClickOn} from "../../../Class/Utils";
+import {modifyObjectWhenClickOn} from "../../../Misc/Utils";
 import clsx from "clsx";
 
 ArrayRenderObject.propTypes = {

@@ -4,7 +4,7 @@ import TextField from "@material-ui/core/TextField";
 import Checkbox from "@material-ui/core/Checkbox";
 import useStyles from "./style";
 import PropTypes from "prop-types";
-import {modificationCSpline} from "../../../../../Class/Utils";
+import {modificationCSpline} from "../../../../../Misc/Utils";
 import {useSnackbar} from 'notistack';
 import {BufferGeometry} from "three";
 

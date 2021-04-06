@@ -1,6 +1,6 @@
 import React from "react";
 import {MenuItem, SubMenu} from "rc-menu"
-import {exportSTL} from "../../../Class/Export";
+import {exportSTL} from "../../../Misc/Export";
 import PropTypes from "prop-types";
 
 

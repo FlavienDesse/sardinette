@@ -7,7 +7,7 @@ import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 import {ChromePicker} from 'react-color'
 import PropTypes from 'prop-types';
-import Background from "../../Class/Background";
+import Background from "../../Misc/Background";
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import ArrayRenderObject from "./ArrayRenderObject/arrayRenderObject";
 import Table from '@material-ui/core/Table';

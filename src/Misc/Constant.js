@@ -4,9 +4,9 @@ export default class Object {
 
 
 
-   static CONSTANT_ALL_CURVES = [""]
+   static CONSTANT_ALL_CURVES = ["Point,Mirrored Point"]
    static CONSTANT_ALL_SURFACES = ["Surface"]
-   static CONSTANT_ALL_POINTS = [""]
+   static CONSTANT_ALL_POINTS = ["B-Spline,C-Spline,Mirrored Curve"]
 
 
    static DEFAULT_NAME_C_SPLINE = "C-Spline0"

@@ -5,7 +5,7 @@ import useStyles from "./style";
 import Checkbox from "@material-ui/core/Checkbox";
 import PropTypes from "prop-types";
 import {useSnackbar} from "notistack";
-import {modificationMirroredPoint} from "../../../../../Class/Utils";
+import {modificationMirroredPoint} from "../../../../../Misc/Utils";
 
 MirroredPoint.propType = {
     setCurrentObject: PropTypes.func.isRequired,

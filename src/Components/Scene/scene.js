@@ -2,9 +2,9 @@ import React, {useRef} from "react";
 import * as THREE from "three"
 import useStyles from "./style";
 import PropTypes from 'prop-types';
-import Background from "../../Class/Background";
+import Background from "../../Misc/Background";
 import {TrackballControls} from "three/examples/jsm/controls/TrackballControls"
-import {modifyObjectWhenClickOn} from "../../Class/Utils";
+import {modifyObjectWhenClickOn} from "../../Misc/Utils";
 import {TransformControls} from "three/examples/jsm/controls/TransformControls"
 
 
@@ -21,8 +21,6 @@ Scene.propType = {
 export default function Scene(props) {
     const classes = useStyles();
     const refContainer = useRef();
-
-
 
 
     const handleMove = React.useCallback((event) => {
@@ -69,6 +67,8 @@ export default function Scene(props) {
 
         props.scene.current = new THREE.Scene()
 
+        const grid = new THREE.InfiniteGridHelper(10, 100);
+
 
         refContainer.current.appendChild(props.renderer.current.domElement)
 
@@ -79,8 +79,6 @@ export default function Scene(props) {
 
         props.scene.current.add(group);
         props.scene.current.add(new THREE.Group());
-
-
 
 
         props.control.current.addEventListener('dragging-changed', function (event) {
@@ -171,7 +169,17 @@ export default function Scene(props) {
             y: -((event.clientY - rectMouse.top) / height) * 2 + 1,
         }
         props.raycaster.current.setFromCamera(mouse, props.camera.current);
-        const intersects = props.raycaster.current.intersectObjects([...props.allObject]);
+
+        let allObjectVisibile = []
+        props.allObject.forEach((object) => {
+            if (object.visible || !object.isError) {
+                allObjectVisibile.push(object)
+            }
+
+        })
+
+
+        const intersects = props.raycaster.current.intersectObjects([...allObjectVisibile]);
         if (!props.control.current.dragging) {
             if (intersects.length > 0) {
                 if (props.currentTextFieldSelected !== null && props.currentTextFieldSelected.id !== intersects[0].object.id && props.currentTextFieldSelected.acceptType.includes(intersects[0].object.type)) {

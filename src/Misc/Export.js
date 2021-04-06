@@ -17,7 +17,7 @@ const exportSTL = (scene)=>{
     })
     scene.children = children
 
-    
+
 
 
     var exporter = new STLExporter();

@@ -4,7 +4,7 @@ import {Typography} from "@material-ui/core";
 import useStyles from "./style";
 import Checkbox from "@material-ui/core/Checkbox";
 import PropTypes from "prop-types";
-import {modificationMirroredPoint, modificationSurface} from "../../../../../Class/Utils";
+import {modificationMirroredPoint, modificationSurface} from "../../../../../Misc/Utils";
 import {useSnackbar} from "notistack";
 
 Surface.propType = {

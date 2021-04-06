@@ -5,7 +5,7 @@ import Toolbar from "../Toolbar/toolbar";
 import Scene from "../Scene/scene";
 import AllObjectAndGlobalSettings from "../AllObjectAndGlobalSettings/allObjectAndGlobalSettings";
 import CurrentObject from "../CurrentObject/currentObject";
-import Background from "../../Class/Background";
+import Background from "../../Misc/Background";
 import {
     createAxis,
     createBSpline,
@@ -14,7 +14,7 @@ import {
     createSurface,
     modifyObjectWhenClickOn,
     updateChildren
-} from "../../Class/Utils";
+} from "../../Misc/Utils";
 import Modal from "@material-ui/core/Modal";
 import {Button, Typography} from "@material-ui/core";
 
@@ -108,13 +108,14 @@ export default function Main() {
     const callBackKeys = useCallback((e) => {
 
         const deleteTheCurrentObject = () => {
-            let number = 0;
+            let allIDImpacted = []
             allObject.forEach((prev)=> {
                 if( currentObject.childrenID.includes(prev.id) ){
-                    number++
+                    allIDImpacted.push(prev.id)
+
                 }
             })
-            setNumberElemDelete(number)
+            setNumberElemDelete(allIDImpacted.length)
             handleOpen()
         }
 
@@ -126,7 +127,7 @@ export default function Main() {
                 setCurrentTextFieldSelected(null)
                 setCurrentObject(null)
             } else if (keyCode === "Delete" && currentObject.type !== "Axis") {
-                updateChildren(allObject, currentObject,true)
+
                 deleteTheCurrentObject()
 
 

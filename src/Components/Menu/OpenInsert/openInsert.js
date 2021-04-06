@@ -7,7 +7,7 @@ import {
     createCSpline,
     createMirroredPoint,
     createMirroredCurve
-} from "../../../Class/Utils"
+} from "../../../Misc/Utils"
 import {MenuItem, SubMenu} from "rc-menu";
 
 
