@@ -216,6 +216,7 @@ export default function Main() {
                                                 setBackground={setBackground}/>
                     {
                         currentObject && <CurrentObject
+                            setAllObject={setAllObject}
                             setCurrentTextFieldSelected={setCurrentTextFieldSelected}
                             allObject={allObject}
                             updateAllObjectWhenCurrentObjectChange={updateAllObjectWhenCurrentObjectChange}

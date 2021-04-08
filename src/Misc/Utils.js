@@ -397,35 +397,35 @@ function createCSpline() {
     const geometry = new BufferGeometry().setFromPoints([]);
 
     const material = new LineBasicMaterial({color: Constant.DEFAULT_COLOR_CURVE});
-    const cSpline = new Line(geometry, material);
-    cSpline.name = Constant.DEFAULT_NAME_C_SPLINE
+    const spline = new Line(geometry, material);
+    spline.name = Constant.DEFAULT_NAME_C_SPLINE
     increaseDefaultName("C-Spline")
-    cSpline.type = "C-Spline"
-    cSpline.controlsPoints = []
-    cSpline.allCalculatedPoints = []
-    cSpline.childrenID = []
-    cSpline.closed = false;
-    cSpline.resolution = 100
-    cSpline.isError = true
+    spline.type = "C-Spline"
+    spline.controlsPoints = []
+    spline.allCalculatedPoints = []
+    spline.childrenID = []
+    spline.closed = false;
+    spline.resolution = 100
+    spline.isError = true
 
 
-    cSpline.update = () => {
-        let allControlsPoints = cSpline.controlsPoints.map(a => a.position);
+    spline.update = () => {
+        let allControlsPoints = spline.controlsPoints.map(a => a.position);
 
         try {
-            let res = cSpline(allControlsPoints, cSpline.resolution, cSpline.closed)
-            cSpline.allCalculatedPoints = res
-            cSpline.geometry = new BufferGeometry().setFromPoints(res);
-            cSpline.isError = false;
+            let res = cSpline(allControlsPoints, spline.resolution, spline.closed)
+            spline.allCalculatedPoints = res
+            spline.geometry = new BufferGeometry().setFromPoints(res);
+            spline.isError = false;
 
         } catch (e) {
-            cSpline.isError = true;
+            spline.isError = true;
             throw new Error(e.message)
         }
     }
 
 
-    return cSpline
+    return spline
 
 }
 
