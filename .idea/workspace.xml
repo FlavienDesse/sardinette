@@ -13,8 +13,6 @@
     <list default="true" id="78afd4d1-1ed3-4b4d-a584-1aa195b3fadc" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Components/CurrentObject/TabsObject/tabsObject.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/CurrentObject/TabsObject/tabsObject.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Main/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Main/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Misc/Utils.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Misc/Utils.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -170,7 +168,7 @@
       <workItem from="1617746947458" duration="5851000" />
       <workItem from="1617793403523" duration="4165000" />
       <workItem from="1617825685739" duration="603000" />
-      <workItem from="1617867209918" duration="1104000" />
+      <workItem from="1617867209918" duration="1332000" />
     </task>
     <servers />
   </component>
@@ -294,6 +292,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="498" height="451" key="SwitcherDM/0.0.1920.1040@0.0.1920.1040" timestamp="1616777287671" />
+    <state x="1097" y="614" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1617882342044">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="1097" y="614" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1617882342044" />
     <state x="985" y="302" width="922" height="680" key="find.popup" timestamp="1617752619208">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
