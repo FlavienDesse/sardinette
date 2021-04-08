@@ -7,6 +7,7 @@ import {TrackballControls} from "three/examples/jsm/controls/TrackballControls"
 import {modifyObjectWhenClickOn} from "../../Misc/Utils";
 import {TransformControls} from "three/examples/jsm/controls/TransformControls"
 import InfiniteGridHelper from "../../Misc/InfiniteGridHelper";
+import {AmbientLight} from "three";
 
 Scene.propType = {
     background: PropTypes.instanceOf(Background).isRequired,

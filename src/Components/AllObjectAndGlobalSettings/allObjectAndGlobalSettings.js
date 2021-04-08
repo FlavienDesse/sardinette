@@ -89,7 +89,7 @@ export default function AllObjectAndGlobalSettings(props) {
                     </TableHead>
                     <TableBody>
                         {
-                            props.allObject.concat([createAxis("x"),createAxis("y"),createAxis("z")]).map((object, index) =>
+                            [createAxis("x"),createAxis("y"),createAxis("z")].concat(props.allObject).map((object, index) =>
                                <ArrayRenderObject key={object.id} currentTextFieldSelected={props.currentTextFieldSelected} currentObject={props.currentObject} setCurrentObject={props.setCurrentObject} object={object}/>
                             )
                         }

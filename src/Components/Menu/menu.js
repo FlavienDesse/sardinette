@@ -23,7 +23,7 @@ export default function Menu(props) {
             mode={"horizontal"}
             selectable={false}
             inlineIndent={100}>
-           <OpenFile scene={props.scene}/>
+           <OpenFile scene={props.scene} setAllObject={props.setAllObject}/>
            <OpenInsert setAllObject={props.setAllObject}/>
            <OpenExamples/>
         </MenuRC>
