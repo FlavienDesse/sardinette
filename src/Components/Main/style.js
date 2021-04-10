@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme)=>({
     containerToolsObject:{
         display: 'flex',
         padding:"5px 16px 5px 16px",
-        minWidth: "500px",
+        width: "500px",
         flexDirection:"column",
         '& > :nth-child(1)':{
             flex:"1",

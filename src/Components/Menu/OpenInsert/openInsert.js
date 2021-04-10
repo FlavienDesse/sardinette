@@ -6,7 +6,7 @@ import {
     createSurface,
     createCSpline,
     createMirroredPoint,
-    createMirroredCurve
+    createMirroredCurve, createNURBS
 } from "../../../Misc/Utils"
 import {MenuItem, SubMenu} from "rc-menu";
 
@@ -84,6 +84,16 @@ export default function OpenInsert(props) {
 
         })
     }
+    const handleAddNURBS = () => {
+        props.setAllObject((prevState) => {
+            let nurbs = createNURBS()
+
+            prevState.push(nurbs)
+
+            return [...prevState]
+
+        })
+    }
 
     let propsSubMenu = Object.assign({}, props)
     delete  propsSubMenu.setAllObject
@@ -99,6 +109,9 @@ export default function OpenInsert(props) {
                 </MenuItem>
             </SubMenu>
             <SubMenu popupOffset={[0, 2]} title={"Curve"}>
+                <MenuItem onClick={handleAddNURBS}>
+                    NURBS
+                </MenuItem>
                 <MenuItem onClick={handleAddBSpline}>
                     B-Spline
                 </MenuItem>

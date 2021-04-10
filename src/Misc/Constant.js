@@ -8,7 +8,7 @@ export default class Object {
    static CONSTANT_ALL_SURFACES = ["Surface","Import STL"]
    static CONSTANT_ALL_POINTS = ["B-Spline,C-Spline,Mirrored Curve"]
 
-
+   static DEFAULT_NAME_NURBS= "NURBS0"
    static DEFAULT_NAME_C_SPLINE = "C-Spline0"
    static DEFAULT_NAME_B_SPLINE = "B-Spline0"
    static DEFAULT_NAME_MIRRORED_CURVE= "MirroredCurve0"

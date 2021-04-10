@@ -65,6 +65,10 @@ function increaseDefaultName(type) {
             matches = Constant.DEFAULT_NAME_MIRRORED_CURVE.match(reg);
             Constant.DEFAULT_NAME_MIRRORED_CURVE = Constant.DEFAULT_NAME_MIRRORED_CURVE.replace(reg, parseInt(matches[0], 10) + 1)
             break;
+        case "NURBS":
+            matches = Constant.DEFAULT_NAME_NURBS.match(reg);
+            Constant.DEFAULT_NAME_NURBS = Constant.DEFAULT_NAME_NURBS.replace(reg, parseInt(matches[0], 10) + 1)
+            break;
         default:
             throw new Error("unknow type provided")
     }
@@ -287,6 +291,69 @@ function createPoint(position) {
 
     return point
 }
+
+function createNURBS(controlsPoints) {
+
+
+    const geometry = new BufferGeometry().setFromPoints([]);
+
+    const material = new LineBasicMaterial({color: Constant.DEFAULT_COLOR_CURVE});
+    const NURBS = new Line(geometry, material);
+    NURBS.name = Constant.DEFAULT_NAME_NURBS
+    increaseDefaultName("NURBS")
+    NURBS.type = "NURBS"
+    NURBS.controlsPoints = []
+    NURBS.childrenID = []
+    NURBS.degree = 2
+    NURBS.resolution = 100
+    NURBS.isError = true
+    NURBS.allCalculatedPoints = []
+    NURBS.knots = []
+
+    if (controlsPoints) {
+
+        try {
+            let allPositionControlsPoints = controlsPoints.map(a => a.position);
+            NURBS.knots =  new Array(controlsPoints.length+ NURBS.degree+1).fill().map((_, index) => index + 1);
+
+            let res = bSpline(NURBS.degree, allPositionControlsPoints, NURBS.resolution, NURBS.knots, controlsPoints.map(a => a.weight))
+
+            NURBS.allCalculatedPoints = res
+            NURBS.geometry = new BufferGeometry().setFromPoints(res);
+            NURBS.isError = false
+            NURBS.controlsPoints = controlsPoints
+
+
+            controlsPoints.forEach((controls) => {
+                controls.childrenID.push(NURBS.id)
+            })
+
+        } catch (e) {
+            console.log(e.message)
+            throw new Error("Error in creation NURBS")
+        }
+    }
+
+
+    NURBS.update = () => {
+
+        let allControlsPoints = NURBS.controlsPoints.map(a => a.position);
+        try {
+            let res = bSpline(NURBS.degree, allControlsPoints, NURBS.resolution, NURBS.knots, NURBS.controlsPoints.map(a => a.weight))
+            NURBS.allCalculatedPoints = res
+            NURBS.geometry = new BufferGeometry().setFromPoints(res);
+            NURBS.isError = false
+
+        } catch (e) {
+            NURBS.isError = true
+            throw new Error(e.message)
+        }
+    }
+
+
+    return NURBS
+}
+
 
 function createBSpline(controlsPoints) {
 
@@ -571,7 +638,7 @@ function modifyObjectWhenClickOn(object, currentObject) {
 
 
     if (object != null) {
-        if (object.type === "Point" || object.type === "Mirrored Point") {
+        if (object.type === "Point" || object.type === "Mirrored Point" ) {
             if (currentObject == null || (currentObject.id !== object.id)) {
                 let intersect = object
 
@@ -638,6 +705,18 @@ function modifyObjectWhenClickOn(object, currentObject) {
                 return currentObject
             }
         }
+        else if (object.type === "NURBS") {
+            if (currentObject == null || (currentObject.id !== object.id)) {
+
+                let intersect = object
+
+
+                return intersect;
+
+            } else {
+                return currentObject
+            }
+        }
     }
 
 
@@ -657,6 +736,7 @@ export {
     createAxis,
     createMirroredPoint,
     createMirroredCurve,
-    updateObjectByAddingChildrenID
+    updateObjectByAddingChildrenID,
+    createNURBS
 }
 

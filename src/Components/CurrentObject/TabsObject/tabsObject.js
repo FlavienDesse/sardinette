@@ -6,6 +6,7 @@ import Surface from "./Surfaces/Surface/surface";
 import CSpline from "./Curve/C-Spline/cSpline";
 import MirroredPoint from "./Point/MirroredPoint/mirroredPoint";
 import MirroredCurve from "./Curve/Mirrored Curve/mirroredCurve";
+import NURBS from "./Curve/NURBS/NURBS";
 
 TabsObject.propType = {
     setCurrentObject: PropTypes.func.isRequired,
@@ -31,6 +32,7 @@ export default function TabsObject(props) {
                             props.currentObject.type === "C-Spline" ? <CSpline setAllObject={props.setAllObject} setCurrentTextFieldSelected={props.setCurrentTextFieldSelected}  setCurrentObject={props.setCurrentObject} currentObject={props.currentObject} allObject={props.allObject} updateAllObjectWhenCurrentObjectChange={props.updateAllObjectWhenCurrentObjectChange}/> :
                                 props.currentObject.type === "Mirrored Point" ? <MirroredPoint setAllObject={props.setAllObject} setCurrentTextFieldSelected={props.setCurrentTextFieldSelected}  setCurrentObject={props.setCurrentObject} currentObject={props.currentObject} allObject={props.allObject} updateAllObjectWhenCurrentObjectChange={props.updateAllObjectWhenCurrentObjectChange}/> :
                                     props.currentObject.type === "Mirrored Curve" ? <MirroredCurve setAllObject={props.setAllObject} setCurrentTextFieldSelected={props.setCurrentTextFieldSelected}  setCurrentObject={props.setCurrentObject} currentObject={props.currentObject} allObject={props.allObject} updateAllObjectWhenCurrentObjectChange={props.updateAllObjectWhenCurrentObjectChange}/> :
+                                        props.currentObject.type === "NURBS" ? <NURBS setAllObject={props.setAllObject} setCurrentTextFieldSelected={props.setCurrentTextFieldSelected}  setCurrentObject={props.setCurrentObject} currentObject={props.currentObject} allObject={props.allObject} updateAllObjectWhenCurrentObjectChange={props.updateAllObjectWhenCurrentObjectChange}/> :
 
 
 

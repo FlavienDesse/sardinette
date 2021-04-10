@@ -477,10 +477,7 @@ function cLoftSurface(curves, minResolution, areClosed) {
     return surface
 }
 
-<<<<<<< HEAD:src/Misc/Math.js
-export {bSpline, cSpline, toVector3, fromVector3, curveLength, distance, getSurface, mirrorPoint, mirrorPointFromCurve, mirrorCurve, cLoftSurface}
 
-=======
 /**
  * Compute a point of the Bezier's curve using De Casteljau’s algorithm
  * @param {Array<THREE.Vector3>} controlPoints 
@@ -551,5 +548,5 @@ function bezierCurve(controlPoints, resolution) {
     return points
 }
 
-export {spline, cSpline, toVector3, fromVector3, curveLength, distance, getSurface, mirrorPoint, mirrorPointFromCurve, mirrorCurve, cLoftSurface, bezierCurve}
->>>>>>> Maths:src/Misc/maths.js
+export {bSpline, cSpline, toVector3, fromVector3, curveLength, distance, getSurface, mirrorPoint, mirrorPointFromCurve, mirrorCurve, cLoftSurface, bezierCurve}
+

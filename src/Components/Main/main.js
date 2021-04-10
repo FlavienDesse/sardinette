@@ -9,7 +9,7 @@ import Background from "../../Misc/Background";
 import {
     createAxis,
     createBSpline,
-    createMirroredCurve, createMirroredPoint,
+    createMirroredCurve, createMirroredPoint, createNURBS,
     createPoint,
     createSurface,
     modifyObjectWhenClickOn,
@@ -56,6 +56,8 @@ export default function Main() {
 
         const mirrorFirstCurve = createMirroredCurve(firstCurve, axisY)
         const surface = createSurface(firstCurve, mirrorFirstCurve)
+
+        const nurbs = createNURBS([firstPoint, mirrorFirstPoint, secondPoint])
         /*  const firstPoint = createPoint({x:0,y:2,z:2});
           const secondPoint=createPoint({x:2,y:2,z:0})
 
@@ -69,7 +71,7 @@ export default function Main() {
 
 
         //setAllObject([axisX,axisY,axisZ,firstPoint,secondPoint,thirdPoint])
-        setAllObject([ firstPoint, mirrorFirstPoint, secondPoint, firstCurve, mirrorFirstCurve, surface])
+        setAllObject([ firstPoint, mirrorFirstPoint, secondPoint, firstCurve, mirrorFirstCurve, surface,nurbs])
 
     }, [])
 
