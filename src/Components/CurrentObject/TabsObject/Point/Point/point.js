@@ -46,7 +46,7 @@ export default function Point(props) {
         let lastValue = props.currentObject;
         let newValue = props.currentObject
         newValue.visible = event.target.checked;
-        props.updateAllObjectWhenCurrentObjectChange(lastValue, newValue,false)
+        props.updateAllObjectWhenCurrentObjectChange(lastValue, newValue, false)
         props.setCurrentObject(newValue)
     }
 
@@ -86,7 +86,7 @@ export default function Point(props) {
             newValue.position.x = parseFloat(position.x)
             newValue.position.y = parseFloat(position.y)
             newValue.position.z = parseFloat(position.z)
-            props.updateAllObjectWhenCurrentObjectChange(lastValue, newValue,true)
+            props.updateAllObjectWhenCurrentObjectChange(lastValue, newValue, true)
             props.setCurrentObject(newValue)
         }
     }
@@ -96,7 +96,7 @@ export default function Point(props) {
             let lastValue = props.currentObject;
             let newValue = props.currentObject
             newValue.weight = weight
-            props.updateAllObjectWhenCurrentObjectChange(lastValue, newValue,true)
+            props.updateAllObjectWhenCurrentObjectChange(lastValue, newValue, true)
             props.setCurrentObject(newValue)
         }
     }
@@ -104,16 +104,15 @@ export default function Point(props) {
 
     const keyPressTextFieldName = (e) => {
         if (e.keyCode === 13) {
-            if(name === ""){
+            if (name === "") {
                 enqueueSnackbar("name can't be empty", {
                     variant: 'error',
                 });
-            }
-            else{
+            } else {
                 let lastValue = props.currentObject;
                 let newValue = props.currentObject
                 newValue.name = name
-                props.updateAllObjectWhenCurrentObjectChange(lastValue, newValue,false)
+                props.updateAllObjectWhenCurrentObjectChange(lastValue, newValue, false)
                 props.setCurrentObject(newValue)
             }
 
@@ -127,7 +126,8 @@ export default function Point(props) {
                 <Typography className={classes.text}>
                     Name
                 </Typography>
-                <TextField value={name} onBlur={blurTextFieldName}onKeyDown={keyPressTextFieldName} onChange={handleChangeTextFieldName}
+                <TextField value={name} onBlur={blurTextFieldName} onKeyDown={keyPressTextFieldName}
+                           onChange={handleChangeTextFieldName}
                            InputProps={{className: classes.inputTextField}}/>
             </div>
             <div className={classes.containerRow}>

@@ -146,7 +146,7 @@ export default function MirroredPoint(props) {
 
             try {
                 newValue.update()
-                updateObjectByAddingChildrenID(new Array(initialPoint),props.currentObject.id,props.allObject,props.setAllObject)
+                updateObjectByAddingChildrenID(new Array(initialPoint), props.currentObject.id, props.allObject, props.setAllObject)
 
 
             } catch (e) {
@@ -161,7 +161,7 @@ export default function MirroredPoint(props) {
         }
     }
 
-    const handleFocusOnTextFieldInitialPoint= (e) => {
+    const handleFocusOnTextFieldInitialPoint = (e) => {
         setInitialPoint(null)
         props.setCurrentTextFieldSelected({
             id: props.currentObject.id,
@@ -177,7 +177,7 @@ export default function MirroredPoint(props) {
     }
 
 
-    const handleDisFocusOnTextFieldInitialPoint= (e) => {
+    const handleDisFocusOnTextFieldInitialPoint = (e) => {
 
         props.setCurrentTextFieldSelected(null)
         setInitialPoint(props.currentObject.initialPoint)

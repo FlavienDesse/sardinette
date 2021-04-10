@@ -6,11 +6,11 @@ const useStyles = makeStyles({
 
         fontSize: "1.1em",
     },
-    container:{
-        borderTop:'solid 1px grey',
+    container: {
+        borderTop: 'solid 1px grey',
     },
-    tabs:{
-      marginBottom:"40px",
+    tabs: {
+        marginBottom: "40px",
     },
 });
 

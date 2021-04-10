@@ -3,12 +3,11 @@ import {MenuItem, SubMenu} from "rc-menu"
 import {exportSTL} from "../../../Misc/Export";
 import PropTypes from "prop-types";
 import {STLLoader} from "three/examples/jsm/loaders/STLLoader";
-import {MeshPhongMaterial,Mesh,Group} from "three";
 import * as THREE from "three";
-import Constant from "../../../Misc/Constant";
+import {Group, Mesh} from "three";
 
 OpenFile.propType = {
-    scene:PropTypes.any.isRequired,
+    scene: PropTypes.any.isRequired,
     setAllObject: PropTypes.func.isRequired,
 }
 
@@ -39,14 +38,14 @@ export default function OpenFile(props) {
                 transparent: true,
                 side: THREE.DoubleSide
             });
-            const mesh = new Mesh( geometry, material );
+            const mesh = new Mesh(geometry, material);
 
-            mesh.type ="Import STL"
+            mesh.type = "Import STL"
 
             group.add(mesh)
 
 
-            props.scene.add(  group);
+            props.scene.add(group);
 
             props.setAllObject([mesh])
 
@@ -55,29 +54,26 @@ export default function OpenFile(props) {
         reader.readAsArrayBuffer(event.target.files[0]);
 
 
-
-
-
-
         //props.handleFile(fileUploaded);
     };
 
-    const handleClickOnSTL = ()=>{
+    const handleClickOnSTL = () => {
         exportSTL(props.scene)
     }
-
+    let propsSubMenu = Object.assign({}, props)
+    delete propsSubMenu.setAllObject
     return (
-        <SubMenu  popupOffset={[0,2]} {...props} title={"File"}>
+        <SubMenu popupOffset={[0, 2]} {...propsSubMenu} title={"File"}>
             <MenuItem onClick={handleClick}>
                 Import
                 <input
-                type="file"
-                ref={hiddenFileInput}
-                onChange={handleChange}
-                style={{display: 'none'}}
+                    type="file"
+                    ref={hiddenFileInput}
+                    onChange={handleChange}
+                    style={{display: 'none'}}
                 />
             </MenuItem>
-            <SubMenu popupOffset={[0, 2]} title={"Export"} >
+            <SubMenu popupOffset={[0, 2]} title={"Export"}>
                 <MenuItem onClick={handleClickOnSTL}>
                     STL
                 </MenuItem>

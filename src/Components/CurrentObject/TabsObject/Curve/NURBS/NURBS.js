@@ -4,9 +4,8 @@ import TextField from "@material-ui/core/TextField";
 import Checkbox from "@material-ui/core/Checkbox";
 import useStyles from "./style";
 import PropTypes from "prop-types";
-import {modificationBSpline, updateObjectByAddingChildrenID} from "../../../../../Misc/Utils";
+import {updateObjectByAddingChildrenID} from "../../../../../Misc/Utils";
 import {useSnackbar} from 'notistack';
-import {BufferGeometry} from "three";
 import TableContainer from "@material-ui/core/TableContainer";
 import Paper from "@material-ui/core/Paper";
 import Table from "@material-ui/core/Table";
@@ -38,10 +37,6 @@ export default function NURBS(props) {
     const [degree, setDegree] = React.useState(props.currentObject.degree);
 
     const [controlsPoints, setControlsPoints] = React.useState(props.currentObject.controlsPoints);
-
-
-
-
 
 
     React.useEffect((() => {
@@ -208,35 +203,33 @@ export default function NURBS(props) {
         })
     }
 
-    const handleChangeTextFieldKnots = (e,index)=>{
+    const handleChangeTextFieldKnots = (e, index) => {
 
         var rgx = /^\d*\.?\d*$/;
         let val = e.target.value.match(rgx)
 
-        if (e.target.value === "" || val[0] === "") {
+        if (e.target.value === "" || val === null || val[0] === "") {
             setKnots((prevState => {
-                prevState[index]=""
+                prevState[index] = ""
                 return ([...prevState])
             }))
         } else {
             setKnots((prevState => {
-                prevState[index]=parseFloat(val[0])
+                prevState[index] = parseFloat(val[0])
                 return ([...prevState])
             }))
         }
 
 
-
-
         let isValidKnots = true
 
-        for (let i = 0 ; i < controlsPoints.length+degree+1 ; i++){
-            if(isNaN(knots[i])){
+        for (let i = 0; i < controlsPoints.length + degree + 1; i++) {
+            if (isNaN(knots[i])) {
                 isValidKnots = false;
                 break;
             }
         }
-        if(isValidKnots){
+        if (isValidKnots) {
 
             let lastValue = props.currentObject;
             let newValue = props.currentObject
@@ -254,7 +247,6 @@ export default function NURBS(props) {
             props.updateAllObjectWhenCurrentObjectChange(lastValue, newValue, true)
             props.setCurrentObject(newValue)
         }
-
 
 
     }
@@ -315,8 +307,8 @@ export default function NURBS(props) {
                         <TableHead>
                             <TableRow>
                                 {
-                                    new Array(controlsPoints.length+degree+1).fill(undefined, undefined, undefined).map((value, index) => {
-                                        return <TableCell align="center" key={index}>{index+1}</TableCell>
+                                    new Array(controlsPoints.length + degree + 1).fill(undefined, undefined, undefined).map((value, index) => {
+                                        return <TableCell align="center" key={index}>{index + 1}</TableCell>
                                     })
                                 }
 
@@ -326,13 +318,15 @@ export default function NURBS(props) {
                         <TableBody>
                             <TableRow>
                                 {
-                                    new Array(controlsPoints.length+degree+1).fill(undefined, undefined, undefined).map((value, index) => {
+                                    new Array(controlsPoints.length + degree + 1).fill(undefined, undefined, undefined).map((value, index) => {
                                         return <TableCell key={index}>
                                             {
-                                                <TextField  error={knots[index] === undefined || knots[index] === "" }  value={knots[index]}  InputProps={{className: classes.inputTextFieldTable}}
+                                                <TextField error={knots[index] === undefined || knots[index] === ""}
+                                                           value={knots[index]}
+                                                           InputProps={{className: classes.inputTextFieldTable}}
 
 
-                                                            onChange={(e)=>handleChangeTextFieldKnots(e,index)}
+                                                           onChange={(e) => handleChangeTextFieldKnots(e, index)}
                                                 >
 
                                                 </TextField>

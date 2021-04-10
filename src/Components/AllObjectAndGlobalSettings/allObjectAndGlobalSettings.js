@@ -22,9 +22,9 @@ import {createAxis} from "../../Misc/Utils";
 AllObjectAndGlobalSettings.propTypes = {
     setBackground: PropTypes.func.isRequired,
     allObject: PropTypes.array.isRequired,
-    setCurrentObject:PropTypes.func.isRequired,
-    currentObject:PropTypes.any,
-    currentTextFieldSelected:PropTypes.object,
+    setCurrentObject: PropTypes.func.isRequired,
+    currentObject: PropTypes.any,
+    currentTextFieldSelected: PropTypes.object,
 
 }
 
@@ -64,9 +64,6 @@ export default function AllObjectAndGlobalSettings(props) {
     }
 
 
-
-
-
     return (
         <div className={classes.container}>
 
@@ -77,20 +74,23 @@ export default function AllObjectAndGlobalSettings(props) {
             </Button>
 
             <TableContainer component={Paper} className={classes.containerAllObject}>
-                <Table className={classes.table} >
+                <Table className={classes.table}>
                     <TableHead>
                         <TableRow>
                             <TableCell>Error</TableCell>
-                            <TableCell >Visibility</TableCell>
+                            <TableCell>Visibility</TableCell>
                             <TableCell>Type</TableCell>
-                            <TableCell >Name</TableCell>
+                            <TableCell>Name</TableCell>
 
                         </TableRow>
                     </TableHead>
                     <TableBody>
                         {
-                            [createAxis("x"),createAxis("y"),createAxis("z")].concat(props.allObject).map((object, index) =>
-                               <ArrayRenderObject key={object.id} currentTextFieldSelected={props.currentTextFieldSelected} currentObject={props.currentObject} setCurrentObject={props.setCurrentObject} object={object}/>
+                            [createAxis("x"), createAxis("y"), createAxis("z")].concat(props.allObject).map((object, index) =>
+                                <ArrayRenderObject key={index}
+                                                   currentTextFieldSelected={props.currentTextFieldSelected}
+                                                   currentObject={props.currentObject}
+                                                   setCurrentObject={props.setCurrentObject} object={object}/>
                             )
                         }
                     </TableBody>

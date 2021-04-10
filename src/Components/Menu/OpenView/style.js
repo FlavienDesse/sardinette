@@ -1,14 +1,14 @@
 import {makeStyles} from '@material-ui/core/styles';
 
 const useStyles = makeStyles({
-    container:{
+    container: {
         position: "absolute",
         backgroundColor: '#f1f1f1',
-        '& > *':{
-            display:'block',
+        '& > *': {
+            display: 'block',
             padding: "12px 16px",
         },
-        minWidth:"160px",
+        minWidth: "160px",
     }
 });
 

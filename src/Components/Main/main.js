@@ -9,7 +9,9 @@ import Background from "../../Misc/Background";
 import {
     createAxis,
     createBSpline,
-    createMirroredCurve, createMirroredPoint, createNURBS,
+    createMirroredCurve,
+    createMirroredPoint,
+    createNURBS,
     createPoint,
     createSurface,
     modifyObjectWhenClickOn,
@@ -43,7 +45,6 @@ export default function Main() {
     useEffect(() => {
 
 
-        const axisX = createAxis("x")
         const axisY = createAxis("y")
         const axisZ = createAxis("z")
 
@@ -71,7 +72,7 @@ export default function Main() {
 
 
         //setAllObject([axisX,axisY,axisZ,firstPoint,secondPoint,thirdPoint])
-        setAllObject([ firstPoint, mirrorFirstPoint, secondPoint, firstCurve, mirrorFirstCurve, surface,nurbs])
+        setAllObject([firstPoint, mirrorFirstPoint, secondPoint, firstCurve, mirrorFirstCurve, nurbs, surface])
 
     }, [])
 
@@ -203,11 +204,8 @@ export default function Main() {
 
 
                     {
-                        camera.current ?    <AxisView controls={control.current} camera={camera.current}/> : ""
+                        camera.current ? <AxisView controls={control.current} camera={camera.current}/> : ""
                     }
-
-
-
 
 
                 </div>

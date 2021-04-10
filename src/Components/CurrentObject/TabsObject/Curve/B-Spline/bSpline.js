@@ -4,9 +4,8 @@ import TextField from "@material-ui/core/TextField";
 import Checkbox from "@material-ui/core/Checkbox";
 import useStyles from "./style";
 import PropTypes from "prop-types";
-import {modificationBSpline, updateObjectByAddingChildrenID} from "../../../../../Misc/Utils";
+import {updateObjectByAddingChildrenID} from "../../../../../Misc/Utils";
 import {useSnackbar} from 'notistack';
-import {BufferGeometry} from "three";
 
 BSpline.propType = {
     setCurrentObject: PropTypes.func.isRequired,
@@ -45,7 +44,7 @@ export default function BSpline(props) {
         let lastValue = props.currentObject;
         let newValue = props.currentObject
         newValue.visible = event.target.checked;
-        props.updateAllObjectWhenCurrentObjectChange(lastValue, newValue,false)
+        props.updateAllObjectWhenCurrentObjectChange(lastValue, newValue, false)
         props.setCurrentObject(newValue)
     }
 
@@ -57,7 +56,7 @@ export default function BSpline(props) {
         setName(props.currentObject.name);
     }
 
-    const blurTextFieldDegree= (event) => {
+    const blurTextFieldDegree = (event) => {
         setDegree(props.currentObject.degree);
     }
 
@@ -65,10 +64,9 @@ export default function BSpline(props) {
         var rgx = /[0-9]*/;
         let val = event.target.value.match(rgx)
 
-        if( event.target.value=== "" || val[0] === "" ){
+        if (event.target.value === "" || val[0] === "") {
             setDegree("");
-        }
-        else{
+        } else {
             setDegree(parseInt(val[0]));
         }
     }
@@ -77,26 +75,24 @@ export default function BSpline(props) {
         var rgx = /[0-9]*/;
         let val = event.target.value.match(rgx)
 
-        if( event.target.value=== "" || val[0] === "" ){
+        if (event.target.value === "" || val[0] === "") {
             setResolution("");
-        }
-        else{
+        } else {
             setResolution(parseInt(val[0]));
         }
     }
 
     const keyPressTextFieldName = (e) => {
         if (e.keyCode === 13) {
-            if(name === ""){
+            if (name === "") {
                 enqueueSnackbar("name can't be empty", {
                     variant: 'error',
                 });
-            }
-            else{
+            } else {
                 let lastValue = props.currentObject;
                 let newValue = props.currentObject
                 newValue.name = name
-                props.updateAllObjectWhenCurrentObjectChange(lastValue, newValue,false)
+                props.updateAllObjectWhenCurrentObjectChange(lastValue, newValue, false)
                 props.setCurrentObject(newValue)
             }
 
@@ -118,7 +114,7 @@ export default function BSpline(props) {
                 });
 
             }
-            props.updateAllObjectWhenCurrentObjectChange(lastValue, newValue,true)
+            props.updateAllObjectWhenCurrentObjectChange(lastValue, newValue, true)
             props.setCurrentObject(newValue)
         }
     }
@@ -131,14 +127,14 @@ export default function BSpline(props) {
 
             try {
                 newValue.update()
-                updateObjectByAddingChildrenID(controlsPoints,props.currentObject.id,props.allObject,props.setAllObject)
+                updateObjectByAddingChildrenID(controlsPoints, props.currentObject.id, props.allObject, props.setAllObject)
 
             } catch (e) {
                 enqueueSnackbar(e.message, {
                     variant: 'error',
                 });
             }
-            props.updateAllObjectWhenCurrentObjectChange(lastValue, newValue,true)
+            props.updateAllObjectWhenCurrentObjectChange(lastValue, newValue, true)
             props.setCurrentObject(newValue)
 
         }
@@ -159,7 +155,7 @@ export default function BSpline(props) {
                 });
 
             }
-            props.updateAllObjectWhenCurrentObjectChange(lastValue, newValue,true)
+            props.updateAllObjectWhenCurrentObjectChange(lastValue, newValue, true)
             props.setCurrentObject(newValue)
         }
     }
@@ -168,8 +164,8 @@ export default function BSpline(props) {
     const handleFocusOnTextFieldControlsPoints = (e) => {
         setControlsPoints([])
         props.setCurrentTextFieldSelected({
-            id:props.currentObject.id,
-            acceptType:["Point","Mirrored Point"],
+            id: props.currentObject.id,
+            acceptType: ["Point", "Mirrored Point"],
             clickCtrl: addControlsPoints,
             simpleClick: setOneControlsPoints
         })
@@ -204,7 +200,8 @@ export default function BSpline(props) {
                 <Typography className={classes.text}>
                     Name
                 </Typography>
-                <TextField value={name} onBlur={blurTextFieldName} onKeyDown={keyPressTextFieldName} onChange={handleChangeTextFieldName}
+                <TextField value={name} onBlur={blurTextFieldName} onKeyDown={keyPressTextFieldName}
+                           onChange={handleChangeTextFieldName}
                            InputProps={{className: classes.inputTextField}}/>
             </div>
 
@@ -229,7 +226,8 @@ export default function BSpline(props) {
                 <Typography className={classes.text}>
                     Degree
                 </Typography>
-                <TextField value={degree} onBlur={blurTextFieldDegree} onKeyDown={keyPressTextFieldDegree} onChange={handleChangeTextFieldDegree}
+                <TextField value={degree} onBlur={blurTextFieldDegree} onKeyDown={keyPressTextFieldDegree}
+                           onChange={handleChangeTextFieldDegree}
                            InputProps={{className: classes.inputSmallTextField}}/>
 
             </div>

@@ -8,11 +8,11 @@ import TabsTexture from "./TabsTexture/tabsTexture";
 
 
 CurrentObject.propType = {
-    setCurrentObject:PropTypes.func.isRequired,
-    currentObject:PropTypes.object.isRequired,
-    updateAllObjectWhenCurrentObjectChange : PropTypes.func.isRequired,
-    allObject:PropTypes.array.isRequired,
-    setCurrentTextFieldSelected:PropTypes.func.isRequired,
+    setCurrentObject: PropTypes.func.isRequired,
+    currentObject: PropTypes.object.isRequired,
+    updateAllObjectWhenCurrentObjectChange: PropTypes.func.isRequired,
+    allObject: PropTypes.array.isRequired,
+    setCurrentTextFieldSelected: PropTypes.func.isRequired,
 }
 
 
@@ -26,7 +26,7 @@ export default function CurrentObject(props) {
     };
 
     return (
-        <div  className={classes.container}>
+        <div className={classes.container}>
             <Tabs
                 variant="fullWidth"
                 value={currentTabs}
@@ -35,14 +35,19 @@ export default function CurrentObject(props) {
                 onChange={handleChangeTabs}
                 className={classes.tabs}
             >
-                <Tab label="OBJECT" />
-                <Tab label="TEXTURE" />
+                <Tab label="OBJECT"/>
+                <Tab label="TEXTURE"/>
             </Tabs>
             {
-                currentTabs === 0  && <TabsObject setCurrentTextFieldSelected={props.setCurrentTextFieldSelected} allObject={props.allObject} updateAllObjectWhenCurrentObjectChange={props.updateAllObjectWhenCurrentObjectChange} setAllObject={props.setAllObject} currentObject={props.currentObject} setCurrentObject={props.setCurrentObject}/>
+                currentTabs === 0 &&
+                <TabsObject setCurrentTextFieldSelected={props.setCurrentTextFieldSelected} allObject={props.allObject}
+                            updateAllObjectWhenCurrentObjectChange={props.updateAllObjectWhenCurrentObjectChange}
+                            setAllObject={props.setAllObject} currentObject={props.currentObject}
+                            setCurrentObject={props.setCurrentObject}/>
             }
             {
-                currentTabs === 1  && <TabsTexture  setAllObject={props.setAllObject} currentObject={props.currentObject} setCurrentObject={props.setCurrentObject}/>
+                currentTabs === 1 && <TabsTexture setAllObject={props.setAllObject} currentObject={props.currentObject}
+                                                  setCurrentObject={props.setCurrentObject}/>
             }
         </div>
     );

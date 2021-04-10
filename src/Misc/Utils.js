@@ -1,7 +1,8 @@
-import {BufferGeometry, Line, LineBasicMaterial, Mesh, MeshBasicMaterial, SphereGeometry, Vector3, Face} from "three";
-import Constant from "./Constant";
-import {bSpline, cSpline, mirrorCurve, mirrorPoint, getSurface} from "./Math";
 import * as THREE from "three";
+import {BufferGeometry, Mesh, MeshBasicMaterial, SphereGeometry} from "three";
+import Constant from "./Constant";
+import {bSpline, cSpline, getSurface, mirrorCurve, mirrorPoint} from "./Math";
+import {MeshLine, MeshLineMaterial, MeshLineRaycast} from 'three.meshline';
 
 /*
     CURRENT TYPE :
@@ -75,14 +76,13 @@ function increaseDefaultName(type) {
 }
 
 
-
-const updateObjectByAddingChildrenID = (allUpdatedObject, id,allObject,setAllObject) => {
+const updateObjectByAddingChildrenID = (allUpdatedObject, id, allObject, setAllObject) => {
 
     let allIDUpdated = allUpdatedObject.map(prev => prev.id)
 
     let newState = allObject.map(prev => {
         if (allIDUpdated.includes(prev.id) && !prev.childrenID.includes(prev.id)) {
-            prev.childrenID.push(id )
+            prev.childrenID.push(id)
 
         }
         return prev
@@ -111,7 +111,7 @@ function updateChildren(allObject, currentObject, isDeletion) {
 
         let tempInfo = []
 
-        allChildrenInfo.forEach((value => {
+        allChildrenInfo.forEach(((value) => {
             let prev = allObject.find(object => object.id === value.id)
 
             if (prev === undefined) {
@@ -124,7 +124,7 @@ function updateChildren(allObject, currentObject, isDeletion) {
                     }
                 })
             } else {
-                if (prev.type === "B-Spline" || prev.type === "C-Spline" ) {
+                if (prev.type === "B-Spline" || prev.type === "C-Spline" || prev.type === "C-Spline") {
                     if (isDeletion) {
                         prev.controlsPoints = prev.controlsPoints.filter(controlsPoints => controlsPoints.id !== currentObject.id)
                     }
@@ -156,10 +156,9 @@ function updateChildren(allObject, currentObject, isDeletion) {
                 if (value.isError) {
                     prev.isError = true
                 } else {
-                    try{
+                    try {
                         prev.update()
-                    }
-                    catch (e){
+                    } catch (e) {
 
                     }
                 }
@@ -189,9 +188,6 @@ function updateChildren(allObject, currentObject, isDeletion) {
 function createAxis(axis) {
 
 
-
-
-
     let tempAxis = {};
 
 
@@ -212,8 +208,10 @@ function createAxis(axis) {
             tempAxis.name = "Z Axis"
             tempAxis.value = "z";
             break
+        default:
+            throw new Error("axis type undefined")
     }
-    tempAxis.visible=false;
+    tempAxis.visible = false;
     tempAxis.type = "Axis"
     tempAxis.isError = false
     tempAxis.lock = true
@@ -237,8 +235,6 @@ function createMirroredPoint(initialPoint, axis) {
     point.childrenID = []
 
 
-
-
     point.update = () => {
 
 
@@ -253,9 +249,9 @@ function createMirroredPoint(initialPoint, axis) {
 
     }
 
-    if(initialPoint && axis){
+    if (initialPoint && axis) {
         point.axis = axis
-        point.initialPoint=initialPoint
+        point.initialPoint = initialPoint
         initialPoint.childrenID.push(point.id)
         point.update()
     }
@@ -297,35 +293,47 @@ function createNURBS(controlsPoints) {
 
     const geometry = new BufferGeometry().setFromPoints([]);
 
-    const material = new LineBasicMaterial({color: Constant.DEFAULT_COLOR_CURVE});
-    const NURBS = new Line(geometry, material);
-    NURBS.name = Constant.DEFAULT_NAME_NURBS
+    const material = new MeshLineMaterial({
+        color: Constant.DEFAULT_COLOR_CURVE,
+        lineWidth: 0.04,
+        sizeAttenuation: true,
+
+    });
+
+    const line = new MeshLine(geometry, material);
+
+
+    const mesh = new THREE.Mesh(line, material);
+    mesh.raycast = MeshLineRaycast;
+
+    mesh.name = Constant.DEFAULT_NAME_NURBS
     increaseDefaultName("NURBS")
-    NURBS.type = "NURBS"
-    NURBS.controlsPoints = []
-    NURBS.childrenID = []
-    NURBS.degree = 2
-    NURBS.resolution = 100
-    NURBS.isError = true
-    NURBS.allCalculatedPoints = []
-    NURBS.knots = []
+    mesh.type = "NURBS"
+    mesh.controlsPoints = []
+    mesh.childrenID = []
+    mesh.degree = 2
+    mesh.resolution = 100
+    mesh.isError = true
+    mesh.allCalculatedPoints = []
+    mesh.knots = []
 
     if (controlsPoints) {
 
         try {
             let allPositionControlsPoints = controlsPoints.map(a => a.position);
-            NURBS.knots =  new Array(controlsPoints.length+ NURBS.degree+1).fill().map((_, index) => index + 1);
+            mesh.knots = new Array(controlsPoints.length + mesh.degree + 1).fill().map((_, index) => index + 1);
 
-            let res = bSpline(NURBS.degree, allPositionControlsPoints, NURBS.resolution, NURBS.knots, controlsPoints.map(a => a.weight))
+            let res = bSpline(mesh.degree, allPositionControlsPoints, mesh.resolution, mesh.knots, controlsPoints.map(a => a.weight))
 
-            NURBS.allCalculatedPoints = res
-            NURBS.geometry = new BufferGeometry().setFromPoints(res);
-            NURBS.isError = false
-            NURBS.controlsPoints = controlsPoints
+            mesh.allCalculatedPoints = res
+            line.setPoints(res)
+
+            mesh.isError = false
+            mesh.controlsPoints = controlsPoints
 
 
             controlsPoints.forEach((controls) => {
-                controls.childrenID.push(NURBS.id)
+                controls.childrenID.push(mesh.id)
             })
 
         } catch (e) {
@@ -335,127 +343,143 @@ function createNURBS(controlsPoints) {
     }
 
 
-    NURBS.update = () => {
+    mesh.update = () => {
 
-        let allControlsPoints = NURBS.controlsPoints.map(a => a.position);
-        console.log(NURBS.knots)
+        let allControlsPoints = mesh.controlsPoints.map(a => a.position);
         try {
-            let res = bSpline(NURBS.degree, allControlsPoints, NURBS.resolution, NURBS.knots, NURBS.controlsPoints.map(a => a.weight))
-            NURBS.allCalculatedPoints = res
-            NURBS.geometry = new BufferGeometry().setFromPoints(res);
-            NURBS.isError = false
+            let res = bSpline(mesh.degree, allControlsPoints, mesh.resolution, mesh.knots, mesh.controlsPoints.map(a => a.weight))
+            mesh.allCalculatedPoints = res
+            line.setPoints(res)
+            mesh.isError = false
 
         } catch (e) {
-            NURBS.isError = true
+            mesh.isError = true
             throw new Error(e.message)
         }
     }
 
 
-    return NURBS
+    return mesh
 }
 
 
 function createBSpline(controlsPoints) {
 
-
     const geometry = new BufferGeometry().setFromPoints([]);
 
-    const material = new LineBasicMaterial({color: Constant.DEFAULT_COLOR_CURVE});
-    const bSplineParam = new Line(geometry, material);
-    bSplineParam.name = Constant.DEFAULT_NAME_B_SPLINE
+    const material = new MeshLineMaterial({
+        color: Constant.DEFAULT_COLOR_CURVE,
+        lineWidth: 0.04,
+        sizeAttenuation: true,
+
+    });
+
+    const bSplineParam = new MeshLine(geometry, material);
+    const mesh = new THREE.Mesh(bSplineParam, material);
+    mesh.raycast = MeshLineRaycast;
+    mesh.name = Constant.DEFAULT_NAME_B_SPLINE
     increaseDefaultName("B-Spline")
-    bSplineParam.type = "B-Spline"
-    bSplineParam.controlsPoints = []
-    bSplineParam.childrenID = []
-    bSplineParam.degree = 2
-    bSplineParam.resolution = 100
-    bSplineParam.isError = true
-    bSplineParam.allCalculatedPoints = []
+    mesh.type = "B-Spline"
+    mesh.controlsPoints = []
+    mesh.childrenID = []
+    mesh.degree = 2
+    mesh.resolution = 100
+    mesh.isError = true
+    mesh.allCalculatedPoints = []
 
     if (controlsPoints) {
         try {
             let allPositionControlsPoints = controlsPoints.map(a => a.position);
-            let res = bSpline(bSplineParam.degree, allPositionControlsPoints, bSplineParam.resolution, null, controlsPoints.map(a => a.weight))
-            bSplineParam.allCalculatedPoints = res
-            bSplineParam.geometry = new BufferGeometry().setFromPoints(res);
-            bSplineParam.isError = false
-            bSplineParam.controlsPoints = controlsPoints
+            let res = bSpline(mesh.degree, allPositionControlsPoints, mesh.resolution, null, controlsPoints.map(a => a.weight))
+            mesh.allCalculatedPoints = res
+            bSplineParam.setPoints(res)
+            mesh.isError = false
+            mesh.controlsPoints = controlsPoints
 
 
             controlsPoints.forEach((controls) => {
-                controls.childrenID.push(bSplineParam.id)
+                controls.childrenID.push(mesh.id)
             })
 
         } catch (e) {
+            console.log(e.message)
             throw new Error("Error in creation b spline")
         }
     }
-
-
-    bSplineParam.update = () => {
-        let allControlsPoints = bSplineParam.controlsPoints.map(a => a.position);
+    mesh.update = () => {
+        let allControlsPoints = mesh.controlsPoints.map(a => a.position);
         try {
-            let res = bSpline(bSplineParam.degree, allControlsPoints, bSplineParam.resolution, null, bSplineParam.controlsPoints.map(a => a.weight))
-            bSplineParam.allCalculatedPoints = res
-            bSplineParam.geometry = new BufferGeometry().setFromPoints(res);
-            bSplineParam.isError = false
+            let res = bSpline(mesh.degree, allControlsPoints, mesh.resolution, null, mesh.controlsPoints.map(a => a.weight))
+            mesh.allCalculatedPoints = res
+            bSplineParam.setPoints(res)
+            mesh.isError = false
 
         } catch (e) {
-            bSplineParam.isError = true
+            mesh.isError = true
             throw new Error(e.message)
         }
     }
 
 
-    return bSplineParam
+    return mesh
 }
 
 function createMirroredCurve(initialCurve, axis) {
 
     const geometry = new BufferGeometry().setFromPoints([]);
 
-    const material = new LineBasicMaterial({color: Constant.DEFAULT_COLOR_CURVE});
-    const mirroredCurve = new Line(geometry, material);
-    mirroredCurve.name = Constant.DEFAULT_NAME_MIRRORED_CURVE
+    const material = new MeshLineMaterial({
+        color: Constant.DEFAULT_COLOR_CURVE,
+        lineWidth: 0.04,
+        sizeAttenuation: true,
+
+    });
+
+    const line = new MeshLine(geometry, material);
+    const mesh = new THREE.Mesh(line, material);
+    mesh.raycast = MeshLineRaycast;
+    mesh.name = Constant.DEFAULT_NAME_MIRRORED_CURVE
     increaseDefaultName("Mirrored Curve")
-    mirroredCurve.type = "Mirrored Curve"
-    mirroredCurve.initialCurve = null
-    mirroredCurve.axis = null
-    mirroredCurve.childrenID = []
-    mirroredCurve.isError = true
-    mirroredCurve.allCalculatedPoints = []
+    mesh.type = "Mirrored Curve"
+    mesh.initialCurve = null
+    mesh.axis = null
+    mesh.childrenID = []
+    mesh.isError = true
+    mesh.allCalculatedPoints = []
 
 
     if (initialCurve && axis) {
         try {
-            let res = mirrorCurve(initialCurve.allCalculatedPoints, axis.value)
-            mirroredCurve.allCalculatedPoints = res
-            mirroredCurve.geometry = new BufferGeometry().setFromPoints(res);
-            mirroredCurve.isError = false
-            mirroredCurve.initialCurve = initialCurve
-            mirroredCurve.axis = axis
-            initialCurve.childrenID.push(mirroredCurve.id)
+
+            let points = mirrorCurve([...initialCurve.allCalculatedPoints], axis.value)
+
+
+            mesh.allCalculatedPoints = points
+            line.setPoints(points)
+            mesh.isError = false
+            mesh.initialCurve = initialCurve
+            mesh.axis = axis
+            initialCurve.childrenID.push(mesh.id)
 
         } catch (e) {
             console.log(e)
         }
     }
 
-    mirroredCurve.update = () => {
+    mesh.update = () => {
         try {
-            let points = mirrorCurve(mirroredCurve.initialCurve.allCalculatedPoints, mirroredCurve.axis.value)
-            mirroredCurve.allCalculatedPoints = points
-            mirroredCurve.geometry = new BufferGeometry().setFromPoints(points);
-            mirroredCurve.isError = false;
+            let points = mirrorCurve(mesh.initialCurve.allCalculatedPoints, mesh.axis.value)
+            mesh.allCalculatedPoints = points
+            line.setPoints(points)
+            mesh.isError = false;
 
         } catch (e) {
-            mirroredCurve.isError = true;
+            mesh.isError = true;
             throw new Error(e.message)
         }
     }
 
-    return mirroredCurve
+    return mesh
 }
 
 
@@ -464,36 +488,44 @@ function createCSpline() {
 
     const geometry = new BufferGeometry().setFromPoints([]);
 
-    const material = new LineBasicMaterial({color: Constant.DEFAULT_COLOR_CURVE});
-    const spline = new Line(geometry, material);
-    spline.name = Constant.DEFAULT_NAME_C_SPLINE
+    const material = new MeshLineMaterial({
+        color: Constant.DEFAULT_COLOR_CURVE,
+        lineWidth: 0.04,
+        sizeAttenuation: true,
+
+    });
+
+    const line = new MeshLine(geometry, material);
+    const mesh = new THREE.Mesh(line, material);
+    mesh.raycast = MeshLineRaycast;
+    mesh.name = Constant.DEFAULT_NAME_C_SPLINE
     increaseDefaultName("C-Spline")
-    spline.type = "C-Spline"
-    spline.controlsPoints = []
-    spline.allCalculatedPoints = []
-    spline.childrenID = []
-    spline.closed = false;
-    spline.resolution = 100
-    spline.isError = true
+    mesh.type = "C-Spline"
+    mesh.controlsPoints = []
+    mesh.allCalculatedPoints = []
+    mesh.childrenID = []
+    mesh.closed = false;
+    mesh.resolution = 100
+    mesh.isError = true
 
 
-    spline.update = () => {
-        let allControlsPoints = spline.controlsPoints.map(a => a.position);
+    mesh.update = () => {
+        let allControlsPoints = mesh.controlsPoints.map(a => a.position);
 
         try {
-            let res = cSpline(allControlsPoints, spline.resolution, spline.closed)
-            spline.allCalculatedPoints = res
-            spline.geometry = new BufferGeometry().setFromPoints(res);
-            spline.isError = false;
+            let res = cSpline(allControlsPoints, mesh.resolution, mesh.closed)
+            mesh.allCalculatedPoints = res
+            line.setPoints(res)
+            mesh.isError = false;
 
         } catch (e) {
-            spline.isError = true;
+            mesh.isError = true;
             throw new Error(e.message)
         }
     }
 
 
-    return spline
+    return mesh
 
 }
 
@@ -576,12 +608,9 @@ function createSurface(firstCurve, secondCurve) {
     }
 
 
-
-
-
-    surface.update = ()=>{
+    surface.update = () => {
         let pointFirstCurve = surface.firstCurve.allCalculatedPoints
-        let pointSecondCurve =  surface.secondCurve.allCalculatedPoints
+        let pointSecondCurve = surface.secondCurve.allCalculatedPoints
 
         try {
             let res = getSurface(pointFirstCurve, pointSecondCurve)
@@ -619,7 +648,6 @@ function createSurface(firstCurve, secondCurve) {
     }
 
 
-
     return surface
 
 }
@@ -639,7 +667,7 @@ function modifyObjectWhenClickOn(object, currentObject) {
 
 
     if (object != null) {
-        if (object.type === "Point" || object.type === "Mirrored Point" ) {
+        if (object.type === "Point" || object.type === "Mirrored Point") {
             if (currentObject == null || (currentObject.id !== object.id)) {
                 let intersect = object
 
@@ -705,8 +733,7 @@ function modifyObjectWhenClickOn(object, currentObject) {
             } else {
                 return currentObject
             }
-        }
-        else if (object.type === "NURBS") {
+        } else if (object.type === "NURBS") {
             if (currentObject == null || (currentObject.id !== object.id)) {
 
                 let intersect = object

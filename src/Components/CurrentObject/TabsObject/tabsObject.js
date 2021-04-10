@@ -13,9 +13,9 @@ TabsObject.propType = {
     currentObject: PropTypes.object.isRequired,
     allObject: PropTypes.array.isRequired,
     updateAllObjectWhenCurrentObjectChange: PropTypes.func.isRequired,
-    setCurrentTextFieldSelected:PropTypes.func.isRequired,
-    updateObjectByAddingChildrenID:PropTypes.func.isRequired,
-    setAllObject:PropTypes.func.isRequired,
+    setCurrentTextFieldSelected: PropTypes.func.isRequired,
+    updateObjectByAddingChildrenID: PropTypes.func.isRequired,
+    setAllObject: PropTypes.func.isRequired,
 }
 
 export default function TabsObject(props) {
@@ -26,17 +26,49 @@ export default function TabsObject(props) {
 
             {
 
-                props.currentObject.type === "Point" ? <Point   setCurrentObject={props.setCurrentObject} currentObject={props.currentObject} allObject={props.allObject} updateAllObjectWhenCurrentObjectChange={props.updateAllObjectWhenCurrentObjectChange}/> :
-                    props.currentObject.type === "B-Spline" ? <BSpline setAllObject={props.setAllObject} setCurrentTextFieldSelected={props.setCurrentTextFieldSelected}  setCurrentObject={props.setCurrentObject} currentObject={props.currentObject} allObject={props.allObject} updateAllObjectWhenCurrentObjectChange={props.updateAllObjectWhenCurrentObjectChange}/> :
-                        props.currentObject.type === "Surface" ? <Surface setAllObject={props.setAllObject} setCurrentTextFieldSelected={props.setCurrentTextFieldSelected}  setCurrentObject={props.setCurrentObject} currentObject={props.currentObject} allObject={props.allObject} updateAllObjectWhenCurrentObjectChange={props.updateAllObjectWhenCurrentObjectChange}/> :
-                            props.currentObject.type === "C-Spline" ? <CSpline setAllObject={props.setAllObject} setCurrentTextFieldSelected={props.setCurrentTextFieldSelected}  setCurrentObject={props.setCurrentObject} currentObject={props.currentObject} allObject={props.allObject} updateAllObjectWhenCurrentObjectChange={props.updateAllObjectWhenCurrentObjectChange}/> :
-                                props.currentObject.type === "Mirrored Point" ? <MirroredPoint setAllObject={props.setAllObject} setCurrentTextFieldSelected={props.setCurrentTextFieldSelected}  setCurrentObject={props.setCurrentObject} currentObject={props.currentObject} allObject={props.allObject} updateAllObjectWhenCurrentObjectChange={props.updateAllObjectWhenCurrentObjectChange}/> :
-                                    props.currentObject.type === "Mirrored Curve" ? <MirroredCurve setAllObject={props.setAllObject} setCurrentTextFieldSelected={props.setCurrentTextFieldSelected}  setCurrentObject={props.setCurrentObject} currentObject={props.currentObject} allObject={props.allObject} updateAllObjectWhenCurrentObjectChange={props.updateAllObjectWhenCurrentObjectChange}/> :
-                                        props.currentObject.type === "NURBS" ? <NURBS setAllObject={props.setAllObject} setCurrentTextFieldSelected={props.setCurrentTextFieldSelected}  setCurrentObject={props.setCurrentObject} currentObject={props.currentObject} allObject={props.allObject} updateAllObjectWhenCurrentObjectChange={props.updateAllObjectWhenCurrentObjectChange}/> :
+                props.currentObject.type === "Point" ?
+                    <Point setCurrentObject={props.setCurrentObject} currentObject={props.currentObject}
+                           allObject={props.allObject}
+                           updateAllObjectWhenCurrentObjectChange={props.updateAllObjectWhenCurrentObjectChange}/> :
+                    props.currentObject.type === "B-Spline" ? <BSpline setAllObject={props.setAllObject}
+                                                                       setCurrentTextFieldSelected={props.setCurrentTextFieldSelected}
+                                                                       setCurrentObject={props.setCurrentObject}
+                                                                       currentObject={props.currentObject}
+                                                                       allObject={props.allObject}
+                                                                       updateAllObjectWhenCurrentObjectChange={props.updateAllObjectWhenCurrentObjectChange}/> :
+                        props.currentObject.type === "Surface" ? <Surface setAllObject={props.setAllObject}
+                                                                          setCurrentTextFieldSelected={props.setCurrentTextFieldSelected}
+                                                                          setCurrentObject={props.setCurrentObject}
+                                                                          currentObject={props.currentObject}
+                                                                          allObject={props.allObject}
+                                                                          updateAllObjectWhenCurrentObjectChange={props.updateAllObjectWhenCurrentObjectChange}/> :
+                            props.currentObject.type === "C-Spline" ? <CSpline setAllObject={props.setAllObject}
+                                                                               setCurrentTextFieldSelected={props.setCurrentTextFieldSelected}
+                                                                               setCurrentObject={props.setCurrentObject}
+                                                                               currentObject={props.currentObject}
+                                                                               allObject={props.allObject}
+                                                                               updateAllObjectWhenCurrentObjectChange={props.updateAllObjectWhenCurrentObjectChange}/> :
+                                props.currentObject.type === "Mirrored Point" ?
+                                    <MirroredPoint setAllObject={props.setAllObject}
+                                                   setCurrentTextFieldSelected={props.setCurrentTextFieldSelected}
+                                                   setCurrentObject={props.setCurrentObject}
+                                                   currentObject={props.currentObject} allObject={props.allObject}
+                                                   updateAllObjectWhenCurrentObjectChange={props.updateAllObjectWhenCurrentObjectChange}/> :
+                                    props.currentObject.type === "Mirrored Curve" ?
+                                        <MirroredCurve setAllObject={props.setAllObject}
+                                                       setCurrentTextFieldSelected={props.setCurrentTextFieldSelected}
+                                                       setCurrentObject={props.setCurrentObject}
+                                                       currentObject={props.currentObject} allObject={props.allObject}
+                                                       updateAllObjectWhenCurrentObjectChange={props.updateAllObjectWhenCurrentObjectChange}/> :
+                                        props.currentObject.type === "NURBS" ? <NURBS setAllObject={props.setAllObject}
+                                                                                      setCurrentTextFieldSelected={props.setCurrentTextFieldSelected}
+                                                                                      setCurrentObject={props.setCurrentObject}
+                                                                                      currentObject={props.currentObject}
+                                                                                      allObject={props.allObject}
+                                                                                      updateAllObjectWhenCurrentObjectChange={props.updateAllObjectWhenCurrentObjectChange}/> :
 
 
-
-                    ""
+                                            ""
             }
         </div>
 

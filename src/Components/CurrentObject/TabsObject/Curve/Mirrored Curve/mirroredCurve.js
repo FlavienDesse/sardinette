@@ -134,7 +134,7 @@ export default function MirroredCurve(props) {
             try {
 
                 newValue.update()
-                updateObjectByAddingChildrenID(new Array(initialCurve),props.currentObject.id,props.allObject,props.setAllObject)
+                updateObjectByAddingChildrenID(new Array(initialCurve), props.currentObject.id, props.allObject, props.setAllObject)
 
 
             } catch (e) {

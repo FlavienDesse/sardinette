@@ -2,11 +2,12 @@ import React from "react";
 import PropTypes from 'prop-types';
 import {
     createBSpline,
-    createPoint,
-    createSurface,
     createCSpline,
+    createMirroredCurve,
     createMirroredPoint,
-    createMirroredCurve, createNURBS
+    createNURBS,
+    createPoint,
+    createSurface
 } from "../../../Misc/Utils"
 import {MenuItem, SubMenu} from "rc-menu";
 
@@ -18,7 +19,7 @@ OpenInsert.propType = {
 
 
 export default function OpenInsert(props) {
-    
+
     const handleAddPoint = () => {
         props.setAllObject((prevState) => {
 
@@ -96,7 +97,8 @@ export default function OpenInsert(props) {
     }
 
     let propsSubMenu = Object.assign({}, props)
-    delete  propsSubMenu.setAllObject
+    delete propsSubMenu.setAllObject
+
 
     return (
         <SubMenu popupOffset={[0, 2]} {...propsSubMenu} title="Insert">

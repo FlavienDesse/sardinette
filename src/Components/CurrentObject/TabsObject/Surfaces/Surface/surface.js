@@ -70,7 +70,7 @@ export default function Surface(props) {
 
             try {
                 newValue.update()
-                updateObjectByAddingChildrenID(new Array(secondCurve),props.currentObject.id,props.allObject,props.setAllObject)
+                updateObjectByAddingChildrenID(new Array(secondCurve), props.currentObject.id, props.allObject, props.setAllObject)
 
 
             } catch (e) {
@@ -118,7 +118,7 @@ export default function Surface(props) {
             try {
 
                 newValue.update()
-                updateObjectByAddingChildrenID(new Array(firstCurve),props.currentObject.id,props.allObject,props.setAllObject)
+                updateObjectByAddingChildrenID(new Array(firstCurve), props.currentObject.id, props.allObject, props.setAllObject)
 
             } catch (e) {
                 enqueueSnackbar(e.message, {

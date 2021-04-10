@@ -45,7 +45,7 @@ export default function CSpline(props) {
         let lastValue = props.currentObject;
         let newValue = props.currentObject
         newValue.visible = event.target.checked;
-        props.updateAllObjectWhenCurrentObjectChange(lastValue, newValue,false)
+        props.updateAllObjectWhenCurrentObjectChange(lastValue, newValue, false)
         props.setCurrentObject(newValue)
     }
 
@@ -55,7 +55,7 @@ export default function CSpline(props) {
         let newValue = props.currentObject
         newValue.closed = event.target.checked;
         newValue.update()
-        props.updateAllObjectWhenCurrentObjectChange(lastValue, newValue,true)
+        props.updateAllObjectWhenCurrentObjectChange(lastValue, newValue, true)
         props.setCurrentObject(newValue)
     }
 
@@ -72,26 +72,24 @@ export default function CSpline(props) {
         var rgx = /[0-9]*/;
         let val = event.target.value.match(rgx)
 
-        if( event.target.value=== "" || val[0] === "" ){
+        if (event.target.value === "" || val[0] === "") {
             setResolution("");
-        }
-        else{
+        } else {
             setResolution(parseInt(val[0]));
         }
     }
 
     const keyPressTextFieldName = (e) => {
         if (e.keyCode === 13) {
-            if(name === ""){
+            if (name === "") {
                 enqueueSnackbar("name can't be empty", {
                     variant: 'error',
                 });
-            }
-            else{
+            } else {
                 let lastValue = props.currentObject;
                 let newValue = props.currentObject
                 newValue.name = name
-                props.updateAllObjectWhenCurrentObjectChange(lastValue, newValue,false)
+                props.updateAllObjectWhenCurrentObjectChange(lastValue, newValue, false)
                 props.setCurrentObject(newValue)
             }
 
@@ -107,14 +105,14 @@ export default function CSpline(props) {
 
             try {
                 newValue.update()
-                updateObjectByAddingChildrenID(controlsPoints,props.currentObject.id,props.allObject,props.setAllObject)
+                updateObjectByAddingChildrenID(controlsPoints, props.currentObject.id, props.allObject, props.setAllObject)
 
             } catch (e) {
                 enqueueSnackbar(e.message, {
                     variant: 'error',
                 });
             }
-            props.updateAllObjectWhenCurrentObjectChange(lastValue, newValue,true)
+            props.updateAllObjectWhenCurrentObjectChange(lastValue, newValue, true)
             props.setCurrentObject(newValue)
 
         }
@@ -134,7 +132,7 @@ export default function CSpline(props) {
                     variant: 'error',
                 });
             }
-            props.updateAllObjectWhenCurrentObjectChange(lastValue, newValue,true)
+            props.updateAllObjectWhenCurrentObjectChange(lastValue, newValue, true)
             props.setCurrentObject(newValue)
         }
     }
@@ -143,8 +141,8 @@ export default function CSpline(props) {
     const handleFocusOnTextFieldControlsPoints = (e) => {
         setControlsPoints([])
         props.setCurrentTextFieldSelected({
-            acceptType:["Point","Mirrored Point"],
-            clickCtrl : addControlsPoints,
+            acceptType: ["Point", "Mirrored Point"],
+            clickCtrl: addControlsPoints,
             simpleClick: setOneControlsPoints
         })
     }
@@ -178,7 +176,8 @@ export default function CSpline(props) {
                 <Typography className={classes.text}>
                     Name
                 </Typography>
-                <TextField value={name} onBlur={blurTextFieldName} onKeyDown={keyPressTextFieldName} onChange={handleChangeTextFieldName}
+                <TextField value={name} onBlur={blurTextFieldName} onKeyDown={keyPressTextFieldName}
+                           onChange={handleChangeTextFieldName}
                            InputProps={{className: classes.inputTextField}}/>
             </div>
 
