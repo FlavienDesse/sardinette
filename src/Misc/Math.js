@@ -477,5 +477,79 @@ function cLoftSurface(curves, minResolution, areClosed) {
     return surface
 }
 
+<<<<<<< HEAD:src/Misc/Math.js
 export {bSpline, cSpline, toVector3, fromVector3, curveLength, distance, getSurface, mirrorPoint, mirrorPointFromCurve, mirrorCurve, cLoftSurface}
 
+=======
+/**
+ * Compute a point of the Bezier's curve using De Casteljau’s algorithm
+ * @param {Array<THREE.Vector3>} controlPoints 
+ * @param {number} t The timestep
+ * @returns A point corresponding to the Bezier's curve of the control points at the given timestep
+ */
+function bezierStep(controlPoints, t) {
+    if(controlPoints.length === 1) {
+        return controlPoints[0]
+    }
+
+    let newControlPoints = []
+
+    controlPoints.forEach((elt, idx) => {
+        if(idx >= controlPoints.length - 1) return
+        newControlPoints.push(new THREE.Vector3(
+            elt.x + (controlPoints[idx + 1].x - elt.x) * t,
+            elt.y + (controlPoints[idx + 1].y - elt.y) * t,
+            elt.z + (controlPoints[idx + 1].z - elt.z) * t,
+        ))
+    })
+    return bezierStep(newControlPoints, t)
+}
+
+/**
+ * Computes the Bezier's curve using De Casteljau’s algorithm
+ * @link https://javascript.info/bezier-curve
+ * @param {Array<THREE.Vector3>} controlPoints 
+ * @param {number} resolution 
+ * @returns {Array<THREE.Vector3>}
+ */
+function bezierCurve(controlPoints, resolution) {
+
+    controlPoints = toVector3(controlPoints)
+
+    let points = []
+
+    // Set the default resolution per unit
+    if(!resolution) resolution = 100
+
+    // Let's say the length is equal to 1, there are resolution * 1 points that are represented by pNum
+    let pNum = resolution
+    let length = 1
+
+    let lastLength = length
+    do {
+        // With each loop, pNum will change according to the computed length
+        // as the number of points will always be resolution * length
+        pNum = Math.floor(resolution * length)
+        points = []
+
+        // Compute a homogeneous array of points representing the spline
+        let t = 0
+        for(t = 0; t <= pNum; t++) {
+            points.push(bezierStep(controlPoints, t / pNum))
+        }
+
+        // Compute the length of the curve
+        length = curveLength(points)
+        
+        // If the length hasn't changed, we stop here
+        if(lastLength === length) break
+        lastLength = length
+        // While the number of points doesn't match the length of the curve with the given resolution
+        // This is an approximation with an error of 0.5%
+    } while(length * 0.995 > pNum / resolution || length * 1.005 < pNum / resolution)
+    
+    return points
+}
+
+export {spline, cSpline, toVector3, fromVector3, curveLength, distance, getSurface, mirrorPoint, mirrorPointFromCurve, mirrorCurve, cLoftSurface, bezierCurve}
+>>>>>>> Maths:src/Misc/maths.js
