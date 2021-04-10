@@ -338,6 +338,7 @@ function createNURBS(controlsPoints) {
     NURBS.update = () => {
 
         let allControlsPoints = NURBS.controlsPoints.map(a => a.position);
+        console.log(NURBS.knots)
         try {
             let res = bSpline(NURBS.degree, allControlsPoints, NURBS.resolution, NURBS.knots, NURBS.controlsPoints.map(a => a.weight))
             NURBS.allCalculatedPoints = res

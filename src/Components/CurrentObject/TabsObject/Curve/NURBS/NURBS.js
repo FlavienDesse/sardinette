@@ -220,7 +220,7 @@ export default function NURBS(props) {
             }))
         } else {
             setKnots((prevState => {
-                prevState[index]=val[0]
+                prevState[index]=parseFloat(val[0])
                 return ([...prevState])
             }))
         }
@@ -237,7 +237,7 @@ export default function NURBS(props) {
             }
         }
         if(isValidKnots){
-          
+
             let lastValue = props.currentObject;
             let newValue = props.currentObject
             newValue.knots = knots
@@ -329,7 +329,7 @@ export default function NURBS(props) {
                                     new Array(controlsPoints.length+degree+1).fill(undefined, undefined, undefined).map((value, index) => {
                                         return <TableCell key={index}>
                                             {
-                                                <TextField  error={!Boolean(knots[index])}  value={knots[index]}  InputProps={{className: classes.inputTextFieldTable}}
+                                                <TextField  error={knots[index] === undefined || knots[index] === "" }  value={knots[index]}  InputProps={{className: classes.inputTextFieldTable}}
 
 
                                                             onChange={(e)=>handleChangeTextFieldKnots(e,index)}

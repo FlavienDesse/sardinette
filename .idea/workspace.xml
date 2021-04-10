@@ -11,15 +11,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="78afd4d1-1ed3-4b4d-a584-1aa195b3fadc" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Components/CurrentObject/TabsObject/Curve/NURBS/NURBS.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Components/CurrentObject/TabsObject/Curve/NURBS/style.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/CurrentObject/TabsObject/tabsObject.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/CurrentObject/TabsObject/tabsObject.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Main/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Main/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Main/style.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Main/style.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Menu/OpenInsert/openInsert.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Menu/OpenInsert/openInsert.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Misc/Constant.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Misc/Constant.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Misc/Math.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Misc/Math.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/CurrentObject/TabsObject/Curve/NURBS/NURBS.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/CurrentObject/TabsObject/Curve/NURBS/NURBS.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Misc/Utils.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Misc/Utils.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
