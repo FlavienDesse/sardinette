@@ -145,8 +145,8 @@ export default function MirroredPoint(props) {
 
 
             try {
-                newValue.update()
                 updateObjectByAddingChildrenID(new Array(initialPoint), props.currentObject.id, props.allObject, props.setAllObject)
+                newValue.update()
 
 
             } catch (e) {

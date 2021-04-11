@@ -12,53 +12,12 @@
   <component name="ChangeListManager">
     <list default="true" id="78afd4d1-1ed3-4b4d-a584-1aa195b3fadc" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/AllObjectAndGlobalSettings/ArrayRenderObject/arrayRenderObject.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/AllObjectAndGlobalSettings/ArrayRenderObject/arrayRenderObject.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/AllObjectAndGlobalSettings/ArrayRenderObject/style.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/AllObjectAndGlobalSettings/ArrayRenderObject/style.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/AllObjectAndGlobalSettings/allObjectAndGlobalSettings.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/AllObjectAndGlobalSettings/allObjectAndGlobalSettings.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/AllObjectAndGlobalSettings/style.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/AllObjectAndGlobalSettings/style.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/AxisView/axisView.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/AxisView/axisView.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/CurrentObject/TabsObject/Curve/B-Spline/bSpline.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/CurrentObject/TabsObject/Curve/B-Spline/bSpline.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/CurrentObject/TabsObject/Curve/B-Spline/style.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/CurrentObject/TabsObject/Curve/B-Spline/style.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/CurrentObject/TabsObject/Curve/C-Spline/cSpline.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/CurrentObject/TabsObject/Curve/C-Spline/cSpline.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/CurrentObject/TabsObject/Curve/C-Spline/style.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/CurrentObject/TabsObject/Curve/C-Spline/style.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/CurrentObject/TabsObject/Curve/Mirrored Curve/mirroredCurve.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/CurrentObject/TabsObject/Curve/Mirrored Curve/mirroredCurve.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/CurrentObject/TabsObject/Curve/Mirrored Curve/style.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/CurrentObject/TabsObject/Curve/Mirrored Curve/style.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/CurrentObject/TabsObject/Curve/NURBS/NURBS.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/CurrentObject/TabsObject/Curve/NURBS/NURBS.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/CurrentObject/TabsObject/Curve/NURBS/style.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/CurrentObject/TabsObject/Curve/NURBS/style.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Components/CurrentObject/TabsObject/Point/MirroredPoint/mirroredPoint.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/CurrentObject/TabsObject/Point/MirroredPoint/mirroredPoint.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/CurrentObject/TabsObject/Point/MirroredPoint/style.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/CurrentObject/TabsObject/Point/MirroredPoint/style.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/CurrentObject/TabsObject/Point/Point/point.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/CurrentObject/TabsObject/Point/Point/point.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/CurrentObject/TabsObject/Point/Point/style.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/CurrentObject/TabsObject/Point/Point/style.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/CurrentObject/TabsObject/Surfaces/Surface/style.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/CurrentObject/TabsObject/Surfaces/Surface/style.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/CurrentObject/TabsObject/Surfaces/Surface/surface.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/CurrentObject/TabsObject/Surfaces/Surface/surface.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/CurrentObject/TabsObject/tabsObject.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/CurrentObject/TabsObject/tabsObject.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/CurrentObject/TabsTexture/style.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/CurrentObject/TabsTexture/style.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/CurrentObject/TabsTexture/tabsTexture.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/CurrentObject/TabsTexture/tabsTexture.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/CurrentObject/currentObject.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/CurrentObject/currentObject.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/CurrentObject/style.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/CurrentObject/style.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Components/Main/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Main/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Main/style.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Main/style.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Menu/OpenExamples/openExamples.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Menu/OpenExamples/openExamples.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Menu/OpenExamples/style.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Menu/OpenExamples/style.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Components/Menu/OpenFile/openFile.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Menu/OpenFile/openFile.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Menu/OpenFile/style.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Menu/OpenFile/style.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Menu/OpenInsert/openInsert.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Menu/OpenInsert/openInsert.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Menu/OpenInsert/style.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Menu/OpenInsert/style.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Menu/OpenView/style.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Menu/OpenView/style.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Menu/menu.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Menu/menu.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Menu/style.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Menu/style.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Components/Scene/scene.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Scene/scene.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Scene/style.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Scene/style.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Toolbar/style.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Toolbar/style.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Misc/Background.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Misc/Background.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Misc/Constant.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Misc/Constant.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Misc/Export.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Misc/Export.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Misc/Math.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Misc/Math.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Misc/Utils.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Misc/Utils.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -154,19 +113,6 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration default="true" type="js.build_tools.npm">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
@@ -228,6 +174,7 @@
       <workItem from="1617793403523" duration="4165000" />
       <workItem from="1617825685739" duration="603000" />
       <workItem from="1617867209918" duration="1332000" />
+      <workItem from="1618154109350" duration="5933000" />
     </task>
     <servers />
   </component>
@@ -271,29 +218,29 @@
     <state x="795" y="338" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1616708358684" />
     <state x="1060" y="455" key="FileChooserDialogImpl/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1616011878145" />
     <state x="3620" y="455" key="FileChooserDialogImpl/0.0.2560.1400/2560.0.2560.1400@2560.0.2560.1400" timestamp="1617112748228" />
-    <state width="2517" height="247" key="GridCell.Tab.0.bottom" timestamp="1617881720091">
+    <state width="2517" height="248" key="GridCell.Tab.0.bottom" timestamp="1618156488348">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state width="1877" height="217" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1617703508887" />
-    <state width="2517" height="247" key="GridCell.Tab.0.bottom/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1617881720091" />
+    <state width="2517" height="248" key="GridCell.Tab.0.bottom/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1618156488348" />
     <state width="2517" height="247" key="GridCell.Tab.0.bottom/0.0.2560.1400/2560.0.2560.1400@2560.0.2560.1400" timestamp="1617205006589" />
-    <state width="2517" height="247" key="GridCell.Tab.0.center" timestamp="1617881720091">
+    <state width="2517" height="248" key="GridCell.Tab.0.center" timestamp="1618156488348">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state width="1877" height="217" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1617703508887" />
-    <state width="2517" height="247" key="GridCell.Tab.0.center/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1617881720091" />
+    <state width="2517" height="248" key="GridCell.Tab.0.center/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1618156488348" />
     <state width="2517" height="247" key="GridCell.Tab.0.center/0.0.2560.1400/2560.0.2560.1400@2560.0.2560.1400" timestamp="1617205006589" />
-    <state width="2517" height="247" key="GridCell.Tab.0.left" timestamp="1617881720091">
+    <state width="2517" height="248" key="GridCell.Tab.0.left" timestamp="1618156488347">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state width="1877" height="217" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1617703508887" />
-    <state width="2517" height="247" key="GridCell.Tab.0.left/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1617881720091" />
+    <state width="2517" height="248" key="GridCell.Tab.0.left/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1618156488347" />
     <state width="2517" height="247" key="GridCell.Tab.0.left/0.0.2560.1400/2560.0.2560.1400@2560.0.2560.1400" timestamp="1617205006589" />
-    <state width="2517" height="247" key="GridCell.Tab.0.right" timestamp="1617881720091">
+    <state width="2517" height="248" key="GridCell.Tab.0.right" timestamp="1618156488348">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state width="1877" height="217" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1617703508887" />
-    <state width="2517" height="247" key="GridCell.Tab.0.right/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1617881720091" />
+    <state width="2517" height="248" key="GridCell.Tab.0.right/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1618156488348" />
     <state width="2517" height="247" key="GridCell.Tab.0.right/0.0.2560.1400/2560.0.2560.1400@2560.0.2560.1400" timestamp="1617205006589" />
     <state width="2517" height="492" key="GridCell.Tab.1.bottom" timestamp="1617314573029">
       <screen x="0" y="0" width="2560" height="1400" />
@@ -361,16 +308,16 @@
     <state x="889" y="212" width="771" height="699" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1617018219136" />
     <state x="985" y="302" width="922" height="680" key="find.popup/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1618077838710" />
     <state x="4115" y="402" width="585" height="534" key="find.popup/0.0.2560.1400/2560.0.2560.1400@2560.0.2560.1400" timestamp="1616455411338" />
-    <state x="821" y="323" key="run.anything.popup" timestamp="1618065916800">
+    <state x="821" y="323" key="run.anything.popup" timestamp="1618158491018">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="616" y="240" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1617703476669" />
-    <state x="821" y="323" key="run.anything.popup/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1618065916800" />
-    <state x="943" y="315" width="672" height="678" key="search.everywhere.popup" timestamp="1617751791328">
+    <state x="821" y="323" key="run.anything.popup/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1618158491018" />
+    <state x="943" y="315" width="672" height="678" key="search.everywhere.popup" timestamp="1618156656115">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="1072" y="252" width="672" height="504" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1616866637861" />
-    <state x="943" y="315" width="672" height="678" key="search.everywhere.popup/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1617751791328" />
+    <state x="943" y="315" width="672" height="678" key="search.everywhere.popup/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1618156656115" />
     <state x="1002" y="612" key="vcs.readOnlyHandler.ReadOnlyStatusDialog" timestamp="1616013727573">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>

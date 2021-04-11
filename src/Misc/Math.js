@@ -207,7 +207,7 @@ function toVector1(points) {
  * @param {Array<number>} weights optional control points weights. Must be the same length as the control point array.
  * @returns {Array<number>} an array of points that represents the spline.
  */
-function spline(degree, controlPoints, resolution, knots, weights) {
+function bSpline(degree, controlPoints, resolution, knots, weights) {
 
     let formattedControlPoints = fromVector3(controlPoints)
 
@@ -306,12 +306,35 @@ function cSpline(controlPoints, resolution, closed, isResolutionRelativeToLength
 
 /**
  * 
- * @param {Array<THREE.Vector3>} curveA 
- * @param {Array<THREE.Vector3>} curveB 
+ * @param {Array<number>} curveA
+ * @param {Array<number>} curveB
  * @returns {Array<Array<THREE.Vector3>} An array of triangles
  */
 function getSurface(curveA, curveB) {
     let triangles = []
+
+    let tempCurveA = []
+    let tempCurveB = []
+
+    for(let i = 0 ; i < curveA.length ; i+=3){
+        tempCurveA.push({
+            x:curveA[i],
+            y:curveA[i+1],
+            z:curveA[i+2],
+        })
+    }
+
+    for(let i = 0 ; i < curveB.length ; i+=3){
+        tempCurveB.push({
+            x:curveB[i],
+            y:curveB[i+1],
+            z:curveB[i+2],
+        })
+    }
+
+    curveA = tempCurveA
+    curveB = tempCurveB
+
 
     let maxLength = Math.max(curveA.length, curveB.length)
     let smallCurve
@@ -390,19 +413,18 @@ function mirrorPointFromCurve(point, curve) {
  * @param {string} axis 
  */
 function mirrorPoint(point, axis) {
-    let res = new THREE.Vector3(point.x, point.y, point.z)
 
     switch(axis.toLowerCase()) {
-        case 'x': res.x *= -1
+        case 'x': point[0] *= -1
             break
-        case 'y': res.y *= -1
+        case 'y': point[1] *= -1
             break
-        case 'z': res.z *= -1
+        case 'z': point[2] *= -1
             break
         default:
             throw new Error("Axis invalid")
     }
-    return res
+    return point
 }
 
 /**
@@ -412,11 +434,17 @@ function mirrorPoint(point, axis) {
  * @returns {Array<THREE.Vector3>} The mirrored curve
  */
 function mirrorCurve(curve, axis) {
+
     let res = []
 
-    curve.foreach(elt => {
-        res.push(mirrorPoint(elt, axis))
-    })
+    for(let i = 0 ; i < curve.length  ; i+=3){
+        let elt = [curve[i],curve[i+1],curve[i+2]]
+
+        res.push(...mirrorPoint(elt, axis))
+    }
+
+
+
 
     return res
 }
@@ -548,4 +576,4 @@ function bezierCurve(controlPoints, resolution) {
     return toVector1(points)
 }
 
-export {spline, cSpline, toVector3, fromVector3, toVector1, curveLength, distance, getSurface, mirrorPoint, mirrorPointFromCurve, mirrorCurve, cLoftSurface, bezierCurve}
+export {bSpline, cSpline, toVector3, fromVector3, toVector1, curveLength, distance, getSurface, mirrorPoint, mirrorPointFromCurve, mirrorCurve, cLoftSurface, bezierCurve}

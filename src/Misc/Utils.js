@@ -239,8 +239,8 @@ function createMirroredPoint(initialPoint, axis) {
 
 
         try {
-            let res = mirrorPoint(point.initialPoint.position, point.axis.value)
-            point.position.set(res.x, res.y, res.z)
+            let res = mirrorPoint([point.initialPoint.position.x,point.initialPoint.position.y,point.initialPoint.position.z], point.axis.value)
+            point.position.set(res[0],res[1], res[2])
             point.isError = false
         } catch (e) {
             point.isError = true
@@ -390,6 +390,7 @@ function createBSpline(controlsPoints) {
     if (controlsPoints) {
         try {
             let allPositionControlsPoints = controlsPoints.map(a => a.position);
+
             let res = bSpline(mesh.degree, allPositionControlsPoints, mesh.resolution, null, controlsPoints.map(a => a.weight))
             mesh.allCalculatedPoints = res
             bSplineParam.setPoints(res)
@@ -564,6 +565,9 @@ function createSurface(firstCurve, secondCurve) {
 
             let pointFirstCurve = firstCurve.allCalculatedPoints
             let pointSecondCurve = secondCurve.allCalculatedPoints
+
+
+
 
 
             let res = getSurface(pointFirstCurve, pointSecondCurve)

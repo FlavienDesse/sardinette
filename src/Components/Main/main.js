@@ -36,6 +36,8 @@ export default function Main() {
      */
     const [currentTextFieldSelected, setCurrentTextFieldSelected] = React.useState(null);
 
+
+
     const control = useRef();
     const camera = useRef();
     const renderer = useRef();
@@ -55,12 +57,10 @@ export default function Main() {
 
         const firstCurve = createBSpline([firstPoint, secondPoint, mirrorFirstPoint])
 
-        const mirrorFirstCurve = createMirroredCurve(firstCurve, axisY)
-        const surface = createSurface(firstCurve, mirrorFirstCurve)
+   
 
         const nurbs = createNURBS([firstPoint, mirrorFirstPoint, secondPoint])
-        /*  const firstPoint = createPoint({x:0,y:2,z:2});
-          const secondPoint=createPoint({x:2,y:2,z:0})
+
 
           const thirdPoint=createPoint({x:0,y:0,z:0});
 
@@ -68,11 +68,11 @@ export default function Main() {
 
           const mirrorFirstCurve = createMirroredCurve(firstCurve,axisY)
 
-         const surface = createSurface(firstCurve,mirrorFirstCurve)*/
+         const surface = createSurface(firstCurve,mirrorFirstCurve)
 
 
         //setAllObject([axisX,axisY,axisZ,firstPoint,secondPoint,thirdPoint])
-        setAllObject([firstPoint, mirrorFirstPoint, secondPoint, firstCurve, mirrorFirstCurve, nurbs, surface])
+          setAllObject([firstPoint, mirrorFirstPoint, secondPoint, firstCurve, mirrorFirstCurve, nurbs, surface])
 
     }, [])
 

@@ -184,7 +184,7 @@ export default function Scene(props) {
 
         let allObjectVisibile = []
         props.allObject.forEach((object) => {
-            if (object.visible || !object.isError) {
+            if (object.visible && !object.isError) {
                 allObjectVisibile.push(object)
             }
 
