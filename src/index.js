@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-import {spline, cSpline, toVector3, fromVector3, getSurface, mirrorPoint, mirrorPointFromCurve, cLoftSurface, bezierCurve} from './utils/maths.js'
+import {spline, cSpline, toVector3, fromVector3, getSurface, mirrorPoint, mirrorPointFromCurve, cLoftSurface, bezierCurve, toVector1} from './utils/maths.js'
 import * as THREE from 'three'
 
 let controlPoints = [
@@ -9,6 +9,8 @@ let controlPoints = [
   new THREE.Vector3( -1.5, 0 ),
   new THREE.Vector3( -3, 1.5 )
 ];
+
+console.log(toVector1(controlPoints))
 
 let isClosed = false
 

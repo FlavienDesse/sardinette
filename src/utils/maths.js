@@ -181,21 +181,35 @@ function toVector3(points) {
 }
 
 /**
+ * 
+ * @param {Array<Array<number>>|Array<THREE.Vector3>} points 
+ * @returns {Array<number>}
+ */
+function toVector1(points) {
+    points = fromVector3(points)
+
+    let res = []
+    points.forEach(elt => {
+        elt.forEach(coord => {
+            res.push(coord)
+        })
+    })
+
+    return res
+}
+
+/**
  * Computes the spline according to the inputs
  * @param {number} degree degree of the curve. Must be less than or equal to the number of control points minus 1. 1 is linear, 2 is quadratic, 3 is cubic, and so on. 
  * @param {Array<Array<number>>|Array<THREE.Vector3>} controlPoints control points that will be interpolated. Can be vectors of any dimensionality ([x, y], [x, y, z], ...)
  * @param {number} resolution number of points per unit in the returned curve
  * @param {Array<number>} knots optional knot vector. Allow to modulate the control points interpolation spans on t. Must be a non-decreasing sequence of number of points + degree + 1 length values. 
  * @param {Array<number>} weights optional control points weights. Must be the same length as the control point array.
- * @returns {Array<Array<number>>|Array<THREE.Vector3>} an array of points that represents the spline.
+ * @returns {Array<number>} an array of points that represents the spline.
  */
 function spline(degree, controlPoints, resolution, knots, weights) {
 
-    let formattedControlPoints = controlPoints
-    // Format the control points if not in the good format
-    if(controlPoints[0].x !== undefined) {
-        formattedControlPoints = fromVector3(controlPoints)
-    }
+    let formattedControlPoints = fromVector3(controlPoints)
 
     let points = []
 
@@ -234,11 +248,7 @@ function spline(degree, controlPoints, resolution, knots, weights) {
         // This is an approximation with an error of 0.5%
     } while(length * 0.995 > pNum / resolution || length * 1.005 < pNum / resolution)
     
-    // If the control points were THREE.Vector3, convert the resulting curve into a THREE.Vector3 array
-    if(controlPoints[0].x !== undefined) {
-        return toVector3(points)
-    }
-    else return points
+    return toVector1(points)
 }
 
 // C-SPLINE
@@ -248,15 +258,11 @@ function spline(degree, controlPoints, resolution, knots, weights) {
  * @param {Array<Array<number>>|Array<THREE.Vector3>} controlPoints control points that will be interpolated. Can be vectors of any dimensionality ([x, y], [x, y, z], ...)
  * @param {number} resolution number of points per unit in the returned curve
  * @param {boolean} closed if the curve should be closed or not
- * @returns {Array<Array<number>>|Array<THREE.Vector3>} an array of points that represents the spline.
+ * @returns {Array<number>} an array of points that represents the spline.
  */
 function cSpline(controlPoints, resolution, closed, isResolutionRelativeToLength) {
     
-    let formattedControlPoints = controlPoints
-    // Format the control points if not in the good format
-    if(controlPoints[0].x === undefined) {
-        formattedControlPoints = toVector3(controlPoints)
-    }
+    let formattedControlPoints = toVector3(controlPoints)
 
     if(isResolutionRelativeToLength === undefined) isResolutionRelativeToLength = true
 
@@ -295,11 +301,7 @@ function cSpline(controlPoints, resolution, closed, isResolutionRelativeToLength
         // This is an approximation with an error of 0.5%
     } while(isResolutionRelativeToLength && (length * 0.995 > pNum / resolution || length * 1.005 < pNum / resolution))
     
-    // If the control points were not THREE.Vector3, convert the resulting curve into a coordinates array
-    if(controlPoints[0].x === undefined) {
-        return fromVector3(points)
-    }
-    else return points
+    return toVector1(points)
 }
 
 /**
@@ -546,4 +548,4 @@ function bezierCurve(controlPoints, resolution) {
     return points
 }
 
-export {spline, cSpline, toVector3, fromVector3, curveLength, distance, getSurface, mirrorPoint, mirrorPointFromCurve, mirrorCurve, cLoftSurface, bezierCurve}
+export {spline, cSpline, toVector3, fromVector3, toVector1, curveLength, distance, getSurface, mirrorPoint, mirrorPointFromCurve, mirrorCurve, cLoftSurface, bezierCurve}
