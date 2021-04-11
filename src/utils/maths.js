@@ -545,7 +545,7 @@ function bezierCurve(controlPoints, resolution) {
         // This is an approximation with an error of 0.5%
     } while(length * 0.995 > pNum / resolution || length * 1.005 < pNum / resolution)
     
-    return points
+    return toVector1(points)
 }
 
 export {spline, cSpline, toVector3, fromVector3, toVector1, curveLength, distance, getSurface, mirrorPoint, mirrorPointFromCurve, mirrorCurve, cLoftSurface, bezierCurve}

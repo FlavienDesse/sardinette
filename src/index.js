@@ -65,13 +65,13 @@ function graph() {
   })
 
   let points = bezierCurve(controlPoints, 20)
-
+  console.log(points)
   theContext.beginPath();
-  theContext.moveTo(points[0][0] * 50 + 250, -points[0][1] * 50 + 250);
+  theContext.moveTo(points[0] * 50 + 250, -points[1] * 50 + 250);
   let x
   theContext.strokeStyle = '#DDA500'
-  for (x = 1; x < points.length; x++) {
-    theContext.lineTo(points[x].x * 50 + 250, -points[x].y* 50 + 250);
+  for (x = 3; x < points.length; x+=3) {
+    theContext.lineTo(points[x] * 50 + 250, -points[x + 1]* 50 + 250);
   }
   theContext.stroke();
   theContext.closePath()
