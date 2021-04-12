@@ -1,10 +1,11 @@
 export default class Object {
 
 
-    static CONSTANT_ALL_CURVES = ["Point,Mirrored Point"]
+    static CONSTANT_ALL_POINTS = ["Point,Mirrored Point"]
     static CONSTANT_ALL_SURFACES = ["Surface", "Import STL"]
-    static CONSTANT_ALL_POINTS = ["B-Spline,C-Spline,Mirrored Curve"]
+    static CONSTANT_ALL_CURVES = ["B-Spline,C-Spline,Mirrored Curve","Bezier","NURBS"]
 
+    static DEFAULT_NAME_BEZIER = "Bezier0"
     static DEFAULT_NAME_NURBS = "NURBS0"
     static DEFAULT_NAME_C_SPLINE = "C-Spline0"
     static DEFAULT_NAME_B_SPLINE = "B-Spline0"

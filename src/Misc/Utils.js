@@ -1,7 +1,7 @@
 import * as THREE from "three";
 import {BufferGeometry, Mesh, MeshBasicMaterial, SphereGeometry} from "three";
 import Constant from "./Constant";
-import {bSpline, cSpline, getSurface, mirrorCurve, mirrorPoint} from "./Math";
+import {bezierCurve, bSpline, cSpline, getSurface, mirrorCurve, mirrorPoint} from "./Math";
 import {MeshLine, MeshLineMaterial, MeshLineRaycast} from 'three.meshline';
 
 /*
@@ -70,6 +70,10 @@ function increaseDefaultName(type) {
             matches = Constant.DEFAULT_NAME_NURBS.match(reg);
             Constant.DEFAULT_NAME_NURBS = Constant.DEFAULT_NAME_NURBS.replace(reg, parseInt(matches[0], 10) + 1)
             break;
+        case "Bezier":
+            matches = Constant.DEFAULT_NAME_BEZIER.match(reg);
+            Constant.DEFAULT_NAME_BEZIER = Constant.DEFAULT_NAME_BEZIER.replace(reg, parseInt(matches[0], 10) + 1)
+            break;
         default:
             throw new Error("unknow type provided")
     }
@@ -124,7 +128,7 @@ function updateChildren(allObject, currentObject, isDeletion) {
                     }
                 })
             } else {
-                if (prev.type === "B-Spline" || prev.type === "C-Spline" || prev.type === "C-Spline") {
+                if (prev.type === "B-Spline" || prev.type === "C-Spline" || prev.type === "C-Spline" || prev.type === "Bezier") {
                     if (isDeletion) {
                         prev.controlsPoints = prev.controlsPoints.filter(controlsPoints => controlsPoints.id !== currentObject.id)
                     }
@@ -347,6 +351,7 @@ function createNURBS(controlsPoints) {
 
         let allControlsPoints = mesh.controlsPoints.map(a => a.position);
         try {
+            console.log(mesh.knots)
             let res = bSpline(mesh.degree, allControlsPoints, mesh.resolution, mesh.knots, mesh.controlsPoints.map(a => a.weight))
             mesh.allCalculatedPoints = res
             line.setPoints(res)
@@ -411,6 +416,67 @@ function createBSpline(controlsPoints) {
         let allControlsPoints = mesh.controlsPoints.map(a => a.position);
         try {
             let res = bSpline(mesh.degree, allControlsPoints, mesh.resolution, null, mesh.controlsPoints.map(a => a.weight))
+            mesh.allCalculatedPoints = res
+            bSplineParam.setPoints(res)
+            mesh.isError = false
+
+        } catch (e) {
+            mesh.isError = true
+            throw new Error(e.message)
+        }
+    }
+
+
+    return mesh
+}
+
+function createBezier(controlsPoints) {
+
+    const geometry = new BufferGeometry().setFromPoints([]);
+
+    const material = new MeshLineMaterial({
+        color: Constant.DEFAULT_COLOR_CURVE,
+        lineWidth: 0.04,
+        sizeAttenuation: true,
+
+    });
+
+    const bSplineParam = new MeshLine(geometry, material);
+    const mesh = new THREE.Mesh(bSplineParam, material);
+    mesh.raycast = MeshLineRaycast;
+    mesh.name = Constant.DEFAULT_NAME_BEZIER
+    increaseDefaultName("Bezier")
+    mesh.type = "Bezier"
+    mesh.controlsPoints = []
+    mesh.childrenID = []
+    mesh.resolution = 100
+    mesh.isError = true
+    mesh.allCalculatedPoints = []
+
+    if (controlsPoints) {
+        try {
+            let allPositionControlsPoints = controlsPoints.map(a => a.position);
+
+            let res = bezierCurve(allPositionControlsPoints,mesh.resolution = 100)
+            mesh.allCalculatedPoints = res
+            bSplineParam.setPoints(res)
+            mesh.isError = false
+            mesh.controlsPoints = controlsPoints
+
+
+            controlsPoints.forEach((controls) => {
+                controls.childrenID.push(mesh.id)
+            })
+
+        } catch (e) {
+            console.log(e.message)
+            throw new Error("Error in creation bezier")
+        }
+    }
+    mesh.update = () => {
+        let allControlsPoints = mesh.controlsPoints.map(a => a.position);
+        try {
+            let res = bezierCurve(allControlsPoints,mesh.resolution)
             mesh.allCalculatedPoints = res
             bSplineParam.setPoints(res)
             mesh.isError = false
@@ -749,6 +815,18 @@ function modifyObjectWhenClickOn(object, currentObject) {
                 return currentObject
             }
         }
+        else if (object.type === "Bezier") {
+            if (currentObject == null || (currentObject.id !== object.id)) {
+
+                let intersect = object
+
+
+                return intersect;
+
+            } else {
+                return currentObject
+            }
+        }
     }
 
 
@@ -769,6 +847,7 @@ export {
     createMirroredPoint,
     createMirroredCurve,
     updateObjectByAddingChildrenID,
-    createNURBS
+    createNURBS,
+    createBezier
 }
 

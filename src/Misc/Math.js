@@ -217,7 +217,19 @@ function bSpline(degree, controlPoints, resolution, knots, weights) {
     if(!resolution) resolution = 50
 
     // Set the default knots array to undefined (will be initialized in the deBoor function)
-    if(!knots || knots.length === 0) knots = undefined
+    if(!knots || knots.length === 0){
+        knots = undefined
+    }
+    else{
+        const isKnotsAscending = array => array.map((a, i) => a > array[i + 1]).indexOf(true) === -1
+        if(!isKnotsAscending(knots)){
+
+            throw new Error("Bad knots vector")
+        }
+    }
+
+
+
     // Set the default weights array to undefined (will be initialized in the deBoor function)
     if(!weights || weights.length === 0) weights = undefined
 
@@ -409,7 +421,7 @@ function mirrorPointFromCurve(point, curve) {
 
 /**
  * 
- * @param {THREE.Vector3} point 
+ * @param {Array<number>} point
  * @param {string} axis 
  */
 function mirrorPoint(point, axis) {
@@ -429,9 +441,9 @@ function mirrorPoint(point, axis) {
 
 /**
  * 
- * @param {Array<THREE.Vector3>} curve 
+ * @param {Array<number>} curve
  * @param {string} axis 
- * @returns {Array<THREE.Vector3>} The mirrored curve
+ * @returns {Array<number>} The mirrored curve
  */
 function mirrorCurve(curve, axis) {
 

@@ -7,6 +7,7 @@ import CSpline from "./Curve/C-Spline/cSpline";
 import MirroredPoint from "./Point/MirroredPoint/mirroredPoint";
 import MirroredCurve from "./Curve/Mirrored Curve/mirroredCurve";
 import NURBS from "./Curve/NURBS/NURBS";
+import Bezier from "./Curve/Bezier/bezier";
 
 TabsObject.propType = {
     setCurrentObject: PropTypes.func.isRequired,
@@ -20,7 +21,7 @@ TabsObject.propType = {
 
 export default function TabsObject(props) {
 
-
+    console.log(props.currentObject.type )
     return (
         <div>
 
@@ -66,6 +67,12 @@ export default function TabsObject(props) {
                                                                                       currentObject={props.currentObject}
                                                                                       allObject={props.allObject}
                                                                                       updateAllObjectWhenCurrentObjectChange={props.updateAllObjectWhenCurrentObjectChange}/> :
+                                            props.currentObject.type === "Bezier" ? <Bezier setAllObject={props.setAllObject}
+                                                                                          setCurrentTextFieldSelected={props.setCurrentTextFieldSelected}
+                                                                                          setCurrentObject={props.setCurrentObject}
+                                                                                          currentObject={props.currentObject}
+                                                                                          allObject={props.allObject}
+                                                                                          updateAllObjectWhenCurrentObjectChange={props.updateAllObjectWhenCurrentObjectChange}/> :
 
 
                                             ""

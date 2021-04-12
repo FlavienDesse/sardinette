@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from 'prop-types';
 import {
+    createBezier,
     createBSpline,
     createCSpline,
     createMirroredCurve,
@@ -96,6 +97,17 @@ export default function OpenInsert(props) {
         })
     }
 
+    const handleAddBezier= () => {
+        props.setAllObject((prevState) => {
+            let bezier = createBezier()
+
+            prevState.push(bezier)
+
+            return [...prevState]
+
+        })
+    }
+
     let propsSubMenu = Object.assign({}, props)
     delete propsSubMenu.setAllObject
 
@@ -111,6 +123,9 @@ export default function OpenInsert(props) {
                 </MenuItem>
             </SubMenu>
             <SubMenu popupOffset={[0, 2]} title={"Curve"}>
+                <MenuItem onClick={handleAddBezier}>
+                    Bezier
+                </MenuItem>
                 <MenuItem onClick={handleAddNURBS}>
                     NURBS
                 </MenuItem>

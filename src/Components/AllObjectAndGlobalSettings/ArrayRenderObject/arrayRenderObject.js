@@ -27,6 +27,9 @@ export default function ArrayRenderObject(props) {
         event.preventDefault();
         event.stopPropagation();
 
+
+
+
         if (props.currentTextFieldSelected !== null && props.currentTextFieldSelected.id !== props.object.id && props.currentTextFieldSelected.acceptType.includes(props.object.type)) {
             if (event.ctrlKey) {
                 event.preventDefault();
@@ -37,6 +40,7 @@ export default function ArrayRenderObject(props) {
             }
         } else {
             if (props.object.type !== "Axis") {
+                console.log("lol")
                 props.setCurrentObject(modifyObjectWhenClickOn(props.object, props.currentObject))
             }
 

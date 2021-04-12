@@ -6,6 +6,7 @@ import Checkbox from "@material-ui/core/Checkbox";
 import PropTypes from "prop-types";
 import {useSnackbar} from "notistack";
 import {updateObjectByAddingChildrenID} from "../../../../../Misc/Utils";
+import Constant from "../../../../../Misc/Constant";
 
 Surface.propType = {
     setCurrentObject: PropTypes.func.isRequired,
@@ -89,7 +90,7 @@ export default function Surface(props) {
         setSecondCurve(null)
         props.setCurrentTextFieldSelected({
             id: props.currentObject.id,
-            acceptType: ["C-Spline", "B-Spline", "Mirrored Curve"],
+            acceptType: Constant.CONSTANT_ALL_CURVES,
             clickCtrl: changeSecondCurve,
             simpleClick: changeSecondCurve
         })
