@@ -351,7 +351,6 @@ function createNURBS(controlsPoints) {
 
         let allControlsPoints = mesh.controlsPoints.map(a => a.position);
         try {
-            console.log(mesh.knots)
             let res = bSpline(mesh.degree, allControlsPoints, mesh.resolution, mesh.knots, mesh.controlsPoints.map(a => a.weight))
             mesh.allCalculatedPoints = res
             line.setPoints(res)

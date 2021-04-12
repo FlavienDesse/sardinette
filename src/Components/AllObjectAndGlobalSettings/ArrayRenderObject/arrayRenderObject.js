@@ -40,7 +40,6 @@ export default function ArrayRenderObject(props) {
             }
         } else {
             if (props.object.type !== "Axis") {
-                console.log("lol")
                 props.setCurrentObject(modifyObjectWhenClickOn(props.object, props.currentObject))
             }
 

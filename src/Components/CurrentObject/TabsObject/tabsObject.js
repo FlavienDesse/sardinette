@@ -21,7 +21,6 @@ TabsObject.propType = {
 
 export default function TabsObject(props) {
 
-    console.log(props.currentObject.type )
     return (
         <div>
 
