@@ -3,7 +3,7 @@ export default class Object {
 
     static CONSTANT_ALL_POINTS = ["Point,Mirrored Point"]
     static CONSTANT_ALL_SURFACES = ["Surface", "Import STL"]
-    static CONSTANT_ALL_CURVES = ["B-Spline,C-Spline,Mirrored Curve","Bezier","NURBS"]
+    static CONSTANT_ALL_CURVES = ["B-Spline","C-Spline","Mirrored Curve","Bezier","NURBS"]
 
     static DEFAULT_NAME_BEZIER = "Bezier0"
     static DEFAULT_NAME_NURBS = "NURBS0"
@@ -15,7 +15,7 @@ export default class Object {
 
     static DEFAULT_COLOR_SURFACE = 0xFFD70
 
-
+    static DEFAULT_NAME_C_LOFT_SURFACE= "CLoftSurface0"
     static DEFAULT_NAME_SURFACE = "Surface0"
     static DEFAULT_COLOR_SURFACE = 0xFFD70
 

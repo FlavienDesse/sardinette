@@ -8,6 +8,8 @@ import MirroredPoint from "./Point/MirroredPoint/mirroredPoint";
 import MirroredCurve from "./Curve/Mirrored Curve/mirroredCurve";
 import NURBS from "./Curve/NURBS/NURBS";
 import Bezier from "./Curve/Bezier/bezier";
+import CLoftSurface from "./Surfaces/CLoftSurface/cLoftSurface";
+
 
 TabsObject.propType = {
     setCurrentObject: PropTypes.func.isRequired,
@@ -72,6 +74,12 @@ export default function TabsObject(props) {
                                                                                           currentObject={props.currentObject}
                                                                                           allObject={props.allObject}
                                                                                           updateAllObjectWhenCurrentObjectChange={props.updateAllObjectWhenCurrentObjectChange}/> :
+                                                props.currentObject.type === "CLoftSurface" ? <CLoftSurface setAllObject={props.setAllObject}
+                                                                                                setCurrentTextFieldSelected={props.setCurrentTextFieldSelected}
+                                                                                                setCurrentObject={props.setCurrentObject}
+                                                                                                currentObject={props.currentObject}
+                                                                                                allObject={props.allObject}
+                                                                                                updateAllObjectWhenCurrentObjectChange={props.updateAllObjectWhenCurrentObjectChange}/> :
 
 
                                             ""

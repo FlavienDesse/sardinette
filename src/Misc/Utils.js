@@ -74,11 +74,14 @@ function increaseDefaultName(type) {
             matches = Constant.DEFAULT_NAME_BEZIER.match(reg);
             Constant.DEFAULT_NAME_BEZIER = Constant.DEFAULT_NAME_BEZIER.replace(reg, parseInt(matches[0], 10) + 1)
             break;
+        case "CLoftSurface":
+            matches = Constant.DEFAULT_NAME_C_LOFT_SURFACE.match(reg);
+            Constant.DEFAULT_NAME_C_LOFT_SURFACE = Constant.DEFAULT_NAME_C_LOFT_SURFACE.replace(reg, parseInt(matches[0], 10) + 1)
+            break;
         default:
             throw new Error("unknow type provided")
     }
 }
-
 
 const updateObjectByAddingChildrenID = (allUpdatedObject, id, allObject, setAllObject) => {
 
@@ -150,8 +153,18 @@ function updateChildren(allObject, currentObject, isDeletion) {
 
                 } else if (prev.type === "Surface") {
                     if (isDeletion) {
-                        prev.firstCurve = null;
-                        prev.secondCurve = null;
+                        if(prev.firstCurve.id === currentObject.id){
+                            prev.firstCurve = null;
+                        }
+                        else{
+                            prev.secondCurve = null;
+                        }
+
+                    }
+
+                } else if (prev.type === "CLoftSurface") {
+                    if (isDeletion) {
+                        prev.allCurves = prev.allCurves.filter(curve => curve.id !== curve.id)
                     }
 
                 }
@@ -187,7 +200,6 @@ function updateChildren(allObject, currentObject, isDeletion) {
 
 
 }
-
 
 function createAxis(axis) {
 
@@ -316,7 +328,7 @@ function createNURBS(controlsPoints) {
     mesh.controlsPoints = []
     mesh.childrenID = []
     mesh.degree = 2
-    mesh.resolution = 100
+    mesh.resolution = 15
     mesh.isError = true
     mesh.allCalculatedPoints = []
     mesh.knots = []
@@ -386,7 +398,7 @@ function createBSpline(controlsPoints) {
     mesh.controlsPoints = []
     mesh.childrenID = []
     mesh.degree = 2
-    mesh.resolution = 100
+    mesh.resolution = 15
     mesh.isError = true
     mesh.allCalculatedPoints = []
 
@@ -447,7 +459,7 @@ function createBezier(controlsPoints) {
     mesh.type = "Bezier"
     mesh.controlsPoints = []
     mesh.childrenID = []
-    mesh.resolution = 100
+    mesh.resolution = 15
     mesh.isError = true
     mesh.allCalculatedPoints = []
 
@@ -569,7 +581,7 @@ function createCSpline(controlsPoints) {
     mesh.allCalculatedPoints = []
     mesh.childrenID = []
     mesh.closed = false;
-    mesh.resolution = 100
+    mesh.resolution = 15
     mesh.isError = true
 
 
@@ -752,10 +764,10 @@ function createCLoftSurface(curves) {
     const surface = new THREE.Mesh(geometrySurface, material);
     const line = new THREE.Line(geometryLine, lineMaterial);
 
-    surface.name = Constant.DEFAULT_NAME_SURFACE
-    increaseDefaultName("Surface")
-    surface.type = "Surface"
-    surface.resolution = 100
+    surface.name = Constant.DEFAULT_NAME_C_LOFT_SURFACE
+    increaseDefaultName("CLoftSurface")
+    surface.type = "CLoftSurface"
+    surface.resolution = 15
     surface.childrenID = []
     surface.allCurves = []
 
@@ -785,7 +797,6 @@ function createCLoftSurface(curves) {
 
 
             let res = cLoftSurface(allVector3Curves, surface.resolution, allCurvesClosed)
-            console.log("lol")
 
             let geometry = new THREE.BufferGeometry();
             let numTriangles = res.length
@@ -825,11 +836,20 @@ function createCLoftSurface(curves) {
 
 
     surface.update = () => {
-        let pointFirstCurve = surface.firstCurve.allCalculatedPoints
-        let pointSecondCurve = surface.secondCurve.allCalculatedPoints
+        const allVector3Curves = []
+        const allCurvesClosed = []
+        for (let j = 0; j < surface.allCurves.length; j++) {
+            let curve = surface.allCurves[j]
+            allVector3Curves.push([])
+            allCurvesClosed.push(curve.closed)
+            for (let i = 0; i < curve.controlsPoints.length; i++) {
+
+                allVector3Curves[j].push(curve.controlsPoints[i].position)
+            }
+        }
 
         try {
-            let res = getSurface(pointFirstCurve, pointSecondCurve)
+            let res = cLoftSurface(allVector3Curves, surface.resolution, allCurvesClosed)
 
             let geometry = new THREE.BufferGeometry();
             let numTriangles = res.length
@@ -962,6 +982,17 @@ function modifyObjectWhenClickOn(object, currentObject) {
                 return currentObject
             }
         } else if (object.type === "Bezier") {
+            if (currentObject == null || (currentObject.id !== object.id)) {
+
+                let intersect = object
+
+
+                return intersect;
+
+            } else {
+                return currentObject
+            }
+        }else if (object.type === "CLoftSurface") {
             if (currentObject == null || (currentObject.id !== object.id)) {
 
                 let intersect = object

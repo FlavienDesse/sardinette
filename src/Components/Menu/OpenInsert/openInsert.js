@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from 'prop-types';
 import {
     createBezier,
-    createBSpline,
+    createBSpline, createCLoftSurface,
     createCSpline,
     createMirroredCurve,
     createMirroredPoint,
@@ -108,6 +108,17 @@ export default function OpenInsert(props) {
         })
     }
 
+    const handleAddCLoftSurface= () => {
+        props.setAllObject((prevState) => {
+            let surface = createCLoftSurface()
+
+            prevState.push(surface)
+
+            return [...prevState]
+
+        })
+    }
+
     let propsSubMenu = Object.assign({}, props)
     delete propsSubMenu.setAllObject
 
@@ -142,6 +153,9 @@ export default function OpenInsert(props) {
             <SubMenu popupOffset={[0, 2]} title={"Surfaces"}>
                 <MenuItem onClick={handleAddSurface}>
                     Surface
+                </MenuItem>
+                <MenuItem onClick={handleAddCLoftSurface}>
+                    C-Loft Surface
                 </MenuItem>
             </SubMenu>
         </SubMenu>

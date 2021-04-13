@@ -494,7 +494,6 @@ function cLoftSurface(curves, minResolution, areClosed) {
             surface.push(triangle)
         })
     })
-    console.log(`surface`, surface)
     return surface
 }
 
@@ -568,4 +567,4 @@ function bezierCurve(controlPoints, resolution) {
     return toVector1(points)
 }
 
-export {spline, cSpline, toVector3, fromVector3, toVector1, curveLength, distance, getSurface, mirrorPoint, mirrorPointFromCurve, mirrorCurve, cLoftSurface, bezierCurve}
+export {bSpline, cSpline, toVector3, fromVector3, toVector1, curveLength, distance, getSurface, mirrorPoint, mirrorPointFromCurve, mirrorCurve, cLoftSurface, bezierCurve}
