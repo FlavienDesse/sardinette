@@ -198,6 +198,16 @@ function toVector1(points) {
     return res
 }
 
+function fromVector1(points) {
+    let res = []
+
+    for(let i = 0; i < points.length; i += 3) {
+        res.push(new THREE.Vector3(points[i], points[i + 1], points[i + 2]))
+    }
+
+    return res;
+}
+
 /**
  * Computes the spline according to the inputs
  * @param {number} degree degree of the curve. Must be less than or equal to the number of control points minus 1. 1 is linear, 2 is quadratic, 3 is cubic, and so on. 
@@ -448,12 +458,12 @@ function cLoftSurface(curves, minResolution, areClosed) {
     let globalResolution = 0
 
     curves.forEach((elt, idx) => {
-        let res = cSpline(elt, minResolution, areClosed[idx])
+        let res = fromVector1(cSpline(elt, minResolution, areClosed[idx]))
         if(globalResolution < res.length) globalResolution = res.length
     })
 
     curves.forEach((elt, idx) => {
-        fullCurves.push(cSpline(elt, globalResolution, areClosed[idx], false))
+        fullCurves.push(fromVector1(cSpline(elt, globalResolution, areClosed[idx], false)))
     })
 
     for(let i = 0; i < fullCurves.length; i++) {
@@ -474,7 +484,7 @@ function cLoftSurface(curves, minResolution, areClosed) {
     let fullLoftCurves = []
 
     loftCurves.forEach(elt => {
-        fullLoftCurves.push(cSpline(elt, minResolution))
+        fullLoftCurves.push(fromVector1(cSpline(elt, minResolution)))
     })
 
     fullLoftCurves.forEach((elt, idx) => {
