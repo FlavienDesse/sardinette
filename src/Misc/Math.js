@@ -198,6 +198,16 @@ function toVector1(points) {
     return res
 }
 
+function fromVector1(points) {
+    let res = []
+
+    for(let i = 0; i < points.length; i += 3) {
+        res.push(new THREE.Vector3(points[i], points[i + 1], points[i + 2]))
+    }
+
+    return res;
+}
+
 /**
  * Computes the spline according to the inputs
  * @param {number} degree degree of the curve. Must be less than or equal to the number of control points minus 1. 1 is linear, 2 is quadratic, 3 is cubic, and so on. 
@@ -208,14 +218,14 @@ function toVector1(points) {
  * @returns {Array<number>} an array of points that represents the spline.
  */
 function bSpline(degree, controlPoints, resolution, knots, weights) {
-
+ 
     let formattedControlPoints = fromVector3(controlPoints)
-
+ 
     let points = []
-
+ 
     // Set the default resolution per unit
     if(!resolution) resolution = 50
-
+ 
     // Set the default knots array to undefined (will be initialized in the deBoor function)
     if(!knots || knots.length === 0){
         knots = undefined
@@ -223,43 +233,40 @@ function bSpline(degree, controlPoints, resolution, knots, weights) {
     else{
         const isKnotsAscending = array => array.map((a, i) => a > array[i + 1]).indexOf(true) === -1
         if(!isKnotsAscending(knots)){
-
             throw new Error("Bad knots vector")
         }
     }
 
-
-
     // Set the default weights array to undefined (will be initialized in the deBoor function)
     if(!weights || weights.length === 0) weights = undefined
-
+ 
     // Let's say the length is equal to 1, there are resolution * 1 points that are represented by pNum
     let pNum = resolution
     let length = 1
-
+ 
     let lastLength = length
     do {
         // With each loop, pNum will change according to the computed length
         // as the number of points will always be resolution * length
         pNum = Math.floor(resolution * length)
         points = []
-
+ 
         // Compute a homogeneous array of points representing the spline
         for(var t = 0; t <= pNum; t++) {
             points.push(deBoor(t / pNum, degree, formattedControlPoints, knots, weights))
         }
-
+ 
         // Compute the length of the curve
         length = curveLength(points)
-        
+ 
         // If the length hasn't changed, we stop here
         if(lastLength === length) break
         lastLength = length
-
+ 
         // While the number of points doesn't match the length of the curve with the given resolution
         // This is an approximation with an error of 0.5%
     } while(length * 0.995 > pNum / resolution || length * 1.005 < pNum / resolution)
-    
+ 
     return toVector1(points)
 }
 
@@ -318,35 +325,12 @@ function cSpline(controlPoints, resolution, closed, isResolutionRelativeToLength
 
 /**
  * 
- * @param {Array<number>} curveA
- * @param {Array<number>} curveB
+ * @param {Array<THREE.Vector3>} curveA 
+ * @param {Array<THREE.Vector3>} curveB 
  * @returns {Array<Array<THREE.Vector3>} An array of triangles
  */
 function getSurface(curveA, curveB) {
     let triangles = []
-
-    let tempCurveA = []
-    let tempCurveB = []
-
-    for(let i = 0 ; i < curveA.length ; i+=3){
-        tempCurveA.push({
-            x:curveA[i],
-            y:curveA[i+1],
-            z:curveA[i+2],
-        })
-    }
-
-    for(let i = 0 ; i < curveB.length ; i+=3){
-        tempCurveB.push({
-            x:curveB[i],
-            y:curveB[i+1],
-            z:curveB[i+2],
-        })
-    }
-
-    curveA = tempCurveA
-    curveB = tempCurveB
-
 
     let maxLength = Math.max(curveA.length, curveB.length)
     let smallCurve
@@ -421,11 +405,11 @@ function mirrorPointFromCurve(point, curve) {
 
 /**
  * 
- * @param {Array<number>} point
+ * @param {THREE.Vector3} point 
  * @param {string} axis 
  */
 function mirrorPoint(point, axis) {
-
+ 
     switch(axis.toLowerCase()) {
         case 'x': point[0] *= -1
             break
@@ -441,22 +425,18 @@ function mirrorPoint(point, axis) {
 
 /**
  * 
- * @param {Array<number>} curve
+ * @param {Array<THREE.Vector3>} curve 
  * @param {string} axis 
- * @returns {Array<number>} The mirrored curve
+ * @returns {Array<THREE.Vector3>} The mirrored curve
  */
 function mirrorCurve(curve, axis) {
-
+ 
     let res = []
 
-    for(let i = 0 ; i < curve.length  ; i+=3){
+    for(let i = 0; i < curve.length; i += 3) {
         let elt = [curve[i],curve[i+1],curve[i+2]]
-
         res.push(...mirrorPoint(elt, axis))
     }
-
-
-
 
     return res
 }
@@ -478,12 +458,12 @@ function cLoftSurface(curves, minResolution, areClosed) {
     let globalResolution = 0
 
     curves.forEach((elt, idx) => {
-        let res = cSpline(elt, minResolution, areClosed[idx])
+        let res = fromVector1(cSpline(elt, minResolution, areClosed[idx]))
         if(globalResolution < res.length) globalResolution = res.length
     })
 
     curves.forEach((elt, idx) => {
-        fullCurves.push(cSpline(elt, globalResolution, areClosed[idx], false))
+        fullCurves.push(fromVector1(cSpline(elt, globalResolution, areClosed[idx], false)))
     })
 
     for(let i = 0; i < fullCurves.length; i++) {
@@ -504,7 +484,7 @@ function cLoftSurface(curves, minResolution, areClosed) {
     let fullLoftCurves = []
 
     loftCurves.forEach(elt => {
-        fullLoftCurves.push(cSpline(elt, minResolution))
+        fullLoftCurves.push(fromVector1(cSpline(elt, minResolution)))
     })
 
     fullLoftCurves.forEach((elt, idx) => {
@@ -514,6 +494,7 @@ function cLoftSurface(curves, minResolution, areClosed) {
             surface.push(triangle)
         })
     })
+    console.log(`surface`, surface)
     return surface
 }
 
@@ -587,4 +568,4 @@ function bezierCurve(controlPoints, resolution) {
     return toVector1(points)
 }
 
-export {bSpline, cSpline, toVector3, fromVector3, toVector1, curveLength, distance, getSurface, mirrorPoint, mirrorPointFromCurve, mirrorCurve, cLoftSurface, bezierCurve}
+export {spline, cSpline, toVector3, fromVector3, toVector1, curveLength, distance, getSurface, mirrorPoint, mirrorPointFromCurve, mirrorCurve, cLoftSurface, bezierCurve}
