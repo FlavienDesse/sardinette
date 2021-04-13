@@ -8,7 +8,7 @@ import CurrentObject from "../CurrentObject/currentObject";
 import Background from "../../Misc/Background";
 import {
     createAxis,
-    createBSpline,
+    createBSpline, createCLoftSurface, createCSpline,
     createMirroredCurve,
     createMirroredPoint,
     createNURBS,
@@ -37,7 +37,6 @@ export default function Main() {
     const [currentTextFieldSelected, setCurrentTextFieldSelected] = React.useState(null);
 
 
-
     const control = useRef();
     const camera = useRef();
     const renderer = useRef();
@@ -47,7 +46,7 @@ export default function Main() {
     useEffect(() => {
 
 
-        const axisY = createAxis("y")
+       /* const axisY = createAxis("y")
         const axisZ = createAxis("z")
 
 
@@ -57,22 +56,42 @@ export default function Main() {
 
         const firstCurve = createBSpline([firstPoint, secondPoint, mirrorFirstPoint])
 
-   
 
         const nurbs = createNURBS([firstPoint, mirrorFirstPoint, secondPoint])
 
 
-          const thirdPoint=createPoint({x:0,y:0,z:0});
+        const thirdPoint = createPoint({x: 0, y: 0, z: 0});
 
 
+        const mirrorFirstCurve = createMirroredCurve(firstCurve, axisY)
 
-          const mirrorFirstCurve = createMirroredCurve(firstCurve,axisY)
-
-         const surface = createSurface(firstCurve,mirrorFirstCurve)
+        const surface = createSurface(firstCurve, mirrorFirstCurve)
 
 
-        //setAllObject([axisX,axisY,axisZ,firstPoint,secondPoint,thirdPoint])
-          setAllObject([firstPoint, mirrorFirstPoint, secondPoint, firstCurve, mirrorFirstCurve, nurbs, surface])
+        setAllObject([axisX,axisY,axisZ,firstPoint,secondPoint,thirdPoint])
+        setAllObject([firstPoint, mirrorFirstPoint, secondPoint, firstCurve, mirrorFirstCurve, nurbs, surface])*/
+
+        const top1 = createPoint({x: 0, y: 2, z: 2});
+        const top2 = createPoint({x: 2, y: 2, z: 0})
+        const top3 = createPoint({x: 2, y: 2, z: 2})
+
+        const bottom1 = createPoint({x: 0, y: -5, z: 2});
+        const bottom2 = createPoint({x: 2, y: -5, z: 0})
+        const bottom3 = createPoint({x: 2, y: -5, z: 2})
+
+        const away1 = createPoint({x: 5, y: 5, z: 2});
+        const away2 = createPoint({x: 8, y: 5, z: 0})
+        const away3 = createPoint({x: 10, y: 5, z: 2})
+
+        const firstCurve = createCSpline([top1,top2,top3])
+
+        const secondCurve = createCSpline([bottom1,bottom2,bottom3])
+
+        const thirdCurve = createCSpline([away1,away2,away3])
+
+        const surface = createCLoftSurface([firstCurve,secondCurve,thirdCurve])
+
+        setAllObject([top1,top2,top3,firstCurve,secondCurve,away1,away2,away3,thirdCurve,bottom1,bottom2,bottom3,surface])
 
     }, [])
 

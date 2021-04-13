@@ -205,10 +205,10 @@ export default function NURBS(props) {
 
     const handleChangeTextFieldKnots = (e, index) => {
 
-        var rgx = /^\d*\.?\d*$/;
+        var rgx = /\d*\.?\d*/;
         let val = e.target.value.match(rgx)
 
-        let actualKnots = [...knots]
+        let actualKnots =knots.map(value => parseFloat(value))
 
         if (e.target.value === "" || val === null || val[0] === "") {
             setKnots((prevState => {
@@ -216,10 +216,13 @@ export default function NURBS(props) {
                 return ([...actualKnots])
             }))
         } else {
+
             setKnots((prevState => {
-                actualKnots[index] = parseFloat(val[0])
-                return ([...actualKnots])
+
+                prevState[index] = val[0]
+                return ([...prevState])
             }))
+            actualKnots[index] = parseFloat(val[0])
         }
 
 

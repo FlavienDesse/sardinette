@@ -1,7 +1,7 @@
 import * as THREE from "three";
 import {BufferGeometry, Mesh, MeshBasicMaterial, SphereGeometry} from "three";
 import Constant from "./Constant";
-import {bezierCurve, bSpline, cSpline, getSurface, mirrorCurve, mirrorPoint} from "./Math";
+import {bezierCurve, bSpline, cLoftSurface, cSpline, getSurface, mirrorCurve, mirrorPoint} from "./Math";
 import {MeshLine, MeshLineMaterial, MeshLineRaycast} from 'three.meshline';
 
 /*
@@ -243,8 +243,8 @@ function createMirroredPoint(initialPoint, axis) {
 
 
         try {
-            let res = mirrorPoint([point.initialPoint.position.x,point.initialPoint.position.y,point.initialPoint.position.z], point.axis.value)
-            point.position.set(res[0],res[1], res[2])
+            let res = mirrorPoint([point.initialPoint.position.x, point.initialPoint.position.y, point.initialPoint.position.z], point.axis.value)
+            point.position.set(res[0], res[1], res[2])
             point.isError = false
         } catch (e) {
             point.isError = true
@@ -366,7 +366,6 @@ function createNURBS(controlsPoints) {
     return mesh
 }
 
-
 function createBSpline(controlsPoints) {
 
     const geometry = new BufferGeometry().setFromPoints([]);
@@ -456,7 +455,7 @@ function createBezier(controlsPoints) {
         try {
             let allPositionControlsPoints = controlsPoints.map(a => a.position);
 
-            let res = bezierCurve(allPositionControlsPoints,mesh.resolution = 100)
+            let res = bezierCurve(allPositionControlsPoints, mesh.resolution = 100)
             mesh.allCalculatedPoints = res
             bSplineParam.setPoints(res)
             mesh.isError = false
@@ -475,7 +474,7 @@ function createBezier(controlsPoints) {
     mesh.update = () => {
         let allControlsPoints = mesh.controlsPoints.map(a => a.position);
         try {
-            let res = bezierCurve(allControlsPoints,mesh.resolution)
+            let res = bezierCurve(allControlsPoints, mesh.resolution)
             mesh.allCalculatedPoints = res
             bSplineParam.setPoints(res)
             mesh.isError = false
@@ -548,8 +547,7 @@ function createMirroredCurve(initialCurve, axis) {
     return mesh
 }
 
-
-function createCSpline() {
+function createCSpline(controlsPoints) {
 
 
     const geometry = new BufferGeometry().setFromPoints([]);
@@ -575,6 +573,25 @@ function createCSpline() {
     mesh.isError = true
 
 
+    if (controlsPoints) {
+        try {
+            let allControlsPoints = controlsPoints.map(a => a.position);
+            let res = cSpline(allControlsPoints, mesh.resolution, mesh.closed)
+            mesh.allCalculatedPoints = res
+            line.setPoints(res)
+            mesh.isError = false
+            mesh.controlsPoints = controlsPoints
+
+
+            controlsPoints.forEach((controls) => {
+                controls.childrenID.push(mesh.id)
+            })
+
+        } catch (e) {
+            console.log(e.message)
+            throw new Error("Error in creation c spline")
+        }
+    }
     mesh.update = () => {
         let allControlsPoints = mesh.controlsPoints.map(a => a.position);
 
@@ -630,9 +647,6 @@ function createSurface(firstCurve, secondCurve) {
 
             let pointFirstCurve = firstCurve.allCalculatedPoints
             let pointSecondCurve = secondCurve.allCalculatedPoints
-
-
-
 
 
             let res = getSurface(pointFirstCurve, pointSecondCurve)
@@ -720,6 +734,140 @@ function createSurface(firstCurve, secondCurve) {
     return surface
 
 }
+
+function createCLoftSurface(curves) {
+
+
+    const geometrySurface = new THREE.BufferGeometry();
+    const geometryLine = new THREE.BufferGeometry();
+
+    const material = new THREE.MeshBasicMaterial({
+        color: Constant.DEFAULT_COLOR_SURFACE,
+        opacity: 0.5,
+        transparent: true,
+        side: THREE.DoubleSide
+    });
+    const lineMaterial = new THREE.MeshBasicMaterial({color: Constant.DEFAULT_COLOR_SURFACE, side: THREE.DoubleSide});
+
+    const surface = new THREE.Mesh(geometrySurface, material);
+    const line = new THREE.Line(geometryLine, lineMaterial);
+
+    surface.name = Constant.DEFAULT_NAME_SURFACE
+    increaseDefaultName("Surface")
+    surface.type = "Surface"
+    surface.resolution = 100
+    surface.childrenID = []
+    surface.allCurves = []
+
+
+    surface.isError = true
+
+
+    if (curves) {
+        try {
+
+            surface.children.push(line)
+
+
+            const allVector3Curves = []
+            const allCurvesClosed = []
+            for (let j = 0; j < curves.length; j++) {
+                let curve = curves[j]
+                surface.allCurves.push(curve)
+                curve.childrenID.push(surface.id);
+                allVector3Curves.push([])
+                allCurvesClosed.push(curve.closed)
+                for (let i = 0; i < curve.controlsPoints.length; i++) {
+
+                    allVector3Curves[j].push(curve.controlsPoints[i].position)
+                }
+            }
+
+
+            let res = cLoftSurface(allVector3Curves, surface.resolution, allCurvesClosed)
+            console.log("lol")
+
+            let geometry = new THREE.BufferGeometry();
+            let numTriangles = res.length
+
+            let positions = new Float32Array(numTriangles * 3 * 9);
+
+
+            for (let i = 0; i < numTriangles; i++) {
+                let triangle = res[i]
+
+                for (let j = 0; j < 9; j++) {
+
+                    let index = Math.floor(j % 3)
+                    positions[i * 27 + j * 3] = triangle[index].x
+                    positions[i * 27 + j * 3 + 1] = triangle[index].y
+                    positions[i * 27 + j * 3 + 2] = triangle[index].z
+                }
+
+            }
+
+
+            geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+
+
+            surface.isError = false
+
+
+
+            // line.geometry=geometry
+
+            surface.geometry = geometry
+
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
+
+    surface.update = () => {
+        let pointFirstCurve = surface.firstCurve.allCalculatedPoints
+        let pointSecondCurve = surface.secondCurve.allCalculatedPoints
+
+        try {
+            let res = getSurface(pointFirstCurve, pointSecondCurve)
+
+            let geometry = new THREE.BufferGeometry();
+            let numTriangles = res.length
+
+            let positions = new Float32Array(numTriangles * 3 * 9);
+
+
+            for (let i = 0; i < numTriangles; i++) {
+                let triangle = res[i]
+
+                for (let j = 0; j < 9; j++) {
+
+                    let index = Math.floor(j % 3)
+                    positions[i * 27 + j * 3] = triangle[index].x
+                    positions[i * 27 + j * 3 + 1] = triangle[index].y
+                    positions[i * 27 + j * 3 + 2] = triangle[index].z
+                }
+
+            }
+
+
+            geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+
+
+            surface.geometry = geometry
+            surface.isError = false
+        } catch (e) {
+            surface.isError = true
+            throw new Error(e.message)
+        }
+
+    }
+
+
+    return surface
+
+}
+
 
 function modifyObjectWhenClickOn(object, currentObject) {
 
@@ -813,8 +961,7 @@ function modifyObjectWhenClickOn(object, currentObject) {
             } else {
                 return currentObject
             }
-        }
-        else if (object.type === "Bezier") {
+        } else if (object.type === "Bezier") {
             if (currentObject == null || (currentObject.id !== object.id)) {
 
                 let intersect = object
@@ -847,6 +994,7 @@ export {
     createMirroredCurve,
     updateObjectByAddingChildrenID,
     createNURBS,
-    createBezier
+    createBezier,
+    createCLoftSurface
 }
 
