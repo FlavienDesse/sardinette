@@ -46,7 +46,7 @@ export default function Main() {
     useEffect(() => {
 
 
-       /* const axisY = createAxis("y")
+        const axisY = createAxis("y")
         const axisZ = createAxis("z")
 
 
@@ -65,13 +65,12 @@ export default function Main() {
 
         const mirrorFirstCurve = createMirroredCurve(firstCurve, axisY)
 
-        const surface = createSurface(firstCurve, mirrorFirstCurve)
 
 
-        setAllObject([axisX,axisY,axisZ,firstPoint,secondPoint,thirdPoint])
-        setAllObject([firstPoint, mirrorFirstPoint, secondPoint, firstCurve, mirrorFirstCurve, nurbs, surface])*/
 
-        const top1 = createPoint({x: 0, y: 2, z: 2});
+        setAllObject([firstPoint, mirrorFirstPoint, secondPoint, firstCurve, mirrorFirstCurve, nurbs])
+
+       /* const top1 = createPoint({x: 0, y: 2, z: 2});
         const top2 = createPoint({x: 2, y: 2, z: 0})
         const top3 = createPoint({x: 2, y: 2, z: 2})
 
@@ -91,7 +90,7 @@ export default function Main() {
 
         const surface = createCLoftSurface([firstCurve,secondCurve,thirdCurve])
 
-        setAllObject([top1,top2,top3,firstCurve,secondCurve,away1,away2,away3,thirdCurve,bottom1,bottom2,bottom3,surface])
+        setAllObject([top1,top2,top3,firstCurve,secondCurve,away1,away2,away3,thirdCurve,bottom1,bottom2,bottom3,surface])*/
 
     }, [])
 

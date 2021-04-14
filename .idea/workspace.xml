@@ -11,13 +11,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="78afd4d1-1ed3-4b4d-a584-1aa195b3fadc" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Components/CurrentObject/TabsObject/Surfaces/CLoftSurface/cLoftSurface.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Components/CurrentObject/TabsObject/Surfaces/CLoftSurface/style.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/CurrentObject/TabsObject/tabsObject.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/CurrentObject/TabsObject/tabsObject.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Menu/OpenInsert/openInsert.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Menu/OpenInsert/openInsert.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Misc/Constant.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Misc/Constant.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Misc/Math.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Misc/Math.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/CurrentObject/TabsObject/Surfaces/Surface/surface.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/CurrentObject/TabsObject/Surfaces/Surface/surface.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Main/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Main/main.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Misc/Utils.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Misc/Utils.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -114,17 +110,6 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration default="true" type="js.build_tools.npm">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
@@ -190,6 +175,7 @@
       <workItem from="1618230142071" duration="6289000" />
       <workItem from="1618266689410" duration="3251000" />
       <workItem from="1618329409044" duration="5597000" />
+      <workItem from="1618408147305" duration="2954000" />
     </task>
     <servers />
   </component>
@@ -209,10 +195,10 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="1148" y="592" key="#ESLint" timestamp="1616012880684">
+    <state x="1148" y="592" key="#ESLint" timestamp="1618410589625">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state x="1148" y="592" key="#ESLint/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1616012880684" />
+    <state x="1148" y="592" key="#ESLint/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1618410589625" />
     <state x="414" y="175" width="1092" height="738" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1616622457359">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -233,29 +219,29 @@
     <state x="795" y="338" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1616708358684" />
     <state x="1060" y="455" key="FileChooserDialogImpl/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1616011878145" />
     <state x="3620" y="455" key="FileChooserDialogImpl/0.0.2560.1400/2560.0.2560.1400@2560.0.2560.1400" timestamp="1618235125611" />
-    <state width="2517" height="248" key="GridCell.Tab.0.bottom" timestamp="1618335017820">
+    <state width="2517" height="248" key="GridCell.Tab.0.bottom" timestamp="1618411106046">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state width="1877" height="217" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1617703508887" />
-    <state width="2517" height="248" key="GridCell.Tab.0.bottom/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1618335017820" />
+    <state width="2517" height="248" key="GridCell.Tab.0.bottom/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1618411106046" />
     <state width="2517" height="248" key="GridCell.Tab.0.bottom/0.0.2560.1400/2560.0.2560.1400@2560.0.2560.1400" timestamp="1618270697374" />
-    <state width="2517" height="248" key="GridCell.Tab.0.center" timestamp="1618335017820">
+    <state width="2517" height="248" key="GridCell.Tab.0.center" timestamp="1618411106046">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state width="1877" height="217" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1617703508887" />
-    <state width="2517" height="248" key="GridCell.Tab.0.center/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1618335017820" />
+    <state width="2517" height="248" key="GridCell.Tab.0.center/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1618411106046" />
     <state width="2517" height="248" key="GridCell.Tab.0.center/0.0.2560.1400/2560.0.2560.1400@2560.0.2560.1400" timestamp="1618270697374" />
-    <state width="2517" height="248" key="GridCell.Tab.0.left" timestamp="1618335017820">
+    <state width="2517" height="248" key="GridCell.Tab.0.left" timestamp="1618411106046">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state width="1877" height="217" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1617703508887" />
-    <state width="2517" height="248" key="GridCell.Tab.0.left/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1618335017820" />
+    <state width="2517" height="248" key="GridCell.Tab.0.left/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1618411106046" />
     <state width="2517" height="248" key="GridCell.Tab.0.left/0.0.2560.1400/2560.0.2560.1400@2560.0.2560.1400" timestamp="1618270697374" />
-    <state width="2517" height="248" key="GridCell.Tab.0.right" timestamp="1618335017820">
+    <state width="2517" height="248" key="GridCell.Tab.0.right" timestamp="1618411106046">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state width="1877" height="217" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1617703508887" />
-    <state width="2517" height="248" key="GridCell.Tab.0.right/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1618335017820" />
+    <state width="2517" height="248" key="GridCell.Tab.0.right/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1618411106046" />
     <state width="2517" height="248" key="GridCell.Tab.0.right/0.0.2560.1400/2560.0.2560.1400@2560.0.2560.1400" timestamp="1618270697374" />
     <state width="2517" height="492" key="GridCell.Tab.1.bottom" timestamp="1617314573029">
       <screen x="0" y="0" width="2560" height="1400" />
@@ -317,11 +303,11 @@
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="1097" y="614" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1617882342044" />
-    <state x="985" y="302" width="922" height="680" key="find.popup" timestamp="1618329653200">
+    <state x="1091" y="246" width="922" height="680" key="find.popup" timestamp="1618410638224">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="889" y="212" width="771" height="699" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1617018219136" />
-    <state x="985" y="302" width="922" height="680" key="find.popup/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1618329653200" />
+    <state x="1091" y="246" width="922" height="680" key="find.popup/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1618410638224" />
     <state x="4115" y="402" width="585" height="534" key="find.popup/0.0.2560.1400/2560.0.2560.1400@2560.0.2560.1400" timestamp="1618235010555" />
     <state x="3222" y="383" key="new project wizard" timestamp="1618235030092">
       <screen x="2560" y="0" width="2560" height="1400" />

@@ -657,12 +657,30 @@ function createSurface(firstCurve, secondCurve) {
 
             surface.children.push(line)
 
-            let pointFirstCurve = firstCurve.allCalculatedPoints
-            let pointSecondCurve = secondCurve.allCalculatedPoints
+            let pointFirstCurve = []
+            let pointSecondCurve = []
+
+
+
+            for(let i = 0 ; i < firstCurve.allCalculatedPoints.length ; i+=3){
+                pointFirstCurve.push({
+                    x: firstCurve.allCalculatedPoints[i],
+                    y: firstCurve.allCalculatedPoints[i+1],
+                    z: firstCurve.allCalculatedPoints[i+2],
+                })
+            }
+
+            for(let i = 0 ; i < secondCurve.allCalculatedPoints.length ; i+=3){
+                pointSecondCurve.push({
+                    x: secondCurve.allCalculatedPoints[i],
+                    y: secondCurve.allCalculatedPoints[i+1],
+                    z: secondCurve.allCalculatedPoints[i+2],
+                })
+            }
+
 
 
             let res = getSurface(pointFirstCurve, pointSecondCurve)
-
             let geometry = new THREE.BufferGeometry();
             let numTriangles = res.length
 
@@ -704,10 +722,48 @@ function createSurface(firstCurve, secondCurve) {
 
 
     surface.update = () => {
-        let pointFirstCurve = surface.firstCurve.allCalculatedPoints
-        let pointSecondCurve = surface.secondCurve.allCalculatedPoints
+
 
         try {
+            let pointFirstCurve = []
+            let pointSecondCurve = []
+
+            console.log()
+
+            let isEmpty = true
+            // eslint-disable-next-line no-native-reassign
+            for( let _ in surface.secondCurve ){
+                isEmpty = false
+                break;
+            }
+            if(isEmpty){
+                throw new Error("second curve is undefined")
+            }
+            isEmpty = true
+            for(let _ in surface.firstCurve ){
+                isEmpty = false
+                break;
+            }
+            if(isEmpty){
+                throw new Error("first curve is undefined")
+            }
+
+
+            for(let i = 0 ; i < surface.firstCurve.allCalculatedPoints.length ; i+=3){
+                pointFirstCurve.push({
+                    x: surface.firstCurve.allCalculatedPoints[i],
+                    y: surface.firstCurve.allCalculatedPoints[i+1],
+                    z: surface.firstCurve.allCalculatedPoints[i+2],
+                })
+            }
+
+            for(let i = 0 ; i <  surface.secondCurve.allCalculatedPoints.length ; i+=3){
+                pointSecondCurve.push({
+                    x: surface.secondCurve.allCalculatedPoints[i],
+                    y: surface.secondCurve.allCalculatedPoints[i+1],
+                    z: surface.secondCurve.allCalculatedPoints[i+2],
+                })
+            }
             let res = getSurface(pointFirstCurve, pointSecondCurve)
 
             let geometry = new THREE.BufferGeometry();

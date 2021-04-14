@@ -105,7 +105,7 @@ export default function Surface(props) {
     const handleDisFocusOnTextFieldSecondCurve = (e) => {
 
         props.setCurrentTextFieldSelected(null)
-        setSecondCurve(props.currentObject.firstCurve)
+        setSecondCurve(props.currentObject.secondCurve)
     }
 
 
@@ -117,7 +117,6 @@ export default function Surface(props) {
 
 
             try {
-
                 newValue.update()
                 updateObjectByAddingChildrenID(new Array(firstCurve), props.currentObject.id, props.allObject, props.setAllObject)
 
