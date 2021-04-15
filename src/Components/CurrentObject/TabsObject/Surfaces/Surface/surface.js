@@ -19,19 +19,21 @@ Surface.propType = {
 export default function Surface(props) {
     const classes = useStyles();
 
-    const [name, setName] = React.useState(props.currentObject.name);
+    const [name, setName] = React.useState(props.currentObject.userData.name);
     const [isVisible, setIsVisible] = React.useState(props.currentObject.visible);
 
-    const [firstCurve, setFirstCurve] = React.useState(props.currentObject.firstCurve);
-    const [secondCurve, setSecondCurve] = React.useState(props.currentObject.secondCurve);
+    const [firstCurve, setFirstCurve] = React.useState(props.currentObject.userData.firstCurve);
+    const [secondCurve, setSecondCurve] = React.useState(props.currentObject.userData.secondCurve);
 
     const {enqueueSnackbar} = useSnackbar();
 
+
+
     React.useEffect((() => {
         setIsVisible(props.currentObject.visible)
-        setName(props.currentObject.name)
-        setFirstCurve(props.currentObject.firstCurve)
-        setSecondCurve(props.currentObject.secondCurve)
+        setName(props.currentObject.userData.name)
+        setFirstCurve(props.currentObject.userData.firstCurve)
+        setSecondCurve(props.currentObject.userData.secondCurve)
     }), [props.currentObject])
 
 
@@ -53,7 +55,7 @@ export default function Surface(props) {
         if (e.keyCode === 13) {
             let lastValue = props.currentObject;
             let newValue = props.currentObject
-            newValue.name = name
+            newValue.userData.name = name
             props.updateAllObjectWhenCurrentObjectChange(lastValue, newValue, false)
             props.setCurrentObject(newValue)
 
@@ -66,12 +68,13 @@ export default function Surface(props) {
         if (e.keyCode === 13) {
             let lastValue = props.currentObject;
             let newValue = props.currentObject
-            newValue.secondCurve = secondCurve
+            newValue.userData.secondCurve = secondCurve
 
 
             try {
-                newValue.update()
                 updateObjectByAddingChildrenID(new Array(secondCurve), props.currentObject.id, props.allObject, props.setAllObject)
+                newValue.userData.update()
+
 
 
             } catch (e) {
@@ -105,7 +108,7 @@ export default function Surface(props) {
     const handleDisFocusOnTextFieldSecondCurve = (e) => {
 
         props.setCurrentTextFieldSelected(null)
-        setSecondCurve(props.currentObject.secondCurve)
+        setSecondCurve(props.currentObject.userData.secondCurve)
     }
 
 
@@ -113,12 +116,13 @@ export default function Surface(props) {
         if (e.keyCode === 13) {
             let lastValue = props.currentObject;
             let newValue = props.currentObject
-            newValue.firstCurve = firstCurve
+            newValue.userData.firstCurve = firstCurve
 
 
             try {
-                newValue.update()
                 updateObjectByAddingChildrenID(new Array(firstCurve), props.currentObject.id, props.allObject, props.setAllObject)
+                newValue.userData.update()
+
 
             } catch (e) {
                 enqueueSnackbar(e.message, {
@@ -136,7 +140,7 @@ export default function Surface(props) {
         setFirstCurve(null)
         props.setCurrentTextFieldSelected({
             id: props.currentObject.id,
-            acceptType: ["C-Spline", "B-Spline", "Mirrored Curve"],
+            acceptType: Constant.CONSTANT_ALL_CURVES,
             clickCtrl: changeFirstCurve,
             simpleClick: changeFirstCurve
         })
@@ -151,7 +155,7 @@ export default function Surface(props) {
     const handleDisFocusOnTextFieldFirstCurve = (e) => {
 
         props.setCurrentTextFieldSelected(null)
-        setFirstCurve(props.currentObject.firstCurve)
+        setFirstCurve(props.currentObject.userData.firstCurve)
     }
 
 
@@ -183,7 +187,7 @@ export default function Surface(props) {
                 <TextField
 
                     value={
-                        firstCurve === null ? "" : firstCurve.name
+                        firstCurve === null ? "" : firstCurve.userData.name
                     }
 
                     error={firstCurve === null}
@@ -198,7 +202,7 @@ export default function Surface(props) {
                 <TextField
 
                     value={
-                        secondCurve === null ? "" : secondCurve.name
+                        secondCurve === null ? "" : secondCurve.userData.name
                     }
 
                     error={secondCurve === null}

@@ -1,4 +1,5 @@
 import {STLExporter} from "three/examples/jsm/exporters/STLExporter"
+import {GLTFExporter} from "three/examples/jsm/exporters/GLTFExporter"
 import {saveAs} from 'file-saver';
 import Constant from "./Constant";
 
@@ -23,7 +24,42 @@ const exportSTL = (scene) => {
     scene.children = allChildren
 }
 
+const exportScene = (scene) => {
+
+
+    const exporter = new GLTFExporter();
+
+    const options = {
+        trs: false,
+        onlyVisible: false,
+        includeCustomExtensions:false,
+    };
+
+
+
+
+    exporter.parse( scene.current.children[1], function ( result  ) {
+        let blob;
+        if ( result instanceof ArrayBuffer ) {
+
+            blob = new Blob([result], {  type: 'application/octet-stream' } );
+
+        } else {
+            blob = new Blob([JSON.stringify(result)], {  type: 'text/plain' } );
+
+
+        }
+
+        saveAs(blob, 'save.gltf');
+    }, options );
+
+
+
+
+}
+
+
 
 export {
-    exportSTL
+    exportSTL,exportScene
 }

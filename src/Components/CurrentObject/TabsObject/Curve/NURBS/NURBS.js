@@ -29,23 +29,23 @@ export default function NURBS(props) {
 
     const {enqueueSnackbar} = useSnackbar();
 
-    const [name, setName] = React.useState(props.currentObject.name);
+    const [name, setName] = React.useState(props.currentObject.userData.name);
     const [isVisible, setIsVisible] = React.useState(props.currentObject.visible);
 
-    const [knots, setKnots] = React.useState(props.currentObject.knots);
-    const [resolution, setResolution] = React.useState(props.currentObject.resolution);
-    const [degree, setDegree] = React.useState(props.currentObject.degree);
+    const [knots, setKnots] = React.useState(props.currentObject.userData.knots);
+    const [resolution, setResolution] = React.useState(props.currentObject.userData.resolution);
+    const [degree, setDegree] = React.useState(props.currentObject.userData.degree);
 
-    const [controlsPoints, setControlsPoints] = React.useState(props.currentObject.controlsPoints);
+    const [controlsPoints, setControlsPoints] = React.useState(props.currentObject.userData.controlsPoints);
 
 
     React.useEffect((() => {
-        setResolution(props.currentObject.resolution)
+        setResolution(props.currentObject.userData.resolution)
         setIsVisible(props.currentObject.visible)
-        setName(props.currentObject.name)
-        setDegree(props.currentObject.degree)
-        setControlsPoints(props.currentObject.controlsPoints)
-        setKnots(props.currentObject.knots)
+        setName(props.currentObject.userData.name)
+        setDegree(props.currentObject.userData.degree)
+        setControlsPoints(props.currentObject.userData.controlsPoints)
+        setKnots(props.currentObject.userData.knots)
     }), [props.currentObject])
 
     const handleChangeIsVisible = (event) => {
@@ -62,11 +62,11 @@ export default function NURBS(props) {
     }
 
     const blurTextFieldName = (event) => {
-        setName(props.currentObject.name);
+        setName(props.currentObject.userData.name);
     }
 
     const blurTextFieldDegree = (event) => {
-        setDegree(props.currentObject.degree);
+        setDegree(props.currentObject.userData.degree);
     }
 
     const handleChangeTextFieldDegree = (event) => {
@@ -100,7 +100,7 @@ export default function NURBS(props) {
             } else {
                 let lastValue = props.currentObject;
                 let newValue = props.currentObject
-                newValue.name = name
+                newValue.userData.name = name
                 props.updateAllObjectWhenCurrentObjectChange(lastValue, newValue, false)
                 props.setCurrentObject(newValue)
             }
@@ -108,14 +108,19 @@ export default function NURBS(props) {
         }
     }
 
+    const shrinkKnotsVector= ()=>{
+        knots.length = controlsPoints.length + degree + 1
+    }
+
     const keyPressTextFieldDegree = (e) => {
         if (e.keyCode === 13) {
             let lastValue = props.currentObject;
             let newValue = props.currentObject
-            newValue.degree = degree
-
+            newValue.userData.degree = degree
+            shrinkKnotsVector ()
             try {
-                newValue.update()
+                newValue.userData.update()
+
 
             } catch (e) {
                 enqueueSnackbar(e.message, {
@@ -132,10 +137,10 @@ export default function NURBS(props) {
         if (e.keyCode === 13) {
             let lastValue = props.currentObject;
             let newValue = props.currentObject
-            newValue.controlsPoints = controlsPoints
+            newValue.userData.controlsPoints = controlsPoints
 
             try {
-                newValue.update()
+                newValue.userData.update()
                 updateObjectByAddingChildrenID(controlsPoints, props.currentObject.id, props.allObject, props.setAllObject)
 
             } catch (e) {
@@ -153,10 +158,10 @@ export default function NURBS(props) {
         if (e.keyCode === 13) {
             let lastValue = props.currentObject;
             let newValue = props.currentObject
-            newValue.resolution = resolution
+            newValue.userData.resolution = resolution
 
             try {
-                newValue.update()
+                newValue.userData.update()
 
             } catch (e) {
                 enqueueSnackbar(e.message, {
@@ -183,7 +188,7 @@ export default function NURBS(props) {
     const handleDisFocusOnTextFieldControlsPoints = (e) => {
 
         props.setCurrentTextFieldSelected(null)
-        setControlsPoints(props.currentObject.controlsPoints)
+        setControlsPoints(props.currentObject.userData.controlsPoints)
     }
 
     const addControlsPoints = (points) => {
@@ -229,7 +234,7 @@ export default function NURBS(props) {
         let isValidKnots = true
         let lastValue = props.currentObject;
         let newValue = props.currentObject
-        newValue.knots = [...actualKnots]
+        newValue.userData.knots = [...actualKnots]
         for (let i = 0; i < controlsPoints.length + degree + 1; i++) {
             if (isNaN(actualKnots[i]) ||actualKnots[i] === "" ) {
                 isValidKnots = false;
@@ -246,7 +251,7 @@ export default function NURBS(props) {
 
             try {
 
-                newValue.update()
+                newValue.userData.update()
 
             } catch (e) {
 
@@ -280,7 +285,7 @@ export default function NURBS(props) {
                 <TextField
 
                     value={
-                        controlsPoints.map(a => a.name)
+                        controlsPoints.map(a => a.userData.name)
                     }
 
                     error={controlsPoints.length < 2}

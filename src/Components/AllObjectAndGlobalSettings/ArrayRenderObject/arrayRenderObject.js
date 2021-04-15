@@ -29,8 +29,7 @@ export default function ArrayRenderObject(props) {
 
 
 
-
-        if (props.currentTextFieldSelected !== null && props.currentTextFieldSelected.id !== props.object.id && props.currentTextFieldSelected.acceptType.includes(props.object.type)) {
+        if (props.currentTextFieldSelected !== null && props.currentTextFieldSelected.id !== props.object.id && props.currentTextFieldSelected.acceptType.includes(props.object.userData.type)) {
             if (event.ctrlKey) {
                 event.preventDefault();
                 props.currentTextFieldSelected.clickCtrl(props.object)
@@ -39,7 +38,7 @@ export default function ArrayRenderObject(props) {
                 props.currentTextFieldSelected.simpleClick(props.object)
             }
         } else {
-            if (props.object.type !== "Axis") {
+            if (props.object.userData.type !== "Axis") {
                 props.setCurrentObject(modifyObjectWhenClickOn(props.object, props.currentObject))
             }
 
@@ -55,7 +54,7 @@ export default function ArrayRenderObject(props) {
 
             <TableCell>
                 {
-                    props.object.isError ? <ErrorIcon className={classes.redIcon}/> : " "
+                    props.object.userData.isError ? <ErrorIcon className={classes.redIcon}/> : " "
                 }
             </TableCell>
             <TableCell>
@@ -67,7 +66,7 @@ export default function ArrayRenderObject(props) {
                 <Typography
                     className={clsx(props.currentObject != null && props.currentObject.id === props.object.id && classes.selectedText)}>
                     {
-                        props.object.type
+                        props.object.userData.type
                     }
                 </Typography>
             </TableCell>
@@ -75,7 +74,7 @@ export default function ArrayRenderObject(props) {
                 className={clsx(props.currentObject != null && props.currentObject.id === props.object.id && classes.selectedText)}>
 
                 {
-                    props.object.name
+                    props.object.userData.name
                 }
 
             </TableCell>

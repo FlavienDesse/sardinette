@@ -24,6 +24,7 @@ export default function Scene(props) {
     const refContainer = useRef();
 
 
+
     const handleMove = React.useCallback((event) => {
         let lastValue = props.currentObject;
         let newValue = event.target.object
@@ -38,7 +39,7 @@ export default function Scene(props) {
 
     React.useEffect(() => {
 
-        if (props.currentObject && props.currentObject.type === "Point") {
+        if (props.currentObject && props.currentObject.userData.type === "Point") {
             props.control.current.attach(props.currentObject);
             props.control.current.addEventListener('objectChange', handleMove);
             return () => {
@@ -76,7 +77,8 @@ export default function Scene(props) {
         props.renderer.current.gammaFactor = 2.2;
 
 
-        props.scene.current = new THREE.Scene()
+        props.scene.current= new THREE.Scene()
+
 
         const grid = new InfiniteGridHelper(10, 1)
 
@@ -93,7 +95,7 @@ export default function Scene(props) {
         props.scene.current.add(group);
         props.scene.current.add(new THREE.Group());
 
-
+       
         props.control.current.addEventListener('dragging-changed', function (event) {
             props.controls.current.enabled = !event.value;
 
@@ -118,13 +120,12 @@ export default function Scene(props) {
             requestAnimationFrame(animate);
             props.controls.current.update()
 
-
             props.renderer.current.render(props.scene.current, props.camera.current);
         };
         animate();
 
 
-    }, [props.camera, props.control, props.raycaster, props.renderer, props.scene])
+    }, [props.camera, props.control, props.controls, props.raycaster, props.renderer])
 
     React.useEffect(() => {
 
@@ -164,7 +165,7 @@ export default function Scene(props) {
 
         }
         //   renderer.render(scene, camera);
-    }, [props.background, props.scene])
+    }, [props.background])
 
 
     const handleClickOnCanvas = React.useCallback((event) => {
@@ -185,18 +186,19 @@ export default function Scene(props) {
 
         let allObjectVisibile = []
         props.allObject.forEach((object) => {
-            if (object.visible && !object.isError) {
+            if (object.visible && !object.userData.isError) {
                 allObjectVisibile.push(object)
             }
 
         })
 
-
         const intersects = props.raycaster.current.intersectObjects([...allObjectVisibile]);
-      
+
+
+
         if (!props.control.current.dragging) {
             if (intersects.length > 0) {
-                if (props.currentTextFieldSelected !== null && props.currentTextFieldSelected.id !== intersects[0].object.id && props.currentTextFieldSelected.acceptType.includes(intersects[0].object.type)) {
+                if (props.currentTextFieldSelected !== null && props.currentTextFieldSelected.id !== intersects[0].object.id && props.currentTextFieldSelected.acceptType.includes(intersects[0].object.userData.type)) {
                     if (event.ctrlKey) {
                         event.preventDefault();
                         props.currentTextFieldSelected.clickCtrl(intersects[0].object)
@@ -236,7 +238,6 @@ export default function Scene(props) {
     //This one is when the list changed
     React.useEffect(() => {
 
-
         //TODO opti
         props.scene.current.remove(props.scene.current.children[1]);
 
@@ -244,7 +245,7 @@ export default function Scene(props) {
 
         props.allObject.forEach(elem => {
             //TODO opti
-            if (!elem.isError) {
+            if (!elem.userData.isError) {
                 group.add(elem)
 
 
@@ -252,8 +253,9 @@ export default function Scene(props) {
 
         });
         props.scene.current.add(group)
+    }, [props.allObject])
 
-    }, [props.allObject, props.scene])
+
 
 
     return (

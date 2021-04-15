@@ -7,7 +7,7 @@ import AllObjectAndGlobalSettings from "../AllObjectAndGlobalSettings/allObjectA
 import CurrentObject from "../CurrentObject/currentObject";
 import Background from "../../Misc/Background";
 import {
-    createAxis,
+    createAxis, createBezier,
     createBSpline, createCLoftSurface, createCSpline,
     createMirroredCurve,
     createMirroredPoint,
@@ -43,32 +43,86 @@ export default function Main() {
     const scene = useRef();
     const raycaster = useRef();
 
+
+
+
+
+
+
+
     useEffect(() => {
 
 
-        const axisY = createAxis("y")
-        const axisZ = createAxis("z")
-
+        const xAxis = createAxis('x')
+        const yAxis = createAxis('y')
+        const zAxis = createAxis('z')
 
         const firstPoint = createPoint({x: 0, y: 2, z: 2});
-        const secondPoint = createPoint({x: 2, y: 2, z: 0})
-        const mirrorFirstPoint = createMirroredPoint(firstPoint, axisZ)
-
-        const firstCurve = createBSpline([firstPoint, secondPoint, mirrorFirstPoint])
-
-
-        const nurbs = createNURBS([firstPoint, mirrorFirstPoint, secondPoint])
-
-
+        const secondPoint = createPoint({x: 0, y: 0, z: 2});
         const thirdPoint = createPoint({x: 0, y: 0, z: 0});
 
+        const firstBSpline = createBSpline([firstPoint,secondPoint,thirdPoint]);
 
-        const mirrorFirstCurve = createMirroredCurve(firstCurve, axisY)
+        const fourthPoint = createPoint({x: 2, y: 2, z: 2});
+        const fifthPoint = createPoint({x: 2, y: 0, z: 2});
+        const sixthPoint = createPoint({x: 2, y: 0, z: 0});
+
+        const firstBezier = createBezier([fourthPoint,fifthPoint,sixthPoint]);
+
+        const seventhPoint = createPoint({x: 4, y: 2, z: 2});
+        const eigthPoint = createPoint({x: 4, y: 0, z: 2});
+        const ninthPoint = createPoint({x: 4, y: 0, z: 0});
+
+        const firstCSpline = createCSpline([seventhPoint,eigthPoint,ninthPoint]);
+
+        const mirrorFirstBSpline = createMirroredCurve(firstBSpline,yAxis);
+        const mirrorFirstBezier= createMirroredCurve(firstBezier,yAxis);
+        const mirrorFirstCSpline= createMirroredCurve(firstCSpline,yAxis);
 
 
+        const tenPoint = createPoint({x: 6, y: 2, z: 2});
+        const elevenPoint = createPoint({x: 6, y: 0, z: 2});
+        const twelvePoint = createPoint({x: 6, y: 0, z: 0});
+
+        const createFirstNURBS= createNURBS([tenPoint,elevenPoint,twelvePoint]);
+
+        const firstSurface= createSurface(firstBezier,firstBSpline);
 
 
-        setAllObject([firstPoint, mirrorFirstPoint, secondPoint, firstCurve, mirrorFirstCurve, nurbs])
+        const thirteenPoint = createPoint({x: 0, y: 2, z: -4});
+        const fourteenPoint = createPoint({x: 0, y: 0, z: -4});
+        const fifteenPoint = createPoint({x: 0, y: 0, z: -2});
+
+        const sixteen = createPoint({x: 2, y: 2, z: -6});
+        const seventeen = createPoint({x: 2, y: 0, z: -6});
+        const eighteen = createPoint({x: 2, y: 0, z: -4});
+
+        const nineteen = createPoint({x: 4, y: 2, z: -4});
+        const twenty = createPoint({x: 4, y: 0, z: -4});
+        const twentyOne = createPoint({x: 4, y: 0, z: -2});
+
+
+        const secondCSpline = createCSpline([thirteenPoint,fourteenPoint,fifteenPoint])
+        const thirdCSpline = createCSpline([sixteen,seventeen,eighteen])
+        const fourthCSpline = createCSpline([nineteen,twenty,twentyOne])
+
+
+        const cLoft = createCLoftSurface([secondCSpline,thirdCSpline,fourthCSpline])
+
+
+        setAllObject([
+            firstPoint,secondPoint,thirdPoint,firstBSpline,
+            fourthPoint,fifthPoint,sixthPoint,firstBezier,
+            seventhPoint,eigthPoint,ninthPoint,firstCSpline,
+            mirrorFirstBSpline,mirrorFirstBezier,mirrorFirstCSpline,
+            tenPoint,elevenPoint,twelvePoint,createFirstNURBS,
+            firstSurface,
+            thirteenPoint,fourteenPoint,fifteenPoint,
+            sixteen,seventeen,eighteen,
+            nineteen,twenty,twentyOne,
+            secondCSpline,thirdCSpline,fourthCSpline,
+            cLoft
+        ])
 
        /* const top1 = createPoint({x: 0, y: 2, z: 2});
         const top2 = createPoint({x: 2, y: 2, z: 0})
@@ -121,7 +175,7 @@ export default function Main() {
         const deleteTheCurrentObject = () => {
             let allIDImpacted = []
             allObject.forEach((prev) => {
-                if (currentObject.childrenID.includes(prev.id)) {
+                if (currentObject.userData.childrenID.includes(prev.id)) {
                     allIDImpacted.push(prev.id)
 
                 }
@@ -137,7 +191,7 @@ export default function Main() {
                 modifyObjectWhenClickOn(null, currentObject)
                 setCurrentTextFieldSelected(null)
                 setCurrentObject(null)
-            } else if (keyCode === "Delete" && currentObject.type !== "Axis") {
+            } else if (keyCode === "Delete" && currentObject.userData.type !== "Axis") {
 
                 deleteTheCurrentObject()
 
@@ -176,7 +230,7 @@ export default function Main() {
     const body = (
         <div className={classes.paper}>
             <Typography variant={"body1"}>
-                Are you sure you want to delete {currentObject != null ? currentObject.name : ""} ?
+                Are you sure you want to delete {currentObject != null ? currentObject.userData.name : ""} ?
             </Typography>
             <Typography variant={"body1"}>
                 {numberElemDelete} object(s) will be impacted
@@ -197,7 +251,7 @@ export default function Main() {
 
     return (
         <div className={classes.container}>
-            <Menu scene={scene.current} setAllObject={setAllObject}>
+            <Menu  scene={scene} setAllObject={setAllObject}>
 
             </Menu>
 
@@ -213,7 +267,7 @@ export default function Main() {
             <Toolbar controls={controls.current} camera={camera.current} currentObject={currentObject}/>
             <div className={classes.containerSceneAndBoxObject}>
                 <div className={classes.containerScene}>
-                    <Scene controls={controls} control={control} camera={camera} renderer={renderer} scene={scene} raycaster={raycaster}
+                    <Scene  controls={controls} control={control} camera={camera} renderer={renderer} scene={scene} raycaster={raycaster}
                            updateAllObjectWhenCurrentObjectChange={updateAllObjectWhenCurrentObjectChange}
                            currentTextFieldSelected={currentTextFieldSelected}
                            setCurrentTextFieldSelected={setCurrentTextFieldSelected} background={background}

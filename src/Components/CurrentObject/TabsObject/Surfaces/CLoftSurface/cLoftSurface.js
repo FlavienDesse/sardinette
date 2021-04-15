@@ -19,17 +19,17 @@ CLoftSurface.propType = {
 export default function CLoftSurface(props) {
     const classes = useStyles();
 
-    const [name, setName] = React.useState(props.currentObject.name);
+    const [name, setName] = React.useState(props.currentObject.userData.name);
     const [isVisible, setIsVisible] = React.useState(props.currentObject.visible);
 
-    const [allCurves, setAllCurves] = React.useState(props.currentObject.allCurves);
+    const [allCurves, setAllCurves] = React.useState(props.currentObject.userData.allCurves);
 
     const {enqueueSnackbar} = useSnackbar();
 
     React.useEffect((() => {
         setIsVisible(props.currentObject.visible)
-        setName(props.currentObject.name)
-        setAllCurves(props.currentObject.allCurves)
+        setName(props.currentObject.userData.name)
+        setAllCurves(props.currentObject.userData.allCurves)
     }), [props.currentObject])
 
 
@@ -51,7 +51,7 @@ export default function CLoftSurface(props) {
         if (e.keyCode === 13) {
             let lastValue = props.currentObject;
             let newValue = props.currentObject
-            newValue.name = name
+            newValue.userData.name = name
             props.updateAllObjectWhenCurrentObjectChange(lastValue, newValue, false)
             props.setCurrentObject(newValue)
 
@@ -64,11 +64,12 @@ export default function CLoftSurface(props) {
         if (e.keyCode === 13) {
             let lastValue = props.currentObject;
             let newValue = props.currentObject
-            newValue.allCurves = allCurves
+            newValue.userData.allCurves = allCurves
 
             try {
-                newValue.update()
                 updateObjectByAddingChildrenID(allCurves, props.currentObject.id, props.allObject, props.setAllObject)
+                newValue.userData.update()
+
 
             } catch (e) {
                 enqueueSnackbar(e.message, {
@@ -85,7 +86,7 @@ export default function CLoftSurface(props) {
         setAllCurves([])
         props.setCurrentTextFieldSelected({
             id: props.currentObject.id,
-            acceptType: Constant.CONSTANT_ALL_CURVES,
+            acceptType: ["C-Spline"],
             clickCtrl: addCurves,
             simpleClick: setOneCurve
         })
@@ -94,7 +95,7 @@ export default function CLoftSurface(props) {
     const handleDisFocusOnTextFieldControlsPoints = (e) => {
 
         props.setCurrentTextFieldSelected(null)
-        setAllCurves(props.currentObject.allCurves)
+        setAllCurves(props.currentObject.userData.allCurves)
     }
 
     const addCurves = (curve) => {
@@ -147,7 +148,7 @@ export default function CLoftSurface(props) {
                 <TextField
 
                     value={
-                        allCurves.map(a => a.name)
+                        allCurves.map(a => a.userData.name)
                     }
 
                     error={allCurves.length < 1}

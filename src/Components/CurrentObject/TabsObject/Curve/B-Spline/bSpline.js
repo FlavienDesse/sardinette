@@ -6,6 +6,7 @@ import useStyles from "./style";
 import PropTypes from "prop-types";
 import {updateObjectByAddingChildrenID} from "../../../../../Misc/Utils";
 import {useSnackbar} from 'notistack';
+import Constant from "../../../../../Misc/Constant";
 
 BSpline.propType = {
     setCurrentObject: PropTypes.func.isRequired,
@@ -22,21 +23,21 @@ export default function BSpline(props) {
 
     const {enqueueSnackbar} = useSnackbar();
 
-    const [name, setName] = React.useState(props.currentObject.name);
+    const [name, setName] = React.useState(props.currentObject.userData.name);
     const [isVisible, setIsVisible] = React.useState(props.currentObject.visible);
 
-    const [resolution, setResolution] = React.useState(props.currentObject.resolution);
-    const [degree, setDegree] = React.useState(props.currentObject.degree);
+    const [resolution, setResolution] = React.useState(props.currentObject.userData.resolution);
+    const [degree, setDegree] = React.useState(props.currentObject.userData.degree);
 
-    const [controlsPoints, setControlsPoints] = React.useState(props.currentObject.controlsPoints);
+    const [controlsPoints, setControlsPoints] = React.useState(props.currentObject.userData.controlsPoints);
 
 
     React.useEffect((() => {
-        setResolution(props.currentObject.resolution)
+        setResolution(props.currentObject.userData.resolution)
         setIsVisible(props.currentObject.visible)
-        setName(props.currentObject.name)
-        setDegree(props.currentObject.degree)
-        setControlsPoints(props.currentObject.controlsPoints)
+        setName(props.currentObject.userData.name)
+        setDegree(props.currentObject.userData.degree)
+        setControlsPoints(props.currentObject.userData.controlsPoints)
     }), [props.currentObject])
 
     const handleChangeIsVisible = (event) => {
@@ -53,11 +54,11 @@ export default function BSpline(props) {
     }
 
     const blurTextFieldName = (event) => {
-        setName(props.currentObject.name);
+        setName(props.currentObject.userData.name);
     }
 
     const blurTextFieldDegree = (event) => {
-        setDegree(props.currentObject.degree);
+        setDegree(props.currentObject.userData.degree);
     }
 
     const handleChangeTextFieldDegree = (event) => {
@@ -91,7 +92,7 @@ export default function BSpline(props) {
             } else {
                 let lastValue = props.currentObject;
                 let newValue = props.currentObject
-                newValue.name = name
+                newValue.userData.name = name
                 props.updateAllObjectWhenCurrentObjectChange(lastValue, newValue, false)
                 props.setCurrentObject(newValue)
             }
@@ -103,10 +104,11 @@ export default function BSpline(props) {
         if (e.keyCode === 13) {
             let lastValue = props.currentObject;
             let newValue = props.currentObject
-            newValue.degree = degree
+            newValue.userData.degree = degree
 
             try {
-                newValue.update()
+                updateObjectByAddingChildrenID(controlsPoints, props.currentObject.id, props.allObject, props.setAllObject)
+                newValue.userData.update()
 
             } catch (e) {
                 enqueueSnackbar(e.message, {
@@ -123,11 +125,12 @@ export default function BSpline(props) {
         if (e.keyCode === 13) {
             let lastValue = props.currentObject;
             let newValue = props.currentObject
-            newValue.controlsPoints = controlsPoints
+            newValue.userData.controlsPoints = controlsPoints
 
             try {
-                newValue.update()
                 updateObjectByAddingChildrenID(controlsPoints, props.currentObject.id, props.allObject, props.setAllObject)
+                newValue.userData.update()
+
 
             } catch (e) {
                 enqueueSnackbar(e.message, {
@@ -144,10 +147,11 @@ export default function BSpline(props) {
         if (e.keyCode === 13) {
             let lastValue = props.currentObject;
             let newValue = props.currentObject
-            newValue.resolution = resolution
+            newValue.userData.resolution = resolution
 
             try {
-                newValue.update()
+                updateObjectByAddingChildrenID(controlsPoints, props.currentObject.id, props.allObject, props.setAllObject)
+                newValue.userData.update()
 
             } catch (e) {
                 enqueueSnackbar(e.message, {
@@ -165,7 +169,7 @@ export default function BSpline(props) {
         setControlsPoints([])
         props.setCurrentTextFieldSelected({
             id: props.currentObject.id,
-            acceptType: ["Point", "Mirrored Point"],
+            acceptType: Constant.CONSTANT_ALL_POINTS,
             clickCtrl: addControlsPoints,
             simpleClick: setOneControlsPoints
         })
@@ -212,7 +216,7 @@ export default function BSpline(props) {
                 <TextField
 
                     value={
-                        controlsPoints.map(a => a.name)
+                        controlsPoints.map(a => a.userData.name)
                     }
 
                     error={controlsPoints.length < 2}

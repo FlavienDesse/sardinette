@@ -22,22 +22,22 @@ export default function CSpline(props) {
 
     const {enqueueSnackbar} = useSnackbar();
 
-    const [name, setName] = React.useState(props.currentObject.name);
+    const [name, setName] = React.useState(props.currentObject.userData.name);
     const [isVisible, setIsVisible] = React.useState(props.currentObject.visible);
 
-    const [resolution, setResolution] = React.useState(props.currentObject.resolution);
+    const [resolution, setResolution] = React.useState(props.currentObject.userData.resolution);
 
-    const [closed, setClosed] = React.useState(props.currentObject.closed);
+    const [closed, setClosed] = React.useState(props.currentObject.userData.closed);
 
-    const [controlsPoints, setControlsPoints] = React.useState(props.currentObject.controlsPoints);
+    const [controlsPoints, setControlsPoints] = React.useState(props.currentObject.userData.controlsPoints);
 
 
     React.useEffect((() => {
-        setResolution(props.currentObject.resolution)
+        setResolution(props.currentObject.userData.resolution)
         setIsVisible(props.currentObject.visible)
-        setName(props.currentObject.name)
-        setControlsPoints(props.currentObject.controlsPoints)
-        setClosed(props.currentObject.closed)
+        setName(props.currentObject.userData.name)
+        setControlsPoints(props.currentObject.userData.controlsPoints)
+        setClosed(props.currentObject.userData.closed)
     }), [props.currentObject])
 
     const handleChangeIsVisible = (event) => {
@@ -53,8 +53,8 @@ export default function CSpline(props) {
         setClosed(event.target.checked);
         let lastValue = props.currentObject;
         let newValue = props.currentObject
-        newValue.closed = event.target.checked;
-        newValue.update()
+        newValue.userData.closed = event.target.checked;
+        newValue.userData.update()
         props.updateAllObjectWhenCurrentObjectChange(lastValue, newValue, true)
         props.setCurrentObject(newValue)
     }
@@ -64,7 +64,7 @@ export default function CSpline(props) {
     }
 
     const blurTextFieldName = (event) => {
-        setName(props.currentObject.name);
+        setName(props.currentObject.userData.name);
     }
 
 
@@ -88,7 +88,7 @@ export default function CSpline(props) {
             } else {
                 let lastValue = props.currentObject;
                 let newValue = props.currentObject
-                newValue.name = name
+                newValue.userData.name = name
                 props.updateAllObjectWhenCurrentObjectChange(lastValue, newValue, false)
                 props.setCurrentObject(newValue)
             }
@@ -101,11 +101,12 @@ export default function CSpline(props) {
         if (e.keyCode === 13) {
             let lastValue = props.currentObject;
             let newValue = props.currentObject
-            newValue.controlsPoints = controlsPoints
+            newValue.userData.controlsPoints = controlsPoints
 
             try {
-                newValue.update()
                 updateObjectByAddingChildrenID(controlsPoints, props.currentObject.id, props.allObject, props.setAllObject)
+                newValue.userData.update()
+
 
             } catch (e) {
                 enqueueSnackbar(e.message, {
@@ -122,10 +123,11 @@ export default function CSpline(props) {
         if (e.keyCode === 13) {
             let lastValue = props.currentObject;
             let newValue = props.currentObject
-            newValue.resolution = resolution
+            newValue.userData.resolution = resolution
 
             try {
-                newValue.update()
+                updateObjectByAddingChildrenID(controlsPoints, props.currentObject.id, props.allObject, props.setAllObject)
+                newValue.userData.update()
 
             } catch (e) {
                 enqueueSnackbar(e.message, {
@@ -150,7 +152,7 @@ export default function CSpline(props) {
     const handleDisFocusOnTextFieldControlsPoints = (e) => {
 
         props.setCurrentTextFieldSelected(null)
-        setControlsPoints(props.currentObject.controlsPoints)
+        setControlsPoints(props.currentObject.userData.controlsPoints)
     }
 
     const addControlsPoints = (points) => {
@@ -188,7 +190,7 @@ export default function CSpline(props) {
                 <TextField
 
                     value={
-                        controlsPoints.map(a => a.name)
+                        controlsPoints.map(a => a.userData.name)
                     }
 
                     error={controlsPoints.length < 2}
