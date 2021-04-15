@@ -7,6 +7,7 @@ import {TrackballControls} from "three/examples/jsm/controls/TrackballControls"
 import {modifyObjectWhenClickOn} from "../../Misc/Utils";
 import {TransformControls} from "three/examples/jsm/controls/TransformControls"
 import InfiniteGridHelper from "../../Misc/InfiniteGridHelper";
+import {OrbitControls} from "three/examples/jsm/controls/OrbitControls";
 
 Scene.propType = {
     background: PropTypes.instanceOf(Background).isRequired,
@@ -82,7 +83,7 @@ export default function Scene(props) {
 
         refContainer.current.appendChild(props.renderer.current.domElement)
 
-        const controls = new TrackballControls(props.camera.current, props.renderer.current.domElement)
+        props.controls.current  = new OrbitControls(props.camera.current, props.renderer.current.domElement)
         props.control.current = new TransformControls(props.camera.current, props.renderer.current.domElement);
 
         group.add(props.control.current)
@@ -94,7 +95,7 @@ export default function Scene(props) {
 
 
         props.control.current.addEventListener('dragging-changed', function (event) {
-            controls.enabled = !event.value;
+            props.controls.current.enabled = !event.value;
 
 
         });
@@ -115,7 +116,7 @@ export default function Scene(props) {
 
         let animate = function () {
             requestAnimationFrame(animate);
-            controls.update()
+            props.controls.current.update()
 
 
             props.renderer.current.render(props.scene.current, props.camera.current);

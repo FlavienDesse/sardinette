@@ -36,7 +36,7 @@ export default function Main() {
      */
     const [currentTextFieldSelected, setCurrentTextFieldSelected] = React.useState(null);
 
-
+    const controls = useRef();
     const control = useRef();
     const camera = useRef();
     const renderer = useRef();
@@ -210,10 +210,10 @@ export default function Main() {
 
             </Modal>
 
-            <Toolbar/>
+            <Toolbar controls={controls.current} camera={camera.current} currentObject={currentObject}/>
             <div className={classes.containerSceneAndBoxObject}>
                 <div className={classes.containerScene}>
-                    <Scene control={control} camera={camera} renderer={renderer} scene={scene} raycaster={raycaster}
+                    <Scene controls={controls} control={control} camera={camera} renderer={renderer} scene={scene} raycaster={raycaster}
                            updateAllObjectWhenCurrentObjectChange={updateAllObjectWhenCurrentObjectChange}
                            currentTextFieldSelected={currentTextFieldSelected}
                            setCurrentTextFieldSelected={setCurrentTextFieldSelected} background={background}
