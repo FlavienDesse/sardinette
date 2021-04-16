@@ -16,6 +16,8 @@ export default function Toolbar(props) {
 
     const handleClickOnView = (position) => {
         if (props.currentObject) {
+            props.camera.zoom = 1
+            props.camera.updateProjectionMatrix()
             props.currentObject.geometry.computeBoundingBox()
             let box = new Box3()
             box.copy(props.currentObject.geometry.boundingBox).applyMatrix4(props.currentObject.matrixWorld)
