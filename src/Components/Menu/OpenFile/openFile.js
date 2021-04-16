@@ -4,6 +4,7 @@ import {exportSTL,exportScene} from "../../../Misc/Export";
 import PropTypes from "prop-types";
 
 import {importSTL,importScene} from "../../../Misc/Import";
+import {useSnackbar} from "notistack";
 
 OpenFile.propType = {
     scene: PropTypes.any.isRequired,
@@ -14,13 +15,20 @@ export default function OpenFile(props) {
 
     const hiddenFileInput = React.useRef(null);
 
-
+    const {enqueueSnackbar} = useSnackbar();
 
     const handleClickSaveAs = event => {
         exportScene(props.scene)
     };
     const handleClickOnSTL = () => {
-        exportSTL(props.scene)
+        try{
+            exportSTL(props.scene.current)
+        }catch (e){
+            enqueueSnackbar(e.message, {
+                variant: 'error',
+            });
+        }
+
     }
 
 

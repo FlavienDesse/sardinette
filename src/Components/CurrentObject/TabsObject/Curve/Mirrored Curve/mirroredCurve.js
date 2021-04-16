@@ -6,6 +6,7 @@ import TextField from "@material-ui/core/TextField";
 import Checkbox from "@material-ui/core/Checkbox";
 import PropTypes from "prop-types";
 import {updateObjectByAddingChildrenID} from "../../../../../Misc/Utils";
+import Constant from "../../../../../Misc/Constant";
 
 
 MirroredCurve.propType = {
@@ -151,7 +152,7 @@ export default function MirroredCurve(props) {
         setInitialCurve(null)
         props.setCurrentTextFieldSelected({
             id: props.currentObject.id,
-            acceptType: ["B-Spline", "C-Spline", "Mirrored Curve"],
+            acceptType: Constant.CONSTANT_ALL_CURVES,
             clickCtrl: changeInitialCurve,
             simpleClick: changeInitialCurve
         })

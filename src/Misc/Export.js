@@ -8,14 +8,22 @@ const exportSTL = (scene) => {
 
     let allChildren = scene.children
 
+
+
     let children = []
+
+    console.log( scene)
+
 
 
     scene.children[1].children.forEach((object) => {
-        if (Constant.CONSTANT_ALL_SURFACES.includes(object.type)) {
+        if (Constant.CONSTANT_ALL_SURFACES.includes(object.userData.type)) {
             children.push(object)
         }
     })
+    if(children.length === 0){
+        throw new Error(" please add at least one surface ")
+    }
     scene.children = children
     var exporter = new STLExporter();
     var str = exporter.parse(scene); // Export the scene
@@ -35,7 +43,7 @@ const exportScene = (scene) => {
         includeCustomExtensions:false,
     };
 
-
+    console.log( scene.current.children[1])
 
 
     exporter.parse( scene.current.children[1], function ( result  ) {

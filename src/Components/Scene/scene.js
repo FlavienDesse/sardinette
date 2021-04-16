@@ -39,7 +39,7 @@ export default function Scene(props) {
 
     React.useEffect(() => {
 
-        if (props.currentObject && props.currentObject.userData.type === "Point") {
+        if (props.currentObject && props.currentObject.userData.type === "Point"&& props.currentObject.visible &&  !props.currentObject.userData.isError ) {
             props.control.current.attach(props.currentObject);
             props.control.current.addEventListener('objectChange', handleMove);
             return () => {
@@ -253,7 +253,7 @@ export default function Scene(props) {
 
         });
         props.scene.current.add(group)
-    }, [props.allObject])
+    }, [props.allObject, props.scene])
 
 
 
