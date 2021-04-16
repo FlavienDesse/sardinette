@@ -15,30 +15,22 @@ export default function AxisView(props) {
     const renderer2 = useRef()
 
 
-
-
-    let animate =React.useCallback((args => {
+    let animate = React.useCallback((args => {
         requestAnimationFrame(animate);
 
 
-
-
-        camera2.current.position.copy( props.camera.position );
-       // camera2.current.position.sub( props.controls.center );
-        camera2.current.position.setLength( 200 );
-        camera2.current.lookAt( scene2.current.position );
+        camera2.current.position.copy(props.camera.position);
+        // camera2.current.position.sub( props.controls.center );
+        camera2.current.position.setLength(200);
+        camera2.current.lookAt(scene2.current.position);
 
         renderer2.current.render(scene2.current, camera2.current);
 
 
-
-
-    }),[props.camera,props.controls])
+    }), [props.camera])
 
 
     React.useEffect(() => {
-
-        console.log(props.controls)
         let CANVAS_WIDTH = 200, CANVAS_HEIGHT = 200;
 
         const origin = new THREE.Vector3(0, 0, 0);
@@ -75,9 +67,7 @@ export default function AxisView(props) {
         animate();
 
 
-    },[])
-
-
+    }, [animate, props.controls])
 
 
     return (

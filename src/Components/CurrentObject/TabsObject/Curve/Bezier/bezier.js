@@ -4,10 +4,11 @@ import TextField from "@material-ui/core/TextField";
 import Checkbox from "@material-ui/core/Checkbox";
 import useStyles from "./style";
 import PropTypes from "prop-types";
-import {useSnackbar} from 'notistack';
 import {updateObjectByAddingChildrenID} from "../../../../../Misc/Utils";
+import {useSnackbar} from 'notistack';
+import Constant from "../../../../../Misc/Constant";
 
-CSpline.propType = {
+Bezier.propType = {
     setCurrentObject: PropTypes.func.isRequired,
     currentObject: PropTypes.object.isRequired,
     allObject: PropTypes.array.isRequired,
@@ -16,7 +17,7 @@ CSpline.propType = {
 }
 
 
-export default function CSpline(props) {
+export default function Bezier(props) {
 
     const classes = useStyles()
 
@@ -27,8 +28,6 @@ export default function CSpline(props) {
 
     const [resolution, setResolution] = React.useState(props.currentObject.userData.resolution);
 
-    const [closed, setClosed] = React.useState(props.currentObject.userData.closed);
-
     const [controlsPoints, setControlsPoints] = React.useState(props.currentObject.userData.controlsPoints);
 
 
@@ -37,7 +36,6 @@ export default function CSpline(props) {
         setIsVisible(props.currentObject.visible)
         setName(props.currentObject.userData.name)
         setControlsPoints(props.currentObject.userData.controlsPoints)
-        setClosed(props.currentObject.userData.closed)
     }), [props.currentObject])
 
     const handleChangeIsVisible = (event) => {
@@ -49,16 +47,6 @@ export default function CSpline(props) {
         props.setCurrentObject(newValue)
     }
 
-    const handleChangeClosed = (event) => {
-        setClosed(event.target.checked);
-        let lastValue = props.currentObject;
-        let newValue = props.currentObject
-        newValue.userData.closed = event.target.checked;
-        newValue.userData.update()
-        props.updateAllObjectWhenCurrentObjectChange(lastValue, newValue, true)
-        props.setCurrentObject(newValue)
-    }
-
     const handleChangeTextFieldName = (event) => {
         setName(event.target.value);
     }
@@ -66,6 +54,7 @@ export default function CSpline(props) {
     const blurTextFieldName = (event) => {
         setName(props.currentObject.userData.name);
     }
+
 
 
     const handleChangeTextFieldResolution = (event) => {
@@ -95,6 +84,7 @@ export default function CSpline(props) {
 
         }
     }
+
 
 
     const keyPressTextFieldControlsPoints = (e) => {
@@ -133,6 +123,7 @@ export default function CSpline(props) {
                 enqueueSnackbar(e.message, {
                     variant: 'error',
                 });
+
             }
             props.updateAllObjectWhenCurrentObjectChange(lastValue, newValue, true)
             props.setCurrentObject(newValue)
@@ -143,7 +134,8 @@ export default function CSpline(props) {
     const handleFocusOnTextFieldControlsPoints = (e) => {
         setControlsPoints([])
         props.setCurrentTextFieldSelected({
-            acceptType: ["Point", "Mirrored Point"],
+            id: props.currentObject.id,
+            acceptType: Constant.CONSTANT_ALL_POINTS,
             clickCtrl: addControlsPoints,
             simpleClick: setOneControlsPoints
         })
@@ -209,17 +201,7 @@ export default function CSpline(props) {
                            InputProps={{className: classes.inputSmallTextField}}/>
 
             </div>
-            <div className={classes.containerRow}>
-                <Typography className={classes.text}>
-                    Closed
-                </Typography>
-                <Checkbox
-                    className={classes.checkBox}
-                    checked={closed}
-                    color="primary"
-                    onChange={handleChangeClosed}
-                />
-            </div>
+
             <div className={classes.containerRow}>
                 <Typography className={classes.text}>
                     Visible

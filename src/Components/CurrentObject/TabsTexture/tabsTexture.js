@@ -11,7 +11,7 @@ import PropTypes from "prop-types";
 TabsTexture.propType = {
     setCurrentObject: PropTypes.func.isRequired,
     currentObject: PropTypes.object.isRequired,
-    setAllObject:PropTypes.array.isRequired,
+    setAllObject: PropTypes.array.isRequired,
 }
 
 
@@ -19,8 +19,7 @@ export default function TabsTexture(props) {
     const classes = useStyles();
 
 
-
-    const [color, setColor] = React.useState("#"+props.currentObject.material.color.getHexString());
+    const [color, setColor] = React.useState("#" + props.currentObject.material.color.getHexString());
 
     const [displayColorPicker, setDisplayColorPicker] = React.useState(false);
 
@@ -51,17 +50,17 @@ export default function TabsTexture(props) {
                             height: '14px',
                             borderRadius: '2px',
                             background: color,
-                            border:"solid black 2px"
+                            border: "solid black 2px"
                         }}/>
                     </div>
-                {displayColorPicker &&
-                <ClickAwayListener onClickAway={handleCloseColorPicker}>
-                    <div className={classes.popoverColorPicker}>
-                        <ChromePicker disableAlpha={true} color={color} onChange={handleChangeColor}/>
-                    </div>
+                    {displayColorPicker &&
+                    <ClickAwayListener onClickAway={handleCloseColorPicker}>
+                        <div className={classes.popoverColorPicker}>
+                            <ChromePicker disableAlpha={true} color={color} onChange={handleChangeColor}/>
+                        </div>
 
-                </ClickAwayListener>
-                }
+                    </ClickAwayListener>
+                    }
                 </div>
 
             </div>

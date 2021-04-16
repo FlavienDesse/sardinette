@@ -3,7 +3,6 @@ import {makeStyles} from '@material-ui/core/styles';
 const useStyles = makeStyles({
     text: {
         width: '100px',
-
     },
 
     inputTextField: {
@@ -15,17 +14,15 @@ const useStyles = makeStyles({
         alignItems: 'center',
     },
 
-    inputTextFieldPosition: {
+    inputSmallTextField: {
         width: '50px',
         marginRight: '25px',
     },
     checkBox: {
         padding: '0px',
     },
-    popoverColorPicker: {
-        position: 'absolute',
-        zIndex: '2000',
-        transform: "translateX(-50%) translateX(15px)", //15px correspoding to the padding of containerColorPicker
+    inputTextFieldTable: {
+        width: '50px',
     },
 });
 

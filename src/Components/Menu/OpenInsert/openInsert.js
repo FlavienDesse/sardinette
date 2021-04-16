@@ -1,12 +1,14 @@
 import React from "react";
 import PropTypes from 'prop-types';
 import {
-    createBSpline,
-    createPoint,
-    createSurface,
+    createBezier,
+    createBSpline, createCLoftSurface,
     createCSpline,
+    createMirroredCurve,
     createMirroredPoint,
-    createMirroredCurve
+    createNURBS,
+    createPoint,
+    createSurface
 } from "../../../Misc/Utils"
 import {MenuItem, SubMenu} from "rc-menu";
 
@@ -18,7 +20,7 @@ OpenInsert.propType = {
 
 
 export default function OpenInsert(props) {
-    
+
     const handleAddPoint = () => {
         props.setAllObject((prevState) => {
 
@@ -84,9 +86,42 @@ export default function OpenInsert(props) {
 
         })
     }
+    const handleAddNURBS = () => {
+        props.setAllObject((prevState) => {
+            let nurbs = createNURBS()
+
+            prevState.push(nurbs)
+
+            return [...prevState]
+
+        })
+    }
+
+    const handleAddBezier= () => {
+        props.setAllObject((prevState) => {
+            let bezier = createBezier()
+
+            prevState.push(bezier)
+
+            return [...prevState]
+
+        })
+    }
+
+    const handleAddCLoftSurface= () => {
+        props.setAllObject((prevState) => {
+            let surface = createCLoftSurface()
+
+            prevState.push(surface)
+
+            return [...prevState]
+
+        })
+    }
 
     let propsSubMenu = Object.assign({}, props)
-    delete  propsSubMenu.setAllObject
+    delete propsSubMenu.setAllObject
+
 
     return (
         <SubMenu popupOffset={[0, 2]} {...propsSubMenu} title="Insert">
@@ -99,6 +134,12 @@ export default function OpenInsert(props) {
                 </MenuItem>
             </SubMenu>
             <SubMenu popupOffset={[0, 2]} title={"Curve"}>
+                <MenuItem onClick={handleAddBezier}>
+                    Bezier
+                </MenuItem>
+                <MenuItem onClick={handleAddNURBS}>
+                    NURBS
+                </MenuItem>
                 <MenuItem onClick={handleAddBSpline}>
                     B-Spline
                 </MenuItem>
@@ -112,6 +153,9 @@ export default function OpenInsert(props) {
             <SubMenu popupOffset={[0, 2]} title={"Surfaces"}>
                 <MenuItem onClick={handleAddSurface}>
                     Surface
+                </MenuItem>
+                <MenuItem onClick={handleAddCLoftSurface}>
+                    C-Loft Surface
                 </MenuItem>
             </SubMenu>
         </SubMenu>

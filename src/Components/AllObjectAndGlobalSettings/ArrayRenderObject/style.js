@@ -7,7 +7,7 @@ const useStyles = makeStyles((theme) => ({
     redIcon: {
         color: 'red !important',
     },
-    selectedText:{
+    selectedText: {
         color: 'white !important',
     },
 

@@ -6,6 +6,7 @@ import TextField from "@material-ui/core/TextField";
 import Checkbox from "@material-ui/core/Checkbox";
 import PropTypes from "prop-types";
 import {updateObjectByAddingChildrenID} from "../../../../../Misc/Utils";
+import Constant from "../../../../../Misc/Constant";
 
 
 MirroredCurve.propType = {
@@ -22,23 +23,23 @@ export default function MirroredCurve(props) {
     const {enqueueSnackbar} = useSnackbar();
 
 
-    const [name, setName] = React.useState(props.currentObject.name);
+    const [name, setName] = React.useState(props.currentObject.userData.name);
     const [isVisible, setIsVisible] = React.useState(props.currentObject.visible);
 
-    const [initialCurve, setInitialCurve] = React.useState(props.currentObject.initialCurve);
+    const [initialCurve, setInitialCurve] = React.useState(props.currentObject.userData.initialCurve);
 
-    const [axis, setAxis] = React.useState(props.currentObject.axis);
+    const [axis, setAxis] = React.useState(props.currentObject.userData.axis);
 
 
     React.useEffect((() => {
         setIsVisible(props.currentObject.visible)
-        setName(props.currentObject.name)
-        setInitialCurve(props.currentObject.initialCurve)
+        setName(props.currentObject.userData.name)
+        setInitialCurve(props.currentObject.userData.initialCurve)
     }), [props.currentObject])
 
 
     const blurTextFieldName = (event) => {
-        setName(props.currentObject.name);
+        setName(props.currentObject.userData.name);
     }
 
     const handleChangeIsVisible = (event) => {
@@ -64,7 +65,7 @@ export default function MirroredCurve(props) {
             } else {
                 let lastValue = props.currentObject;
                 let newValue = props.currentObject
-                newValue.name = name
+                newValue.userData.name = name
                 props.updateAllObjectWhenCurrentObjectChange(lastValue, newValue, false)
                 props.setCurrentObject(newValue)
             }
@@ -77,14 +78,13 @@ export default function MirroredCurve(props) {
         if (e.keyCode === 13) {
             let lastValue = props.currentObject;
             let newValue = props.currentObject
-            newValue.axis = axis
+            newValue.userData.axis = axis
 
 
             try {
 
-
-                newValue.update()
-                props.updateObjectByAddingChildrenID(new Array(initialCurve), props.currentObject.id)
+                updateObjectByAddingChildrenID(new Array(initialCurve), props.currentObject.id, props.allObject, props.setAllObject)
+                newValue.userData.update()
 
 
             } catch (e) {
@@ -120,7 +120,7 @@ export default function MirroredCurve(props) {
     const handleDisFocusOnTextFieldAxis = (e) => {
 
         props.setCurrentTextFieldSelected(null)
-        setInitialCurve(props.currentObject.initialCurve)
+        setInitialCurve(props.currentObject.userData.initialCurve)
     }
 
 
@@ -128,13 +128,13 @@ export default function MirroredCurve(props) {
         if (e.keyCode === 13) {
             let lastValue = props.currentObject;
             let newValue = props.currentObject
-            newValue.initialCurve = initialCurve
+            newValue.userData.initialCurve = initialCurve
 
 
             try {
+                updateObjectByAddingChildrenID(new Array(initialCurve), props.currentObject.id, props.allObject, props.setAllObject)
+                newValue.userData.update()
 
-                newValue.update()
-                updateObjectByAddingChildrenID(new Array(initialCurve),props.currentObject.id,props.allObject,props.setAllObject)
 
 
             } catch (e) {
@@ -152,7 +152,7 @@ export default function MirroredCurve(props) {
         setInitialCurve(null)
         props.setCurrentTextFieldSelected({
             id: props.currentObject.id,
-            acceptType: ["B-Spline", "C-Spline", "Mirrored Curve"],
+            acceptType: Constant.CONSTANT_ALL_CURVES,
             clickCtrl: changeInitialCurve,
             simpleClick: changeInitialCurve
         })
@@ -167,7 +167,7 @@ export default function MirroredCurve(props) {
     const handleDisFocusOnTextFieldInitialCurve = (e) => {
 
         props.setCurrentTextFieldSelected(null)
-        setInitialCurve(props.currentObject.initialCurve)
+        setInitialCurve(props.currentObject.userData.initialCurve)
     }
 
 
@@ -189,7 +189,7 @@ export default function MirroredCurve(props) {
                 <TextField
 
                     value={
-                        initialCurve === null ? "" : initialCurve.name
+                        initialCurve === null ? "" : initialCurve.userData.name
                     }
 
                     error={initialCurve === null}
@@ -205,7 +205,7 @@ export default function MirroredCurve(props) {
                 <TextField
 
                     value={
-                        axis === null ? "" : axis.name
+                        axis === null ? "" : axis.userData.name
                     }
 
                     error={axis === null}

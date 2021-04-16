@@ -8,7 +8,7 @@ import {useSnackbar} from "notistack";
 import {updateObjectByAddingChildrenID} from "../../../../../Misc/Utils";
 import Constant from "../../../../../Misc/Constant";
 
-Surface.propType = {
+CLoftSurface.propType = {
     setCurrentObject: PropTypes.func.isRequired,
     currentObject: PropTypes.object.isRequired,
     allObject: PropTypes.array.isRequired,
@@ -16,24 +16,20 @@ Surface.propType = {
 }
 
 
-export default function Surface(props) {
+export default function CLoftSurface(props) {
     const classes = useStyles();
 
     const [name, setName] = React.useState(props.currentObject.userData.name);
     const [isVisible, setIsVisible] = React.useState(props.currentObject.visible);
 
-    const [firstCurve, setFirstCurve] = React.useState(props.currentObject.userData.firstCurve);
-    const [secondCurve, setSecondCurve] = React.useState(props.currentObject.userData.secondCurve);
+    const [allCurves, setAllCurves] = React.useState(props.currentObject.userData.allCurves);
 
     const {enqueueSnackbar} = useSnackbar();
-
-
 
     React.useEffect((() => {
         setIsVisible(props.currentObject.visible)
         setName(props.currentObject.userData.name)
-        setFirstCurve(props.currentObject.userData.firstCurve)
-        setSecondCurve(props.currentObject.userData.secondCurve)
+        setAllCurves(props.currentObject.userData.allCurves)
     }), [props.currentObject])
 
 
@@ -64,63 +60,14 @@ export default function Surface(props) {
     }
 
 
-    const keyPressTextFieldSecondCurve = (e) => {
+    const keyPressTextFieldCurves = (e) => {
         if (e.keyCode === 13) {
             let lastValue = props.currentObject;
             let newValue = props.currentObject
-            newValue.userData.secondCurve = secondCurve
-
-
-            try {
-                updateObjectByAddingChildrenID(new Array(secondCurve), props.currentObject.id, props.allObject, props.setAllObject)
-                newValue.userData.update()
-
-
-
-            } catch (e) {
-                enqueueSnackbar(e.message, {
-                    variant: 'error',
-                });
-
-            }
-
-            props.updateAllObjectWhenCurrentObjectChange(lastValue, newValue, true)
-            props.setCurrentObject(newValue)
-        }
-    }
-
-    const handleFocusOnTextFieldSecondCurve = (e) => {
-        setSecondCurve(null)
-        props.setCurrentTextFieldSelected({
-            id: props.currentObject.id,
-            acceptType: Constant.CONSTANT_ALL_CURVES,
-            clickCtrl: changeSecondCurve,
-            simpleClick: changeSecondCurve
-        })
-    }
-
-
-    const changeSecondCurve = (curve) => {
-        setSecondCurve(curve)
-    }
-
-
-    const handleDisFocusOnTextFieldSecondCurve = (e) => {
-
-        props.setCurrentTextFieldSelected(null)
-        setSecondCurve(props.currentObject.userData.secondCurve)
-    }
-
-
-    const keyPressTextFieldFirstCurve = (e) => {
-        if (e.keyCode === 13) {
-            let lastValue = props.currentObject;
-            let newValue = props.currentObject
-            newValue.userData.firstCurve = firstCurve
-
+            newValue.userData.allCurves = allCurves
 
             try {
-                updateObjectByAddingChildrenID(new Array(firstCurve), props.currentObject.id, props.allObject, props.setAllObject)
+                updateObjectByAddingChildrenID(allCurves, props.currentObject.id, props.allObject, props.setAllObject)
                 newValue.userData.update()
 
 
@@ -128,7 +75,6 @@ export default function Surface(props) {
                 enqueueSnackbar(e.message, {
                     variant: 'error',
                 });
-
             }
             props.updateAllObjectWhenCurrentObjectChange(lastValue, newValue, true)
             props.setCurrentObject(newValue)
@@ -136,27 +82,42 @@ export default function Surface(props) {
         }
     }
 
-    const handleFocusOnTextFieldFirstCurve = (e) => {
-        setFirstCurve(null)
+    const handleFocusOnTextFieldCurves = (e) => {
+        setAllCurves([])
         props.setCurrentTextFieldSelected({
             id: props.currentObject.id,
-            acceptType: Constant.CONSTANT_ALL_CURVES,
-            clickCtrl: changeFirstCurve,
-            simpleClick: changeFirstCurve
+            acceptType: ["C-Spline"],
+            clickCtrl: addCurves,
+            simpleClick: setOneCurve
+        })
+    }
+
+    const handleDisFocusOnTextFieldControlsPoints = (e) => {
+
+        props.setCurrentTextFieldSelected(null)
+        setAllCurves(props.currentObject.userData.allCurves)
+    }
+
+    const addCurves = (curve) => {
+        setAllCurves((prevState) => {
+            prevState.push(curve)
+
+            return [...prevState]
+        })
+
+    }
+
+    const setOneCurve= (curve) => {
+        setAllCurves((prevState) => {
+            prevState = []
+            prevState.push(curve)
+            return [...prevState]
         })
     }
 
 
-    const changeFirstCurve = (curve) => {
-        setFirstCurve(curve)
-    }
 
 
-    const handleDisFocusOnTextFieldFirstCurve = (e) => {
-
-        props.setCurrentTextFieldSelected(null)
-        setFirstCurve(props.currentObject.userData.firstCurve)
-    }
 
 
     return (
@@ -182,36 +143,20 @@ export default function Surface(props) {
             </div>
             <div className={classes.containerRow}>
                 <Typography className={classes.text}>
-                    First Curve
+                    All Curves
                 </Typography>
                 <TextField
 
                     value={
-                        firstCurve === null ? "" : firstCurve.userData.name
+                        allCurves.map(a => a.userData.name)
                     }
 
-                    error={firstCurve === null}
-                    helperText={firstCurve === null && "Please enter 1 curve"}
-                    onKeyDown={keyPressTextFieldFirstCurve} onBlur={handleDisFocusOnTextFieldFirstCurve}
-                    onFocus={handleFocusOnTextFieldFirstCurve} InputProps={{className: classes.inputTextField}}/>
+                    error={allCurves.length < 1}
+                    helperText={allCurves.length < 1 && "Please enter at least 2 curves"}
+                    onKeyDown={keyPressTextFieldCurves} onBlur={handleDisFocusOnTextFieldControlsPoints}
+                    onFocus={handleFocusOnTextFieldCurves} InputProps={{className: classes.inputTextField}}/>
             </div>
-            <div className={classes.containerRow}>
-                <Typography className={classes.text}>
-                    Second Curve
-                </Typography>
-                <TextField
 
-                    value={
-                        secondCurve === null ? "" : secondCurve.userData.name
-                    }
-
-                    error={secondCurve === null}
-                    helperText={secondCurve === null && "Please enter 1 curve"}
-                    onKeyDown={keyPressTextFieldSecondCurve} onBlur={handleDisFocusOnTextFieldSecondCurve}
-                    onFocus={handleFocusOnTextFieldSecondCurve} InputProps={{className: classes.inputTextField}}/>
-
-
-            </div>
         </div>
     )
 

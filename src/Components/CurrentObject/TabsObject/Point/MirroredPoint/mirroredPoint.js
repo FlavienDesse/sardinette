@@ -6,6 +6,7 @@ import Checkbox from "@material-ui/core/Checkbox";
 import PropTypes from "prop-types";
 import {useSnackbar} from "notistack";
 import {updateObjectByAddingChildrenID} from "../../../../../Misc/Utils";
+import Constant from "../../../../../Misc/Constant";
 
 MirroredPoint.propType = {
     setCurrentObject: PropTypes.func.isRequired,
@@ -21,21 +22,22 @@ export default function MirroredPoint(props) {
     const {enqueueSnackbar} = useSnackbar();
 
 
-    const [weight, setWeight] = React.useState(props.currentObject.weight);
+    const [weight, setWeight] = React.useState(props.currentObject.userData.weight);
 
-    const [name, setName] = React.useState(props.currentObject.name);
+    const [name, setName] = React.useState(props.currentObject.userData.name);
     const [isVisible, setIsVisible] = React.useState(props.currentObject.visible);
 
-    const [initialPoint, setInitialPoint] = React.useState(props.currentObject.initialPoint);
+    const [initialPoint, setInitialPoint] = React.useState(props.currentObject.userData.initialPoint);
 
-    const [axis, setAxis] = React.useState(props.currentObject.axis);
+    const [axis, setAxis] = React.useState(props.currentObject.userData.axis);
 
 
     React.useEffect((() => {
-        setWeight(props.currentObject.weight)
+        setWeight(props.currentObject.userData.weight)
         setIsVisible(props.currentObject.visible)
-        setName(props.currentObject.name)
-        setInitialPoint(props.currentObject.initialPoint)
+        setName(props.currentObject.userData.name)
+        setInitialPoint(props.currentObject.userData.initialPoint)
+        setAxis(props.currentObject.userData.axis)
     }), [props.currentObject])
 
 
@@ -66,7 +68,7 @@ export default function MirroredPoint(props) {
         if (e.keyCode === 13) {
             let lastValue = props.currentObject;
             let newValue = props.currentObject
-            newValue.weight = weight
+            newValue.userData.weight = weight
             props.updateAllObjectWhenCurrentObjectChange(lastValue, newValue, true)
             props.setCurrentObject(newValue)
         }
@@ -82,7 +84,7 @@ export default function MirroredPoint(props) {
             } else {
                 let lastValue = props.currentObject;
                 let newValue = props.currentObject
-                newValue.name = name
+                newValue.userData.name = name
                 props.updateAllObjectWhenCurrentObjectChange(lastValue, newValue, false)
                 props.setCurrentObject(newValue)
             }
@@ -95,11 +97,12 @@ export default function MirroredPoint(props) {
         if (e.keyCode === 13) {
             let lastValue = props.currentObject;
             let newValue = props.currentObject
-            newValue.axis = axis
+            newValue.userData.axis = axis
 
 
             try {
-                newValue.update()
+                updateObjectByAddingChildrenID(new Array(initialPoint), props.currentObject.id, props.allObject, props.setAllObject)
+                newValue.userData.update()
 
 
             } catch (e) {
@@ -133,7 +136,7 @@ export default function MirroredPoint(props) {
     const handleDisFocusOnTextFieldAxis = (e) => {
 
         props.setCurrentTextFieldSelected(null)
-        setInitialPoint(props.currentObject.initialPoint)
+        setInitialPoint(props.currentObject.userData.initialPoint)
     }
 
 
@@ -141,12 +144,12 @@ export default function MirroredPoint(props) {
         if (e.keyCode === 13) {
             let lastValue = props.currentObject;
             let newValue = props.currentObject
-            newValue.initialPoint = initialPoint
+            newValue.userData.initialPoint = initialPoint
 
 
             try {
-                newValue.update()
-                updateObjectByAddingChildrenID(new Array(initialPoint),props.currentObject.id,props.allObject,props.setAllObject)
+                updateObjectByAddingChildrenID(new Array(initialPoint), props.currentObject.id, props.allObject, props.setAllObject)
+                newValue.userData.update()
 
 
             } catch (e) {
@@ -161,11 +164,11 @@ export default function MirroredPoint(props) {
         }
     }
 
-    const handleFocusOnTextFieldInitialPoint= (e) => {
+    const handleFocusOnTextFieldInitialPoint = (e) => {
         setInitialPoint(null)
         props.setCurrentTextFieldSelected({
             id: props.currentObject.id,
-            acceptType: ["Point", "Mirrored Point"],
+            acceptType: Constant.CONSTANT_ALL_POINTS,
             clickCtrl: changeInitialPoint,
             simpleClick: changeInitialPoint
         })
@@ -177,10 +180,10 @@ export default function MirroredPoint(props) {
     }
 
 
-    const handleDisFocusOnTextFieldInitialPoint= (e) => {
+    const handleDisFocusOnTextFieldInitialPoint = (e) => {
 
         props.setCurrentTextFieldSelected(null)
-        setInitialPoint(props.currentObject.initialPoint)
+        setInitialPoint(props.currentObject.userData.initialPoint)
     }
 
 
@@ -202,7 +205,7 @@ export default function MirroredPoint(props) {
                 <TextField
 
                     value={
-                        initialPoint === null ? "" : initialPoint.name
+                        initialPoint === null ? "" : initialPoint.userData.name
                     }
 
                     error={initialPoint === null}
@@ -218,7 +221,7 @@ export default function MirroredPoint(props) {
                 <TextField
 
                     value={
-                        axis === null ? "" : axis.name
+                        axis === null ? "" : axis.userData.name
                     }
 
                     error={axis === null}

@@ -6,21 +6,21 @@ const useStyles = makeStyles({
 
     },
 
-    inputTextField:{
+    inputTextField: {
         width: '200px',
     },
     containerRow: {
-        marginTop:'20px',
+        marginTop: '20px',
         display: 'flex',
         alignItems: 'center',
     },
 
-    inputSmallTextField:{
+    inputSmallTextField: {
         width: '50px',
         marginRight: '25px',
     },
-    checkBox:{
-      padding:'0px',
+    checkBox: {
+        padding: '0px',
     },
 });
 

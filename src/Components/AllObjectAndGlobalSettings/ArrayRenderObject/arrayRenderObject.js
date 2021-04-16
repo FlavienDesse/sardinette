@@ -11,23 +11,25 @@ import {modifyObjectWhenClickOn} from "../../../Misc/Utils";
 import clsx from "clsx";
 
 ArrayRenderObject.propTypes = {
-  currentObject: PropTypes.any,
-  currentTextFieldSelected: PropTypes.object,
-  object: PropTypes.object.isRequired,
-  setCurrentObject: PropTypes.func.isRequired
+    currentObject: PropTypes.any,
+    currentTextFieldSelected: PropTypes.object,
+    object: PropTypes.object.isRequired,
+    setCurrentObject: PropTypes.func.isRequired
 }
 /*
      Component for render array of all object
  */
-export default function ArrayRenderObject(props){
+export default function ArrayRenderObject(props) {
     const classes = useStyles();
 
 
-    let handleOnClickTableRow = (event)=>{
+    let handleOnClickTableRow = (event) => {
         event.preventDefault();
         event.stopPropagation();
 
-        if (props.currentTextFieldSelected !== null && props.currentTextFieldSelected.id !==props.object.id && props.currentTextFieldSelected.acceptType.includes(props.object.type)) {
+
+
+        if (props.currentTextFieldSelected !== null && props.currentTextFieldSelected.id !== props.object.id && props.currentTextFieldSelected.acceptType.includes(props.object.userData.type)) {
             if (event.ctrlKey) {
                 event.preventDefault();
                 props.currentTextFieldSelected.clickCtrl(props.object)
@@ -36,7 +38,7 @@ export default function ArrayRenderObject(props){
                 props.currentTextFieldSelected.simpleClick(props.object)
             }
         } else {
-            if(props.object.type !== "Axis"){
+            if (props.object.userData.type !== "Axis" ) {
                 props.setCurrentObject(modifyObjectWhenClickOn(props.object, props.currentObject))
             }
 
@@ -45,12 +47,14 @@ export default function ArrayRenderObject(props){
     }
 
 
-    return(
-        <TableRow className={clsx(classes.container , props.currentObject!= null && props.currentObject.id === props.object.id && classes.selected)}  onMouseDown={handleOnClickTableRow}>
+    return (
+        <TableRow
+            className={clsx(classes.container, props.currentObject != null && props.currentObject.id === props.object.id && classes.selected)}
+            onMouseDown={handleOnClickTableRow}>
 
             <TableCell>
                 {
-                    props.object.isError ? <ErrorIcon className={classes.redIcon}/> : " "
+                    props.object.userData.isError ? <ErrorIcon className={classes.redIcon}/> : " "
                 }
             </TableCell>
             <TableCell>
@@ -58,18 +62,20 @@ export default function ArrayRenderObject(props){
                     props.object.visible ? <VisibilityIcon/> : <VisibilityOffIcon/>
                 }
             </TableCell>
-            <TableCell >
-                <Typography className={ clsx(props.currentObject!= null && props.currentObject.id === props.object.id && classes.selectedText)}>
+            <TableCell>
+                <Typography
+                    className={clsx(props.currentObject != null && props.currentObject.id === props.object.id && classes.selectedText)}>
                     {
-                        props.object.type
+                        props.object.userData.type
                     }
                 </Typography>
             </TableCell>
-            <TableCell className={ clsx(props.currentObject!= null && props.currentObject.id === props.object.id && classes.selectedText)}>
+            <TableCell
+                className={clsx(props.currentObject != null && props.currentObject.id === props.object.id && classes.selectedText)}>
 
-                    {
-                        props.object.name
-                    }
+                {
+                    props.object.userData.name
+                }
 
             </TableCell>
         </TableRow>

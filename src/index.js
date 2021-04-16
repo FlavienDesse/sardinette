@@ -12,7 +12,7 @@ const onClickDismiss = key => () => {
 ReactDOM.render(
     <SnackbarProvider ref={notistackRef} maxSnack={3}
                       action={(key) => (
-                          <CancelIcon  onClick={onClickDismiss(key)}/>
+                          <CancelIcon onClick={onClickDismiss(key)}/>
 
                       )}>
         <Main/>

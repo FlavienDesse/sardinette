@@ -12,7 +12,7 @@ const useStyles = makeStyles({
     },
 
     section: {
-        display:"flex",
+        display: "flex",
         alignItems: "center",
         justifyContent: "center",
         '& *': {
