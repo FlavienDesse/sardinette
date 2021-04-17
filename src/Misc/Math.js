@@ -273,13 +273,13 @@ function bSpline(degree, controlPoints, resolution, knots, weights) {
 // C-SPLINE
 
 /**
- * Computes the c-spline according to the inputs
+ * Computes the Centripetal Catmull-Rom spline according to the inputs
  * @param {Array<Array<number>>|Array<THREE.Vector3>} controlPoints control points that will be interpolated. Can be vectors of any dimensionality ([x, y], [x, y, z], ...)
  * @param {number} resolution number of points per unit in the returned curve
  * @param {boolean} closed if the curve should be closed or not
  * @returns {Array<number>} an array of points that represents the spline.
  */
-function cSpline(controlPoints, resolution, closed, isResolutionRelativeToLength) {
+function catmullRomSpline(controlPoints, resolution, closed, isResolutionRelativeToLength) {
     
     let formattedControlPoints = toVector3(controlPoints)
 
@@ -443,50 +443,53 @@ function mirrorCurve(curve, axis) {
 
 /**
  * 
- * @param {Array<Array<THREE.Vector3>>} curves  The control points of each curve 
+ * @param {Array<Array<THREE.Vector3>>} curves  The points of each curve 
  * @param {number} minResolution The minimum resolution
- * @param {Array<boolean>} areClosed Tells if each curve is closed or not
  * @returns {Array<Array<THREE.Vector3>>} An array of triangles
  */
-function cLoftSurface(curves, minResolution, areClosed) {
+function loftSurface(curves, minResolution) {
     let surface = []
-    minResolution = minResolution || 20
-
-    let fullCurves = []
     let loftCurves = []
 
-    let globalResolution = 0
+    minResolution = minResolution || 20
+    let maxLength = 0
 
-    curves.forEach((elt, idx) => {
-        let res = fromVector1(cSpline(elt, minResolution, areClosed[idx]))
-        if(globalResolution < res.length) globalResolution = res.length
+    // Find the maximum number of points
+    curves.forEach(elt => {
+        if(elt.length > maxLength) maxLength = elt.length
     })
 
-    curves.forEach((elt, idx) => {
-        fullCurves.push(fromVector1(cSpline(elt, globalResolution, areClosed[idx], false)))
-    })
+    // Find the control points for the curves making the surface up
+    for(let i = 0; i < curves.length; i++) {
+        let curve = curves[i]
+        let ratio = curve.length / maxLength
 
-    for(let i = 0; i < fullCurves.length; i++) {
-        let curve = fullCurves[i]
-
+        // Uses a surjective function to map each point of the longest curve (of maxLength)
+        // to the other curves' points uniformly
         if(i === 0) {
-            curve.forEach(elt => {
-                loftCurves.push([elt])
-            })
+            for(let j = 0; j < maxLength; j++) {
+                let val = ratio * (j + 1) - 1
+                loftCurves.push([curve[Math.round(val < 0 ? 0 : val)]])
+            }
         }
         else {
-            curve.forEach((elt, idx) => {
-                loftCurves[idx].push(elt)
-            })
+            let idx = 0
+            for(let j = 0; j < maxLength; j++) {
+                let val = ratio * (j + 1) - 1
+                loftCurves[idx].push(curve[Math.round(val < 0 ? 0 : val)])
+                idx++
+            }
         }
     }
 
     let fullLoftCurves = []
 
+    // Build the curves with the control points that were just computed
     loftCurves.forEach(elt => {
-        fullLoftCurves.push(fromVector1(cSpline(elt, minResolution)))
+        fullLoftCurves.push(fromVector1(catmullRomSpline(elt, minResolution)))
     })
 
+    // Build the surfaces between each curve
     fullLoftCurves.forEach((elt, idx) => {
         if(idx === fullLoftCurves.length - 1) return
         let tmp = getSurface(elt, fullLoftCurves[idx + 1])
@@ -567,4 +570,4 @@ function bezierCurve(controlPoints, resolution) {
     return toVector1(points)
 }
 
-export {bSpline, cSpline, toVector3, fromVector3, toVector1, curveLength, distance, getSurface, mirrorPoint, mirrorPointFromCurve, mirrorCurve, cLoftSurface, bezierCurve}
+export {bSpline, catmullRomSpline, toVector3, fromVector3, toVector1, fromVector1, curveLength, distance, getSurface, mirrorPoint, mirrorPointFromCurve, mirrorCurve, loftSurface, bezierCurve}
