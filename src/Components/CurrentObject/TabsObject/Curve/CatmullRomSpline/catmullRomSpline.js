@@ -6,8 +6,9 @@ import useStyles from "./style";
 import PropTypes from "prop-types";
 import {useSnackbar} from 'notistack';
 import {updateObjectByAddingChildrenID} from "../../../../../Misc/Utils";
+import Constant from "../../../../../Misc/Constant";
 
-CSpline.propType = {
+CatmullRomSpline.propType = {
     setCurrentObject: PropTypes.func.isRequired,
     currentObject: PropTypes.object.isRequired,
     allObject: PropTypes.array.isRequired,
@@ -16,7 +17,7 @@ CSpline.propType = {
 }
 
 
-export default function CSpline(props) {
+export default function CatmullRomSpline(props) {
 
     const classes = useStyles()
 
@@ -143,7 +144,7 @@ export default function CSpline(props) {
     const handleFocusOnTextFieldControlsPoints = (e) => {
         setControlsPoints([])
         props.setCurrentTextFieldSelected({
-            acceptType: ["Point", "Mirrored Point"],
+            acceptType: Constant.CONSTANT_ALL_POINTS,
             clickCtrl: addControlsPoints,
             simpleClick: setOneControlsPoints
         })

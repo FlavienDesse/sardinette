@@ -283,6 +283,9 @@ function catmullRomSpline(controlPoints, resolution, closed, isResolutionRelativ
     
     let formattedControlPoints = toVector3(controlPoints)
 
+
+
+
     if(isResolutionRelativeToLength === undefined) isResolutionRelativeToLength = true
 
     let points = []
@@ -481,6 +484,8 @@ function loftSurface(curves, minResolution) {
             }
         }
     }
+
+
 
     let fullLoftCurves = []
 

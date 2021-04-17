@@ -1,7 +1,7 @@
 import * as THREE from "three";
 import {BufferGeometry, Mesh, MeshBasicMaterial, SphereGeometry} from "three";
 import Constant from "./Constant";
-import {bezierCurve, bSpline, cLoftSurface, cSpline, getSurface, mirrorCurve, mirrorPoint} from "./Math";
+import {bezierCurve, bSpline, loftSurface, catmullRomSpline, getSurface, mirrorCurve, mirrorPoint} from "./Math";
 import {MeshLine, MeshLineMaterial, MeshLineRaycast} from 'three.meshline';
 
 /*
@@ -54,9 +54,9 @@ function increaseDefaultName(type) {
             matches = Constant.DEFAULT_NAME_SURFACE.match(reg);
             Constant.DEFAULT_NAME_SURFACE = Constant.DEFAULT_NAME_SURFACE.replace(reg, parseInt(matches[0], 10) + 1)
             break;
-        case "C-Spline":
-            matches = Constant.DEFAULT_NAME_C_SPLINE.match(reg);
-            Constant.DEFAULT_NAME_C_SPLINE = Constant.DEFAULT_NAME_C_SPLINE.replace(reg, parseInt(matches[0], 10) + 1)
+        case "Catmull Rom Spline":
+            matches = Constant.DEFAULT_NAME_CATMULL_ROM_SPLINE.match(reg);
+            Constant.DEFAULT_NAME_CATMULL_ROM_SPLINE = Constant.DEFAULT_NAME_CATMULL_ROM_SPLINE.replace(reg, parseInt(matches[0], 10) + 1)
             break;
         case "Mirrored Point":
             matches = Constant.DEFAULT_NAME_MIRRORED_POINT.match(reg);
@@ -74,12 +74,13 @@ function increaseDefaultName(type) {
             matches = Constant.DEFAULT_NAME_BEZIER.match(reg);
             Constant.DEFAULT_NAME_BEZIER = Constant.DEFAULT_NAME_BEZIER.replace(reg, parseInt(matches[0], 10) + 1)
             break;
-        case "CLoftSurface":
-            matches = Constant.DEFAULT_NAME_C_LOFT_SURFACE.match(reg);
-            Constant.DEFAULT_NAME_C_LOFT_SURFACE = Constant.DEFAULT_NAME_C_LOFT_SURFACE.replace(reg, parseInt(matches[0], 10) + 1)
+        case "Loft Surface":
+            matches = Constant.DEFAULT_NAME_LOFT_SURFACE.match(reg);
+            Constant.DEFAULT_NAME_LOFT_SURFACE = Constant.DEFAULT_NAME_LOFT_SURFACE.replace(reg, parseInt(matches[0], 10) + 1)
             break;
         default:
-            throw new Error("unknow type provided")
+
+            throw new Error("unknow type provided "+type)
     }
 }
 
@@ -162,7 +163,7 @@ function updateChildren(allObject, currentObject, isDeletion) {
 
                     }
 
-                } else if (prev.userData.type === "CLoftSurface") {
+                } else if (prev.userData.type === "loftSurface") {
                     if (isDeletion) {
                         prev.userData.allCurves = prev.userData.allCurves.filter(curve => curve.id !== curve.id)
                     }
@@ -536,7 +537,6 @@ function createMirroredCurve(initialCurve, axis) {
 
 
     if (initialCurve && axis) {
-        console.log(initialCurve)
         try {
 
             let points = mirrorCurve([...initialCurve.userData.allCalculatedPoints], axis.userData.value)
@@ -570,7 +570,7 @@ function createMirroredCurve(initialCurve, axis) {
     return mesh
 }
 
-function createCSpline(controlsPoints) {
+function createCatmullRomSpline(controlsPoints) {
 
 
     const geometry = new BufferGeometry().setFromPoints([]);
@@ -585,9 +585,9 @@ function createCSpline(controlsPoints) {
     const line = new MeshLine(geometry, material);
     const mesh = new THREE.Mesh(line, material);
     mesh.raycast = MeshLineRaycast;
-    mesh.userData.name = Constant.DEFAULT_NAME_C_SPLINE
-    increaseDefaultName("C-Spline")
-    mesh.userData.type = "C-Spline"
+    mesh.userData.name = Constant.DEFAULT_NAME_CATMULL_ROM_SPLINE
+    increaseDefaultName("Catmull Rom Spline")
+    mesh.userData.type = "Catmull Rom Spline"
     mesh.userData.controlsPoints = []
     mesh.userData.allCalculatedPoints = []
     mesh.userData.childrenID = []
@@ -599,7 +599,7 @@ function createCSpline(controlsPoints) {
     if (controlsPoints) {
         try {
             let allControlsPoints = controlsPoints.map(a => a.position);
-            let res = cSpline(allControlsPoints, mesh.userData.resolution, mesh.userData.closed)
+            let res = catmullRomSpline(allControlsPoints, mesh.userData.resolution, mesh.userData.closed)
             mesh.userData.allCalculatedPoints = res
             line.setPoints(res)
             mesh.userData.isError = false
@@ -619,7 +619,7 @@ function createCSpline(controlsPoints) {
         let allControlsPoints = mesh.userData.controlsPoints.map(a => a.position);
 
         try {
-            let res = cSpline(allControlsPoints, mesh.userData.resolution, mesh.userData.closed)
+            let res = catmullRomSpline(allControlsPoints, mesh.userData.resolution, mesh.userData.closed)
             mesh.userData.allCalculatedPoints = res
             line.setPoints(res)
             mesh.userData.isError = false;
@@ -737,7 +737,6 @@ function createSurface(firstCurve, secondCurve) {
 
 
     surface.userData.update = () => {
-        console.log("lol")
 
         try {
             let pointFirstCurve = []
@@ -822,7 +821,7 @@ function createSurface(firstCurve, secondCurve) {
 
 }
 
-function createCLoftSurface(curves) {
+function createLoftSurface(curves) {
 
 
     const geometrySurface = new THREE.BufferGeometry();
@@ -837,11 +836,10 @@ function createCLoftSurface(curves) {
     const lineMaterial = new THREE.MeshBasicMaterial({color: Constant.DEFAULT_COLOR_SURFACE, side: THREE.DoubleSide});
 
     const surface = new THREE.Mesh(geometrySurface, material);
-    const line = new THREE.Line(geometryLine, lineMaterial);
 
-    surface.userData.name = Constant.DEFAULT_NAME_C_LOFT_SURFACE
-    increaseDefaultName("CLoftSurface")
-    surface.userData.type = "CLoftSurface"
+    surface.userData.name = Constant.DEFAULT_NAME_LOFT_SURFACE
+    increaseDefaultName("Loft Surface")
+    surface.userData.type = "Loft Surface"
     surface.userData.resolution = 5
     surface.userData.childrenID = []
     surface.userData.allCurves = []
@@ -853,25 +851,27 @@ function createCLoftSurface(curves) {
     if (curves) {
         try {
 
-            surface.children.push(line)
 
 
             const allVector3Curves = []
-            const allCurvesClosed = []
             for (let j = 0; j < curves.length; j++) {
                 let curve = curves[j]
                 surface.userData.allCurves.push(curve)
                 curve.userData.childrenID.push(surface.id);
                 allVector3Curves.push([])
-                allCurvesClosed.push(curve.userData.closed)
-                for (let i = 0; i < curve.userData.controlsPoints.length; i++) {
+                for (let i = 0; i < curve.userData.allCalculatedPoints.length; i+=3) {
 
-                    allVector3Curves[j].push(curve.userData.controlsPoints[i].position)
+                    allVector3Curves[j].push(new THREE.Vector3(
+                        curve.userData.allCalculatedPoints[i],
+                        curve.userData.allCalculatedPoints[i+1],
+                        curve.userData.allCalculatedPoints[i+2]
+
+                    ))
                 }
             }
 
 
-            let res = cLoftSurface(allVector3Curves, surface.userData.resolution, allCurvesClosed)
+            let res = loftSurface(allVector3Curves,  surface.userData.resolution)
 
             let geometry = new THREE.BufferGeometry();
             let numTriangles = res.length
@@ -911,24 +911,30 @@ function createCLoftSurface(curves) {
 
 
     surface.userData.update = () => {
-        const allVector3Curves = []
-        const allCurvesClosed = []
-        for (let j = 0; j < surface.userData.allCurves.length; j++) {
-            let curve = surface.userData.allCurves[j]
-            allVector3Curves.push([])
-            allCurvesClosed.push(curve.userData.closed)
-            for (let i = 0; i < curve.userData.controlsPoints.length; i++) {
 
-                allVector3Curves[j].push(curve.userData.controlsPoints[i].position)
+        let allVector3Curves = []
+
+        for (let j = 0; j <  surface.userData.allCurves.length; j++) {
+            let curve =surface.userData.allCurves[j]
+            allVector3Curves.push([])
+            for (let i = 0; i < curve.userData.allCalculatedPoints.length; i+=3) {
+
+                allVector3Curves[j].push(new THREE.Vector3(
+                    curve.userData.allCalculatedPoints[i],
+                    curve.userData.allCalculatedPoints[i+1],
+                    curve.userData.allCalculatedPoints[i+2]
+
+                ))
             }
         }
 
 
 
-        try {
-            let res = cLoftSurface(allVector3Curves, surface.userData.resolution, allCurvesClosed)
 
-            console.log(res)
+
+        try {
+            let res = loftSurface(allVector3Curves, surface.userData.resolution)
+
 
             let geometry = new THREE.BufferGeometry();
             let numTriangles = res.length
@@ -1006,7 +1012,7 @@ function modifyObjectWhenClickOn(object, currentObject) {
             } else {
                 return currentObject
             }
-        } else if (object.userData.type === "C-Spline") {
+        } else if (object.userData.type === "Catmull Rom Spline") {
             if (currentObject == null || (currentObject.id !== object.id)) {
 
                 let intersect = object
@@ -1071,7 +1077,7 @@ function modifyObjectWhenClickOn(object, currentObject) {
             } else {
                 return currentObject
             }
-        }else if (object.userData.type === "CLoftSurface") {
+        }else if (object.userData.type === "Loft Surface") {
             if (currentObject == null || (currentObject.id !== object.id)) {
 
                 let intersect = object
@@ -1098,13 +1104,13 @@ export {
     createBSpline,
     updateChildren,
     createSurface,
-    createCSpline,
+    createCatmullRomSpline,
     createAxis,
     createMirroredPoint,
     createMirroredCurve,
     updateObjectByAddingChildrenID,
     createNURBS,
     createBezier,
-    createCLoftSurface
+    createLoftSurface
 }
 

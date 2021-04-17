@@ -12,7 +12,6 @@ const exportSTL = (scene) => {
 
     let children = []
 
-    console.log( scene)
 
 
 
@@ -43,7 +42,6 @@ const exportScene = (scene) => {
         includeCustomExtensions:false,
     };
 
-    console.log( scene.current.children[1])
 
 
     exporter.parse( scene.current.children[1], function ( result  ) {

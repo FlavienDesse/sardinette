@@ -3,12 +3,12 @@ import PropTypes from "prop-types";
 import Point from "./Point/Point/point"
 import BSpline from "./Curve/B-Spline/bSpline";
 import Surface from "./Surfaces/Surface/surface";
-import CSpline from "./Curve/C-Spline/cSpline";
+import CatmullRomSpline from "./Curve/CatmullRomSpline/catmullRomSpline";
 import MirroredPoint from "./Point/MirroredPoint/mirroredPoint";
 import MirroredCurve from "./Curve/Mirrored Curve/mirroredCurve";
 import NURBS from "./Curve/NURBS/NURBS";
 import Bezier from "./Curve/Bezier/bezier";
-import CLoftSurface from "./Surfaces/CLoftSurface/cLoftSurface";
+import LoftSurface from "./Surfaces/LoftSurface/loftSurface";
 
 
 TabsObject.propType = {
@@ -44,12 +44,12 @@ export default function TabsObject(props) {
                                                                           currentObject={props.currentObject}
                                                                           allObject={props.allObject}
                                                                           updateAllObjectWhenCurrentObjectChange={props.updateAllObjectWhenCurrentObjectChange}/> :
-                            props.currentObject.userData.type === "C-Spline" ? <CSpline setAllObject={props.setAllObject}
-                                                                               setCurrentTextFieldSelected={props.setCurrentTextFieldSelected}
-                                                                               setCurrentObject={props.setCurrentObject}
-                                                                               currentObject={props.currentObject}
-                                                                               allObject={props.allObject}
-                                                                               updateAllObjectWhenCurrentObjectChange={props.updateAllObjectWhenCurrentObjectChange}/> :
+                            props.currentObject.userData.type === "Catmull Rom Spline" ? <CatmullRomSpline setAllObject={props.setAllObject}
+                                                                                                 setCurrentTextFieldSelected={props.setCurrentTextFieldSelected}
+                                                                                                 setCurrentObject={props.setCurrentObject}
+                                                                                                 currentObject={props.currentObject}
+                                                                                                 allObject={props.allObject}
+                                                                                                 updateAllObjectWhenCurrentObjectChange={props.updateAllObjectWhenCurrentObjectChange}/> :
                                 props.currentObject.userData.type === "Mirrored Point" ?
                                     <MirroredPoint setAllObject={props.setAllObject}
                                                    setCurrentTextFieldSelected={props.setCurrentTextFieldSelected}
@@ -74,12 +74,12 @@ export default function TabsObject(props) {
                                                                                           currentObject={props.currentObject}
                                                                                           allObject={props.allObject}
                                                                                           updateAllObjectWhenCurrentObjectChange={props.updateAllObjectWhenCurrentObjectChange}/> :
-                                                props.currentObject.userData.type === "CLoftSurface" ? <CLoftSurface setAllObject={props.setAllObject}
-                                                                                                setCurrentTextFieldSelected={props.setCurrentTextFieldSelected}
-                                                                                                setCurrentObject={props.setCurrentObject}
-                                                                                                currentObject={props.currentObject}
-                                                                                                allObject={props.allObject}
-                                                                                                updateAllObjectWhenCurrentObjectChange={props.updateAllObjectWhenCurrentObjectChange}/> :
+                                                props.currentObject.userData.type === "Loft Surface" ? <LoftSurface setAllObject={props.setAllObject}
+                                                                                                                   setCurrentTextFieldSelected={props.setCurrentTextFieldSelected}
+                                                                                                                   setCurrentObject={props.setCurrentObject}
+                                                                                                                   currentObject={props.currentObject}
+                                                                                                                   allObject={props.allObject}
+                                                                                                                   updateAllObjectWhenCurrentObjectChange={props.updateAllObjectWhenCurrentObjectChange}/> :
 
 
                                             ""

@@ -61,18 +61,7 @@ export default function OpenFile(props) {
                     style={{display: 'none'}}
                 />
             </MenuItem>
-            <MenuItem onClick={handleClickHiddenFile}>
-                Open
-                <input
-                    type="file"
-                    ref={hiddenFileInput}
-                    onChange={handleChangeOpen}
-                    style={{display: 'none'}}
-                />
-            </MenuItem>
-            <MenuItem onClick={handleClickSaveAs}>
-                Save as
-            </MenuItem>
+
 
             <SubMenu popupOffset={[0, 2]} title={"Export"}>
                 <MenuItem onClick={handleClickOnSTL}>

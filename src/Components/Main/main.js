@@ -8,7 +8,7 @@ import CurrentObject from "../CurrentObject/currentObject";
 import Background from "../../Misc/Background";
 import {
     createAxis, createBezier,
-    createBSpline, createCLoftSurface, createCSpline,
+    createBSpline, createCatmullRomSpline, createLoftSurface,
     createMirroredCurve,
     createMirroredPoint,
     createNURBS,
@@ -73,7 +73,7 @@ export default function Main() {
         const eigthPoint = createPoint({x: 4, y: 0, z: 2});
         const ninthPoint = createPoint({x: 4, y: 0, z: 0});
 
-        const firstCSpline = createCSpline([seventhPoint,eigthPoint,ninthPoint]);
+        const firstCSpline = createCatmullRomSpline([seventhPoint,eigthPoint,ninthPoint]);
 
         const mirrorFirstBSpline = createMirroredCurve(firstBSpline,yAxis);
         const mirrorFirstBezier= createMirroredCurve(firstBezier,yAxis);
@@ -102,12 +102,12 @@ export default function Main() {
         const twentyOne = createPoint({x: 4, y: 0, z: -2});
 
 
-        const secondCSpline = createCSpline([thirteenPoint,fourteenPoint,fifteenPoint])
-        const thirdCSpline = createCSpline([sixteen,seventeen,eighteen])
-        const fourthCSpline = createCSpline([nineteen,twenty,twentyOne])
+        const secondCSpline = createCatmullRomSpline([thirteenPoint,fourteenPoint,fifteenPoint])
+        const thirdCSpline = createCatmullRomSpline([sixteen,seventeen,eighteen])
+        const fourthCSpline = createCatmullRomSpline([nineteen,twenty,twentyOne])
 
 
-        const cLoft = createCLoftSurface([secondCSpline,thirdCSpline,fourthCSpline])
+        const cLoft = createLoftSurface([secondCSpline,thirdCSpline,fourthCSpline])
 
 
         setAllObject([

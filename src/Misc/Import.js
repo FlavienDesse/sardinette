@@ -10,9 +10,10 @@ const importSTL = (event, scene, setAllObject) => {
 
     var reader = new FileReader();
 
+
     reader.onload = function (e) {
 
-        scene.remove(scene.children[1]);
+        scene.current.remove(scene.current.children[1]);
 
         let geometry = loader.parse(e.target.result);
         const material = new MeshBasicMaterial({
@@ -23,12 +24,13 @@ const importSTL = (event, scene, setAllObject) => {
         });
         const mesh = new Mesh(geometry, material);
 
-        mesh.type = "Import STL"
+        mesh.userData.type = "Import STL"
+        mesh.userData.name = "ImportSTL"
 
         group.add(mesh)
 
 
-        scene.add(group);
+        scene.current.add(group);
 
         setAllObject([mesh])
 
@@ -47,7 +49,6 @@ const importScene = (event, setAllObject) => {
     const gltfLoader = new GLTFLoader();
 
     const onLoad = (e) => {
-        console.log(e.scenes[0].children[0].children)
         //setAllObject(e.scenes[0].children[0].children)
 
 

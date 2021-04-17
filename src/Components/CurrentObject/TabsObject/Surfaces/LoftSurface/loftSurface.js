@@ -8,7 +8,7 @@ import {useSnackbar} from "notistack";
 import {updateObjectByAddingChildrenID} from "../../../../../Misc/Utils";
 import Constant from "../../../../../Misc/Constant";
 
-CLoftSurface.propType = {
+LoftSurface.propType = {
     setCurrentObject: PropTypes.func.isRequired,
     currentObject: PropTypes.object.isRequired,
     allObject: PropTypes.array.isRequired,
@@ -16,7 +16,7 @@ CLoftSurface.propType = {
 }
 
 
-export default function CLoftSurface(props) {
+export default function LoftSurface(props) {
     const classes = useStyles();
 
     const [name, setName] = React.useState(props.currentObject.userData.name);
@@ -86,7 +86,7 @@ export default function CLoftSurface(props) {
         setAllCurves([])
         props.setCurrentTextFieldSelected({
             id: props.currentObject.id,
-            acceptType: ["C-Spline"],
+            acceptType: Constant.CONSTANT_ALL_CURVES,
             clickCtrl: addCurves,
             simpleClick: setOneCurve
         })

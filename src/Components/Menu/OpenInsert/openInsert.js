@@ -2,8 +2,8 @@ import React from "react";
 import PropTypes from 'prop-types';
 import {
     createBezier,
-    createBSpline, createCLoftSurface,
-    createCSpline,
+    createBSpline, createLoftSurface,
+    createCatmullRomSpline,
     createMirroredCurve,
     createMirroredPoint,
     createNURBS,
@@ -56,7 +56,7 @@ export default function OpenInsert(props) {
 
     const handleAddCSpline = () => {
         props.setAllObject((prevState) => {
-            let curve = createCSpline()
+            let curve = createCatmullRomSpline()
 
             prevState.push(curve)
 
@@ -110,7 +110,7 @@ export default function OpenInsert(props) {
 
     const handleAddCLoftSurface= () => {
         props.setAllObject((prevState) => {
-            let surface = createCLoftSurface()
+            let surface = createLoftSurface()
 
             prevState.push(surface)
 
@@ -144,7 +144,7 @@ export default function OpenInsert(props) {
                     B-Spline
                 </MenuItem>
                 <MenuItem onClick={handleAddCSpline}>
-                    C-Spline
+                    Catmull Rom Spline
                 </MenuItem>
                 <MenuItem onClick={handleAddMirroredCurve}>
                     Mirrored Curve
@@ -155,7 +155,7 @@ export default function OpenInsert(props) {
                     Surface
                 </MenuItem>
                 <MenuItem onClick={handleAddCLoftSurface}>
-                    C-Loft Surface
+                    Loft Surface
                 </MenuItem>
             </SubMenu>
         </SubMenu>
