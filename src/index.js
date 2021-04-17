@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-import {spline, cSpline, toVector3, fromVector3, getSurface, mirrorPoint, mirrorPointFromCurve, cLoftSurface, bezierCurve, toVector1} from './utils/maths.js'
+import {bSpline, catmullRomSpline, toVector3, fromVector3, getSurface, mirrorPoint, mirrorPointFromCurve, loftSurface, bezierCurve, toVector1, fromVector1} from './utils/maths.js'
 import * as THREE from 'three'
 
 let controlPoints = [
@@ -10,14 +10,12 @@ let controlPoints = [
   new THREE.Vector3( -3, 1.5 )
 ];
 
-console.log(toVector1(controlPoints))
-
 let isClosed = false
 
 let controlPoints2 = [
-  new THREE.Vector3( 0.5, -1 ),
+  new THREE.Vector3( 1, -1 ),
   new THREE.Vector3( 1.5, 0 ),
-  new THREE.Vector3( 0.5, 1 ),
+  new THREE.Vector3( 0.5, 0.5 ),
 ];
 let isClosed2 = false
 
@@ -64,67 +62,67 @@ function graph() {
     theContext.fillRect(elt.x * 50 + 250 - 3, -elt.y * 50 + 250 - 3, 6, 6)
   })
 
-  let points = bezierCurve(controlPoints, 20)
-  console.log(points)
+  let points = fromVector1(bezierCurve(controlPoints, 20))
+
   theContext.beginPath();
   theContext.moveTo(points[0] * 50 + 250, -points[1] * 50 + 250);
   let x
   theContext.strokeStyle = '#DDA500'
-  for (x = 3; x < points.length; x+=3) {
-    theContext.lineTo(points[x] * 50 + 250, -points[x + 1]* 50 + 250);
+  for (x = 0; x < points.length; x++) {
+    theContext.lineTo(points[x].x * 50 + 250, -points[x].y * 50 + 250);
   }
   theContext.stroke();
   theContext.closePath()
 
   //2
 
-  /*controlPoints2.forEach(elt => {
+  controlPoints2.forEach(elt => {
     theContext.fillRect(elt.x * 50 + 250 - 3, -elt.y * 50 + 250 - 3, 6, 6)
   })
 
-  points = cSpline(controlPoints2, 100, isClosed2)
+  let points2 = fromVector1(bSpline(2, controlPoints2, 20))
 
   theContext.beginPath();
-  theContext.moveTo(points[0][0] * 50 + 250, -points[0][1] * 50 + 250);
+  theContext.moveTo(points2[0][0] * 50 + 250, -points2[0][1] * 50 + 250);
   theContext.strokeStyle = '#DDA500'
-  for (x = 1; x < points.length; x++) {
-    theContext.lineTo(points[x].x * 50 + 250, -points[x].y* 50 + 250);
+  for (x = 1; x < points2.length; x++) {
+    theContext.lineTo(points2[x].x * 50 + 250, -points2[x].y* 50 + 250);
   }
   theContext.stroke();
-  theContext.closePath()*/
+  theContext.closePath()
 
   //3
 
-  /*controlPoints3.forEach(elt => {
+  controlPoints3.forEach(elt => {
     theContext.fillRect(elt.x * 50 + 250 - 3, -elt.y * 50 + 250 - 3, 6, 6)
   })
 
-  points = cSpline(controlPoints3, 100, isClosed3)
+  let points3 = fromVector1(catmullRomSpline(controlPoints3, 20, isClosed3))
 
   theContext.beginPath();
-  theContext.moveTo(points[0][0] * 50 + 250, -points[0][1] * 50 + 250);
+  theContext.moveTo(points3[0][0] * 50 + 250, -points3[0][1] * 50 + 250);
   theContext.strokeStyle = '#DDA500'
-  for (x = 1; x < points.length; x++) {
-    theContext.lineTo(points[x].x * 50 + 250, -points[x].y* 50 + 250);
+  for (x = 1; x < points3.length; x++) {
+    theContext.lineTo(points3[x].x * 50 + 250, -points3[x].y* 50 + 250);
   }
   theContext.stroke();
-  theContext.closePath()*/
+  theContext.closePath()
 
   // LoftSurface
 
-  /*let triangles = cLoftSurface([controlPoints, controlPoints2, controlPoints3], 0, [isClosed, isClosed2, isClosed3])
+  let triangles = loftSurface([points, points2, points3], 0, [isClosed, isClosed2, isClosed3])
 
   //triangles.forEach(elt => drawTriangle(theContext, elt[0], elt[1], elt[2]))
   
   let iterVar = 0
   let interval = setInterval(() => {
-    for(let i = 0; i < 500; i++) {
+    for(let i = 0; i < 200; i++) {
       drawTriangle(theContext, triangles[iterVar][0], triangles[iterVar][1], triangles[iterVar][2])
       iterVar++
       if(iterVar >= triangles.length) break
     }
     if(iterVar >= triangles.length) clearInterval(interval)
-  })*/
+  })
 
 }
 
