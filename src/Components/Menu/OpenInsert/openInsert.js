@@ -2,8 +2,9 @@ import React from "react";
 import PropTypes from 'prop-types';
 import {
     createBezier,
-    createBSpline, createLoftSurface,
+    createBSpline,
     createCatmullRomSpline,
+    createLoftSurface,
     createMirroredCurve,
     createMirroredPoint,
     createNURBS,
@@ -97,7 +98,7 @@ export default function OpenInsert(props) {
         })
     }
 
-    const handleAddBezier= () => {
+    const handleAddBezier = () => {
         props.setAllObject((prevState) => {
             let bezier = createBezier()
 
@@ -108,7 +109,7 @@ export default function OpenInsert(props) {
         })
     }
 
-    const handleAddCLoftSurface= () => {
+    const handleAddCLoftSurface = () => {
         props.setAllObject((prevState) => {
             let surface = createLoftSurface()
 

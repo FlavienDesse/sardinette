@@ -33,23 +33,24 @@ export default function TabsObject(props) {
                            allObject={props.allObject}
                            updateAllObjectWhenCurrentObjectChange={props.updateAllObjectWhenCurrentObjectChange}/> :
                     props.currentObject.userData.type === "B-Spline" ? <BSpline setAllObject={props.setAllObject}
-                                                                       setCurrentTextFieldSelected={props.setCurrentTextFieldSelected}
-                                                                       setCurrentObject={props.setCurrentObject}
-                                                                       currentObject={props.currentObject}
-                                                                       allObject={props.allObject}
-                                                                       updateAllObjectWhenCurrentObjectChange={props.updateAllObjectWhenCurrentObjectChange}/> :
+                                                                                setCurrentTextFieldSelected={props.setCurrentTextFieldSelected}
+                                                                                setCurrentObject={props.setCurrentObject}
+                                                                                currentObject={props.currentObject}
+                                                                                allObject={props.allObject}
+                                                                                updateAllObjectWhenCurrentObjectChange={props.updateAllObjectWhenCurrentObjectChange}/> :
                         props.currentObject.userData.type === "Surface" ? <Surface setAllObject={props.setAllObject}
-                                                                          setCurrentTextFieldSelected={props.setCurrentTextFieldSelected}
-                                                                          setCurrentObject={props.setCurrentObject}
-                                                                          currentObject={props.currentObject}
-                                                                          allObject={props.allObject}
-                                                                          updateAllObjectWhenCurrentObjectChange={props.updateAllObjectWhenCurrentObjectChange}/> :
-                            props.currentObject.userData.type === "Catmull Rom Spline" ? <CatmullRomSpline setAllObject={props.setAllObject}
-                                                                                                 setCurrentTextFieldSelected={props.setCurrentTextFieldSelected}
-                                                                                                 setCurrentObject={props.setCurrentObject}
-                                                                                                 currentObject={props.currentObject}
-                                                                                                 allObject={props.allObject}
-                                                                                                 updateAllObjectWhenCurrentObjectChange={props.updateAllObjectWhenCurrentObjectChange}/> :
+                                                                                   setCurrentTextFieldSelected={props.setCurrentTextFieldSelected}
+                                                                                   setCurrentObject={props.setCurrentObject}
+                                                                                   currentObject={props.currentObject}
+                                                                                   allObject={props.allObject}
+                                                                                   updateAllObjectWhenCurrentObjectChange={props.updateAllObjectWhenCurrentObjectChange}/> :
+                            props.currentObject.userData.type === "Catmull Rom Spline" ?
+                                <CatmullRomSpline setAllObject={props.setAllObject}
+                                                  setCurrentTextFieldSelected={props.setCurrentTextFieldSelected}
+                                                  setCurrentObject={props.setCurrentObject}
+                                                  currentObject={props.currentObject}
+                                                  allObject={props.allObject}
+                                                  updateAllObjectWhenCurrentObjectChange={props.updateAllObjectWhenCurrentObjectChange}/> :
                                 props.currentObject.userData.type === "Mirrored Point" ?
                                     <MirroredPoint setAllObject={props.setAllObject}
                                                    setCurrentTextFieldSelected={props.setCurrentTextFieldSelected}
@@ -62,27 +63,30 @@ export default function TabsObject(props) {
                                                        setCurrentObject={props.setCurrentObject}
                                                        currentObject={props.currentObject} allObject={props.allObject}
                                                        updateAllObjectWhenCurrentObjectChange={props.updateAllObjectWhenCurrentObjectChange}/> :
-                                        props.currentObject.userData.type === "NURBS" ? <NURBS setAllObject={props.setAllObject}
-                                                                                      setCurrentTextFieldSelected={props.setCurrentTextFieldSelected}
-                                                                                      setCurrentObject={props.setCurrentObject}
-                                                                                      currentObject={props.currentObject}
-                                                                                      allObject={props.allObject}
-                                                                                      updateAllObjectWhenCurrentObjectChange={props.updateAllObjectWhenCurrentObjectChange}/> :
-                                            props.currentObject.userData.type === "Bezier" ? <Bezier setAllObject={props.setAllObject}
-                                                                                          setCurrentTextFieldSelected={props.setCurrentTextFieldSelected}
-                                                                                          setCurrentObject={props.setCurrentObject}
-                                                                                          currentObject={props.currentObject}
-                                                                                          allObject={props.allObject}
-                                                                                          updateAllObjectWhenCurrentObjectChange={props.updateAllObjectWhenCurrentObjectChange}/> :
-                                                props.currentObject.userData.type === "Loft Surface" ? <LoftSurface setAllObject={props.setAllObject}
-                                                                                                                   setCurrentTextFieldSelected={props.setCurrentTextFieldSelected}
-                                                                                                                   setCurrentObject={props.setCurrentObject}
-                                                                                                                   currentObject={props.currentObject}
-                                                                                                                   allObject={props.allObject}
-                                                                                                                   updateAllObjectWhenCurrentObjectChange={props.updateAllObjectWhenCurrentObjectChange}/> :
+                                        props.currentObject.userData.type === "NURBS" ?
+                                            <NURBS setAllObject={props.setAllObject}
+                                                   setCurrentTextFieldSelected={props.setCurrentTextFieldSelected}
+                                                   setCurrentObject={props.setCurrentObject}
+                                                   currentObject={props.currentObject}
+                                                   allObject={props.allObject}
+                                                   updateAllObjectWhenCurrentObjectChange={props.updateAllObjectWhenCurrentObjectChange}/> :
+                                            props.currentObject.userData.type === "Bezier" ?
+                                                <Bezier setAllObject={props.setAllObject}
+                                                        setCurrentTextFieldSelected={props.setCurrentTextFieldSelected}
+                                                        setCurrentObject={props.setCurrentObject}
+                                                        currentObject={props.currentObject}
+                                                        allObject={props.allObject}
+                                                        updateAllObjectWhenCurrentObjectChange={props.updateAllObjectWhenCurrentObjectChange}/> :
+                                                props.currentObject.userData.type === "Loft Surface" ?
+                                                    <LoftSurface setAllObject={props.setAllObject}
+                                                                 setCurrentTextFieldSelected={props.setCurrentTextFieldSelected}
+                                                                 setCurrentObject={props.setCurrentObject}
+                                                                 currentObject={props.currentObject}
+                                                                 allObject={props.allObject}
+                                                                 updateAllObjectWhenCurrentObjectChange={props.updateAllObjectWhenCurrentObjectChange}/> :
 
 
-                                            ""
+                                                    ""
             }
         </div>
 

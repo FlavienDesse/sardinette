@@ -6,20 +6,12 @@ import Scene from "../Scene/scene";
 import AllObjectAndGlobalSettings from "../AllObjectAndGlobalSettings/allObjectAndGlobalSettings";
 import CurrentObject from "../CurrentObject/currentObject";
 import Background from "../../Misc/Background";
-import {
-    createAxis, createBezier,
-    createBSpline, createCatmullRomSpline, createLoftSurface,
-    createMirroredCurve,
-    createMirroredPoint,
-    createNURBS,
-    createPoint,
-    createSurface,
-    modifyObjectWhenClickOn,
-    updateChildren
-} from "../../Misc/Utils";
+import {createPoint, modifyObjectWhenClickOn, updateChildren} from "../../Misc/Utils";
 import Modal from "@material-ui/core/Modal";
 import {Button, Typography} from "@material-ui/core";
 import AxisView from "../AxisView/axisView";
+import {createAxis,createCatmullRomSpline,createNURBS,createBSpline,createBezier,createMirroredCurve,createSurface,createLoftSurface} from "../../Misc/Utils";
+
 
 export default function Main() {
     const classes = useStyles();
@@ -44,101 +36,87 @@ export default function Main() {
     const raycaster = useRef();
 
 
-
-
-
-
-
-
     useEffect(() => {
 
 
 
+            const xAxis = createAxis('x')
+         const yAxis = createAxis('y')
+         const zAxis = createAxis('z')
 
-        const firstPoint = createPoint({x: 0, y: 2, z: 2});
-        const secondPoint = createPoint({x: 0, y: 0, z: 2});
-        const thirdPoint = createPoint({x: 0, y: 0, z: 0});
+         const firstPoint = createPoint({x: 0, y: 2, z: 2});
+         const secondPoint = createPoint({x: 0, y: 0, z: 2});
+         const thirdPoint = createPoint({x: 0, y: 0, z: 0});
 
-       /*const xAxis = createAxis('x')
-        const yAxis = createAxis('y')
-        const zAxis = createAxis('z')
+         const firstBSpline = createBSpline([firstPoint,secondPoint,thirdPoint]);
 
-        const firstPoint = createPoint({x: 0, y: 2, z: 2});
-        const secondPoint = createPoint({x: 0, y: 0, z: 2});
-        const thirdPoint = createPoint({x: 0, y: 0, z: 0});
+         const fourthPoint = createPoint({x: 2, y: 2, z: 2});
+         const fifthPoint = createPoint({x: 2, y: 0, z: 2});
+         const sixthPoint = createPoint({x: 2, y: 0, z: 0});
 
-        const firstBSpline = createBSpline([firstPoint,secondPoint,thirdPoint]);
+         const firstBezier = createBezier([fourthPoint,fifthPoint,sixthPoint]);
 
-        const fourthPoint = createPoint({x: 2, y: 2, z: 2});
-        const fifthPoint = createPoint({x: 2, y: 0, z: 2});
-        const sixthPoint = createPoint({x: 2, y: 0, z: 0});
+         const seventhPoint = createPoint({x: 4, y: 2, z: 2});
+         const eigthPoint = createPoint({x: 4, y: 0, z: 2});
+         const ninthPoint = createPoint({x: 4, y: 0, z: 0});
 
-        const firstBezier = createBezier([fourthPoint,fifthPoint,sixthPoint]);
+         const firstCSpline = createCatmullRomSpline([seventhPoint,eigthPoint,ninthPoint]);
 
-        const seventhPoint = createPoint({x: 4, y: 2, z: 2});
-        const eigthPoint = createPoint({x: 4, y: 0, z: 2});
-        const ninthPoint = createPoint({x: 4, y: 0, z: 0});
-
-        const firstCSpline = createCatmullRomSpline([seventhPoint,eigthPoint,ninthPoint]);
-
-        const mirrorFirstBSpline = createMirroredCurve(firstBSpline,yAxis);
-        const mirrorFirstBezier= createMirroredCurve(firstBezier,yAxis);
-        const mirrorFirstCSpline= createMirroredCurve(firstCSpline,yAxis);
+         const mirrorFirstBSpline = createMirroredCurve(firstBSpline,yAxis);
+         const mirrorFirstBezier= createMirroredCurve(firstBezier,yAxis);
+         const mirrorFirstCSpline= createMirroredCurve(firstCSpline,yAxis);
 
 
-        const tenPoint = createPoint({x: 6, y: 2, z: 2});
-        const elevenPoint = createPoint({x: 6, y: 0, z: 2});
-        const twelvePoint = createPoint({x: 6, y: 0, z: 0});
+         const tenPoint = createPoint({x: 6, y: 2, z: 2});
+         const elevenPoint = createPoint({x: 6, y: 0, z: 2});
+         const twelvePoint = createPoint({x: 6, y: 0, z: 0});
 
-        const createFirstNURBS= createNURBS([tenPoint,elevenPoint,twelvePoint]);
+         const createFirstNURBS= createNURBS([tenPoint,elevenPoint,twelvePoint]);
 
-        const firstSurface= createSurface(firstBezier,firstBSpline);
-
-
-        const thirteenPoint = createPoint({x: 0, y: 2, z: -4});
-        const fourteenPoint = createPoint({x: 0, y: 0, z: -4});
-        const fifteenPoint = createPoint({x: 0, y: 0, z: -2});
-
-        const sixteen = createPoint({x: 2, y: 2, z: -6});
-        const seventeen = createPoint({x: 2, y: 0, z: -6});
-        const eighteen = createPoint({x: 2, y: 0, z: -4});
-
-        const nineteen = createPoint({x: 4, y: 2, z: -4});
-        const twenty = createPoint({x: 4, y: 0, z: -4});
-        const twentyOne = createPoint({x: 4, y: 0, z: -2});
+         const firstSurface= createSurface(firstBezier,firstBSpline);
 
 
-        const secondCSpline = createCatmullRomSpline([thirteenPoint,fourteenPoint,fifteenPoint])
-        const thirdCSpline = createCatmullRomSpline([sixteen,seventeen,eighteen])
-        const fourthCSpline = createCatmullRomSpline([nineteen,twenty,twentyOne])
+         const thirteenPoint = createPoint({x: 0, y: 2, z: -4});
+         const fourteenPoint = createPoint({x: 0, y: 0, z: -4});
+         const fifteenPoint = createPoint({x: 0, y: 0, z: -2});
+
+         const sixteen = createPoint({x: 2, y: 2, z: -6});
+         const seventeen = createPoint({x: 2, y: 0, z: -6});
+         const eighteen = createPoint({x: 2, y: 0, z: -4});
+
+         const nineteen = createPoint({x: 4, y: 2, z: -4});
+         const twenty = createPoint({x: 4, y: 0, z: -4});
+         const twentyOne = createPoint({x: 4, y: 0, z: -2});
 
 
-        const cLoft = createLoftSurface([secondCSpline,thirdCSpline,fourthCSpline])
+         const secondCSpline = createCatmullRomSpline([thirteenPoint,fourteenPoint,fifteenPoint])
+         const thirdCSpline = createCatmullRomSpline([sixteen,seventeen,eighteen])
+         const fourthCSpline = createCatmullRomSpline([nineteen,twenty,twentyOne])
 
 
-        setAllObject([
-            firstPoint,secondPoint,thirdPoint,firstBSpline,
-            fourthPoint,fifthPoint,sixthPoint,firstBezier,
-            seventhPoint,eigthPoint,ninthPoint,firstCSpline,
-            mirrorFirstBSpline,mirrorFirstBezier,mirrorFirstCSpline,
-            tenPoint,elevenPoint,twelvePoint,createFirstNURBS,
-            firstSurface,
-            thirteenPoint,fourteenPoint,fifteenPoint,
-            sixteen,seventeen,eighteen,
-            nineteen,twenty,twentyOne,
-            secondCSpline,thirdCSpline,fourthCSpline,
-            cLoft
-        ])*/
+         const cLoft = createLoftSurface([secondCSpline,thirdCSpline,fourthCSpline])
 
-    /*    const top1 = createPoint({x: 0, y: 2, z: 2});
-        const top2 = createPoint({x: 2, y: 2, z: 0})
-        const top3 = createPoint({x: 2, y: 2, z: 2})
 
-        const firstCurve = createCSpline([top1,top2,top3])*/
+         setAllObject([
+             firstPoint,secondPoint,thirdPoint,firstBSpline,
+             fourthPoint,fifthPoint,sixthPoint,firstBezier,
+             seventhPoint,eigthPoint,ninthPoint,firstCSpline,
+             mirrorFirstBSpline,mirrorFirstBezier,mirrorFirstCSpline,
+             tenPoint,elevenPoint,twelvePoint,createFirstNURBS,
+             firstSurface,
+             thirteenPoint,fourteenPoint,fifteenPoint,
+             sixteen,seventeen,eighteen,
+             nineteen,twenty,twentyOne,
+             secondCSpline,thirdCSpline,fourthCSpline,
+             cLoft
+         ])
 
-        setAllObject([
-            firstPoint,secondPoint,thirdPoint
-        ])
+        /*    const top1 = createPoint({x: 0, y: 2, z: 2});
+            const top2 = createPoint({x: 2, y: 2, z: 0})
+            const top3 = createPoint({x: 2, y: 2, z: 2})
+
+            const firstCurve = createCSpline([top1,top2,top3])*/
+
 
 
 
@@ -247,7 +225,7 @@ export default function Main() {
 
     return (
         <div className={classes.container}>
-            <Menu  scene={scene} setAllObject={setAllObject}>
+            <Menu scene={scene} setAllObject={setAllObject}>
 
             </Menu>
 
@@ -263,7 +241,8 @@ export default function Main() {
             <Toolbar controls={controls.current} camera={camera.current} currentObject={currentObject}/>
             <div className={classes.containerSceneAndBoxObject}>
                 <div className={classes.containerScene}>
-                    <Scene  controls={controls} control={control} camera={camera} renderer={renderer} scene={scene} raycaster={raycaster}
+                    <Scene controls={controls} control={control} camera={camera} renderer={renderer} scene={scene}
+                           raycaster={raycaster}
                            updateAllObjectWhenCurrentObjectChange={updateAllObjectWhenCurrentObjectChange}
                            currentTextFieldSelected={currentTextFieldSelected}
                            setCurrentTextFieldSelected={setCurrentTextFieldSelected} background={background}

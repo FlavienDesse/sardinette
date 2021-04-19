@@ -12,8 +12,23 @@
   <component name="ChangeListManager">
     <list default="true" id="78afd4d1-1ed3-4b4d-a584-1aa195b3fadc" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/AllObjectAndGlobalSettings/ArrayRenderObject/arrayRenderObject.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/AllObjectAndGlobalSettings/ArrayRenderObject/arrayRenderObject.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/CurrentObject/TabsObject/Curve/Bezier/bezier.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/CurrentObject/TabsObject/Curve/Bezier/bezier.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/CurrentObject/TabsObject/Curve/Mirrored Curve/mirroredCurve.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/CurrentObject/TabsObject/Curve/Mirrored Curve/mirroredCurve.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Components/CurrentObject/TabsObject/Curve/NURBS/NURBS.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/CurrentObject/TabsObject/Curve/NURBS/NURBS.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/CurrentObject/TabsObject/Surfaces/LoftSurface/loftSurface.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/CurrentObject/TabsObject/Surfaces/LoftSurface/loftSurface.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/CurrentObject/TabsObject/Surfaces/Surface/surface.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/CurrentObject/TabsObject/Surfaces/Surface/surface.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/CurrentObject/TabsObject/tabsObject.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/CurrentObject/TabsObject/tabsObject.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Components/Main/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Main/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Menu/OpenExamples/openExamples.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Menu/OpenExamples/openExamples.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Menu/OpenFile/openFile.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Menu/OpenFile/openFile.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Menu/OpenInsert/openInsert.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Menu/OpenInsert/openInsert.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Menu/menu.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Menu/menu.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Scene/scene.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Scene/scene.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Misc/Constant.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Misc/Constant.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Misc/Export.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Misc/Export.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Misc/Import.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Misc/Import.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Misc/Math.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Misc/Math.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Misc/Utils.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Misc/Utils.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -110,6 +125,19 @@
     </key>
   </component>
   <component name="RunManager">
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration default="true" type="js.build_tools.npm">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
@@ -182,7 +210,7 @@
       <workItem from="1618556846907" duration="4320000" />
       <workItem from="1618694654263" duration="4846000" />
       <workItem from="1618763629719" duration="2092000" />
-      <workItem from="1618844479152" duration="6954000" />
+      <workItem from="1618844479152" duration="9248000" />
     </task>
     <servers />
   </component>

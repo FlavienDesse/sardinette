@@ -3,7 +3,6 @@ import * as THREE from "three"
 import useStyles from "./style";
 import PropTypes from 'prop-types';
 import Background from "../../Misc/Background";
-import {TrackballControls} from "three/examples/jsm/controls/TrackballControls"
 import {modifyObjectWhenClickOn} from "../../Misc/Utils";
 import {TransformControls} from "three/examples/jsm/controls/TransformControls"
 import InfiniteGridHelper from "../../Misc/InfiniteGridHelper";
@@ -24,7 +23,6 @@ export default function Scene(props) {
     const refContainer = useRef();
 
 
-
     const handleMove = React.useCallback((event) => {
         let lastValue = props.currentObject;
         let newValue = event.target.object
@@ -39,7 +37,7 @@ export default function Scene(props) {
 
     React.useEffect(() => {
 
-        if (props.currentObject && props.currentObject.userData.type === "Point"&& props.currentObject.visible &&  !props.currentObject.userData.isError ) {
+        if (props.currentObject && props.currentObject.userData.type === "Point" && props.currentObject.visible && !props.currentObject.userData.isError) {
             props.control.current.attach(props.currentObject);
             props.control.current.addEventListener('objectChange', handleMove);
             return () => {
@@ -77,7 +75,7 @@ export default function Scene(props) {
         props.renderer.current.gammaFactor = 2.2;
 
 
-        props.scene.current= new THREE.Scene()
+        props.scene.current = new THREE.Scene()
         const color = 0xFFFFFF;  // white
         const near = 10;
         const far = 100;
@@ -88,7 +86,7 @@ export default function Scene(props) {
 
         refContainer.current.appendChild(props.renderer.current.domElement)
 
-        props.controls.current  = new OrbitControls(props.camera.current, props.renderer.current.domElement)
+        props.controls.current = new OrbitControls(props.camera.current, props.renderer.current.domElement)
         props.control.current = new TransformControls(props.camera.current, props.renderer.current.domElement);
 
         group.add(props.control.current)
@@ -98,7 +96,7 @@ export default function Scene(props) {
         props.scene.current.add(group);
         props.scene.current.add(new THREE.Group());
 
-       
+
         props.control.current.addEventListener('dragging-changed', function (event) {
             props.controls.current.enabled = !event.value;
 
@@ -128,7 +126,7 @@ export default function Scene(props) {
         animate();
 
 
-    }, [props.camera, props.control, props.controls, props.raycaster, props.renderer])
+    }, [props.camera, props.control, props.controls, props.raycaster, props.renderer, props.scene])
 
     React.useEffect(() => {
 
@@ -168,7 +166,7 @@ export default function Scene(props) {
 
         }
         //   renderer.render(scene, camera);
-    }, [props.background])
+    }, [props.background, props.scene])
 
 
     const handleClickOnCanvas = React.useCallback((event) => {
@@ -196,7 +194,6 @@ export default function Scene(props) {
         })
 
         const intersects = props.raycaster.current.intersectObjects([...allObjectVisibile]);
-
 
 
         if (!props.control.current.dragging) {
@@ -257,8 +254,6 @@ export default function Scene(props) {
         });
         props.scene.current.add(group)
     }, [props.allObject, props.scene])
-
-
 
 
     return (

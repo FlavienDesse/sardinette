@@ -39,11 +39,8 @@ export default function NURBS(props) {
     const [controlsPoints, setControlsPoints] = React.useState(props.currentObject.userData.controlsPoints);
 
 
+    const shrinkKnotsVector = () => {
 
-
-
-    const shrinkKnotsVector= ()=>{
-        
 
         let newKnotsVector = [...knots]
 
@@ -52,21 +49,20 @@ export default function NURBS(props) {
         let newValue = props.currentObject
 
 
-
         props.updateAllObjectWhenCurrentObjectChange(lastValue, newValue, true)
         props.setCurrentObject(newValue)
 
 
-        for(let i = 0 ; i < newKnotsVector.length ;i++){
-            if(newKnotsVector[i] === undefined){
-                newKnotsVector[i] = newKnotsVector[i-1]+1
+        for (let i = 0; i < newKnotsVector.length; i++) {
+            if (newKnotsVector[i] === undefined) {
+                newKnotsVector[i] = newKnotsVector[i - 1] + 1
             }
         }
 
         setKnots(newKnotsVector)
 
 
-       newValue.userData.knots = [...newKnotsVector]
+        newValue.userData.knots = [...newKnotsVector]
 
         try {
             newValue.userData.update()
@@ -83,8 +79,6 @@ export default function NURBS(props) {
         return null
 
     }
-
-
 
 
     React.useEffect((() => {
@@ -157,13 +151,12 @@ export default function NURBS(props) {
     }
 
 
-
     const keyPressTextFieldDegree = (e) => {
         if (e.keyCode === 13) {
             let lastValue = props.currentObject;
             let newValue = props.currentObject
             newValue.userData.degree = degree
-            shrinkKnotsVector ()
+            shrinkKnotsVector()
 
             try {
                 newValue.userData.update()
@@ -242,7 +235,6 @@ export default function NURBS(props) {
     const addControlsPoints = (points) => {
 
 
-
         setControlsPoints((prevState => {
             prevState.push(points)
 
@@ -253,8 +245,6 @@ export default function NURBS(props) {
     }
 
     const setOneControlsPoints = (points) => {
-
-
 
 
         setControlsPoints((prevState => {
@@ -269,7 +259,7 @@ export default function NURBS(props) {
         var rgx = /\d*\.?\d*/;
         let val = e.target.value.match(rgx)
 
-        let actualKnots =knots.map(value => parseFloat(value))
+        let actualKnots = knots.map(value => parseFloat(value))
 
         if (e.target.value === "" || val === null || val[0] === "") {
             setKnots((prevState => {
@@ -291,7 +281,7 @@ export default function NURBS(props) {
         let newValue = props.currentObject
         newValue.userData.knots = [...actualKnots]
         for (let i = 0; i < controlsPoints.length + degree + 1; i++) {
-            if (isNaN(actualKnots[i]) ||actualKnots[i] === "" ) {
+            if (isNaN(actualKnots[i]) || actualKnots[i] === "") {
                 isValidKnots = false;
                 newValue.isError = true
                 props.updateAllObjectWhenCurrentObjectChange(lastValue, newValue, true)

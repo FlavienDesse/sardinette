@@ -9,10 +9,7 @@ const exportSTL = (scene) => {
     let allChildren = scene.children
 
 
-
     let children = []
-
-
 
 
     scene.children[1].children.forEach((object) => {
@@ -20,7 +17,7 @@ const exportSTL = (scene) => {
             children.push(object)
         }
     })
-    if(children.length === 0){
+    if (children.length === 0) {
         throw new Error(" please add at least one surface ")
     }
     scene.children = children
@@ -39,33 +36,29 @@ const exportScene = (scene) => {
     const options = {
         trs: false,
         onlyVisible: false,
-        includeCustomExtensions:false,
+        includeCustomExtensions: false,
     };
 
 
-
-    exporter.parse( scene.current.children[1], function ( result  ) {
+    exporter.parse(scene.current.children[1], function (result) {
         let blob;
-        if ( result instanceof ArrayBuffer ) {
+        if (result instanceof ArrayBuffer) {
 
-            blob = new Blob([result], {  type: 'application/octet-stream' } );
+            blob = new Blob([result], {type: 'application/octet-stream'});
 
         } else {
-            blob = new Blob([JSON.stringify(result)], {  type: 'text/plain' } );
+            blob = new Blob([JSON.stringify(result)], {type: 'text/plain'});
 
 
         }
 
         saveAs(blob, 'save.gltf');
-    }, options );
-
-
+    }, options);
 
 
 }
 
 
-
 export {
-    exportSTL,exportScene
+    exportSTL, exportScene
 }

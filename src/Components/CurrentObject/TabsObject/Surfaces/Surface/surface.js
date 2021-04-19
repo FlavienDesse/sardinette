@@ -28,7 +28,6 @@ export default function Surface(props) {
     const {enqueueSnackbar} = useSnackbar();
 
 
-
     React.useEffect((() => {
         setIsVisible(props.currentObject.visible)
         setName(props.currentObject.userData.name)
@@ -74,7 +73,6 @@ export default function Surface(props) {
             try {
                 updateObjectByAddingChildrenID(new Array(secondCurve), props.currentObject.id, props.allObject, props.setAllObject)
                 newValue.userData.update()
-
 
 
             } catch (e) {

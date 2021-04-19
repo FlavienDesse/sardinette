@@ -136,7 +136,6 @@ export default function MirroredCurve(props) {
                 newValue.userData.update()
 
 
-
             } catch (e) {
                 enqueueSnackbar(e.message, {
                     variant: 'error',

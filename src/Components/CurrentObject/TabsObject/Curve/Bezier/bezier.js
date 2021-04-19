@@ -56,7 +56,6 @@ export default function Bezier(props) {
     }
 
 
-
     const handleChangeTextFieldResolution = (event) => {
         var rgx = /[0-9]*/;
         let val = event.target.value.match(rgx)
@@ -84,7 +83,6 @@ export default function Bezier(props) {
 
         }
     }
-
 
 
     const keyPressTextFieldControlsPoints = (e) => {

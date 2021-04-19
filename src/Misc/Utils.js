@@ -1,7 +1,7 @@
 import * as THREE from "three";
-import {BufferGeometry, DoubleSide, Mesh, MeshBasicMaterial, SphereGeometry} from "three";
+import {BufferGeometry, Mesh, MeshBasicMaterial, SphereGeometry} from "three";
 import Constant from "./Constant";
-import {bezierCurve, bSpline, loftSurface, catmullRomSpline, getSurface, mirrorCurve, mirrorPoint} from "./Math";
+import {bezierCurve, bSpline, catmullRomSpline, getSurface, loftSurface, mirrorCurve, mirrorPoint} from "./Math";
 import {MeshLine, MeshLineMaterial, MeshLineRaycast} from 'three.meshline';
 
 /*
@@ -80,20 +80,14 @@ function increaseDefaultName(type) {
             break;
         default:
 
-            throw new Error("unknow type provided "+type)
+            throw new Error("unknow type provided " + type)
     }
 }
 
 const updateObjectByAddingChildrenID = (allUpdatedObject, id, allObject, setAllObject) => {
 
 
-
-
-
-
     let allIDUpdated = allUpdatedObject.map(prev => prev.id)
-
-
 
 
     let newState = allObject.map(prev => {
@@ -137,7 +131,7 @@ function updateChildren(allObject, currentObject, isDeletion) {
                     }
                 })
             } else {
-                if (prev.userData.type === "B-Spline" || prev.userData.type === "C-Spline" || prev.userData.type === "C-Spline" || prev.userData.type === "Bezier") {
+                if (prev.userData.type === "B-Spline" || prev.userData.type === "Catmull Rom Spline" || prev.userData.type === "NURBS" || prev.userData.type === "Bezier") {
                     if (isDeletion) {
                         prev.userData.controlsPoints = prev.userData.controlsPoints.filter(controlsPoints => controlsPoints.id !== currentObject.id)
                     }
@@ -154,37 +148,36 @@ function updateChildren(allObject, currentObject, isDeletion) {
 
                 } else if (prev.userData.type === "Surface") {
                     if (isDeletion) {
-                        if(prev.userData.firstCurve.id === currentObject.id){
+                        if (prev.userData.firstCurve.id === currentObject.id) {
                             prev.userData.firstCurve = null;
-                        }
-                        else{
+                        } else {
                             prev.userData.secondCurve = null;
                         }
 
                     }
 
-                } else if (prev.userData.type === "loftSurface") {
+                } else if (prev.userData.type === "Loft Surface") {
                     if (isDeletion) {
-                        prev.userData.allCurves = prev.userData.allCurves.filter(curve => curve.id !== curve.id)
+                        prev.userData.allCurves = prev.userData.allCurves.filter(curve => curve.id !== currentObject.id)
                     }
 
                 }
 
 
                 if (value.isError) {
-                    prev.isError = true
+                    prev.userData.isError = true
                 } else {
                     try {
                         prev.userData.update()
                     } catch (e) {
-
+                        prev.userData.isError = true
                     }
                 }
 
                 prev.userData.childrenID.forEach((id) => {
                     tempInfo.push({
                             id: id,
-                            isError: prev.isError,
+                            isError:   prev.userData.isError,
                         }
                     )
                 })
@@ -205,7 +198,7 @@ function updateChildren(allObject, currentObject, isDeletion) {
 function createAxis(axis) {
 
 
-    let tempAxis = {userData:{}};
+    let tempAxis = {userData: {}};
 
 
     switch (axis) {
@@ -258,8 +251,8 @@ function createMirroredPoint(initialPoint, axis) {
         try {
 
 
-            if(point.userData.axis === null){
-                 throw new Error("axis is null")
+            if (point.userData.axis === null) {
+                throw new Error("axis is null")
             }
 
 
@@ -341,14 +334,14 @@ function createNURBS(controlsPoints) {
     mesh.userData.resolution = 15
     mesh.userData.isError = true
     mesh.userData.allCalculatedPoints = []
-    mesh.userData.knots = new Array( mesh.userData.degree + 1).fill().map((_, index) => index + 1);
+    mesh.userData.knots = new Array(mesh.userData.degree + 1).fill().map((_, index) => index + 1);
 
     if (controlsPoints) {
 
         try {
             let allPositionControlsPoints = controlsPoints.map(a => a.position);
 
-            mesh.userData.knots = new Array( allPositionControlsPoints.length+mesh.userData.degree + 1).fill().map((_, index) => index + 1);
+            mesh.userData.knots = new Array(allPositionControlsPoints.length + mesh.userData.degree + 1).fill().map((_, index) => index + 1);
             let res = bSpline(mesh.userData.degree, allPositionControlsPoints, mesh.userData.resolution, mesh.userData.knots, controlsPoints.map(a => a.userData.weight))
 
             mesh.userData.allCalculatedPoints = res
@@ -437,9 +430,6 @@ function createBSpline(controlsPoints) {
         let allControlsPoints = mesh.userData.controlsPoints.map(a => a.position);
         try {
             let res = bSpline(mesh.userData.degree, allControlsPoints, mesh.userData.resolution, null, mesh.userData.controlsPoints.map(a => a.userData.weight))
-
-            console.log(mesh.userData.degree)
-            console.log(mesh.userData.resolution)
 
             mesh.userData.allCalculatedPoints = res
             bSplineParam.setPoints(res)
@@ -677,23 +667,21 @@ function createSurface(firstCurve, secondCurve) {
             let pointSecondCurve = []
 
 
-
-            for(let i = 0 ; i < firstCurve.userData.allCalculatedPoints.length ; i+=3){
+            for (let i = 0; i < firstCurve.userData.allCalculatedPoints.length; i += 3) {
                 pointFirstCurve.push({
                     x: firstCurve.userData.allCalculatedPoints[i],
-                    y: firstCurve.userData.allCalculatedPoints[i+1],
-                    z: firstCurve.userData.allCalculatedPoints[i+2],
+                    y: firstCurve.userData.allCalculatedPoints[i + 1],
+                    z: firstCurve.userData.allCalculatedPoints[i + 2],
                 })
             }
 
-            for(let i = 0 ; i < secondCurve.userData.allCalculatedPoints.length ; i+=3){
+            for (let i = 0; i < secondCurve.userData.allCalculatedPoints.length; i += 3) {
                 pointSecondCurve.push({
                     x: secondCurve.userData.allCalculatedPoints[i],
-                    y: secondCurve.userData.allCalculatedPoints[i+1],
-                    z: secondCurve.userData.allCalculatedPoints[i+2],
+                    y: secondCurve.userData.allCalculatedPoints[i + 1],
+                    z: secondCurve.userData.allCalculatedPoints[i + 2],
                 })
             }
-
 
 
             let res = getSurface(pointFirstCurve, pointSecondCurve)
@@ -732,7 +720,6 @@ function createSurface(firstCurve, secondCurve) {
             surface.geometry = geometry
 
 
-
         } catch (e) {
             console.log(e)
             throw new Error("error in creation surface")
@@ -749,40 +736,36 @@ function createSurface(firstCurve, secondCurve) {
 
             let isEmpty = true
             // eslint-disable-next-line no-native-reassign
-            for( let _ in surface.userData.secondCurve ){
+            for (let _ in surface.userData.secondCurve) {
                 isEmpty = false
                 break;
             }
-            if(isEmpty){
+            if (isEmpty) {
                 throw new Error("second curve is undefined")
             }
             isEmpty = true
-            for(let _ in surface.userData.firstCurve ){
+            for (let _ in surface.userData.firstCurve) {
                 isEmpty = false
                 break;
             }
-            if(isEmpty){
+            if (isEmpty) {
                 throw new Error("first curve is undefined")
             }
 
 
-
-
-
-
-            for(let i = 0 ; i < surface.userData.firstCurve.userData.allCalculatedPoints.length ; i+=3){
+            for (let i = 0; i < surface.userData.firstCurve.userData.allCalculatedPoints.length; i += 3) {
                 pointFirstCurve.push({
-                    x:  surface.userData.firstCurve.userData.allCalculatedPoints[i],
-                    y:  surface.userData.firstCurve.userData.allCalculatedPoints[i+1],
-                    z:  surface.userData.firstCurve.userData.allCalculatedPoints[i+2],
+                    x: surface.userData.firstCurve.userData.allCalculatedPoints[i],
+                    y: surface.userData.firstCurve.userData.allCalculatedPoints[i + 1],
+                    z: surface.userData.firstCurve.userData.allCalculatedPoints[i + 2],
                 })
             }
 
-            for(let i = 0 ; i < surface.userData.secondCurve.userData.allCalculatedPoints.length ; i+=3){
+            for (let i = 0; i < surface.userData.secondCurve.userData.allCalculatedPoints.length; i += 3) {
                 pointSecondCurve.push({
                     x: surface.userData.secondCurve.userData.allCalculatedPoints[i],
-                    y: surface.userData.secondCurve.userData.allCalculatedPoints[i+1],
-                    z: surface.userData.secondCurve.userData.allCalculatedPoints[i+2],
+                    y: surface.userData.secondCurve.userData.allCalculatedPoints[i + 1],
+                    z: surface.userData.secondCurve.userData.allCalculatedPoints[i + 2],
                 })
             }
 
@@ -826,7 +809,7 @@ function createSurface(firstCurve, secondCurve) {
 }
 
 
-function createSTL(geometry){
+function createSTL(geometry) {
 
     const material = new MeshBasicMaterial({
         color: Constant.DEFAULT_COLOR_SURFACE,
@@ -846,7 +829,6 @@ function createLoftSurface(curves) {
 
 
     const geometrySurface = new THREE.BufferGeometry();
-    const geometryLine = new THREE.BufferGeometry();
 
     const material = new THREE.MeshBasicMaterial({
         color: Constant.DEFAULT_COLOR_SURFACE,
@@ -854,7 +836,6 @@ function createLoftSurface(curves) {
         transparent: true,
         side: THREE.DoubleSide
     });
-    const lineMaterial = new THREE.MeshBasicMaterial({color: Constant.DEFAULT_COLOR_SURFACE, side: THREE.DoubleSide});
 
     const surface = new THREE.Mesh(geometrySurface, material);
 
@@ -873,26 +854,24 @@ function createLoftSurface(curves) {
         try {
 
 
-
             const allVector3Curves = []
             for (let j = 0; j < curves.length; j++) {
                 let curve = curves[j]
                 surface.userData.allCurves.push(curve)
                 curve.userData.childrenID.push(surface.id);
                 allVector3Curves.push([])
-                for (let i = 0; i < curve.userData.allCalculatedPoints.length; i+=3) {
+                for (let i = 0; i < curve.userData.allCalculatedPoints.length; i += 3) {
 
                     allVector3Curves[j].push(new THREE.Vector3(
                         curve.userData.allCalculatedPoints[i],
-                        curve.userData.allCalculatedPoints[i+1],
-                        curve.userData.allCalculatedPoints[i+2]
-
+                        curve.userData.allCalculatedPoints[i + 1],
+                        curve.userData.allCalculatedPoints[i + 2]
                     ))
                 }
             }
 
 
-            let res = loftSurface(allVector3Curves,  surface.userData.resolution)
+            let res = loftSurface(allVector3Curves, surface.userData.resolution)
 
             let geometry = new THREE.BufferGeometry();
             let numTriangles = res.length
@@ -920,7 +899,6 @@ function createLoftSurface(curves) {
             surface.userData.isError = false
 
 
-
             // line.geometry=geometry
 
             surface.geometry = geometry
@@ -935,22 +913,18 @@ function createLoftSurface(curves) {
 
         let allVector3Curves = []
 
-        for (let j = 0; j <  surface.userData.allCurves.length; j++) {
-            let curve =surface.userData.allCurves[j]
+        for (let j = 0; j < surface.userData.allCurves.length; j++) {
+            let curve = surface.userData.allCurves[j]
             allVector3Curves.push([])
-            for (let i = 0; i < curve.userData.allCalculatedPoints.length; i+=3) {
+            for (let i = 0; i < curve.userData.allCalculatedPoints.length; i += 3) {
 
                 allVector3Curves[j].push(new THREE.Vector3(
                     curve.userData.allCalculatedPoints[i],
-                    curve.userData.allCalculatedPoints[i+1],
-                    curve.userData.allCalculatedPoints[i+2]
-
+                    curve.userData.allCalculatedPoints[i + 1],
+                    curve.userData.allCalculatedPoints[i + 2]
                 ))
             }
         }
-
-
-
 
 
         try {
@@ -1097,7 +1071,7 @@ function modifyObjectWhenClickOn(object, currentObject) {
             } else {
                 return currentObject
             }
-        }else if (object.userData.type === "Loft Surface") {
+        } else if (object.userData.type === "Loft Surface") {
             if (currentObject == null || (currentObject.id !== object.id)) {
 
                 let intersect = object

@@ -1,9 +1,9 @@
 import React from "react";
 import {MenuItem, SubMenu} from "rc-menu"
-import {exportSTL,exportScene} from "../../../Misc/Export";
+import {exportSTL} from "../../../Misc/Export";
 import PropTypes from "prop-types";
 
-import {importSTLFromEvent,importScene} from "../../../Misc/Import";
+import {importSTLFromEvent} from "../../../Misc/Import";
 import {useSnackbar} from "notistack";
 
 OpenFile.propType = {
@@ -17,13 +17,11 @@ export default function OpenFile(props) {
 
     const {enqueueSnackbar} = useSnackbar();
 
-    const handleClickSaveAs = event => {
-        exportScene(props.scene)
-    };
+
     const handleClickOnSTL = () => {
-        try{
+        try {
             exportSTL(props.scene.current)
-        }catch (e){
+        } catch (e) {
             enqueueSnackbar(e.message, {
                 variant: 'error',
             });
@@ -33,23 +31,18 @@ export default function OpenFile(props) {
 
 
     const handleChangeSTL = (event) => {
-        importSTLFromEvent (event,props.scene,props.setAllObject)
+        importSTLFromEvent(event, props.scene, props.setAllObject)
     };
 
-
-    const handleChangeOpen = (event) => {
-
-        importScene(event, props.setAllObject)
-    }
 
     const handleClickHiddenFile = event => {
         hiddenFileInput.current.click();
     };
 
 
-
     let propsSubMenu = Object.assign({}, props)
     delete propsSubMenu.setAllObject
+
     return (
         <SubMenu popupOffset={[0, 2]} {...propsSubMenu} title={"File"}>
             <MenuItem onClick={handleClickHiddenFile}>

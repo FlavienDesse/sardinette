@@ -107,17 +107,13 @@ export default function LoftSurface(props) {
 
     }
 
-    const setOneCurve= (curve) => {
+    const setOneCurve = (curve) => {
         setAllCurves((prevState) => {
             prevState = []
             prevState.push(curve)
             return [...prevState]
         })
     }
-
-
-
-
 
 
     return (
