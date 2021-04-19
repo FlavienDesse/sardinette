@@ -341,7 +341,7 @@ function createNURBS(controlsPoints) {
     mesh.userData.resolution = 15
     mesh.userData.isError = true
     mesh.userData.allCalculatedPoints = []
-    mesh.userData.knots = new Array(controlsPoints.length + mesh.userData.degree + 1).fill().map((_, index) => index + 1);
+    mesh.userData.knots = new Array( mesh.userData.degree + 1).fill().map((_, index) => index + 1);
 
     if (controlsPoints) {
 
