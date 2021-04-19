@@ -341,14 +341,14 @@ function createNURBS(controlsPoints) {
     mesh.userData.resolution = 15
     mesh.userData.isError = true
     mesh.userData.allCalculatedPoints = []
-    mesh.userData.knots=[]
+    mesh.userData.knots = new Array(controlsPoints.length + mesh.userData.degree + 1).fill().map((_, index) => index + 1);
 
     if (controlsPoints) {
 
         try {
             let allPositionControlsPoints = controlsPoints.map(a => a.position);
 
-            mesh.userData.knots = new Array(controlsPoints.length + mesh.userData.degree + 1).fill().map((_, index) => index + 1);
+
             let res = bSpline(mesh.userData.degree, allPositionControlsPoints, mesh.userData.resolution, mesh.userData.knots, controlsPoints.map(a => a.userData.weight))
 
             mesh.userData.allCalculatedPoints = res
@@ -408,7 +408,7 @@ function createBSpline(controlsPoints) {
     mesh.userData.controlsPoints = []
     mesh.userData.childrenID = []
     mesh.userData.degree = 2
-    mesh.userData.resolution = 15
+    mesh.userData.resolution = 16
     mesh.userData.isError = true
     mesh.userData.allCalculatedPoints = []
 
@@ -437,6 +437,10 @@ function createBSpline(controlsPoints) {
         let allControlsPoints = mesh.userData.controlsPoints.map(a => a.position);
         try {
             let res = bSpline(mesh.userData.degree, allControlsPoints, mesh.userData.resolution, null, mesh.userData.controlsPoints.map(a => a.userData.weight))
+
+            console.log(mesh.userData.degree)
+            console.log(mesh.userData.resolution)
+
             mesh.userData.allCalculatedPoints = res
             bSplineParam.setPoints(res)
             mesh.userData.isError = false

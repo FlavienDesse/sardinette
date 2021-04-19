@@ -51,9 +51,11 @@ export default function Main() {
 
 
     useEffect(() => {
+        const firstPoint = createPoint({x: 0, y: 2, z: 2});
+        const secondPoint = createPoint({x: 0, y: 0, z: 2});
+        const thirdPoint = createPoint({x: 0, y: 0, z: 0});
 
-
-       const xAxis = createAxis('x')
+       /*const xAxis = createAxis('x')
         const yAxis = createAxis('y')
         const zAxis = createAxis('z')
 
@@ -122,7 +124,7 @@ export default function Main() {
             nineteen,twenty,twentyOne,
             secondCSpline,thirdCSpline,fourthCSpline,
             cLoft
-        ])
+        ])*/
 
     /*    const top1 = createPoint({x: 0, y: 2, z: 2});
         const top2 = createPoint({x: 2, y: 2, z: 0})
@@ -130,6 +132,9 @@ export default function Main() {
 
         const firstCurve = createCSpline([top1,top2,top3])*/
 
+        setAllObject([
+            firstPoint,secondPoint,thirdPoint
+        ])
 
 
 

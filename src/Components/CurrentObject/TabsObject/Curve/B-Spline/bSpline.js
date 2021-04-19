@@ -178,7 +178,7 @@ export default function BSpline(props) {
     const handleDisFocusOnTextFieldControlsPoints = (e) => {
 
         props.setCurrentTextFieldSelected(null)
-        setControlsPoints(props.currentObject.controlsPoints)
+        setControlsPoints(props.currentObject.userData.controlsPoints)
     }
 
     const addControlsPoints = (points) => {
