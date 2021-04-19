@@ -26,7 +26,7 @@ export default function Menu(props) {
             inlineIndent={100}>
             <OpenFile  scene={props.scene} setAllObject={props.setAllObject}/>
             <OpenInsert setAllObject={props.setAllObject}/>
-            <OpenExamples/>
+            <OpenExamples  scene={props.scene} setAllObject={props.setAllObject}/>
         </MenuRC>
     )
 }

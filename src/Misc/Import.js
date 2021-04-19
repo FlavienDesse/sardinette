@@ -1,8 +1,26 @@
 import {STLLoader} from "three/examples/jsm/loaders/STLLoader";
 import {DoubleSide, Group, Mesh, MeshBasicMaterial} from "three";
 import {GLTFLoader} from "three/examples/jsm/loaders/GLTFLoader";
+import {createSTL} from "./Utils";
 
-const importSTL = (event, scene, setAllObject) => {
+const importSTLFromFile = (file,scene,setAllObject)=>{
+    const loader = new STLLoader()
+
+    loader.load(file,function (geometry) {
+        const mesh = createSTL(geometry)
+        const group = new Group()
+        group.add(mesh)
+
+
+        scene.current.add(group);
+
+        setAllObject([mesh])
+    },)
+
+}
+
+
+const importSTLFromEvent = (event, scene, setAllObject) => {
 
     const loader = new STLLoader();
     const group = new Group()
@@ -14,18 +32,8 @@ const importSTL = (event, scene, setAllObject) => {
     reader.onload = function (e) {
 
         scene.current.remove(scene.current.children[1]);
-
         let geometry = loader.parse(e.target.result);
-        const material = new MeshBasicMaterial({
-            color: 0x999999,
-            opacity: 0.5,
-            transparent: true,
-            side: DoubleSide
-        });
-        const mesh = new Mesh(geometry, material);
-
-        mesh.userData.type = "Import STL"
-        mesh.userData.name = "ImportSTL"
+        const mesh = createSTL(geometry)
 
         group.add(mesh)
 
@@ -67,5 +75,5 @@ const importScene = (event, setAllObject) => {
 };
 
 export {
-    importSTL, importScene
+    importSTLFromEvent, importScene,importSTLFromFile
 }

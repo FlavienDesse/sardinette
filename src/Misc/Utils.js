@@ -1,5 +1,5 @@
 import * as THREE from "three";
-import {BufferGeometry, Mesh, MeshBasicMaterial, SphereGeometry} from "three";
+import {BufferGeometry, DoubleSide, Mesh, MeshBasicMaterial, SphereGeometry} from "three";
 import Constant from "./Constant";
 import {bezierCurve, bSpline, loftSurface, catmullRomSpline, getSurface, mirrorCurve, mirrorPoint} from "./Math";
 import {MeshLine, MeshLineMaterial, MeshLineRaycast} from 'three.meshline';
@@ -821,6 +821,23 @@ function createSurface(firstCurve, secondCurve) {
 
 }
 
+
+function createSTL(geometry){
+
+    const material = new MeshBasicMaterial({
+        color: Constant.DEFAULT_COLOR_SURFACE,
+        opacity: 0.5,
+        transparent: true,
+        side: THREE.DoubleSide
+    });
+    const mesh = new Mesh(geometry, material);
+
+    mesh.userData.type = "Import STL"
+    mesh.userData.name = "ImportSTL"
+
+    return mesh;
+}
+
 function createLoftSurface(curves) {
 
 
@@ -973,7 +990,6 @@ function createLoftSurface(curves) {
 
 }
 
-
 function modifyObjectWhenClickOn(object, currentObject) {
 
 
@@ -1111,6 +1127,7 @@ export {
     updateObjectByAddingChildrenID,
     createNURBS,
     createBezier,
-    createLoftSurface
+    createLoftSurface,
+    createSTL,
 }
 

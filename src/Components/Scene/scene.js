@@ -78,7 +78,10 @@ export default function Scene(props) {
 
 
         props.scene.current= new THREE.Scene()
-
+        const color = 0xFFFFFF;  // white
+        const near = 10;
+        const far = 100;
+        props.scene.current.fog = new THREE.Fog(color, near, far);
 
         const grid = new InfiniteGridHelper(10, 1)
 

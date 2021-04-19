@@ -3,7 +3,7 @@ import {MenuItem, SubMenu} from "rc-menu"
 import {exportSTL,exportScene} from "../../../Misc/Export";
 import PropTypes from "prop-types";
 
-import {importSTL,importScene} from "../../../Misc/Import";
+import {importSTLFromEvent,importScene} from "../../../Misc/Import";
 import {useSnackbar} from "notistack";
 
 OpenFile.propType = {
@@ -33,7 +33,7 @@ export default function OpenFile(props) {
 
 
     const handleChangeSTL = (event) => {
-        importSTL (event,props.scene,props.setAllObject)
+        importSTLFromEvent (event,props.scene,props.setAllObject)
     };
 
 

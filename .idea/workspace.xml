@@ -11,20 +11,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="78afd4d1-1ed3-4b4d-a584-1aa195b3fadc" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/STL/sardinette.stl" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/CurrentObject/TabsObject/Curve/C-Spline/cSpline.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/CurrentObject/TabsObject/Curve/CatmullRomSpline/catmullRomSpline.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/CurrentObject/TabsObject/Curve/C-Spline/style.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/CurrentObject/TabsObject/Curve/CatmullRomSpline/style.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/CurrentObject/TabsObject/Surfaces/CLoftSurface/cLoftSurface.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/CurrentObject/TabsObject/Surfaces/LoftSurface/loftSurface.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/CurrentObject/TabsObject/Surfaces/CLoftSurface/style.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/CurrentObject/TabsObject/Surfaces/LoftSurface/style.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/CurrentObject/TabsObject/tabsObject.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/CurrentObject/TabsObject/tabsObject.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Main/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Main/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Menu/OpenExamples/openExamples.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Menu/OpenExamples/openExamples.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Components/Menu/OpenFile/openFile.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Menu/OpenFile/openFile.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Menu/OpenInsert/openInsert.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Menu/OpenInsert/openInsert.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Misc/Constant.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Misc/Constant.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Misc/Export.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Misc/Export.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Menu/menu.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Menu/menu.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Scene/scene.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Scene/scene.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Misc/Import.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Misc/Import.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Misc/Math.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Misc/Math.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Misc/Utils.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Misc/Utils.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -51,12 +44,12 @@
               <option name="branches">
                 <list>
                   <RecentBranch>
-                    <option name="branchName" value="Interface" />
-                    <option name="lastUsedInstant" value="1617699048" />
+                    <option name="branchName" value="main" />
+                    <option name="lastUsedInstant" value="1618699170" />
                   </RecentBranch>
                   <RecentBranch>
-                    <option name="branchName" value="main" />
-                    <option name="lastUsedInstant" value="1616883244" />
+                    <option name="branchName" value="Interface" />
+                    <option name="lastUsedInstant" value="1617699048" />
                   </RecentBranch>
                   <RecentBranch>
                     <option name="branchName" value="TransformControls" />
@@ -105,6 +98,13 @@
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\flav6\Desktop\sardinette\sardinette-front\src\STL" />
+      <recent name="C:\Users\flav6\Desktop\sardinette\src\Misc" />
+      <recent name="C:\Users\flav6\Desktop\sardinette\sardinette-front\src\Class" />
+      <recent name="C:\Users\flav6\Desktop\sardinette\sardinette-front\src\Components\CurrentObject\TabsObject\Point\Point" />
+      <recent name="C:\Users\flav6\Desktop\sardinette\src\Images\Icons" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\flav6\Desktop\sardinette\src\Components\CurrentObject\TabsObject\Curve\Bezier" />
       <recent name="C:\Users\flav6\Desktop\sardinette\src\Components\CurrentObject\TabsObject\Curve\NURBS" />
@@ -112,24 +112,15 @@
       <recent name="C:\Users\flav6\Desktop\sardinette\src\Components\CurrentObject\TabsObject\Curve\Mirrored Curve" />
       <recent name="C:\Users\flav6\Desktop\sardinette\src\Components\CurrentObject\TabsObject\Point\MirroredPoint" />
     </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\flav6\Desktop\sardinette\src\Misc" />
-      <recent name="C:\Users\flav6\Desktop\sardinette\sardinette-front\src\Class" />
-      <recent name="C:\Users\flav6\Desktop\sardinette\sardinette-front\src\Components\CurrentObject\TabsObject\Point\Point" />
-      <recent name="C:\Users\flav6\Desktop\sardinette\src\Images\Icons" />
-      <recent name="C:\Users\flav6\Desktop\sardinette\src\Components" />
-    </key>
   </component>
   <component name="RunManager">
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -204,7 +195,8 @@
       <workItem from="1618500749866" duration="16549000" />
       <workItem from="1618555718698" duration="886000" />
       <workItem from="1618556846907" duration="4320000" />
-      <workItem from="1618694654263" duration="4246000" />
+      <workItem from="1618694654263" duration="4846000" />
+      <workItem from="1618763629719" duration="2092000" />
     </task>
     <servers />
   </component>
