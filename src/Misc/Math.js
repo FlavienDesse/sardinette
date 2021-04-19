@@ -497,6 +497,7 @@ function loftSurface(curves, minResolution) {
         }
         if(doublon) {
             closed = true
+            loftCurves.length--
         }
     }
 
