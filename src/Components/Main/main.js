@@ -51,6 +51,10 @@ export default function Main() {
 
 
     useEffect(() => {
+
+
+
+
         const firstPoint = createPoint({x: 0, y: 2, z: 2});
         const secondPoint = createPoint({x: 0, y: 0, z: 2});
         const thirdPoint = createPoint({x: 0, y: 0, z: 0});

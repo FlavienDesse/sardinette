@@ -348,7 +348,7 @@ function createNURBS(controlsPoints) {
         try {
             let allPositionControlsPoints = controlsPoints.map(a => a.position);
 
-
+            mesh.userData.knots = new Array( allPositionControlsPoints.length+mesh.userData.degree + 1).fill().map((_, index) => index + 1);
             let res = bSpline(mesh.userData.degree, allPositionControlsPoints, mesh.userData.resolution, mesh.userData.knots, controlsPoints.map(a => a.userData.weight))
 
             mesh.userData.allCalculatedPoints = res

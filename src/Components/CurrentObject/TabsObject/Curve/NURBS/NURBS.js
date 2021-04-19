@@ -39,6 +39,54 @@ export default function NURBS(props) {
     const [controlsPoints, setControlsPoints] = React.useState(props.currentObject.userData.controlsPoints);
 
 
+
+
+
+    const shrinkKnotsVector= ()=>{
+        
+
+        let newKnotsVector = [...knots]
+
+        newKnotsVector.length = controlsPoints.length + degree + 1
+        let lastValue = props.currentObject;
+        let newValue = props.currentObject
+
+
+
+        props.updateAllObjectWhenCurrentObjectChange(lastValue, newValue, true)
+        props.setCurrentObject(newValue)
+
+
+        for(let i = 0 ; i < newKnotsVector.length ;i++){
+            if(newKnotsVector[i] === undefined){
+                newKnotsVector[i] = newKnotsVector[i-1]+1
+            }
+        }
+
+        setKnots(newKnotsVector)
+
+
+       newValue.userData.knots = [...newKnotsVector]
+
+        try {
+            newValue.userData.update()
+
+        } catch (e) {
+
+            enqueueSnackbar(e.message, {
+                variant: 'error',
+            });
+        }
+        props.updateAllObjectWhenCurrentObjectChange(lastValue, newValue, true)
+        props.setCurrentObject(newValue)
+
+        return null
+
+    }
+
+
+
+
     React.useEffect((() => {
         setResolution(props.currentObject.userData.resolution)
         setIsVisible(props.currentObject.visible)
@@ -108,9 +156,7 @@ export default function NURBS(props) {
         }
     }
 
-    const shrinkKnotsVector= ()=>{
-        knots.length = controlsPoints.length + degree + 1
-    }
+
 
     const keyPressTextFieldDegree = (e) => {
         if (e.keyCode === 13) {
@@ -118,15 +164,15 @@ export default function NURBS(props) {
             let newValue = props.currentObject
             newValue.userData.degree = degree
             shrinkKnotsVector ()
+
             try {
                 newValue.userData.update()
-
+                updateObjectByAddingChildrenID(controlsPoints, props.currentObject.id, props.allObject, props.setAllObject)
 
             } catch (e) {
                 enqueueSnackbar(e.message, {
                     variant: 'error',
                 });
-
             }
             props.updateAllObjectWhenCurrentObjectChange(lastValue, newValue, true)
             props.setCurrentObject(newValue)
@@ -138,6 +184,8 @@ export default function NURBS(props) {
             let lastValue = props.currentObject;
             let newValue = props.currentObject
             newValue.userData.controlsPoints = controlsPoints
+            shrinkKnotsVector()
+
 
             try {
                 newValue.userData.update()
@@ -192,20 +240,28 @@ export default function NURBS(props) {
     }
 
     const addControlsPoints = (points) => {
-        setControlsPoints((prevState) => {
+
+
+
+        setControlsPoints((prevState => {
             prevState.push(points)
 
             return [...prevState]
-        })
+        }))
+
 
     }
 
     const setOneControlsPoints = (points) => {
-        setControlsPoints((prevState) => {
-            prevState = []
+
+
+
+
+        setControlsPoints((prevState => {
             prevState.push(points)
+
             return [...prevState]
-        })
+        }))
     }
 
     const handleChangeTextFieldKnots = (e, index) => {
@@ -223,7 +279,6 @@ export default function NURBS(props) {
         } else {
 
             setKnots((prevState => {
-
                 prevState[index] = val[0]
                 return ([...prevState])
             }))
@@ -247,10 +302,7 @@ export default function NURBS(props) {
         }
         if (isValidKnots) {
 
-
-
             try {
-
                 newValue.userData.update()
 
             } catch (e) {
