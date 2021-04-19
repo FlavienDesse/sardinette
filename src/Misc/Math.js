@@ -284,8 +284,6 @@ function catmullRomSpline(controlPoints, resolution, closed, isResolutionRelativ
     let formattedControlPoints = toVector3(controlPoints)
 
 
-
-
     if(isResolutionRelativeToLength === undefined) isResolutionRelativeToLength = true
 
     let points = []
@@ -304,7 +302,7 @@ function catmullRomSpline(controlPoints, resolution, closed, isResolutionRelativ
     do {
         // With each loop, pNum will change according to the computed length
         // as the number of points will always be resolution * length
-        pNum = Math.floor(resolution * length)
+        pNum = Math.ceil(resolution * length)
         points = []
 
         // Compute a homogeneous array of points representing the spline
@@ -462,6 +460,7 @@ function loftSurface(curves, minResolution) {
         if(elt.length > maxLength) maxLength = elt.length
     })
 
+
     // Find the control points for the curves making the surface up
     for(let i = 0; i < curves.length; i++) {
         let curve = curves[i]
@@ -485,13 +484,34 @@ function loftSurface(curves, minResolution) {
         }
     }
 
-
+    let closed = false;
+    if(loftCurves[0].length === loftCurves[loftCurves.length - 1].length) {
+        let first = loftCurves[0]
+        let last = loftCurves[loftCurves.length - 1]
+        let doublon = true
+        for(let i = 0; i < first.length; i++) {
+            if(first[i].x !== last[i].x || first[i].y === last[i].y || first[i].z === last[i].z) {
+                doublon = false
+                break
+            }
+        }
+        if(doublon) {
+            closed = true
+        }
+    }
 
     let fullLoftCurves = []
-
     // Build the curves with the control points that were just computed
     loftCurves.forEach(elt => {
-        fullLoftCurves.push(fromVector1(catmullRomSpline(elt, minResolution)))
+        let last = elt[0]
+        let i = 1
+        while(i < elt.length) {
+            let current = elt[i]
+            if(last.x === current.x && last.y === current.y && last.z === current.z) return
+            last = current
+            i++
+        }
+        fullLoftCurves.push(fromVector1(catmullRomSpline(elt, minResolution, closed)))
     })
 
     // Build the surfaces between each curve
