@@ -1,5 +1,4 @@
 import {STLLoader} from "three/examples/jsm/loaders/STLLoader";
-import {Group} from "three";
 import {GLTFLoader} from "three/examples/jsm/loaders/GLTFLoader";
 import {createSTL} from "./Utils";
 
@@ -20,7 +19,7 @@ const importSTLFromFile = (file, scene, setAllObject) => {
 const importSTLFromEvent = (event, scene, setAllObject) => {
 
     const loader = new STLLoader();
-    const group = new Group()
+
 
 
     var reader = new FileReader();
