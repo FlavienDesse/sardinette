@@ -254,9 +254,10 @@ export default function Main() {
 
         setAllObject([
             firstPoint,secondPoint,thirdPoint,firstCatmullRom,firstMirrorCurve,firstSurface,fourthPoint,secondCatmullRom,secondMirrorCurve,
-            secondSurface,thirdSurface,
+            secondSurface,thirdSurface,fifthPoint,sixthPoint,
             seventhPoint,eigthPoint,thirdCatmullRom,fourthCatmullRom,fourthSurface,
-            fifthCatmullRom,sixthCatmullRom,fifthSurface
+            fifthCatmullRom,sixthCatmullRom,fifthSurface,
+            ninthPoint,tenPoint
         ])
 
 

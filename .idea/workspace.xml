@@ -13,7 +13,6 @@
     <list default="true" id="78afd4d1-1ed3-4b4d-a584-1aa195b3fadc" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Components/Main/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Main/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Misc/Utils.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Misc/Utils.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -89,19 +88,19 @@
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\flav6\Desktop\sardinette\sardinette-front\src\STL" />
-      <recent name="C:\Users\flav6\Desktop\sardinette\src\Misc" />
-      <recent name="C:\Users\flav6\Desktop\sardinette\sardinette-front\src\Class" />
-      <recent name="C:\Users\flav6\Desktop\sardinette\sardinette-front\src\Components\CurrentObject\TabsObject\Point\Point" />
-      <recent name="C:\Users\flav6\Desktop\sardinette\src\Images\Icons" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\flav6\Desktop\sardinette\src\Components\CurrentObject\TabsObject\Curve\Bezier" />
       <recent name="C:\Users\flav6\Desktop\sardinette\src\Components\CurrentObject\TabsObject\Curve\NURBS" />
       <recent name="C:\Users\flav6\Desktop\sardinette\src\Components\AxisView" />
       <recent name="C:\Users\flav6\Desktop\sardinette\src\Components\CurrentObject\TabsObject\Curve\Mirrored Curve" />
       <recent name="C:\Users\flav6\Desktop\sardinette\src\Components\CurrentObject\TabsObject\Point\MirroredPoint" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\flav6\Desktop\sardinette\src\STL" />
+      <recent name="C:\Users\flav6\Desktop\sardinette\sardinette-front\src\STL" />
+      <recent name="C:\Users\flav6\Desktop\sardinette\src\Misc" />
+      <recent name="C:\Users\flav6\Desktop\sardinette\sardinette-front\src\Class" />
+      <recent name="C:\Users\flav6\Desktop\sardinette\sardinette-front\src\Components\CurrentObject\TabsObject\Point\Point" />
     </key>
   </component>
   <component name="RunManager">
