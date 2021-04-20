@@ -456,7 +456,23 @@ function loftSurface(curves, minResolution) {
     curves.forEach(elt => {
         if (elt.length > maxLength) maxLength = elt.length
     })
-
+    
+    let closed = false
+    if(curves[0].length === curves[curves.length - 1].length) {
+        let first = curves[0]
+        let last = curves[curves.length - 1]
+        let doublon = true
+        for(let i = 0; i < first.length; i++) {
+            if(first[i].x !== last[i].x || first[i].y === last[i].y || first[i].z === last[i].z) {
+                doublon = false
+                break
+            }
+        }
+        if(doublon) {
+            closed = true
+            curves.length--
+        }
+    }
 
     // Find the control points for the curves making the surface up
     for (let i = 0; i < curves.length; i++) {
@@ -477,23 +493,6 @@ function loftSurface(curves, minResolution) {
                 loftCurves[idx].push(curve[Math.round(val < 0 ? 0 : val)])
                 idx++
             }
-        }
-    }
-
-    let closed = false;
-    if (loftCurves[0].length === loftCurves[loftCurves.length - 1].length) {
-        let first = loftCurves[0]
-        let last = loftCurves[loftCurves.length - 1]
-        let doublon = true
-        for (let i = 0; i < first.length; i++) {
-            if (first[i].x !== last[i].x || first[i].y === last[i].y || first[i].z === last[i].z) {
-                doublon = false
-                break
-            }
-        }
-        if (doublon) {
-            closed = true
-            loftCurves.length--
         }
     }
 
