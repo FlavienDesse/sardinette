@@ -14,7 +14,8 @@ ArrayRenderObject.propTypes = {
     currentObject: PropTypes.any,
     currentTextFieldSelected: PropTypes.object,
     object: PropTypes.object.isRequired,
-    setCurrentObject: PropTypes.func.isRequired
+    setCurrentObject: PropTypes.func.isRequired,
+    updateAllObjectWhenCurrentObjectChange: PropTypes.func.isRequired
 }
 /*
      Component for render array of all object
@@ -22,6 +23,15 @@ ArrayRenderObject.propTypes = {
 export default function ArrayRenderObject(props) {
     const classes = useStyles();
 
+
+    const handleChangeVisibility = (event) => {
+
+        let lastValue = props.object;
+        props.object.visible = !props.object.visible
+        props.updateAllObjectWhenCurrentObjectChange(lastValue, props.object, false)
+        props.setCurrentObject(props.object)
+
+    }
 
     let handleOnClickTableRow = (event) => {
         event.preventDefault();
@@ -58,7 +68,8 @@ export default function ArrayRenderObject(props) {
             </TableCell>
             <TableCell>
                 {
-                    props.object.visible ? <VisibilityIcon/> : <VisibilityOffIcon/>
+                    props.object.visible ? <VisibilityIcon onMouseDown={handleChangeVisibility}/> :
+                        <VisibilityOffIcon onMouseDown={handleChangeVisibility}/>
                 }
             </TableCell>
             <TableCell>

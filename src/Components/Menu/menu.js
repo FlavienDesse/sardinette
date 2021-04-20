@@ -10,11 +10,12 @@ import 'rc-menu/assets/index.css';
 Menu.propType = {
     scene: PropTypes.any.isRequired,
     setAllObject: PropTypes.func.isRequired,
-
+    setCurrentObject:PropTypes.func.isRequired,
 }
 
 export default function Menu(props) {
     const classes = useStyles();
+
 
 
     return (
@@ -24,7 +25,7 @@ export default function Menu(props) {
             mode={"horizontal"}
             selectable={false}
             inlineIndent={100}>
-            <OpenFile scene={props.scene} setAllObject={props.setAllObject}/>
+            <OpenFile setCurrentObject={props.setCurrentObject} scene={props.scene} setAllObject={props.setAllObject}/>
             <OpenInsert setAllObject={props.setAllObject}/>
             <OpenExamples scene={props.scene} setAllObject={props.setAllObject}/>
         </MenuRC>

@@ -11,6 +11,7 @@ const exportSTL = (scene) => {
 
     let children = []
 
+    console.log(scene.children[1])
 
     scene.children[1].children.forEach((object) => {
         if (Constant.CONSTANT_ALL_SURFACES.includes(object.userData.type)) {

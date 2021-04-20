@@ -25,7 +25,7 @@ AllObjectAndGlobalSettings.propTypes = {
     setCurrentObject: PropTypes.func.isRequired,
     currentObject: PropTypes.any,
     currentTextFieldSelected: PropTypes.object,
-
+    updateAllObjectWhenCurrentObjectChange:PropTypes.func.isRequired,
 }
 
 /*
@@ -90,6 +90,7 @@ export default function AllObjectAndGlobalSettings(props) {
                                 <ArrayRenderObject key={index}
                                                    currentTextFieldSelected={props.currentTextFieldSelected}
                                                    currentObject={props.currentObject}
+                                                   updateAllObjectWhenCurrentObjectChange={props.updateAllObjectWhenCurrentObjectChange}
                                                    setCurrentObject={props.setCurrentObject} object={object}/>
                             )
                         }

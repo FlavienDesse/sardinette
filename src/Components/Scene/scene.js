@@ -130,7 +130,8 @@ export default function Scene(props) {
 
     React.useEffect(() => {
 
-        if (props.currentObject === null) {
+        if (props.currentObject === null || !props.currentObject.visible) {
+
             props.control.current.detach(props.currentObject);
         }
 

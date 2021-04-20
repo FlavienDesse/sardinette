@@ -225,7 +225,7 @@ export default function Main() {
 
     return (
         <div className={classes.container}>
-            <Menu scene={scene} setAllObject={setAllObject}>
+            <Menu scene={scene} setAllObject={setAllObject} setCurrentObject={setCurrentObject}>
 
             </Menu>
 
@@ -259,6 +259,7 @@ export default function Main() {
                 <div className={classes.containerToolsObject}>
                     <AllObjectAndGlobalSettings currentTextFieldSelected={currentTextFieldSelected}
                                                 currentObject={currentObject} setCurrentObject={setCurrentObject}
+                                                updateAllObjectWhenCurrentObjectChange={updateAllObjectWhenCurrentObjectChange}
                                                 setAllObject={setAllObject} allObject={allObject}
                                                 setBackground={setBackground}/>
                     {

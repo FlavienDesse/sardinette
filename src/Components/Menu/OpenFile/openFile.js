@@ -9,6 +9,7 @@ import {useSnackbar} from "notistack";
 OpenFile.propType = {
     scene: PropTypes.any.isRequired,
     setAllObject: PropTypes.func.isRequired,
+    setCurrentObject:PropTypes.func.isRequired,
 }
 
 export default function OpenFile(props) {
@@ -17,6 +18,10 @@ export default function OpenFile(props) {
 
     const {enqueueSnackbar} = useSnackbar();
 
+    const newScene = ()=>{
+        props.setAllObject([])
+        props.setCurrentObject(null)
+    }
 
     const handleClickOnSTL = () => {
         try {
@@ -53,6 +58,11 @@ export default function OpenFile(props) {
                     onChange={handleChangeSTL}
                     style={{display: 'none'}}
                 />
+            </MenuItem>
+
+            <MenuItem onClick={newScene}>
+                New
+
             </MenuItem>
 
 

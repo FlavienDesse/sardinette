@@ -8,11 +8,8 @@ const importSTLFromFile = (file, scene, setAllObject) => {
 
     loader.load(file, function (geometry) {
         const mesh = createSTL(geometry)
-        const group = new Group()
-        group.add(mesh)
 
 
-        scene.current.add(group);
 
         setAllObject([mesh])
     },)
@@ -35,10 +32,6 @@ const importSTLFromEvent = (event, scene, setAllObject) => {
         let geometry = loader.parse(e.target.result);
         const mesh = createSTL(geometry)
 
-        group.add(mesh)
-
-
-        scene.current.add(group);
 
         setAllObject([mesh])
 
