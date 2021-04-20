@@ -278,7 +278,7 @@ function createMirroredPoint(initialPoint, axis) {
     return point
 }
 
-function createPoint(position) {
+function createPoint(userData) {
 
 
     const geometry = new SphereGeometry(Constant.DEFAULT_SIZE_POINT, 32, 32);
@@ -286,9 +286,6 @@ function createPoint(position) {
     const point = new Mesh(geometry, material);
 
 
-    if (position) {
-        point.position.set(position.x, position.y, position.z)
-    }
 
 
     point.userData.type = "Point"
@@ -299,6 +296,11 @@ function createPoint(position) {
     point.userData.weight = 1
     point.userData.childrenID = []
 
+    if (userData) {
+        point.position.set(userData.position.x, userData.position.y, userData.position.z)
+        point.userData.weight = userData.weight
+    }
+
 
     point.userData.update = () => {
 
@@ -308,7 +310,7 @@ function createPoint(position) {
     return point
 }
 
-function createNURBS(controlsPoints) {
+function createNURBS(userData) {
 
 
     const geometry = new BufferGeometry().setFromPoints([]);
@@ -337,22 +339,22 @@ function createNURBS(controlsPoints) {
     mesh.userData.allCalculatedPoints = []
     mesh.userData.knots = new Array(mesh.userData.degree + 1).fill().map((_, index) => index + 1);
 
-    if (controlsPoints) {
+    if (userData) {
 
         try {
-            let allPositionControlsPoints = controlsPoints.map(a => a.position);
-
-            mesh.userData.knots = new Array(allPositionControlsPoints.length + mesh.userData.degree + 1).fill().map((_, index) => index + 1);
-            let res = bSpline(mesh.userData.degree, allPositionControlsPoints, mesh.userData.resolution, mesh.userData.knots, controlsPoints.map(a => a.userData.weight))
+            let allPositionControlsPoints = userData.controlsPoints.map(a => a.position);
+            mesh.userData.knots = userData.knots
+            mesh.userData.degree = userData.degree
+            let res = bSpline(mesh.userData.degree, allPositionControlsPoints, mesh.userData.resolution, mesh.userData.knots, userData.controlsPoints.map(a => a.userData.weight))
 
             mesh.userData.allCalculatedPoints = res
             line.setPoints(res)
 
             mesh.userData.isError = false
-            mesh.userData.controlsPoints = controlsPoints
+            mesh.userData.controlsPoints = userData.controlsPoints
 
 
-            controlsPoints.forEach((controls) => {
+            userData.controlsPoints.forEach((controls) => {
                 controls.userData.childrenID.push(mesh.id)
             })
 

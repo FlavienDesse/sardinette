@@ -6,11 +6,29 @@ import Scene from "../Scene/scene";
 import AllObjectAndGlobalSettings from "../AllObjectAndGlobalSettings/allObjectAndGlobalSettings";
 import CurrentObject from "../CurrentObject/currentObject";
 import Background from "../../Misc/Background";
-import {createPoint, modifyObjectWhenClickOn, updateChildren} from "../../Misc/Utils";
+import {
+    createAxis, createCatmullRomSpline, createLoftSurface,
+    createMirroredCurve, createMirroredPoint,
+    createNURBS,
+    createPoint, createSurface,
+    modifyObjectWhenClickOn,
+    updateChildren
+} from "../../Misc/Utils";
 import Modal from "@material-ui/core/Modal";
 import {Button, Typography} from "@material-ui/core";
 import AxisView from "../AxisView/axisView";
-import {createAxis,createCatmullRomSpline,createNURBS,createBSpline,createBezier,createMirroredCurve,createSurface,createLoftSurface} from "../../Misc/Utils";
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 export default function Main() {
@@ -36,88 +54,220 @@ export default function Main() {
     const raycaster = useRef();
 
 
+
+
+    const createPipe= ()=>{
+        const yAxis = createAxis('y')
+
+        const firstPointsFirstCircle = createPoint({
+            position: {x: 1, y: 1, z: 0},
+            weight: 1,
+        });
+        const secondPointFirstCircle = createPoint({
+            position: {x: 0, y: 1, z: 0},
+            weight: 1 / 2,
+        });
+        const thirdPointFirstCircle = createPoint({
+            position: {x: 1 / 2, y: 1.86, z: 0},
+            weight: 1,
+        });
+
+        const fourthPointsFirstCircle = createPoint({
+            position: {x: 1, y: 2.73, z: 0},
+            weight: 1 / 2,
+        });
+        const fifthPointFirstCircle = createPoint({
+            position: {x: 3 / 2, y: 1.86, z: 0},
+            weight: 1,
+        });
+        const sixthPointFirstCircle = createPoint({
+            position: {x: 2, y: 1, z: 0}, weight: 1 / 2,
+        });
+        const seventhPointsFirstCircle = createPoint({
+            position: {x: 1, y: 1, z: 0}, weight: 1,
+        });
+
+        const firstCircle = createNURBS({
+            controlsPoints: [firstPointsFirstCircle, secondPointFirstCircle, thirdPointFirstCircle, fourthPointsFirstCircle, fifthPointFirstCircle, sixthPointFirstCircle, seventhPointsFirstCircle],
+            knots : [0,0,0,1/3,1/3,2/3,2/3,1,1,1],
+            degree:2
+        })
+
+
+
+
+        const firstPointsSecondCircle = createPoint({
+            position: {x: 1, y: 1, z: 2},
+            weight: 1,
+        });
+        const secondPointSecondCircle= createPoint({
+            position: {x: 0, y: 1, z: 2},
+            weight: 1 / 2,
+        });
+        const thirdPointSecondCircle = createPoint({
+            position: {x: 1 / 2, y: 1.86, z: 2.5},
+            weight: 1,
+        });
+
+        const fourthPointsSecondCircle = createPoint({
+            position: {x: 1, y: 2.73, z: 3},
+            weight: 1 / 2,
+        });
+        const fifthPointSecondCircle = createPoint({
+            position: {x: 3 / 2, y: 1.86, z: 2.5},
+            weight: 1,
+        });
+        const sixthPointSecondCircle = createPoint({
+            position: {x: 2, y: 1, z: 2}, weight: 1 / 2,
+        });
+        const seventhPointsSecondCircle = createPoint({
+            position: {x: 1, y: 1, z: 2}, weight: 1,
+        });
+
+        const secondCircle = createNURBS({
+            controlsPoints: [firstPointsSecondCircle, secondPointSecondCircle, thirdPointSecondCircle, fourthPointsSecondCircle, fifthPointSecondCircle, sixthPointSecondCircle, seventhPointsSecondCircle],
+            knots : [0,0,0,1/3,1/3,2/3,2/3,1,1,1],
+            degree:2
+        })
+
+
+
+
+
+        const firstPointsThirdCircle = createPoint({
+            position: {x: 1, y: 0, z: 3},
+            weight: 1,
+        });
+        const secondPointThirdCircle= createPoint({
+            position: {x: 0, y: 0, z: 3},
+            weight: 1 / 2,
+        });
+        const thirdPointThirdCircle = createPoint({
+            position: {x: 1 / 2, y: 0, z:4.36},
+            weight: 1,
+        });
+
+        const fourthPointsThirdCircle = createPoint({
+            position: {x: 1, y: 0, z: 5.73},
+            weight: 1 / 2,
+        });
+        const fifthPointThirdCircle = createPoint({
+            position: {x: 3 / 2, y: 0, z:4.36},
+            weight: 1,
+        });
+        const sixthPointThirdCircle = createPoint({
+            position: {x: 2, y: 0, z: 3}, weight: 1 / 2,
+        });
+        const seventhPointsThirdCircle = createPoint({
+            position: {x: 1, y: 0, z: 3}, weight: 1,
+        });
+
+        const thirdCircle = createNURBS({
+            controlsPoints: [firstPointsThirdCircle, secondPointThirdCircle, thirdPointThirdCircle, fourthPointsThirdCircle, fifthPointThirdCircle, sixthPointThirdCircle, seventhPointsThirdCircle],
+            knots : [0,0,0,1/3,1/3,2/3,2/3,1,1,1],
+            degree:2
+        })
+
+
+        const mirroredCurveFirstCircle = createMirroredCurve(firstCircle,yAxis)
+        const mirroredCurveSecondCircle= createMirroredCurve(secondCircle,yAxis)
+
+
+        const loftSurface = createLoftSurface([firstCircle,secondCircle,thirdCircle,mirroredCurveSecondCircle,mirroredCurveFirstCircle])
+
+        setAllObject([
+            firstPointsFirstCircle, secondPointFirstCircle, thirdPointFirstCircle, fourthPointsFirstCircle, fifthPointFirstCircle, sixthPointFirstCircle, seventhPointsFirstCircle, firstCircle,
+            firstPointsSecondCircle, secondPointSecondCircle, thirdPointSecondCircle, fourthPointsSecondCircle, fifthPointSecondCircle, sixthPointSecondCircle, seventhPointsSecondCircle, secondCircle,
+            firstPointsThirdCircle, secondPointThirdCircle, thirdPointThirdCircle, fourthPointsThirdCircle, fifthPointThirdCircle, sixthPointThirdCircle, seventhPointsThirdCircle, thirdCircle,
+            mirroredCurveFirstCircle,mirroredCurveSecondCircle,
+            loftSurface
+        ])
+    }
+
+    const createSardinette = ()=>{
+
+
+        const xAxis = createAxis("x")
+
+
+        const firstPoint = createPoint({
+            position: {x: 3.77, y: 0, z: 0},
+            weight: 1,
+        });
+        const secondPoint = createPoint({
+            position: {x: 5.17, y: -0.82, z: 11.81},
+            weight: 1 / 2,
+        });
+        const thirdPoint = createPoint({
+            position: {x: 0.39, y: 0.73, z: 21.18},
+            weight: 1,
+        });
+
+
+        const firstCatmullRom = createCatmullRomSpline([firstPoint,secondPoint,thirdPoint])
+        const firstMirrorCurve = createMirroredCurve(firstCatmullRom,xAxis)
+        const firstSurface = createSurface(firstCatmullRom,firstMirrorCurve)
+
+
+        const fourthPoint = createPoint({
+            position: {x: 4.53, y: 3.26, z: -0.80},
+            weight: 1,
+        });
+        const fifthPoint = createPoint({
+            position: {x: 5.63, y: 3.05, z: 11.73},
+            weight: 1 / 2,
+        });
+        const sixthPoint = createPoint({
+            position: {x:1.14, y: 3.96, z: 22.38},
+            weight: 1,
+        });
+
+        const secondCatmullRom = createCatmullRomSpline([fourthPoint,fifthPoint,sixthPoint])
+        const secondMirrorCurve = createMirroredCurve(secondCatmullRom,xAxis)
+
+
+        const secondSurface = createSurface(firstCatmullRom,secondCatmullRom)
+        const thirdSurface = createSurface(firstMirrorCurve,secondMirrorCurve)
+
+
+
+
+        const seventhPoint = createMirroredPoint(firstPoint,xAxis)
+        const eigthPoint = createMirroredPoint(fourthPoint,xAxis)
+
+        const thirdCatmullRom = createCatmullRomSpline([firstPoint,seventhPoint])
+        const fourthCatmullRom = createCatmullRomSpline([fourthPoint,eigthPoint])
+
+        const fourthSurface = createSurface(thirdCatmullRom,fourthCatmullRom)
+
+
+
+
+        const ninthPoint = createMirroredPoint(thirdPoint,xAxis)
+        const tenPoint = createMirroredPoint(sixthPoint,xAxis)
+
+        const fifthCatmullRom = createCatmullRomSpline([thirdPoint,ninthPoint])
+        const sixthCatmullRom = createCatmullRomSpline([sixthPoint,tenPoint])
+
+        const fifthSurface = createSurface(fifthCatmullRom,sixthCatmullRom)
+
+
+        setAllObject([
+            firstPoint,secondPoint,thirdPoint,firstCatmullRom,firstMirrorCurve,firstSurface,fourthPoint,secondCatmullRom,secondMirrorCurve,
+            secondSurface,thirdSurface,
+            seventhPoint,eigthPoint,thirdCatmullRom,fourthCatmullRom,fourthSurface,
+            fifthCatmullRom,sixthCatmullRom,fifthSurface
+        ])
+
+
+
+    }
+
     useEffect(() => {
 
 
-
-            const xAxis = createAxis('x')
-         const yAxis = createAxis('y')
-         const zAxis = createAxis('z')
-
-         const firstPoint = createPoint({x: 0, y: 2, z: 2});
-         const secondPoint = createPoint({x: 0, y: 0, z: 2});
-         const thirdPoint = createPoint({x: 0, y: 0, z: 0});
-
-         const firstBSpline = createBSpline([firstPoint,secondPoint,thirdPoint]);
-
-         const fourthPoint = createPoint({x: 2, y: 2, z: 2});
-         const fifthPoint = createPoint({x: 2, y: 0, z: 2});
-         const sixthPoint = createPoint({x: 2, y: 0, z: 0});
-
-         const firstBezier = createBezier([fourthPoint,fifthPoint,sixthPoint]);
-
-         const seventhPoint = createPoint({x: 4, y: 2, z: 2});
-         const eigthPoint = createPoint({x: 4, y: 0, z: 2});
-         const ninthPoint = createPoint({x: 4, y: 0, z: 0});
-
-         const firstCSpline = createCatmullRomSpline([seventhPoint,eigthPoint,ninthPoint]);
-
-         const mirrorFirstBSpline = createMirroredCurve(firstBSpline,yAxis);
-         const mirrorFirstBezier= createMirroredCurve(firstBezier,yAxis);
-         const mirrorFirstCSpline= createMirroredCurve(firstCSpline,yAxis);
-
-
-         const tenPoint = createPoint({x: 6, y: 2, z: 2});
-         const elevenPoint = createPoint({x: 6, y: 0, z: 2});
-         const twelvePoint = createPoint({x: 6, y: 0, z: 0});
-
-         const createFirstNURBS= createNURBS([tenPoint,elevenPoint,twelvePoint]);
-
-         const firstSurface= createSurface(firstBezier,firstBSpline);
-
-
-         const thirteenPoint = createPoint({x: 0, y: 2, z: -4});
-         const fourteenPoint = createPoint({x: 0, y: 0, z: -4});
-         const fifteenPoint = createPoint({x: 0, y: 0, z: -2});
-
-         const sixteen = createPoint({x: 2, y: 2, z: -6});
-         const seventeen = createPoint({x: 2, y: 0, z: -6});
-         const eighteen = createPoint({x: 2, y: 0, z: -4});
-
-         const nineteen = createPoint({x: 4, y: 2, z: -4});
-         const twenty = createPoint({x: 4, y: 0, z: -4});
-         const twentyOne = createPoint({x: 4, y: 0, z: -2});
-
-
-         const secondCSpline = createCatmullRomSpline([thirteenPoint,fourteenPoint,fifteenPoint])
-         const thirdCSpline = createCatmullRomSpline([sixteen,seventeen,eighteen])
-         const fourthCSpline = createCatmullRomSpline([nineteen,twenty,twentyOne])
-
-
-         const cLoft = createLoftSurface([secondCSpline,thirdCSpline,fourthCSpline])
-
-
-         setAllObject([
-             firstPoint,secondPoint,thirdPoint,firstBSpline,
-             fourthPoint,fifthPoint,sixthPoint,firstBezier,
-             seventhPoint,eigthPoint,ninthPoint,firstCSpline,
-             mirrorFirstBSpline,mirrorFirstBezier,mirrorFirstCSpline,
-             tenPoint,elevenPoint,twelvePoint,createFirstNURBS,
-             firstSurface,
-             thirteenPoint,fourteenPoint,fifteenPoint,
-             sixteen,seventeen,eighteen,
-             nineteen,twenty,twentyOne,
-             secondCSpline,thirdCSpline,fourthCSpline,
-             cLoft
-         ])
-
-        /*    const top1 = createPoint({x: 0, y: 2, z: 2});
-            const top2 = createPoint({x: 2, y: 2, z: 0})
-            const top3 = createPoint({x: 2, y: 2, z: 2})
-
-            const firstCurve = createCSpline([top1,top2,top3])*/
-
-
+        //createPipe()
+        createSardinette()
 
 
     }, [])

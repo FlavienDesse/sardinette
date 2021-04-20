@@ -12,8 +12,7 @@
   <component name="ChangeListManager">
     <list default="true" id="78afd4d1-1ed3-4b4d-a584-1aa195b3fadc" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Menu/OpenFile/openFile.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Menu/OpenFile/openFile.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Misc/Import.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Misc/Import.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Main/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Main/main.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Misc/Utils.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Misc/Utils.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -56,7 +55,7 @@
       </RecentBranches>
     </option>
   </component>
-  <component name="JupyterTrust" id="a3c65dd0-ec4e-4226-a2ac-76b6eb968a1f" />
+  <component name="JupyterTrust" id="5a638de9-f33f-4d61-aadc-d54bcc0e7ad4" />
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
@@ -216,12 +215,12 @@
     </state>
     <state x="672" y="375" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1920.1040@0.0.1920.1040" timestamp="1616765960159" />
     <state x="896" y="505" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1617123735238" />
-    <state x="1060" y="455" key="FileChooserDialogImpl" timestamp="1618852113959">
-      <screen x="0" y="0" width="2560" height="1400" />
+    <state x="3620" y="455" key="FileChooserDialogImpl" timestamp="1618946934399">
+      <screen x="2560" y="0" width="2560" height="1400" />
     </state>
     <state x="795" y="338" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1616708358684" />
     <state x="1060" y="455" key="FileChooserDialogImpl/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1618852113959" />
-    <state x="3620" y="455" key="FileChooserDialogImpl/0.0.2560.1400/2560.0.2560.1400@2560.0.2560.1400" timestamp="1618556604615" />
+    <state x="3620" y="455" key="FileChooserDialogImpl/0.0.2560.1400/2560.0.2560.1400@2560.0.2560.1400" timestamp="1618946934399" />
     <state width="1877" height="52" key="GridCell.Tab.0.bottom" timestamp="1618943521663">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
