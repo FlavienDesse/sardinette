@@ -47,6 +47,7 @@ export default function OpenFile(props) {
 
     let propsSubMenu = Object.assign({}, props)
     delete propsSubMenu.setAllObject
+    delete propsSubMenu.setCurrentObject
 
     return (
         <SubMenu popupOffset={[0, 2]} {...propsSubMenu} title={"File"}>

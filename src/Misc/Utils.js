@@ -120,6 +120,7 @@ function updateChildren(allObject, currentObject, isDeletion) {
 
         let tempInfo = []
 
+        // eslint-disable-next-line no-loop-func
         allChildrenInfo.forEach(((value) => {
             let prev = allObject.find(object => object.id === value.id)
 
@@ -735,7 +736,7 @@ function createSurface(firstCurve, secondCurve) {
 
 
             let isEmpty = true
-            // eslint-disable-next-line no-native-reassign
+            // eslint-disable-next-line no-native-reassign,no-unused-vars
             for (let _ in surface.userData.secondCurve) {
                 isEmpty = false
                 break;
@@ -744,6 +745,7 @@ function createSurface(firstCurve, secondCurve) {
                 throw new Error("second curve is undefined")
             }
             isEmpty = true
+            // eslint-disable-next-line no-unused-vars
             for (let _ in surface.userData.firstCurve) {
                 isEmpty = false
                 break;
